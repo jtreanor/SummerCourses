@@ -40,16 +40,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#"><img src="assets/img/UCC-logo.png"/><!--UCC Summer Courses--></a>
+          <a class="brand" href="index.html"><img src="assets/img/UCC-logo.png"/><!--UCC Summer Courses--></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li><a href="index.html">Home</a></li>
               <li><a href="#courses">Courses</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li class="active"><a href="#">Contact</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select Language <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#" class="active">English</a></li>
+                  <li><a href="#">English</a></li>
                   <li><a href="#">Irish</a></li>
                   <li><a href="#">Chinese</a></li>
                   <li><a href="#">Slovak</a></li>
@@ -58,15 +58,6 @@
               
             </ul>
             <ul class="nav pull-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shopping Cart <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a class="btn btn-success" href="#">
-                  <i class="icon-shopping-cart icon-white"></i>
-                  Checkout
-                  </a></li>
-                </ul>
-              </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Name <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -93,7 +84,6 @@
                 <input type="text" name="forename" placeholder="Forename">
                 <input type="text" name="surname" placeholder="Surname">
                 <input type="text" name="nationality" placeholder="Nationality">
-
                 <input class="btn btn-primary" style="width: 100%;" type="submit" value="Register" />
               </form>
             </div>
@@ -116,33 +106,63 @@
     </div>
 
     <div class="container">
+<div class="row">
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>UCC Summer Courses</h1>
-        <p>University College Cork offers a wide variety of educational programmes from 1 day to 1 week in duration during the months of July and August. Our courses are ideal for visitors to Cork from abroad.</p>
-        <p><a class="btn btn-primary btn-large" href="#courses">View Courses &raquo;</a></p>
-      </div>
+        <div class="hero-unit">
+          <h1>Ask us anything</h1>
+          <p>Please feel free to ask us about any of our courses. A member of our staff will reply to you as soon as possible.</p>  
+        </div><!--end hero unit -->
 
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <h2>Contact Us</h2>
-          <p>If you have a question about any of our courses please don't hesitate to get in touch. </p>
-          <p><a class="btn" href="contact.html">Contact Us &raquo;</a></p>
-       </div>
-        <div class="span4">
-          <h2>Courses for everyone</h2>
-          <p>Our wide variety of courses are aimed at visitors from all around the glode. To help this, our site is available in English, Irish, Chinese and Slovak. </p>
-          <p><a class="btn" href="#courses">View courses &raquo;</a></p>
-        </div>
-        <div class="span4">
-          <h2>iOS App</h2>
-          <p>UCC's Summer Courses department now offers an app for iPhone and iPad. Users can browse and enrol in any course of their choice. For visitors who don't have an iOS device, this website is optimised for all modern smartphones and tablets.</p>
-          <p><a href="#"><img src="assets/img/App_Store.svg" alt="Download on AppStore"/></a></p>
-        </div>
-      </div>
+        <section class="span6">
 
+          <form>
+
+            <div class="control-group">
+              <label class="control-label" for="inputEmail"><i class="icon-user"></i> Full Name</label>
+              <div class="controls controls-row">
+                <input type="text" class="input-xxlarge" id="inputEmail" placeholder="Your name">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="inputEmail"><i class="icon-envelope"></i> Email</label>
+              <div class="controls">
+                <input type="text" class="input-xxlarge" id="inputEmail" placeholder="you@yourdomain.com">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="inputEmail"><i class="icon-question-sign"></i> Subject</label>
+              <div class="controls">
+                <input type="text" class="input-xxlarge" id="inputSubject" placeholder="What does your question relate to?">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="inputEmail"><i class="icon-pencil"></i> Message</label>
+              <div class="controls">
+                <textarea rows="6" class="input-xxlarge" placeholder="Write your question here."></textarea>
+              </div>
+            </div>
+
+            <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </div>
+
+          </form>
+          <br class="clear">
+
+
+                
+        </section><!-- end left -->
+
+        <section class="span6">
+          <div class="well">
+             <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=University+College+Cork,+College+Road,+Cork,+Ireland&amp;aq=0&amp;oq=university+college+cor&amp;sll=35.675147,-95.712891&amp;sspn=49.29376,93.076172&amp;ie=UTF8&amp;hq=&amp;hnear=University+College+Cork,+College+Rd,+Cork,+Ireland&amp;t=m&amp;z=14&amp;ll=51.892162,-8.492932&amp;output=embed"></iframe>
+          </div><!--end well -->
+        </section><!--end right --> 
+      </div><!--end row -->
       <hr>
 
       <footer>
