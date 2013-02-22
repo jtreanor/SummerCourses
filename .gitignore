@@ -4,7 +4,6 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-.DS_Store
 
 # Ignore bundler config
 /.bundle
@@ -15,3 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore other unneeded files.
+*.swp
+*~
+.project
+.DS_Store
+.idea
+
