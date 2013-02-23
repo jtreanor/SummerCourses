@@ -1,0 +1,22 @@
+// 'Readable' bootswatch
+//
+// First import journal variables
+@import "bootswatch/readable/variables";
+
+// Then bootstrap itself
+@import "bootstrap";
+
+// Bootstrap body padding for fixed navbar
+body { padding-top: 60px; }
+.navbar .brand {
+	padding: 5px 25px 5px;
+}
+.hero-unit {
+	background-color: #eeeeee;
+}
+
+// Responsive styles go here in case you want them
+@import "bootstrap-responsive";
+
+// And finally bootswatch style itself
+@import "bootswatch/readable/bootswatch";
