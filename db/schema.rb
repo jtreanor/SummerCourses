@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130224141929) do
 
   create_table "administrators", :force => true do |t|
     t.string "forename", :limit => 35,                     :null => false
@@ -104,16 +104,26 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table "students", :force => true do |t|
-    t.string  "forename",    :limit => 35, :null => false
-    t.string  "surname",     :limit => 35, :null => false
-    t.string  "email",                     :null => false
-    t.string  "countryCode", :limit => 2,  :null => false
-    t.integer "sexID",       :limit => 1,  :null => false
-    t.string  "password",    :limit => 60, :null => false
-    t.integer "yearOfBirth",               :null => false
+    t.string   "forename",               :limit => 35,                 :null => false
+    t.string   "surname",                :limit => 35,                 :null => false
+    t.string   "countryCode",            :limit => 2,                  :null => false
+    t.integer  "sexID",                  :limit => 1,                  :null => false
+    t.integer  "yearOfBirth",                                          :null => false
+    t.string   "email",                                :default => "", :null => false
+    t.string   "encrypted_password",                   :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
   add_index "students", ["countryCode"], :name => "countryCode_idx"
+  add_index "students", ["email"], :name => "index_students_on_email", :unique => true
+  add_index "students", ["reset_password_token"], :name => "index_students_on_reset_password_token", :unique => true
   add_index "students", ["sexID"], :name => "sexID_idx"
 
   create_table "teachers", :force => true do |t|

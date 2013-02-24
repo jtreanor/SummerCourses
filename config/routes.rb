@@ -1,4 +1,6 @@
 SummerCourses::Application.routes.draw do
+  devise_for :students
+
   root :to => 'static_pages#home'
 
   # The priority is based upon order of creation:

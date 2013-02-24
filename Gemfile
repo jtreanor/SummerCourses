@@ -10,6 +10,8 @@ gem 'bcrypt-ruby', '3.0.1'
 
 gem 'mysql2'
 
+gem 'devise'
+
 group :development do
 	gem 'annotate', '2.5.0'
 end

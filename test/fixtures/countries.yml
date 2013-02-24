@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: countries
+#
+#  countryCode :string(2)        not null, primary key
+#  countryName :string(45)       not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the
