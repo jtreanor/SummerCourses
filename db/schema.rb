@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224141929) do
+ActiveRecord::Schema.define(:version => 0) do
 
   create_table "administrators", :force => true do |t|
-    t.string "forename", :limit => 35,                     :null => false
-    t.string "surname",  :limit => 35,                     :null => false
-    t.string "email",                                      :null => false
-    t.string "password", :limit => 60
-    t.binary "isSuper",  :limit => 1,  :default => "b'0'", :null => false
+    t.string  "forename", :limit => 35,                    :null => false
+    t.string  "surname",  :limit => 35,                    :null => false
+    t.string  "email",                                     :null => false
+    t.string  "password", :limit => 60
+    t.boolean "isSuper",                :default => false, :null => false
   end
 
   add_index "administrators", ["id"], :name => "adminID_UNIQUE", :unique => true
@@ -55,9 +55,9 @@ ActiveRecord::Schema.define(:version => 20130224141929) do
   add_index "courses", ["teacherID"], :name => "teacherID_idx"
 
   create_table "enrollments", :force => true do |t|
-    t.integer "studentID",                                    :null => false
-    t.integer "courseID",                                     :null => false
-    t.binary  "isCancelled", :limit => 1, :default => "b'0'", :null => false
+    t.integer "studentID",                      :null => false
+    t.integer "courseID",                       :null => false
+    t.boolean "isCancelled", :default => false, :null => false
   end
 
   add_index "enrollments", ["courseID"], :name => "courseID_idx"
@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(:version => 20130224141929) do
   end
 
   create_table "messages", :force => true do |t|
-    t.string   "threadID",    :limit => 80,                      :null => false
-    t.datetime "timestamp",                                      :null => false
-    t.text     "subject",     :limit => 255,                     :null => false
-    t.binary   "isResponse",  :limit => 1,   :default => "b'0'", :null => false
-    t.text     "messageText",                                    :null => false
+    t.string   "threadID",    :limit => 80,                     :null => false
+    t.datetime "timestamp",                                     :null => false
+    t.text     "subject",     :limit => 255,                    :null => false
+    t.boolean  "isResponse",                 :default => false, :null => false
+    t.text     "messageText",                                   :null => false
   end
 
   add_index "messages", ["threadID"], :name => "threadID_idx"
@@ -127,13 +127,13 @@ ActiveRecord::Schema.define(:version => 20130224141929) do
   add_index "students", ["sexID"], :name => "sexID_idx"
 
   create_table "teachers", :force => true do |t|
-    t.string "photoUrl"
-    t.binary "isActive",    :limit => 1,  :default => "b'1'", :null => false
-    t.text   "description",                                   :null => false
-    t.string "forename",    :limit => 45,                     :null => false
-    t.string "surname",     :limit => 45,                     :null => false
-    t.string "email",       :limit => 45,                     :null => false
-    t.string "password",    :limit => 60,                     :null => false
+    t.string  "photoUrl"
+    t.boolean "isActive",                  :default => true, :null => false
+    t.text    "description",                                 :null => false
+    t.string  "forename",    :limit => 45,                   :null => false
+    t.string  "surname",     :limit => 45,                   :null => false
+    t.string  "email",       :limit => 45,                   :null => false
+    t.string  "password",    :limit => 60,                   :null => false
   end
 
   add_index "teachers", ["id"], :name => "teacherID_UNIQUE", :unique => true
