@@ -1,0 +1,28 @@
+<div class="hero-unit">
+  <h1><%= @category.categoryName %></h1>
+  <p>This page lists all the courses offered in the <%= @category.categoryName %> category though the UCC summer courses office.</p>
+</div>
+
+<% if !@courses.empty? %>
+  <div class="accordion" id="accordion2">
+  <% @courses.each do |course| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= course.id %>">
+          <%= course.title %>
+        </a>
+      </div>
+      <div id="collapse<%= course.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <p><%= course.briefDescription %></p>
+          <p>
+            <%= link_to "View Course", '#', class: "btn btn-primary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<% else %>
+  <p>There are currently no courses available in this category. Please check back soon.</p>
+<% end %>
