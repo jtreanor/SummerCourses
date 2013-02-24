@@ -67,4 +67,6 @@ SummerCourses::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'summercourses.herokuapp.com' }
 
+  config.log_level = :warn
+
 end
