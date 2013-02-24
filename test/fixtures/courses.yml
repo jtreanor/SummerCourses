@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id               :integer          not null, primary key
+#  title            :string(100)      not null
+#  description      :text             default(""), not null
+#  briefDescription :text(255)        default(""), not null
+#  teacherID        :integer          not null
+#  numberOfPlaces   :integer          not null
+#  price            :decimal(10, 2)   not null
+#  deposit          :decimal(10, 2)   not null
+#  categoryID       :integer          not null
+#  hits             :integer          default(0), not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value
