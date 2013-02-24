@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: countries
+# Table name: categories
 #
-#  countryCode :integer          not null, primary key
-#  countryName :string(45)       not null
+#  id           :integer          not null, primary key
+#  categoryName :string(45)       not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
