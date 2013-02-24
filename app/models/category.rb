@@ -7,5 +7,7 @@
 #
 
 class Category < ActiveRecord::Base
-  # attr_accessible :title, :body
+	attr_accessible :categoryName
+
+	validates :categoryName, presence: true, length: { maximum: 45 }
 end

@@ -1,0 +1,11 @@
+<div class="hero-unit">
+    <h1>Our Courses</h1>
+    <p>On this page you can find a list of all our upcoming courses. Simply choose a category that interests you.</p>
+</div>
+<ul class="nav nav-tabs nav-stacked">
+    <% @categories.sort_by(&:categoryName).each do |category| %>
+    <li>
+      <%= link_to category.categoryName, '#' %>
+    </li>
+    <% end %>
+</ul>
