@@ -2,7 +2,7 @@
 <div class="hero-unit">
 <h1>UCC Summer Courses</h1>
 <p>University College Cork offers a wide variety of educational programmes from 1 day to 1 week in duration during the months of July and August. Our courses are ideal for visitors to Cork from abroad.</p>
-<p><a class="btn btn-danger btn-large" href="courses.html">View Courses &raquo;</a></p>
+<p><%= link_to "View Courses", categories_path, class: "btn btn-large btn-danger" %></a></p>
 </div>
 
 <!-- Example row of columns -->
@@ -10,11 +10,11 @@
 <div class="span6">
   <h2>Contact Us</h2>
   <p>If you have a question about any of our courses please don't hesitate to get in touch. </p>
-  <p><a class="btn" href="contact.html">Contact Us &raquo;</a></p>
+  <p><%= link_to "Contact Us","#", class: "btn" %></a></p>
 </div>
 <div class="span6">
   <h2>Courses for everyone</h2>
   <p>Our wide variety of courses are aimed at visitors from all around the glode. To help this, our site is available in English, Irish, Chinese and Slovak. </p>
-  <p><a class="btn" href="courses.html">View courses &raquo;</a></p>
+  <p><%= link_to "View Courses", categories_path, class: "btn" %></a></p>
 </div>
 </div>
