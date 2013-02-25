@@ -278,10 +278,10 @@ Enrollment.create([
 
 
 Sex.create([
-  { :id => 0 :sexName => "not known" }
-  { :id => 1 :sexName => "male" }
-  { :id => 2 :sexName => "female" }
-  { :id => 9 :sexName => "not applicable" }
+  { :sexName => "not known" },
+  { :sexName => "male" },
+  { :sexName => "female" },
+  { :sexName => "not applicable" }
 ], :without_protection => true )
 
 
