@@ -7,6 +7,8 @@ gem 'bcrypt-ruby', '3.0.1'
 
 gem 'seed_dump'
 
+gem 'rails_admin'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

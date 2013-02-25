@@ -11,17 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130225151612) do
 
   create_table "administrators", :force => true do |t|
-    t.string  "forename", :limit => 35,                    :null => false
-    t.string  "surname",  :limit => 35,                    :null => false
-    t.string  "email",                                     :null => false
-    t.string  "password", :limit => 60
-    t.boolean "isSuper",                :default => false, :null => false
+    t.string   "forename",               :limit => 35,                    :null => false
+    t.string   "surname",                :limit => 35,                    :null => false
+    t.boolean  "isSuper",                              :default => false, :null => false
+    t.string   "email",                                :default => "",    :null => false
+    t.string   "encrypted_password",                   :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                        :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
   end
 
+  add_index "administrators", ["confirmation_token"], :name => "index_administrators_on_confirmation_token", :unique => true
+  add_index "administrators", ["email"], :name => "index_administrators_on_email", :unique => true
   add_index "administrators", ["id"], :name => "adminID_UNIQUE", :unique => true
+  add_index "administrators", ["reset_password_token"], :name => "index_administrators_on_reset_password_token", :unique => true
 
   create_table "categories", :force => true do |t|
     t.string "categoryName", :limit => 45, :null => false
@@ -91,6 +108,19 @@ ActiveRecord::Schema.define(:version => 0) do
 
   add_index "payments", ["enrollmentID"], :name => "enrollmentID_idx"
 
+  create_table "rails_admin_histories", :force => true do |t|
+    t.text     "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refundTransactionID",   :limit => 45, :null => false
     t.string "originalTransactionID", :limit => 45, :null => false
@@ -119,11 +149,10 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    ## Confirmable
-    t.string   :confirmation_token
-    t.datetime :confirmed_at
-    t.datetime :confirmation_sent_at
-    t.string   :unconfirmed_email # Only if using reconfirmable
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "students", ["countryCode"], :name => "countryCode_idx"

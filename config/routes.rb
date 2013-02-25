@@ -1,4 +1,8 @@
 SummerCourses::Application.routes.draw do
+  devise_for :administrators
+
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   devise_for :students
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
