@@ -1,0 +1,24 @@
+<div class="hero-unit">
+  <h1>My Courses</h1>
+  <p>This page lists all the courses you have enrolled in.</p>
+</div>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Student ID</th>
+		<th>CourseID</th>
+	</tr>
+    <% @enrollments.each do |enrollment| %>
+    <tr>
+		<td>
+			<%= enrollment.id %>
+		</td>
+		<td>
+			<%= enrollment.studentID %>
+		</td>
+		<td>
+			<%= link_to enrollment.course.title, course_path(enrollment.course.id) %>
+		</td>
+    </tr>
+    <% end %>
+</table>
