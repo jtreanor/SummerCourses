@@ -5,6 +5,8 @@ gem 'bootstrap-sass', '2.1'
 gem 'bootswatch-rails'
 gem 'bcrypt-ruby', '3.0.1'
 
+gem 'seed_dump'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
