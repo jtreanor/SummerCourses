@@ -9,8 +9,12 @@ gem 'bcrypt-ruby', '3.0.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-
 gem 'devise'
+
+#payment with braintree
+gem 'sinatra'
+gem 'shotgun'
+gem 'braintree'
 
 group :development do
 	gem 'annotate', '2.5.0'
