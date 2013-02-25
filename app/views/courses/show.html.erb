@@ -1,0 +1,13 @@
+<div class="hero-unit">
+  <h1><%= @course.title %></h1>
+  <p><%= @course.briefDescription %>.</p>
+</div>
+<p><%= @course.description %></p>
+<ul>
+	<li>Teacher: <%= @course.teacherID %></li>
+	<li>Number Of Places: <%= @course.numberOfPlaces %></li>
+	<li>Price: €<%= @course.price %></li>
+	<li>Deposit: €<%= @course.deposit %></li>
+	<li>CategoryID: <%= @course.categoryID %></li>
+</ul>
+<p><%= link_to "Enrol", '#', class: "btn btn-large btn-danger" %></a></p>
