@@ -287,8 +287,8 @@ Sex.create([
 
 
 Student.create([
-  { :forename => "John", :surname => "Doe", :countryCode => "IE", :sexID => 1, :yearOfBirth => 1980, :email => "someone@example.com", :encrypted_password => "$2a$10$NPB9Cq5uHuuzoriXRBBF5uRj0ad.csUU/tMvtiwYNGVJMgbjTlLV6", :reset_password_token => nil, :reset_password_sent_at => nil, :remember_created_at => nil, :sign_in_count => 0, :current_sign_in_at => nil, :last_sign_in_at => nil, :current_sign_in_ip => nil, :last_sign_in_ip => nil, :confirmation_token => "xSyHVQrzku8a4Y2SZsJU", :confirmed_at => nil, :confirmation_sent_at => "2013-02-24 18:02:57", :unconfirmed_email => nil },
-  { :forename => "James", :surname => "Treanor", :countryCode => "IE", :sexID => 1, :yearOfBirth => 1991, :email => "jtreanor3@gmail.com", :encrypted_password => "$2a$10$.g3xQf5IZQUBBgOBH/tGKuO8DO7LczxF.V/uJk0D4xQJ11hou5QjK", :reset_password_token => nil, :reset_password_sent_at => nil, :remember_created_at => nil, :sign_in_count => 1, :current_sign_in_at => "2013-02-25 11:17:28", :last_sign_in_at => "2013-02-25 11:17:28", :current_sign_in_ip => "127.0.0.1", :last_sign_in_ip => "127.0.0.1", :confirmation_token => "yBpDrgpAJ91HjC6yAazq", :confirmed_at => "2013-02-25 11:15:14", :confirmation_sent_at => "2013-02-25 11:14:14", :unconfirmed_email => nil }
+  { :forename => "John", :surname => "Doe", :countryCode => "IE", :sexID => 1, :yearOfBirth => 1980, :email => "someone@example.com", :password => "password", :password_confirmation => "password" },
+  { :forename => "James", :surname => "Treanor", :countryCode => "IE", :sexID => 1, :yearOfBirth => 1991, :email => "jtreanor3@gmail.com", :password => "password", :password_confirmation => "password"  }
 ], :without_protection => true )
 
 
