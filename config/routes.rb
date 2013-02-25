@@ -1,6 +1,7 @@
 SummerCourses::Application.routes.draw do
   devise_for :students
   resources :categories, only: [:index, :show]
+  resources :courses, only: [:show]
 
   root :to => 'static_pages#home'
 

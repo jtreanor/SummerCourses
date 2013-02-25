@@ -16,7 +16,7 @@
         <div class="accordion-inner">
           <p><%= course.briefDescription %></p>
           <p>
-            <%= link_to "View Course", '#', class: "btn btn-primary" %>
+            <%= link_to "View Course", course_path(course.id), class: "btn btn-primary" %>
           </p>
         </div>
       </div>
