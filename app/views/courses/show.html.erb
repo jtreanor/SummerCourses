@@ -10,4 +10,4 @@
 	<li>Deposit: €<%= @course.deposit %></li>
 	<li>CategoryID: <%= @course.categoryID %></li>
 </ul>
-<p><%= link_to "Enrol", '#', class: "btn btn-large btn-danger" %></a></p>
+<p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>

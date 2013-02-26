@@ -2,9 +2,12 @@ SummerCourses::Application.routes.draw do
   devise_for :students
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
-  resources :enrollments, only: [:index, :new, :create]
+  resources :enrollments, only: [:index, :create]
 
   root :to => 'static_pages#home'
+
+  match 'enrollments/new/course/:id' => 'enrollments#new', :as => :new_enrollment
+  match 'enrollments/result' => 'enrollments#result', :as => :enrollment_result
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
