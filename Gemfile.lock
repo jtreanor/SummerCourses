@@ -40,6 +40,8 @@ GEM
     bootstrap-sass (2.1.0.0)
     bootswatch-rails (0.4.0)
       railties (>= 3.1)
+    braintree (2.22.0)
+      builder (>= 2.0.0)
     builder (3.0.4)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -132,6 +134,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (= 2.1)
   bootswatch-rails
+  braintree
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
