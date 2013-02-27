@@ -60,9 +60,13 @@
 	  	</div>
 	</div>
 
-	  <div><%= f.submit "Sign up", class: "btn btn-danger" %></div>
-	<% end %>
+	<div class="controls">
+	  	<%= f.submit "Sign up", class: "btn btn-large" %>
+	</div>
+	<div class="control-group">
+		<p><%= render "devise/shared/links" %></p>
+	</div>
 
-	<%= render "devise/shared/links" %>
+	<% end %>
 	</div>
 </div>
