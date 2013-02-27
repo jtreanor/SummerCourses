@@ -1,3 +1,5 @@
+before_filter :authenticate_student!
+
 class EnrollmentsController < ApplicationController
 	def index
 		@enrollments = Enrollment.find_all_by_studentID(current_student.id)
@@ -25,7 +27,7 @@ class EnrollmentsController < ApplicationController
 	def result
 		result = Braintree::TransparentRedirect.confirm(request.query_string)
 		@course = Course.find_by_id(params[:id])
-		@message = "Message: #{result.message}"
+		error = true
 
 	  if result.success?
 	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: Date.today)
@@ -34,12 +36,15 @@ class EnrollmentsController < ApplicationController
 	    	if enrollment.save
 	    		payment = Payment.create(id: transaction.id, enrollmentID: enrollment.id)
 	    		if payment.save
+	    			error = false
 	    			@message = "Transaction Status: #{result.transaction.status}. The transaction_id is #{result.transaction.id}"
 	    		end
-	    	else
 	    	end
 		end
-	end
+	  end
+	  if error
+	  	@message = "Message: #{result.message}"
+	  end
 	end
 
 	def create
