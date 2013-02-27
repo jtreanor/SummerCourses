@@ -43,7 +43,12 @@ class EnrollmentsController < ApplicationController
 		end
 	  end
 	  if error
-	  	@message = "Message: #{result.message}"
+	  	if result.success?
+	  		#TODO - refund transaction if something went wrong 
+	  	else
+	  		@message = "Message: #{result.message}"
+	  	end
+
 	  end
 	end
 

@@ -1,19 +1,20 @@
-<html>
-  <head>
-    <style type='text/css'>label {display: block;} input {margin-bottom: 10px;}</style>
-  </head>
-  <body>
-    <h1>Braintree Credit Card Transaction Form</h1>
-    <form id='payment-form' action='<%= Braintree::TransparentRedirect.url %>' method='POST'>
-      <input type='hidden' name='tr_data' value='<%= @tr_data %>' />
-      <div>
-        <h2>Credit Card</h2>
-        <label for='braintree_credit_card_number'>Credit Card Number</label>
-        <input type='text' name='transaction[credit_card][number]' id='braintree_credit_card_number' value='4111111111111111'></input>
-        <label for='braintree_credit_card_exp'>Credit Card Expiry (mm/yyyy)</label>
-        <input type='text' name='transaction[credit_card][expiration_date]' id='braintree_credit_card_exp' value='12/2015'></input>
+<h2>Enrol in <%= @course.title %></h2>
+<%= form_tag(Braintree::TransparentRedirect.url, :html => { :class => "form-horizontal", :id => "payment-form"}, :method => "post") do %>
+  <%= hidden_field_tag :tr_data, @tr_data %>
+  <div>
+    <div class="control-group">
+      <%= label_tag :braintree_credit_card_number, "Credit Card Number" , class: "control-label" %>
+      <div class="controls">
+        <%= text_field_tag :braintree_credit_card_number, '4111111111111111', name: "transaction[credit_card][number]"  %>
       </div>
-      <input class='submit-button' type='submit' />
-    </form>
-  </body>
-</html>
+    </div>
+
+    <div class="control-group">
+      <%= label_tag :braintree_credit_card_exp, "Credit Card Expiry (mm/yyyy)" , class: "control-label" %>
+      <div class="controls">
+        <%= text_field_tag :braintree_credit_card_exp, '12/2015', name: "transaction[credit_card][expiration_date]"  %>
+      </div>
+    </div>
+  </div>
+  <%= submit_tag "Sign up", class: "btn btn-danger" %>
+<% end %>

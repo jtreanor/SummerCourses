@@ -1,0 +1,7 @@
+<h2><%= @course.title %></h2>
+
+<% if !@message.empty? %>
+	<p><%= @message %></p>
+<% else %>
+	<p>You have been succesfully enrolled in <%= @course.title %></p>
+<% end %>
