@@ -1,0 +1,11 @@
+<h2>Heroku Run</h2>
+<p>Enter a command below. e.g. <code>rake db:reset</code></p>
+<form method="get" action="">
+	<label for="command">Command:</label>
+	<input type="text" name="command" id="command" />
+	<input type="submit" class="btn"/> 
+<form>
+	<% if @output != nil %>
+		<h3>Output</h3>
+		<div><code><%= @output %></code></div>
+	<% end %>
