@@ -1,5 +1,5 @@
 SummerCourses::Application.routes.draw do
-  devise_for :students
+  devise_for :students, :controllers => { :regsitrations => 'students/registrations' } 
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
   resources :enrollments, only: [:index, :create]

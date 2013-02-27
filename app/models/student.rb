@@ -31,6 +31,14 @@ class Student < ActiveRecord::Base
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def sexes
+    Sex.all
+  end
+
+  def countries
+    Country.all
+  end
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :forename, :surname, :yearOfBirth , :sexID , :countryCode , :password, :password_confirmation, :remember_me
   has_one :sex

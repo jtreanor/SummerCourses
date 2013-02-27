@@ -35,14 +35,14 @@
 	<div class="control-group">
 		<%= f.label :sex, class: "control-label" %>
 		<div class="controls">
-	  		<%= f.text_field :sexID, placeholder: "1"  %>
+	  		<%= select_tag :sex, options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
 	  	</div>
 	</div>
 
 	<div class="control-group">
 		<%= f.label :nationality, class: "control-label" %>
 		<div class="controls">
-	  		<%= f.text_field :countryCode, placeholder: "IE"  %>
+			<%= select_tag :nationality, options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
 	  	</div>
 	</div>
 
