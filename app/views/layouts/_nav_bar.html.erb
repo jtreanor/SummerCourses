@@ -1,70 +1,70 @@
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#"><%= image_tag("UCC-logo.png", alt: "UCC logo") %><!--UCC Summer Courses--></a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li <% if current_page?(root_path) %>class="active"<% end %>><%= link_to "Home", root_path %></li>
-              <li <% if current_page?(categories_path) %>class="active"<% end %> ><%= link_to "Courses", categories_path %></li>
-              <li><%= link_to "Contact" %></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select Language <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#" style="font-weight: bold">English</a></li>
-                  <li><a href="#">Irish</a></li>
-                  <li><a href="#">Chinese</a></li>
-                  <li><a href="#">Slovak</a></li>
-                </ul>
-              </li>
-              
-            </ul>
-            <ul class="nav pull-right">
-              <% if student_signed_in? %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "#{current_student.forename} #{current_student.surname}" %> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li class="nav-header">Account</li>
-                  <li><%= link_to "Edit Account", edit_student_registration_path %></li>
-                  <li><%= link_to "My Courses", enrollments_path %></li>
-                  <li><%= link_to "Sign Out", destroy_student_session_path, method: "delete" %></li>
-                </ul>
-              </li>
-              <% else %>
-              <li><%= link_to "Sign In", new_student_session_path %></li>
-              <li><%= link_to "Sign Up", new_student_registration_path %></li>
-              <% end %>
-          <!--<li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Register <strong class="caret"></strong></a>
-            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-              <form>
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Confirm Password">
-                <input type="text" name="forename" placeholder="Forename">
-                <input type="text" name="surname" placeholder="Surname">
-                <input type="text" name="nationality" placeholder="Nationality">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#"><%= image_tag("UCC-logo.png", alt: "UCC logo") %><!--UCC Summer Courses--></a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li <% if current_page?(root_path) %>class="active"<% end %>><%= link_to "Home", root_path %></li>
+          <li <% if current_page?(categories_path) %>class="active"<% end %> ><%= link_to "Courses", categories_path %></li>
+          <li><%= link_to "Contact" %></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select Language <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" style="font-weight: bold">English</a></li>
+            <li><a href="#">Irish</a></li>
+            <li><a href="#">Chinese</a></li>
+            <li><a href="#">Slovak</a></li>
+          </ul>
+          </li>
 
-                <input class="btn btn-danger" style="width: 100%;" type="submit" value="Register" />
-              </form>
-            </div>
+        </ul>
+        <ul class="nav pull-right">
+          <% if student_signed_in? %>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "#{current_student.forename} #{current_student.surname}" %> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="nav-header">Account</li>
+              <li><%= link_to "Edit Account", edit_student_registration_path %></li>
+              <li><%= link_to "My Courses", enrollments_path %></li>
+              <li><%= link_to "Sign Out", destroy_student_session_path, method: "delete" %></li>
+            </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign In", new_student_session_path %></li>
+            <li><%= link_to "Sign Up", new_student_registration_path %></li>
+          <% end %>
+          <!--<li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Register <strong class="caret"></strong></a>
+          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <form>
+              <input type="text" placeholder="Email">
+              <input type="password" placeholder="Password">
+              <input type="password" placeholder="Confirm Password">
+              <input type="text" name="forename" placeholder="Forename">
+              <input type="text" name="surname" placeholder="Surname">
+              <input type="text" name="nationality" placeholder="Nationality">
+
+              <input class="btn btn-danger" style="width: 100%;" type="submit" value="Register" />
+            </form>
+          </div>
           </li>
           <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
-            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-              <form>
-                <input type="text" placeholder="Email">
-                <input type="passwordasd" placeholder="Password">
-                <input class="btn btn-danger" style="width: 100%;" type="submit" value="Sign In" />
-              </form>
-            </div>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+            <form>
+              <input type="text" placeholder="Email">
+              <input type="passwordasd" placeholder="Password">
+              <input class="btn btn-danger" style="width: 100%;" type="submit" value="Sign In" />
+            </form>
+          </div>
           </li>-->
         </ul>
-          </div><!--/.nav-collapse --> 
-        </div>
-      </div>
+      </div><!--/.nav-collapse --> 
     </div>
+  </div>
+</div>
