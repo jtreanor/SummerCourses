@@ -1,6 +1,6 @@
-before_filter :authenticate_student!
-
 class EnrollmentsController < ApplicationController
+	before_filter :authenticate_student!
+	
 	def index
 		@enrollments = Enrollment.find_all_by_studentID(current_student.id)
 	end
