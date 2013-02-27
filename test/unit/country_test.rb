@@ -2,7 +2,7 @@
 #
 # Table name: countries
 #
-#  countryCode :integer          not null, primary key
+#  countryCode :string(2)
 #  countryName :string(45)       not null
 #
 

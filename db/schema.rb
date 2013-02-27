@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string "categoryName", :limit => 45, :null => false
   end
 
-  create_table "countries", :primary_key => "countryCode", :force => true do |t|
+  create_table "countries", :id => false, :force => true do |t|
+    t.string "countryCode", :limit => 2
     t.string "countryName", :limit => 45, :null => false
   end
+    add_index "countries", ["countryCode"], :name => "countryCode_idx"
 
   create_table "course_media", :id => false, :force => true do |t|
     t.integer "courseID", :null => false
@@ -99,9 +101,12 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "refunds", ["originalTransactionID"], :name => "transactionID_idx1"
   add_index "refunds", ["refundTransactionID"], :name => "transactionID_idx"
 
-  create_table "sexes", :force => true do |t|
+  create_table "sexes", :id => false, :force => true do |t|
+    t.integer "sex_id"
     t.string "sexName", :limit => 45, :null => false
   end
+
+  add_index "sexes", ["sex_id"], :name => "sex_id_idx"
 
   create_table "students", :force => true do |t|
     t.string   "forename",               :limit => 35,                 :null => false
