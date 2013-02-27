@@ -265,14 +265,30 @@ Country.create([
 
 
 Course.create([
-  { :title => "Intro to programming", :description => "full description", :briefDescription => "brief description", :teacherID => 1, :numberOfPlaces => 50, :price => 100.0, :deposit => 10.0, :categoryID => 3, :hits => 0 },
-  { :title => "Some course", :description => "full description", :briefDescription => "brief description", :teacherID => 1, :numberOfPlaces => 50, :price => 100.0, :deposit => 10.0, :categoryID => 3, :hits => 0 }
+  { :title => "Intro to programming", 
+    :description => "full description", 
+    :briefDescription => "brief description", 
+    :teacherID => 1, 
+    :numberOfPlaces => 50, 
+    :price => 100.0, 
+    :deposit => 10.0, :categoryID => 3, :hits => 0 },
+  { :title => "Some course", 
+    :description => "full description", 
+    :briefDescription => "brief description", 
+    :teacherID => 1, 
+    :numberOfPlaces => 50, 
+    :price => 100.0, 
+    :deposit => 10.0, 
+    :categoryID => 3, 
+    :hits => 0 }
 ], :without_protection => true )
 
 
 
 Enrollment.create([
-  { :studentID => 2, :courseID => 1, :isCancelled => false }
+  { :studentID => 2, 
+    :courseID => 1, 
+    :isCancelled => false }
 ], :without_protection => true )
 
 
@@ -293,7 +309,25 @@ Sex.create([
 
 
 Student.create([
-  { :forename => nil, :surname => nil, :countryCode => nil, :sexID => nil, :yearOfBirth => nil, :email => "", :encrypted_password => "", :reset_password_token => nil, :reset_password_sent_at => nil, :remember_created_at => nil, :sign_in_count => 0, :current_sign_in_at => nil, :last_sign_in_at => nil, :current_sign_in_ip => nil, :last_sign_in_ip => nil, :confirmation_token => nil, :confirmed_at => nil, :confirmation_sent_at => nil, :unconfirmed_email => nil }
+  { :forename => nil, 
+    :surname => nil, 
+    :countryCode => nil, 
+    :sexID => nil, 
+    :yearOfBirth => nil, 
+    :email => "", 
+    :encrypted_password => "", 
+    :reset_password_token => nil, 
+    :reset_password_sent_at => nil, 
+    :remember_created_at => nil, 
+    :sign_in_count => 0, 
+    :current_sign_in_at => nil, 
+    :last_sign_in_at => nil, 
+    :current_sign_in_ip => nil, 
+    :last_sign_in_ip => nil, 
+    :confirmation_token => nil, 
+    :confirmed_at => nil, 
+    :confirmation_sent_at => nil, 
+    :unconfirmed_email => nil }
 ], :without_protection => true )
 
 
