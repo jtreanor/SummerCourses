@@ -12,7 +12,7 @@ class EnrollmentsController < ApplicationController
 		Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
 
 		@tr_data = Braintree::TransparentRedirect.transaction_data(
-			:redirect_url => enrollment_result_url,
+			:redirect_url => enrollment_result_url(@course.id),
 			:transaction => {
 			  :type => "sale",
 			  :amount => @course.price.to_s,
@@ -24,13 +24,22 @@ class EnrollmentsController < ApplicationController
 
 	def result
 		result = Braintree::TransparentRedirect.confirm(request.query_string)
+		@course = Course.find_by_id(params[:id])
+		@message = "Message: #{result.message}"
 
 	  if result.success?
-	    @message = "Transaction Status: #{result.transaction.status}. The transaction_id is #{result.transaction.id}"
-	    # status will be authorized or submitted_for_settlement
-	  else
-	    @message = "Message: #{result.message}"
-	  end
+	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: Date.today)
+	    if transaction.save
+	    	enrollment = Enrollment.create(studentID: current_student.id, courseID: Course.all[0])
+	    	if enrollment.save
+	    		payment = Payment.create(id: transaction.id, enrollmentID: enrollment.id)
+	    		if payment.save
+	    			@message = "Transaction Status: #{result.transaction.status}. The transaction_id is #{result.transaction.id}"
+	    		end
+	    	else
+	    	end
+		end
+	end
 	end
 
 	def create

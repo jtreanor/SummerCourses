@@ -8,5 +8,5 @@
 #
 
 class Transaction < ActiveRecord::Base
-	attr_accessible :amount, :timestamp
+	attr_accessible :id, :amount, :timestamp
 end

@@ -7,7 +7,7 @@ SummerCourses::Application.routes.draw do
   root :to => 'static_pages#home'
 
   match 'enrollments/new/course/:id' => 'enrollments#new', :as => :new_enrollment
-  match 'enrollments/result' => 'enrollments#result', :as => :enrollment_result
+  match 'enrollments/result/course/:id' => 'enrollments#result', :as => :enrollment_result
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

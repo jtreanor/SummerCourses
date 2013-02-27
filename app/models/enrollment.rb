@@ -9,7 +9,7 @@
 #
 
 class Enrollment < ActiveRecord::Base
-	attr_accessible :studentID, :isCancelled
+	attr_accessible :studentID, :courseID, :isCancelled
 
 	def course # getter
   		Course.find_by_id(courseID)
