@@ -15,7 +15,7 @@ class EnrollmentsController < ApplicationController
 			:redirect_url => enrollment_result_url,
 			:transaction => {
 			  :type => "sale",
-			  :amount => "1000.00",
+			  :amount => @course.price.to_s,
 			  :options => {
 			    :submit_for_settlement => true
 			    }
@@ -26,7 +26,7 @@ class EnrollmentsController < ApplicationController
 		result = Braintree::TransparentRedirect.confirm(request.query_string)
 
 	  if result.success?
-	    @message = "Transaction Status: #{result.transaction.status}"
+	    @message = "Transaction Status: #{result.transaction.status}. The transaction_id is #{result.transaction.id}"
 	    # status will be authorized or submitted_for_settlement
 	  else
 	    @message = "Message: #{result.message}"
