@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
+
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -111,22 +112,20 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.string "description", :limit => 45, :null => false
   end
 
-  create_table "message_threads", :force => true do |t|
-    t.string   "user_email", :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table :messages do |t|
+    t.string   :message_thread_id, :limit => 80, :null => false
+    t.text     :subject, :limit => 255, :null => false
+    t.boolean  :is_response, :default => false, :null => false
+    t.text     :message_text, :null => false
+    t.timestamps
   end
 
-  create_table "messages", :force => true do |t|
-    t.string   "message_thread_id", :limit => 80,                     :null => false
-    t.text     "subject",           :limit => 255,                    :null => false
-    t.boolean  "is_response",                      :default => false, :null => false
-    t.text     "content",                                        :null => false
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
-  end
+  add_index :messages, :message_thread_id, :name => :message_thread_id_idx
 
-  add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
+  create_table :message_threads do |t|
+    t.string   :user_email, :null => false
+    t.timestamps
+  end
 
   create_table "payments", :force => true do |t|
     t.integer "enrollmentID", :null => false
