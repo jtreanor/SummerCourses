@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130228011949) do
 
   create_table "administrators", :force => true do |t|
     t.string  "forename", :limit => 35,                    :null => false
@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string "countryCode", :limit => 2
     t.string "countryName", :limit => 45, :null => false
   end
-    add_index "countries", ["countryCode"], :name => "countryCode_idx"
+
+  add_index "countries", ["countryCode"], :name => "countryCode_idx"
 
   create_table "course_media", :id => false, :force => true do |t|
     t.integer "courseID", :null => false
@@ -77,15 +78,22 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string "description", :limit => 45, :null => false
   end
 
-  create_table "messages", :force => true do |t|
-    t.string   "threadID",    :limit => 80,                     :null => false
-    t.datetime "timestamp",                                     :null => false
-    t.text     "subject",     :limit => 255,                    :null => false
-    t.boolean  "isResponse",                 :default => false, :null => false
-    t.text     "messageText",                                   :null => false
+  create_table "message_threads", :force => true do |t|
+    t.string   "user_email", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "messages", ["threadID"], :name => "threadID_idx"
+  create_table "messages", :force => true do |t|
+    t.string   "message_thread_id", :limit => 80,                     :null => false
+    t.text     "subject",           :limit => 255,                    :null => false
+    t.boolean  "is_response",                      :default => false, :null => false
+    t.text     "message_text",                                        :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+  end
+
+  add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
 
   create_table "payments", :force => true do |t|
     t.integer "enrollmentID", :null => false
@@ -103,7 +111,7 @@ ActiveRecord::Schema.define(:version => 0) do
 
   create_table "sexes", :id => false, :force => true do |t|
     t.integer "sex_id"
-    t.string "sexName", :limit => 45, :null => false
+    t.string  "sexName", :limit => 45, :null => false
   end
 
   add_index "sexes", ["sex_id"], :name => "sex_id_idx"
@@ -124,11 +132,10 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    ## Confirmable
-    t.string   :confirmation_token
-    t.datetime :confirmed_at
-    t.datetime :confirmation_sent_at
-    t.string   :unconfirmed_email # Only if using reconfirmable
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "students", ["countryCode"], :name => "countryCode_idx"
@@ -147,10 +154,6 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   add_index "teachers", ["id"], :name => "teacherID_UNIQUE", :unique => true
-
-  create_table "threads", :force => true do |t|
-    t.string "userEmail", :null => false
-  end
 
   create_table "time_table_items", :force => true do |t|
     t.integer  "courseID",                 :null => false

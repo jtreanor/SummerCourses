@@ -336,4 +336,17 @@ Student.create([
 #  { :amount => nil, :timestamp => nil }
 #], :without_protection => true )
 
+MessageThread.create([
+  { :user_email => "test@test.com"
+  }
+], :without_protection => true )
+
+Message.create([
+  { :message_thread_id => 1,
+    :subject =>"test subject",
+    :is_response => false,
+    :message_text => "test message",
+}
+], :without_protection => true )
+
 
