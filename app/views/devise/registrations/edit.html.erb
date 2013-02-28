@@ -3,6 +3,10 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f| %>
   <%= devise_error_messages! %>
 
+    <fieldset>
+
+    <legend>Account Details</legend>
+
   <div class="control-group">
     <%= f.label :first_name, class: "control-label" %>
     <div class="controls">
@@ -51,6 +55,12 @@
       </div>
   </div>
 
+</fieldset>
+
+  <fieldset>
+
+    <legend>Change Password</legend>
+
   <div class="control-group">
     <%= f.label :password, class: "control-label" %>
     <div class="controls">
@@ -71,6 +81,8 @@
         <%= f.password_field :current_password  %>
       </div>
   </div>
+
+  </fieldset>
 
   <div class="controls"><%= f.submit "Update", class: "btn" %></div>
 <% end %>
