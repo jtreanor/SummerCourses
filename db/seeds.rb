@@ -329,7 +329,7 @@ Message.create([
 ], :without_protection => true )
 
 AdminUser.create([
-  { :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password'
+  { :forename => "Test", :surname => "Admin", :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password'
   }
 ], :without_protection => true )
 
