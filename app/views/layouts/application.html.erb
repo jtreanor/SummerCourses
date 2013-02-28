@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <%= render "layouts/header" %>
   <body>
-    <%= render "layouts/header" %>
     <%= render "layouts/nav_bar" %>
-
+    <header></header>
     <div class="container">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
       <%= yield %>
-      <%= render "layouts/footer" %>
-    </div> <!-- /container -->
 
+    </div> <!-- /container -->
+    <%= render "layouts/footer" %>
   </body>
 </html>
