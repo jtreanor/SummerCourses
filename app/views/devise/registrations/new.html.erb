@@ -32,17 +32,31 @@
 	  	</div>
 	</div>
 
-	<div class="control-group">
+		<div class="control-group">
 		<%= f.label :sex, class: "control-label" %>
 		<div class="controls">
-	  		<%= select_tag :sex, options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
+	  		<%= f.text_field :sexID, placeholder: "1"  %>
 	  	</div>
 	</div>
 
 	<div class="control-group">
 		<%= f.label :nationality, class: "control-label" %>
 		<div class="controls">
-			<%= select_tag :nationality, options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
+	  		<%= f.text_field :countryCode, placeholder: "IE"  %>
+	  	</div>
+	</div>
+
+	<div class="control-group">
+		<%= f.label :sexID, class: "control-label" %>
+		<div class="controls">
+	  		<%= select_tag :sexID, options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
+	  	</div>
+	</div>
+
+	<div class="control-group">
+		<%= f.label :countryCode, class: "control-label" %>
+		<div class="controls">
+			<%= select_tag :countryCode, options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
 	  	</div>
 	</div>
 
