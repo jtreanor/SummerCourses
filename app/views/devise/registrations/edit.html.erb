@@ -36,16 +36,18 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :sex, class: "control-label" %>
+    <%= f.label :sexID, class: "control-label" %>
     <div class="controls">
-        <%= select_tag :sex, options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
+        <%= select_tag 'student[sexID]',
+      options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
       </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :nationality, class: "control-label" %>
+    <%= f.label :countryCode, class: "control-label" %>
     <div class="controls">
-      <%= select_tag :nationality, options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
+      <%= select_tag 'student[countryCode]',
+      options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
       </div>
   </div>
 

@@ -308,27 +308,6 @@ Sex.create([
 
 
 
-Student.create([
-  { :forename => nil, 
-    :surname => nil, 
-    :countryCode => nil, 
-    :sexID => nil, 
-    :yearOfBirth => nil, 
-    :email => "", 
-    :encrypted_password => "", 
-    :reset_password_token => nil, 
-    :reset_password_sent_at => nil, 
-    :remember_created_at => nil, 
-    :sign_in_count => 0, 
-    :current_sign_in_at => nil, 
-    :last_sign_in_at => nil, 
-    :current_sign_in_ip => nil, 
-    :last_sign_in_ip => nil, 
-    :confirmation_token => nil, 
-    :confirmed_at => nil, 
-    :confirmation_sent_at => nil, 
-    :unconfirmed_email => nil }
-], :without_protection => true )
 
 
 
@@ -347,6 +326,11 @@ Message.create([
     :is_response => false,
     :content => "test message",
 }
+], :without_protection => true )
+
+AdminUser.create([
+  { :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password'
+  }
 ], :without_protection => true )
 
 

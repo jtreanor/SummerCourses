@@ -10,13 +10,6 @@ $btnPrimaryBackgroundHighlight: $red;
 // Then bootstrap itself
 @import "bootstrap";
 
-// Bootstrap body padding for fixed navbar
-/**
-body {
-  padding-top: 60px;
-}
-**/
-
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
