@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="span8">
-	<%= form_for(resource, :html => { :class => "form-horizontal"}, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= form_for(resource, :as => resource_name, :html => { :class => "form-horizontal"}, :url => registration_path(resource_name)) do |f| %>
 	  <%= devise_error_messages! %>
 
 	<div class="control-group">
@@ -32,31 +32,20 @@
 	  	</div>
 	</div>
 
-		<div class="control-group">
-		<%= f.label :sex, class: "control-label" %>
-		<div class="controls">
-	  		<%= f.text_field :sexID, placeholder: "1"  %>
-	  	</div>
-	</div>
-
-	<div class="control-group">
-		<%= f.label :nationality, class: "control-label" %>
-		<div class="controls">
-	  		<%= f.text_field :countryCode, placeholder: "IE"  %>
-	  	</div>
-	</div>
 
 	<div class="control-group">
 		<%= f.label :sexID, class: "control-label" %>
 		<div class="controls">
-	  		<%= select_tag :sexID, options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
+	  		<%= select_tag 'student[sexID]',
+			options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
 	  	</div>
 	</div>
 
 	<div class="control-group">
 		<%= f.label :countryCode, class: "control-label" %>
 		<div class="controls">
-			<%= select_tag :countryCode, options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
+			<%= select_tag 'student[countryCode]',
+			options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
 	  	</div>
 	</div>
 

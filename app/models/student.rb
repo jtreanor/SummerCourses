@@ -47,4 +47,5 @@ class Student < ActiveRecord::Base
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }
   validates :yearOfBirth, presence: true
+  validates :sexID, presence: true
 end
