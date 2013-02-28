@@ -3,6 +3,8 @@ SummerCourses::Application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
   resources :enrollments, only: [:index, :create]
+  resources :messages
+  resources :message_threads
 
   root :to => 'static_pages#home'
 
@@ -10,6 +12,8 @@ SummerCourses::Application.routes.draw do
   match 'enrollments/result/course/:id' => 'enrollments#result', :as => :enrollment_result
 
   match 'heroku' => 'heroku#run'
+  match '/contact' => 'message_threads#contact'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
