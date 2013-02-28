@@ -1,11 +1,12 @@
 <div class="hero-unit">
   <h1>Ask us anything</h1>
   <p>Please feel free to ask us about any of our courses. A member of our staff will reply to you as soon as possible.</p>
-</div><!--end hero unit -->
-<div class="control-group center">
-  <form action="message_threads" class="span6" method="post">
-    <label for="subject">Subject</label>
-    <input id="subject" class="input-xlarge" name="new_message_thread[subject]" type="text" />
+</div>
+<!--end hero unit -->
+
+  <form action="message_threads" class="span12" method="post">
+    <label class="offset3" for="subject">Subject</label>
+    <input id="subject" class="input-xlarge offset3" name="new_message_thread[subject]" type="text" />
 
     <label  class="control-label" for="user_email">Email</label>
     <input id="user_email" class="input-xxlarge"  name="new_message_thread[user_email]" type="text" />
@@ -15,5 +16,3 @@
 
     <button type="submit" class="btn btn-large btn-primary">Send Message</button>
   </form>
-  <br class="clear">
-</div>

@@ -12,7 +12,7 @@ SummerCourses::Application.routes.draw do
   match 'enrollments/result/course/:id' => 'enrollments#result', :as => :enrollment_result
 
   match 'heroku' => 'heroku#run'
-  match '/contact' => 'message_threads#contact'
+  match '/contact' => 'message_threads#new'
 
 
   # The priority is based upon order of creation:

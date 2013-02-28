@@ -1,6 +1,5 @@
 class Message < ActiveRecord::Base
-   attr_accessible :thread_id, :subject, :is_response, :message_textasd, :user_email
+  attr_accessible :message_thread_id, :subject, :is_response, :content
   belongs_to :message_thread
-   attr_accessible :title, :body
-
+  attr_accessible :title, :body
 end

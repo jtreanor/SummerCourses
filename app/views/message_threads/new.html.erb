@@ -1,0 +1,36 @@
+<div class="hero-unit">
+  <h1>Ask us anything</h1>
+  <p>Please feel free to ask us about any of our courses. A member of our staff will reply to you as soon as possible.</p>
+</div>
+<!--end hero unit -->
+
+<div class="span6 offset3">
+  <form action="message_threads" method="post">
+
+    <div class="control-group">
+      <label class= "control-label" for="subject" >Subject</label>
+      <div class="controls">
+        <input id="subject"  class="input-xlarge"  name="new_message_thread[subject]" type="text" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="user_email">Email</label>
+      <div class="controls">
+        <input id="user_email" class="input-xlarge"  name="new_message_thread[user_email]" type="text" />
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <label class= "control-label"  for="text"> Message</label>
+      <div class="controls">
+        <textarea rows="6" class="input-xxlarge" name="new_message_thread[content]"  placeholder="Write your question here."></textarea>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <button type="submit" class="btn btn-large btn-primary">Send Message</button>
+    </div> 
+  </form>
+</div>
