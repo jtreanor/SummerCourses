@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
+    t.string   "forename",               :limit => 35,                 :null => false
+    t.string   "surname",                :limit => 35,                 :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -46,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
-
+=begin
   create_table "administrators", :force => true do |t|
     t.string  "forename", :limit => 35,                    :null => false
     t.string  "surname",  :limit => 35,                    :null => false
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   end
 
   add_index "administrators", ["id"], :name => "adminID_UNIQUE", :unique => true
+=end
 
   create_table "categories", :force => true do |t|
     t.string "categoryName", :limit => 45, :null => false
