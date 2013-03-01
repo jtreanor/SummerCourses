@@ -4,7 +4,6 @@ class MessageThreadsController < ApplicationController
 
   def new
     @thread = MessageThread.new
-    @thread.set_message(Message.new)
   end
 
   def create
@@ -18,8 +17,10 @@ class MessageThreadsController < ApplicationController
       @message.message_thread_id = @thread.id
       if  @message.save
         flash[:success] = "Your message has been successfully sent, we will reply to yout email shortly!"
+        redirect_to root_path
       end
+    else
+      render 'new'
     end
-    render 'new'
   end
 end

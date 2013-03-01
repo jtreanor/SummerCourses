@@ -7,8 +7,8 @@ SummerCourses::Application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
   resources :enrollments, only: [:index, :create]
-  resources :messages
-  resources :message_threads
+  resources :messages, only: [:new]
+  resources :message_threads, only: [:new, :create] 
 
   root :to => 'static_pages#home'
 

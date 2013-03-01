@@ -2,6 +2,7 @@ class MessageThread < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :user_email
   
+=begin 
   def get_message
     @message
   end
@@ -11,4 +12,5 @@ class MessageThread < ActiveRecord::Base
   end
 
   has_many :message
+=end
 end
