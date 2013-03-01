@@ -2,8 +2,8 @@
 #
 # Table name: categories
 #
-#  id           :integer          not null, primary key
-#  categoryName :string(45)       not null
+#  id            :integer          not null, primary key
+#  category_name :string(45)       not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
