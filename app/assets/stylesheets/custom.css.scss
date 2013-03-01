@@ -3,34 +3,24 @@
 // First import journal variables
 @import "bootswatch/readable/variables";
 $linkColor: $red;
-
 $btnPrimaryBackground: $red;
 $btnPrimaryBackgroundHighlight: $red;
 
 // Then bootstrap itself
 @import "bootstrap";
 
-@mixin box_sizing {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box;
-}
 
 .navbar .brand {
   padding: 5px 25px 5px;
 }
+
 .hero-unit {
   background-color: #eeeeee;
 }
 
- .center
-{
-margin-left:auto;
-margin-right:auto;
-width:70%;
-background-color:#b0e0e6;
-}
-
+header{
+  padding: 40px
+} 
 
 // Responsive styles go here in case you want them
 @import "bootstrap-responsive";
