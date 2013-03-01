@@ -68,7 +68,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.5.0)
+    coffee-script-source (1.4.0)
     debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -173,7 +173,8 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.0.1)
   bootswatch-rails
   braintree
-  coffee-rails (~> 3.2.1)
+  coffee-rails
+  coffee-script-source (~> 1.4.0)
   devise
   jquery-rails
   meta_search (>= 1.1.0.pre)
