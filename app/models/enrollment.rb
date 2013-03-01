@@ -13,4 +13,5 @@ class Enrollment < ActiveRecord::Base
 
 	belongs_to :course
 	belongs_to :student
+	has_many :payments
 end

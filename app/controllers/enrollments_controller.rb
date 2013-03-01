@@ -27,6 +27,7 @@ class EnrollmentsController < ApplicationController
 	def result
 		result = Braintree::TransparentRedirect.confirm(request.query_string)
 		@course = Course.find_by_id(params[:id])
+		@message =""
 		error = true
 
 	  if result.success?
@@ -37,7 +38,6 @@ class EnrollmentsController < ApplicationController
 	    		payment = Payment.create(id: transaction.id, enrollment_id: enrollment.id)
 	    		if payment.save
 	    			error = false
-	    			@message = "Transaction Status: #{result.transaction.status}. The transaction_id is #{result.transaction.id}"
 	    		end
 	    	end
 		end

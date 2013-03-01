@@ -8,4 +8,6 @@
 
 class Payment < ActiveRecord::Base
 	attr_accessible :id, :enrollment_id
+
+	has_one :enrollment
 end

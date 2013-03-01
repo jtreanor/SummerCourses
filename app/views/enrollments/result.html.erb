@@ -3,5 +3,5 @@
 <% if !@message.empty? %>
 	<p><%= @message %></p>
 <% else %>
-	<p>You have been succesfully enrolled in <%= @course.title %></p>
+	<p>You have been succesfully enrolled in <%= link_to @course.title, course_path(@course.id) %></p>
 <% end %>
