@@ -18,4 +18,5 @@ class Course < ActiveRecord::Base
 	attr_accessible :title, :description, :brief_description, :teacher_id, :number_of_places, :price, :deposit
 
 	belongs_to :category
+	has_many :enrollments
 end

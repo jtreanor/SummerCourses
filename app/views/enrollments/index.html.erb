@@ -14,7 +14,7 @@
 			<%= enrollment.id %>
 		</td>
 		<td>
-			<%= enrollment.student_id %>
+			<%= enrollment.student.forename %>
 		</td>
 		<td>
 			<%= link_to enrollment.course.title, course_path(enrollment.course.id) %>

@@ -35,6 +35,7 @@ class Student < ActiveRecord::Base
   attr_accessible :email, :forename, :surname, :year_of_birth, :password, :password_confirmation, :remember_me, :sex_id, :country_id
   has_one :sex
   has_one :country
+  has_many :enrollments
 
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }

@@ -11,9 +11,6 @@
 class Enrollment < ActiveRecord::Base
 	attr_accessible :student_id, :course_id, :is_Cancelled
 
-	def course # getter
-  		Course.find_by_id(course_id)
-	end
-
-	has_one :course
+	belongs_to :course
+	belongs_to :student
 end
