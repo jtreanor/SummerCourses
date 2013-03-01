@@ -98,13 +98,13 @@ DROP TABLE IF EXISTS `course_media`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `course_media` (
-  `courseID` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
   `mediaID` int(11) NOT NULL,
-  PRIMARY KEY (`courseID`,`mediaID`),
+  PRIMARY KEY (`course_id`,`mediaID`),
   KEY `mediaID_idx` (`mediaID`),
-  KEY `courseID_idx` (`courseID`),
+  KEY `course_id_idx` (`course_id`),
   CONSTRAINT `courseMedia.mediaID` FOREIGN KEY (`mediaID`) REFERENCES `media` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `courseMedia.courseID` FOREIGN KEY (`courseID`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `courseMedia.course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -161,14 +161,14 @@ DROP TABLE IF EXISTS `enrollments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `enrollments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `studentID` int(11) NOT NULL,
-  `courseID` int(11) NOT NULL,
-  `isCancelled` bit(1) NOT NULL DEFAULT b'0',
+  `student_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `is_Cancelled` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
-  KEY `studentID_idx` (`studentID`),
-  KEY `courseID_idx` (`courseID`),
-  CONSTRAINT `enrol.studentID` FOREIGN KEY (`studentID`) REFERENCES `students` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `enrol.courseID` FOREIGN KEY (`courseID`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `student_id_idx` (`student_id`),
+  KEY `course_id_idx` (`course_id`),
+  CONSTRAINT `enrol.student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `enrol.course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -466,15 +466,15 @@ DROP TABLE IF EXISTS `time_table_items`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `time_table_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `courseID` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
   `locationID` int(11) NOT NULL,
   `startTime` datetime NOT NULL,
   `endTime` datetime NOT NULL,
   `room` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `locationID_idx` (`locationID`),
-  KEY `courseID_idx` (`courseID`),
-  CONSTRAINT `timetable.courseID` FOREIGN KEY (`courseID`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `course_id_idx` (`course_id`),
+  CONSTRAINT `timetable.course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `timetable.locationID` FOREIGN KEY (`locationID`) REFERENCES `locations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

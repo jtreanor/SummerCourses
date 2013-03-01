@@ -6,7 +6,7 @@
 	<tr>
 		<th>ID</th>
 		<th>Student ID</th>
-		<th>CourseID</th>
+		<th>course_id</th>
 	</tr>
     <% @enrollments.each do |enrollment| %>
     <tr>
@@ -14,7 +14,7 @@
 			<%= enrollment.id %>
 		</td>
 		<td>
-			<%= enrollment.studentID %>
+			<%= enrollment.student_id %>
 		</td>
 		<td>
 			<%= link_to enrollment.course.title, course_path(enrollment.course.id) %>

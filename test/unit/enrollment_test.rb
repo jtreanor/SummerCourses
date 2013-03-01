@@ -3,9 +3,9 @@
 # Table name: enrollments
 #
 #  id          :integer          not null, primary key
-#  studentID   :integer          not null
-#  courseID    :integer          not null
-#  isCancelled :boolean          default(FALSE), not null
+#  student_id   :integer          not null
+#  course_id    :integer          not null
+#  is_Cancelled :boolean          default(FALSE), not null
 #
 
 require 'test_helper'

@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
 	before_filter :authenticate_student!
 
 	def index
-		@enrollments = Enrollment.find_all_by_studentID(current_student.id)
+		@enrollments = Enrollment.find_all_by_student_id(current_student.id)
 	end
 
 	def new
@@ -32,7 +32,7 @@ class EnrollmentsController < ApplicationController
 	  if result.success?
 	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: Date.today)
 	    if transaction.save
-	    	enrollment = Enrollment.create(studentID: current_student.id, courseID: @course.id)
+	    	enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	if enrollment.save
 	    		payment = Payment.create(id: transaction.id, enrollmentID: enrollment.id)
 	    		if payment.save

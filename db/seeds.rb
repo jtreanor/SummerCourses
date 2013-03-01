@@ -302,9 +302,9 @@ Course.create([
 
 
 Enrollment.create([
-  { :studentID => 2, 
-    :courseID => 1, 
-    :isCancelled => false }
+  { :student_id => 2, 
+    :course_id => 1, 
+    :is_Cancelled => false }
 ], :without_protection => true )
 
 
@@ -348,5 +348,9 @@ AdminUser.create([
   { :forename => "Test", :surname => "Admin", :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password'
   }
 ], :without_protection => true )
+
+Student.create([
+  { email: "jtreanor3@gmail.com", forename: "James", surname: "Treanor", password: "password", password_confirmation: "password", year_of_birth: 1991, country_id: "IE", sex_id: 1
+    }])
 
 

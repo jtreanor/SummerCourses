@@ -3,16 +3,16 @@
 # Table name: enrollments
 #
 #  id          :integer          not null, primary key
-#  studentID   :integer          not null
-#  courseID    :integer          not null
-#  isCancelled :boolean          default(FALSE), not null
+#  student_id   :integer          not null
+#  course_id    :integer          not null
+#  is_Cancelled :boolean          default(FALSE), not null
 #
 
 class Enrollment < ActiveRecord::Base
-	attr_accessible :studentID, :courseID, :isCancelled
+	attr_accessible :student_id, :course_id, :is_Cancelled
 
 	def course # getter
-  		Course.find_by_id(courseID)
+  		Course.find_by_id(course_id)
 	end
 
 	has_one :course
