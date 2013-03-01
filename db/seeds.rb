@@ -304,7 +304,7 @@ Course.create([
 Enrollment.create([
   { :student_id => 2, 
     :course_id => 1, 
-    :is_Cancelled => false }
+    :is_cancelled => false }
 ], :without_protection => true )
 
 

@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id           :integer          not null, primary key
+#  id            :integer          not null, primary key
 #  enrollment_id :integer          not null
 #
 
