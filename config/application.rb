@@ -59,6 +59,10 @@ module SummerCourses
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.initialize_on_precompile = true
+    #Added to fix devise/active admin issue ?
+    config.assets.initialize_on_precompile = false
+
+    # Precompile additional assets. Defaults to [application.js, application.css, non-JS/CSS]
+    config.assets.precompile += ['active_admin.css', 'active_admin.js'] 
   end
 end
