@@ -3,9 +3,9 @@
     <p>On this page you can find a list of all our upcoming courses. Simply choose a category that interests you.</p>
 </div>
 <ul class="nav nav-tabs nav-stacked">
-    <% @categories.sort_by(&:categoryName).each do |category| %>
+    <% @categories.sort_by(&:category_name).each do |category| %>
     <li>
-      <%= link_to category.categoryName, category_path(category.id) %>
+      <%= link_to category.category_name, category_path(category.id) %>
     </li>
     <% end %>
 </ul>

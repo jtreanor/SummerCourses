@@ -7,8 +7,8 @@
 #
 
 class Category < ActiveRecord::Base
-	attr_accessible :categoryName
+	attr_accessible :category_name
 	has_many :courses
 
-	validates :categoryName, presence: true, length: { maximum: 45 }
+	validates :category_name, presence: true, length: { maximum: 45 }
 end

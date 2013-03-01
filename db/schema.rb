@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   create_table "courses", :force => true do |t|
     t.string  "title",            :limit => 100,                                               :null => false
     t.text    "description",                                                                   :null => false
-    t.text    "brief_sescription", :limit => 255,                                               :null => false
+    t.text    "brief_description", :limit => 255,                                               :null => false
     t.integer "teacher_id",                                                                     :null => false
     t.integer "number_of_places",                                                                :null => false
     t.decimal "price",                           :precision => 10, :scale => 2,                :null => false
