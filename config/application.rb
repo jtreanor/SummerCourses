@@ -60,6 +60,6 @@ module SummerCourses
     config.assets.version = '1.0'
 
     #Added to fix devise/active admin issue ?
-    config.assets.initialize_on_precompile = true
+    config.assets.initialize_on_precompile = false
   end
 end
