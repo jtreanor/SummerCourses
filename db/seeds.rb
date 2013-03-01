@@ -310,7 +310,7 @@ Enrollment.create([
 
 
 #Payment.create([
-#  { :enrollmentID => nil }
+#  { :enrollment_id => nil }
 #], :without_protection => true )
 
 

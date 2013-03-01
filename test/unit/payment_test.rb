@@ -3,7 +3,7 @@
 # Table name: payments
 #
 #  id           :integer          not null, primary key
-#  enrollmentID :integer          not null
+#  enrollment_id :integer          not null
 #
 
 require 'test_helper'

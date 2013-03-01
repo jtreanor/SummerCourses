@@ -5,9 +5,9 @@
 #  id                     :integer          not null, primary key
 #  forename               :string(35)       not null
 #  surname                :string(35)       not null
-#  country_id           :string(2)        not null
+#  country_id             :string(2)        not null
 #  sex_id                 :integer          not null
-#  year_of_Birth          :integer          not null
+#  year_of_birth          :integer          not null
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)

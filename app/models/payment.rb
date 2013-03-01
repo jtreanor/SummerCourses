@@ -3,9 +3,9 @@
 # Table name: payments
 #
 #  id           :integer          not null, primary key
-#  enrollmentID :integer          not null
+#  enrollment_id :integer          not null
 #
 
 class Payment < ActiveRecord::Base
-	attr_accessible :id, :enrollmentID
+	attr_accessible :id, :enrollment_id
 end

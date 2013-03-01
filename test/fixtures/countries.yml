@@ -2,7 +2,7 @@
 #
 # Table name: countries
 #
-#  country_id :string(2)        primary key
+#  country_id   :string(2)        primary key
 #  country_name :string(45)       not null
 #
 

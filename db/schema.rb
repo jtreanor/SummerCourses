@@ -121,10 +121,10 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
 
   create_table "payments", :force => true do |t|
-    t.integer "enrollmentID", :null => false
+    t.integer "enrollment_id", :null => false
   end
 
-  add_index "payments", ["enrollmentID"], :name => "enrollmentID_idx"
+  add_index "payments", ["enrollment_id"], :name => "enrollment_id_idx"
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refundTransactionID",   :limit => 45, :null => false

@@ -2,7 +2,7 @@
 #
 # Table name: enrollments
 #
-#  id          :integer          not null, primary key
+#  id           :integer          not null, primary key
 #  student_id   :integer          not null
 #  course_id    :integer          not null
 #  is_Cancelled :boolean          default(FALSE), not null

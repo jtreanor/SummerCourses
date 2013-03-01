@@ -269,11 +269,11 @@ DROP TABLE IF EXISTS `payments`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payments` (
   `id` varchar(45) NOT NULL,
-  `enrollmentID` int(11) NOT NULL,
+  `enrollment_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `enrollmentID_idx` (`enrollmentID`),
+  KEY `enrollment_id_idx` (`enrollment_id`),
   CONSTRAINT `pay.transactionID` FOREIGN KEY (`id`) REFERENCES `transactions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `pay.enrollmentID` FOREIGN KEY (`enrollmentID`) REFERENCES `enrollments` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `pay.enrollment_id` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
