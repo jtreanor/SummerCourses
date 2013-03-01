@@ -280,6 +280,22 @@ Course.create([
     :price => 100.0, 
     :deposit => 10.0, 
     :categoryID => 3, 
+    :hits => 0 },
+    { :title => "Intro to programming", 
+    :description => "full description", 
+    :briefDescription => "brief description", 
+    :teacherID => 1, 
+    :numberOfPlaces => 50, 
+    :price => 100.0, 
+    :deposit => 10.0, :categoryID => 21, :hits => 0 },
+  { :title => "Some course", 
+    :description => "full description", 
+    :briefDescription => "brief description", 
+    :teacherID => 1, 
+    :numberOfPlaces => 50, 
+    :price => 100.0, 
+    :deposit => 10.0, 
+    :categoryID => 21, 
     :hits => 0 }
 ], :without_protection => true )
 
