@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.string   :message_thread_id, :limit => 80, :null => false
     t.text     :subject, :limit => 255, :null => false
     t.boolean  :is_response, :default => false, :null => false
-    t.text     :message_text, :null => false
+    t.text     :content, :null => false
     t.timestamps
   end
 

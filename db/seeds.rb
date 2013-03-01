@@ -324,7 +324,7 @@ Message.create([
   { :message_thread_id => 1,
     :subject =>"test subject",
     :is_response => false,
-    :message_text => "test message",
+    :content => "test message",
 }
 ], :without_protection => true )
 

@@ -16,7 +16,7 @@ class MessageThreadsController < ApplicationController
     if @thread.save
       @message.message_thread_id = @thread.id
       if  @message.save
-        flash[:success] = "Your message has been successfully sent, we will reply to yout email shortly!"
+        flash[:success] = "Your message has been successfully sent, we will reply your email shortly!"
         redirect_to root_path
       end
     else
