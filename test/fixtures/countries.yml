@@ -2,8 +2,8 @@
 #
 # Table name: countries
 #
-#  countryCode :string(2)
-#  countryName :string(45)       not null
+#  country_id :string(2)        primary key
+#  country_name :string(45)       not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

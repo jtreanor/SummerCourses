@@ -75,7 +75,7 @@ DROP TABLE IF EXISTS `countries`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `countries` (
   `countryCode` char(2) NOT NULL,
-  `countryName` varchar(45) NOT NULL,
+  `country_name` varchar(45) NOT NULL,
   PRIMARY KEY (`countryCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

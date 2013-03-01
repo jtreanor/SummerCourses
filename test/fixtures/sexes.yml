@@ -2,8 +2,8 @@
 #
 # Table name: sexes
 #
-#  sex_id  :integer
-#  sexName :string(45)       not null
+#  sex_id   :integer          primary key
+#  sex_name :string(45)       not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

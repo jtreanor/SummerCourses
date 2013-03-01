@@ -5,9 +5,9 @@
 #  id                     :integer          not null, primary key
 #  forename               :string(35)       not null
 #  surname                :string(35)       not null
-#  countryCode            :string(2)        not null
-#  sexID                  :integer          not null
-#  yearOfBirth            :integer          not null
+#  country_id           :string(2)        not null
+#  sex_id                 :integer          not null
+#  year_of_Birth          :integer          not null
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
@@ -31,21 +31,13 @@ class Student < ActiveRecord::Base
   devise :confirmable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def sexes
-    Sex.all
-  end
-
-  def countries
-    Country.all
-  end
-
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :forename, :surname, :yearOfBirth , :sexID , :countryCode , :password, :password_confirmation, :remember_me
+  attr_accessible :email, :forename, :surname, :year_of_birth, :password, :password_confirmation, :remember_me, :sex_id, :country_id
   has_one :sex
   has_one :country
 
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }
-  validates :yearOfBirth, presence: true
-  validates :sexID, presence: true
+  validates :year_of_birth, presence: true
+  validates :sex_id, presence: true
 end

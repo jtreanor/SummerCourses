@@ -35,23 +35,23 @@
     <div class="control-group">
     <%= f.label :year_of_birth, class: "control-label" %>
     <div class="controls">
-        <%= f.text_field :yearOfBirth, placeholder: "YYYY"  %>
+        <%= f.text_field :year_of_birth, placeholder: "YYYY"  %>
       </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :sexID, class: "control-label" %>
+    <%= f.label :sex_id, class: "control-label" %>
     <div class="controls">
-        <%= select_tag 'student[sexID]',
-      options_from_collection_for_select(resource.sexes, :sex_id, :sexName) %>
+        <%= f.select :sex_id,
+      options_from_collection_for_select(Sex.all, :sex_id, :sex_name) %>
       </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :countryCode, class: "control-label" %>
+    <%= f.label :country_id, class: "control-label" %>
     <div class="controls">
-      <%= select_tag 'student[countryCode]',
-      options_from_collection_for_select(resource.countries, :countryCode, :countryName) %>
+      <%= f.select :country_id,
+      options_from_collection_for_select(Country.all, :country_id, :country_name) %>
       </div>
   </div>
 

@@ -48,28 +48,10 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
-=begin
-  create_table "administrators", :force => true do |t|
-    t.string  "forename", :limit => 35,                    :null => false
-    t.string  "surname",  :limit => 35,                    :null => false
-    t.string  "email",                                     :null => false
-    t.string  "password", :limit => 60
-    t.boolean "isSuper",                :default => false, :null => false
-  end
-
-  add_index "administrators", ["id"], :name => "adminID_UNIQUE", :unique => true
-=end
 
   create_table "categories", :force => true do |t|
     t.string "category_name", :limit => 45, :null => false
   end
-
-  create_table "countries", :id => false, :force => true do |t|
-    t.string "countryCode", :limit => 2
-    t.string "countryName", :limit => 45, :null => false
-  end
-
-  add_index "countries", ["countryCode"], :name => "countryCode_idx"
 
   create_table "course_media", :id => false, :force => true do |t|
     t.integer "courseID", :null => false
@@ -144,9 +126,16 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "refunds", ["originalTransactionID"], :name => "transactionID_idx1"
   add_index "refunds", ["refundTransactionID"], :name => "transactionID_idx"
 
+  create_table "countries", :id => false, :force => true do |t|
+    t.string "country_id", :limit => 2
+    t.string "country_name", :limit => 45, :null => false
+  end
+
+  add_index "countries", ["country_id"], :name => "country_id_idx"
+
   create_table "sexes", :id => false, :force => true do |t|
     t.integer "sex_id"
-    t.string  "sexName", :limit => 45, :null => false
+    t.string  "sex_name", :limit => 45, :null => false
   end
 
   add_index "sexes", ["sex_id"], :name => "sex_id_idx"
@@ -154,9 +143,9 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   create_table "students", :force => true do |t|
     t.string   "forename",               :limit => 35,                 :null => false
     t.string   "surname",                :limit => 35,                 :null => false
-    t.string   "countryCode",            :limit => 2,                  :null => false
-    t.integer  "sexID",                  :limit => 1,                  :null => false
-    t.integer  "yearOfBirth",                                          :null => false
+    t.string   "country_id",            :limit => 2,                  :null => false
+    t.integer  "sex_id",                  :limit => 1,                  :null => false
+    t.integer  "year_of_birth",                                          :null => false
     t.string   "email",                                :default => "", :null => false
     t.string   "encrypted_password",                   :default => "", :null => false
     t.string   "reset_password_token"
@@ -173,10 +162,10 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.string   "unconfirmed_email"
   end
 
-  add_index "students", ["countryCode"], :name => "countryCode_idx"
+  add_index "students", ["country_id"], :name => "country_id_idx"
   add_index "students", ["email"], :name => "index_students_on_email", :unique => true
   add_index "students", ["reset_password_token"], :name => "index_students_on_reset_password_token", :unique => true
-  add_index "students", ["sexID"], :name => "sexID_idx"
+  add_index "students", ["sex_id"], :name => "sex_id_idx"
 
   create_table "teachers", :force => true do |t|
     t.string  "photoUrl"
