@@ -1,6 +1,6 @@
 <div class="hero-unit">
   <h1><%= @category.categoryName %></h1>
-  <p>This page lists all the courses offered in the <%= @category.categoryName %> category though the UCC summer courses office.</p>
+  <p>This page lists all the courses offered in the <%= @category.category_name %> category though the UCC summer courses office.</p>
 </div>
 
 <% if !@courses.empty? %>
@@ -14,7 +14,7 @@
       </div>
       <div id="collapse<%= course.id %>" class="accordion-body collapse">
         <div class="accordion-inner">
-          <p><%= course.briefDescription %></p>
+          <p><%= course.brief_description %></p>
           <p>
             <%= link_to "View Course", course_path(course.id), class: "btn btn-primary" %>
           </p>

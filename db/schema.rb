@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 =end
 
   create_table "categories", :force => true do |t|
-    t.string "categoryName", :limit => 45, :null => false
+    t.string "category_name", :limit => 45, :null => false
   end
 
   create_table "countries", :id => false, :force => true do |t|
@@ -82,17 +82,17 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   create_table "courses", :force => true do |t|
     t.string  "title",            :limit => 100,                                               :null => false
     t.text    "description",                                                                   :null => false
-    t.text    "briefDescription", :limit => 255,                                               :null => false
-    t.integer "teacherID",                                                                     :null => false
-    t.integer "numberOfPlaces",                                                                :null => false
+    t.text    "brief_sescription", :limit => 255,                                               :null => false
+    t.integer "teacher_id",                                                                     :null => false
+    t.integer "number_of_places",                                                                :null => false
     t.decimal "price",                           :precision => 10, :scale => 2,                :null => false
     t.decimal "deposit",                         :precision => 10, :scale => 2,                :null => false
-    t.integer "categoryID",                                                                    :null => false
+    t.integer "category_id",                                                                    :null => false
     t.integer "hits",                                                           :default => 0, :null => false
   end
 
-  add_index "courses", ["categoryID"], :name => "categoryID_idx"
-  add_index "courses", ["teacherID"], :name => "teacherID_idx"
+  add_index "courses", ["category_id"], :name => "category_id_idx"
+  add_index "courses", ["teacher_id"], :name => "teacher_id_idx"
 
   create_table "enrollments", :force => true do |t|
     t.integer "studentID",                      :null => false

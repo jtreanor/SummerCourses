@@ -3,9 +3,9 @@
 # Do not hesitate to tweak this to your needs
 
 Category.create([
-  { :categoryName => "Computer Science" },
-  { :categoryName => "Chemistry" },
-  { :categoryName => "Architecture" }
+  { :category_name => "Computer Science" },
+  { :category_name => "Chemistry" },
+  { :category_name => "Architecture" }
 ], :without_protection => true )
 
 
@@ -267,35 +267,35 @@ Country.create([
 Course.create([
   { :title => "Intro to programming", 
     :description => "full description", 
-    :briefDescription => "brief description", 
-    :teacherID => 1, 
-    :numberOfPlaces => 50, 
+    :brief_description => "brief description", 
+    :teacher_id => 1, 
+    :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, :categoryID => 3, :hits => 0 },
   { :title => "Some course", 
     :description => "full description", 
-    :briefDescription => "brief description", 
-    :teacherID => 1, 
-    :numberOfPlaces => 50, 
+    :brief_description => "brief description", 
+    :teacher_id => 1, 
+    :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, 
-    :categoryID => 3, 
+    :category_id => 3, 
     :hits => 0 },
     { :title => "Intro to programming", 
     :description => "full description", 
-    :briefDescription => "brief description", 
-    :teacherID => 1, 
-    :numberOfPlaces => 50, 
+    :brief_description => "brief description", 
+    :teacher_id => 1, 
+    :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, :categoryID => 21, :hits => 0 },
   { :title => "Some course", 
     :description => "full description", 
-    :briefDescription => "brief description", 
-    :teacherID => 1, 
-    :numberOfPlaces => 50, 
+    :brief_description => "brief description", 
+    :teacher_id => 1, 
+    :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, 
-    :categoryID => 21, 
+    :category_id => 21, 
     :hits => 0 }
 ], :without_protection => true )
 
