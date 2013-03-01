@@ -5,6 +5,5 @@ class CategoriesController < ApplicationController
 
 	def show
 		@category = Category.find_by_id(params[:id])
-		@courses = Course.find_all_by_categoryID(params[:id])
 	end
 end

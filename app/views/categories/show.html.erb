@@ -1,11 +1,11 @@
 <div class="hero-unit">
-  <h1><%= @category.categoryName %></h1>
+  <h1><%= @category.category_name %></h1>
   <p>This page lists all the courses offered in the <%= @category.category_name %> category though the UCC summer courses office.</p>
 </div>
 
-<% if !@courses.empty? %>
+<% if !@category.courses.empty? %>
   <div class="accordion" id="accordion2">
-  <% @courses.each do |course| %>
+  <% @category.courses.each do |course| %>
     <div class="accordion-group">
       <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= course.id %>">
