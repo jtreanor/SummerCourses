@@ -60,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "countries", ["country_id"], :name => "country_id_idx"
 
   create_table "course_media", :id => false, :force => true do |t|
-    t.integer "courseID", :null => false
-    t.integer "mediaID",  :null => false
+    t.integer "course_id", :null => false
+    t.integer "media_id",  :null => false
   end
 
-  add_index "course_media", ["courseID"], :name => "courseID_idx"
-  add_index "course_media", ["mediaID"], :name => "mediaID_idx"
+  add_index "course_media", ["course_id"], :name => "course_id_idx"
+  add_index "course_media", ["media_id"], :name => "mediaID_idx"
 
   create_table "courses", :force => true do |t|
     t.string  "title",             :limit => 100,                                               :null => false
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "enrollments", ["course_id"], :name => "course_id_idx"
   add_index "enrollments", ["student_id"], :name => "student_id_idx"
   add_foreign_key "enrollments", "courses", :name => "enrollments_course_id_fk"
-  #add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk"
+  #add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk", :primary_key => "id", :sender_id => "student_id"
 
   create_table "locations", :force => true do |t|
     t.string "title",     :limit => 45, :null => false
@@ -125,14 +125,14 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   #add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
 
   create_table "payments", :id => false, :force => true do |t|
-    t.string   "transaction_id", :limit => 80, :null => false
+    t.string  "transaction_id",    :limit => 10, :null => false
     t.integer "enrollment_id", :null => false
   end
 
-  add_index "payments", ["enrollment_id"], :name => "enrollment_id_idx"
-  add_index "payments", ["transaction_id"], :name => "transaction_id_idx"
+  add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
+  add_index "payments", ["transaction_id"], :name => "payments_transaction_id_idx"
   add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
-  add_foreign_key "payments", "transactions", :name => "payments_transaction_id_fk", :primary_key => "id"
+  #add_foreign_key "payments", "transactions", :name => "payments_transaction_id_fk"
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refundTransactionID",   :limit => 45, :null => false
