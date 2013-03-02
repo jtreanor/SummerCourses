@@ -1,20 +1,6 @@
 <h2>Enrol in <%= @course.title %></h2>
-<%= form_tag(Braintree::TransparentRedirect.url, :html => { :class => "form-horizontal", :id => "payment-form"}, :method => "post") do %>
-  <%= hidden_field_tag :tr_data, @tr_data %>
-  <div>
-    <div class="control-group">
-      <%= label_tag :braintree_credit_card_number, "Credit Card Number" , class: "control-label" %>
-      <div class="controls">
-        <%= text_field_tag :braintree_credit_card_number, '4111111111111111', name: "transaction[credit_card][number]"  %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= label_tag :braintree_credit_card_exp, "Credit Card Expiry (mm/yyyy)" , class: "control-label" %>
-      <div class="controls">
-        <%= text_field_tag :braintree_credit_card_exp, '12/2015', name: "transaction[credit_card][expiration_date]"  %>
-      </div>
-    </div>
-  </div>
-  <%= submit_tag "Sign up", class: "btn btn-danger" %>
+<% if current_student.enrollments.find_by_course_id(@course.id) == nil %>
+  <p>You are already enrolled in this course.</p>
+<% else %>
+  <%= render "layouts/payment_form" %>
 <% end %>

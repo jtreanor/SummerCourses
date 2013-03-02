@@ -8,20 +8,24 @@ class EnrollmentsController < ApplicationController
 	def new
 		@course = Course.find_by_id(params[:id])
 
-		Braintree::Configuration.environment = :sandbox
-		Braintree::Configuration.merchant_id = "6b6c6smqn4ddbrvy"
-		Braintree::Configuration.public_key = "bkmz9ztnjt6f3jvj"
-		Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
+		if current_student.enrollments.find_by_course_id(@course.id) == nil
+			Braintree::Configuration.environment = :sandbox
+			Braintree::Configuration.merchant_id = "6b6c6smqn4ddbrvy"
+			Braintree::Configuration.public_key = "bkmz9ztnjt6f3jvj"
+			Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
 
-		@tr_data = Braintree::TransparentRedirect.transaction_data(
-			:redirect_url => enrollment_result_url(@course.id),
-			:transaction => {
-			  :type => "sale",
-			  :amount => @course.price.to_s,
-			  :options => {
-			    :submit_for_settlement => true
-			    }
-			  })
+			@tr_data = Braintree::TransparentRedirect.transaction_data(
+				:redirect_url => enrollment_result_url(@course.id),
+				:transaction => {
+				  :type => "sale",
+				  :amount => @course.price.to_s,
+				  :options => {
+				    :submit_for_settlement => true
+				    }
+				  })
+		else
+			#already enrolled
+		end
 	end
 
 	def result
@@ -31,7 +35,7 @@ class EnrollmentsController < ApplicationController
 		error = true
 
 	  if result.success?
-	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: Date.today)
+	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: DateTime.now)
 	    if transaction.save
 	    	enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	if enrollment.save
