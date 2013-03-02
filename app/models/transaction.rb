@@ -9,4 +9,7 @@
 
 class Transaction < ActiveRecord::Base
 	attr_accessible :id, :amount, :timestamp
+	set_primary_key :id
+
+	has_one :payment
 end

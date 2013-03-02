@@ -33,8 +33,8 @@ class Student < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :forename, :surname, :year_of_birth, :password, :password_confirmation, :remember_me, :sex_id, :country_id
-  has_one :sex
-  has_one :country
+  belongs_to :sex
+  belongs_to :country
   has_many :enrollments
 
   validates :forename, presence: true, length: { maximum: 35 }

@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "courses", ["category_id"], :name => "category_id_idx"
   add_index "courses", ["teacher_id"], :name => "teacher_id_idx"
+  add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
 
   create_table "enrollments", :force => true do |t|
     t.integer "student_id",                      :null => false
@@ -90,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "enrollments", ["course_id"], :name => "course_id_idx"
   add_index "enrollments", ["student_id"], :name => "student_id_idx"
+  add_foreign_key "enrollments", "courses", :name => "enrollments_course_id_fk"
+  #add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk"
 
   create_table "locations", :force => true do |t|
     t.string "title",     :limit => 45, :null => false
@@ -119,12 +122,17 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   end
 
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
+  #add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
 
-  create_table "payments", :force => true do |t|
+  create_table "payments", :id => false, :force => true do |t|
+    t.string   "transaction_id", :limit => 80, :null => false
     t.integer "enrollment_id", :null => false
   end
 
   add_index "payments", ["enrollment_id"], :name => "enrollment_id_idx"
+  add_index "payments", ["transaction_id"], :name => "transaction_id_idx"
+  add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
+  add_foreign_key "payments", "transactions", :name => "payments_transaction_id_fk", :primary_key => "id"
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refundTransactionID",   :limit => 45, :null => false
@@ -135,7 +143,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "refunds", ["refundTransactionID"], :name => "transactionID_idx"
 
   create_table "sexes", :id => false, :force => true do |t|
-    t.integer "sex_id"
+    t.integer "sex_id",                 :limit => 1,                  :null => false
     t.string  "sex_name", :limit => 45, :null => false
   end
 
@@ -167,6 +175,8 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "students", ["email"], :name => "index_students_on_email", :unique => true
   add_index "students", ["reset_password_token"], :name => "index_students_on_reset_password_token", :unique => true
   add_index "students", ["sex_id"], :name => "sex_id_idx"
+  add_foreign_key "students", "countries", :name => "students_country_id_fk", :primary_key => "country_id"
+  add_foreign_key "students", "sexes", :name => "students_sex_id_fk", :primary_key => "sex_id"
 
   create_table "teachers", :force => true do |t|
     t.string  "photoUrl"
@@ -191,11 +201,12 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "time_table_items", ["courseID"], :name => "courseID_idx"
   add_index "time_table_items", ["locationID"], :name => "locationID_idx"
 
-  create_table "transactions", :force => true do |t|
+  create_table "transactions", :id => false, :force => true do |t|
+    t.string  "id",    :limit => 10,           :null => false
     t.decimal  "amount",    :precision => 10, :scale => 2, :null => false
     t.datetime "timestamp",                                :null => false
   end
 
-  add_index "transactions", ["id"], :name => "transactionID_UNIQUE", :unique => true
+  add_index "transactions", ["id"], :name => "transaction_id_UNIQUE", :unique => true
 
 end

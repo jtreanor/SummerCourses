@@ -7,7 +7,9 @@
 #
 
 class Payment < ActiveRecord::Base
-	attr_accessible :id, :enrollment_id
+	attr_accessible :transaction_id, :enrollment_id
+	set_primary_key :transaction_id
 
-	has_one :enrollment
+	belongs_to :enrollment
+	belongs_to :transaction
 end

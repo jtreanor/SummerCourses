@@ -35,7 +35,7 @@ class EnrollmentsController < ApplicationController
 	    if transaction.save
 	    	enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	if enrollment.save
-	    		payment = Payment.create(id: transaction.id, enrollment_id: enrollment.id)
+	    		payment = Payment.create(transaction_id: transaction.id, enrollment_id: enrollment.id)
 	    		if payment.save
 	    			error = false
 	    		end

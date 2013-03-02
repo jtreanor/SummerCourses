@@ -29,6 +29,10 @@ group :development do
 	gem 'binding_of_caller'
 end
 
+#generate foreign keys
+gem 'foreigner'
+gem 'immigrant'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
