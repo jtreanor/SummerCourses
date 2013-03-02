@@ -17,6 +17,9 @@ gem 'meta_search', '>= 1.1.0.pre'
 gem 'mysql2'
 gem 'devise'
 
+#retina images
+gem 'clear_eyes'
+
 #payment with braintree
 gem 'braintree'
 
