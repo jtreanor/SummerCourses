@@ -336,5 +336,8 @@ AdminUser.create([
 Student.create([
   { email: "jtreanor3@gmail.com", forename: "James", surname: "Treanor", password: "password", password_confirmation: "password", year_of_birth: 1991, country_id: "IE", sex_id: 1
     }])
+s = Student.first
+s.confirmed_at = DateTime.now
+s.save
 
 
