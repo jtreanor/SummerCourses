@@ -283,37 +283,12 @@ Course.create([
     :hits => 0 }
 ], :without_protection => true )
 
-
-
-Enrollment.create([
-  { :student_id => 2, 
-    :course_id => 1, 
-    :is_cancelled => false }
-], :without_protection => true )
-
-
-
-#Payment.create([
-#  { :enrollment_id => nil }
-#], :without_protection => true )
-
-
-
 Sex.create([
   { :sex_id => 0, :sex_name => "not known" },
   { :sex_id => 1, :sex_name => "male" },
   { :sex_id => 2, :sex_name => "female" },
   { :sex_id => 9, :sex_name => "not applicable" }
 ], :without_protection => true )
-
-
-
-
-
-
-#Transaction.create([
-#  { :amount => nil, :timestamp => nil }
-#], :without_protection => true )
 
 MessageThread.create([
   { :user_email => "test@test.com"
@@ -339,5 +314,3 @@ Student.create([
 s = Student.first
 s.confirmed_at = DateTime.now
 s.save
-
-
