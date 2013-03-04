@@ -6,7 +6,7 @@ SummerCourses::Application.routes.draw do
   devise_for :students, :controllers => { :regsitrations => 'students/registrations' } 
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
-  resources :enrollments, only: [:index, :create]
+  resources :enrollments, only: [:index, :create, :edit, :destroy]
   resources :messages, only: [:new]
   resources :message_threads, only: [:new, :create] 
 

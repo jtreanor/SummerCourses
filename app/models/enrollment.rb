@@ -14,4 +14,9 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :course
 	belongs_to :student
 	has_many :payments
+
+	def balance_due
+		total_paid = self.payments.inject(0) { |sum, e| sum + e.transaction.amount }
+		self.course.price - total_paid
+	end
 end

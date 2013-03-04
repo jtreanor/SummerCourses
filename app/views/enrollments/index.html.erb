@@ -2,22 +2,35 @@
   <h1>My Courses</h1>
   <p>This page lists all the courses you have enrolled in.</p>
 </div>
-<table>
+<table class="table">
 	<tr>
-		<th>Enrol ID</th>
-		<th>Student</th>
 		<th>Course</th>
+		<th>Total Paid</th>
+		<th>Total Due</th>
+		<th></th>
 	</tr>
     <% @enrollments.each do |enrollment| %>
     <tr>
 		<td>
-			<%= enrollment.id %>
-		</td>
-		<td>
-			<%= enrollment.student.forename %>
-		</td>
-		<td>
 			<%= link_to enrollment.course.title, course_path(enrollment.course.id) %>
+		</td>
+		<td>
+			<%=
+				total_paid = enrollment.payments.inject(0) { |sum, e| sum + e.transaction.amount }
+				number_to_currency(total_paid, :unit => "&euro;")
+			%>
+		</td>
+		<td>
+			<%=
+				total_due = enrollment.course.price - total_paid
+				number_to_currency(total_due, :unit => "&euro;")
+			%>
+		</td>
+		<td>
+			<% if total_due > total_paid %>
+				<%= link_to "Pay Balance", edit_enrollment_path(enrollment.id), class: "btn" %>
+			<% end %>
+			<%= link_to "Cancel", enrollment_path(enrollment.id), method: "delete", class: "btn btn-danger" %>
 		</td>
     </tr>
     <% end %>
