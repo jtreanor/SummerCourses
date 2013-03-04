@@ -1,6 +1,18 @@
 class EnrollmentsController < ApplicationController
 	before_filter :authenticate_student!
 
+	def tr_data(amount,course_id)
+		Braintree::TransparentRedirect.transaction_data(
+			:redirect_url => enrollment_result_url(course_id),
+			:transaction => {
+			  :type => "sale",
+			  :amount => amount,
+			  :options => {
+			    :submit_for_settlement => true
+			    }
+			  })
+	end
+
 	def index
 		@enrollments = current_student.enrollments
 	end
@@ -14,15 +26,9 @@ class EnrollmentsController < ApplicationController
 			Braintree::Configuration.public_key = "bkmz9ztnjt6f3jvj"
 			Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
 
-			@tr_data = Braintree::TransparentRedirect.transaction_data(
-				:redirect_url => enrollment_result_url(@course.id),
-				:transaction => {
-				  :type => "sale",
-				  :amount => @course.price.to_s,
-				  :options => {
-				    :submit_for_settlement => true
-				    }
-				  })
+			@full_tr_data = tr_data(@course.price.to_s,@course.id)
+			@deposit_tr_data = tr_data(@course.deposit.to_s,@course.id)
+
 		else
 			#already enrolled
 		end

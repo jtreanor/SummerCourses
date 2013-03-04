@@ -1,5 +1,5 @@
 <%= form_tag(Braintree::TransparentRedirect.url, :html => { :class => "form-horizontal", :id => "payment-form"}, :method => "post") do %>
-  <%= hidden_field_tag :tr_data, @tr_data %>
+  <%= hidden_field_tag :tr_data, @deposit_tr_data != nil ? @deposit_tr_data : @full_tr_data %>
   <div>
     <div class="control-group">
       <%= label_tag :braintree_credit_card_number, "Credit Card Number" , class: "control-label" %>
@@ -15,5 +15,5 @@
       </div>
     </div>
   </div>
-  <%= submit_tag "Sign up", class: "btn btn-danger" %>
+  <%= submit_tag "Enrol", class: "btn btn-danger" %>
 <% end %>
