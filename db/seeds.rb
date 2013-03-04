@@ -271,7 +271,7 @@ Course.create([
     :teacher_id => 1, 
     :number_of_places => 50, 
     :price => 100.0, 
-    :deposit => 10.0, :category_id => 3, :hits => 0 },
+    :deposit => 10.0, :category_id => Category.first.id, :hits => 0 },
   { :title => "Some course", 
     :description => "full description", 
     :brief_description => "brief description", 
@@ -279,7 +279,7 @@ Course.create([
     :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, 
-    :category_id => 3, 
+    :category_id => Category.first.id, 
     :hits => 0 }
 ], :without_protection => true )
 
