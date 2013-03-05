@@ -76,8 +76,43 @@ class EnrollmentsController < ApplicationController
 	  end
 	end
 
-	def destroy
-		
+	def cancel
+		@enrollment = Enrollment.find_by_id(params[:id])
+	end
+
+	def refund
+		Braintree::Configuration.environment = :sandbox
+		Braintree::Configuration.merchant_id = "6b6c6smqn4ddbrvy"
+		Braintree::Configuration.public_key = "bkmz9ztnjt6f3jvj"
+		Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
+
+		@enrollment = Enrollment.find_by_id(params[:id])
+		@message = ""
+
+		amount_to_be_refunded = @enrollment.refund_amount
+		refund_transactions = @enrollment.refund_transactions
+
+		results = []
+		refund_transactions.sort_by(&:amount).each do |transaction|
+			result = nil
+			transactionDetails = Braintree::Transaction.find(transaction.id)
+			if transaction.amount > amount_to_be_refunded
+				result = Braintree::Transaction.refund(transaction.id, transaction.amount.to_s)
+			else
+				result = Braintree::Transaction.refund(transaction.id)
+			end
+			@message = result.message
+			if result.success?
+				if amount_to_be_refunded <= 0
+					enrollment.is_cancelled = true
+					enrollment.save
+					@message = "The refund was succesfully applied."
+					break
+				end
+			else
+				@message = "An error occured when issuing the refund. Please contact an administrator to un-enroll." + transactionDetails.status
+			end
+		end
 	end
 end
 

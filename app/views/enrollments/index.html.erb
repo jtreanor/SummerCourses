@@ -30,7 +30,7 @@
 			<% if total_due > total_paid %>
 				<%= link_to "Pay Balance", edit_enrollment_path(enrollment.id), class: "btn" %>
 			<% end %>
-			<%= link_to "Cancel", enrollment_path(enrollment.id), method: "delete", class: "btn btn-danger" %>
+			<%= link_to "Cancel", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>
 		</td>
     </tr>
     <% end %>

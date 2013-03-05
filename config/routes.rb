@@ -6,7 +6,7 @@ SummerCourses::Application.routes.draw do
   devise_for :students, :controllers => { :regsitrations => 'students/registrations' } 
   resources :categories, only: [:index, :show]
   resources :courses, only: [:show]
-  resources :enrollments, only: [:index, :create, :edit, :destroy]
+  resources :enrollments, only: [:index, :create, :edit]
   resources :messages, only: [:new]
   resources :message_threads, only: [:new, :create] 
 
@@ -14,6 +14,8 @@ SummerCourses::Application.routes.draw do
 
   match 'enrollments/new/course/:id' => 'enrollments#new', :as => :new_enrollment
   match 'enrollments/result/course/:id' => 'enrollments#result', :as => :enrollment_result
+  match 'enrollments/cancel/:id' => 'enrollments#cancel', :as => :cancel_enrollment
+  match 'enrollments/refund/:id' => 'enrollments#refund', :as => :refund_enrollment, :via => [:post]
 
   match 'heroku' => 'heroku#run'
   match '/contact' => 'message_threads#new'
