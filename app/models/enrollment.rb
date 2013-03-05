@@ -15,11 +15,6 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :student
 	has_many :payments
 
-	def balance_due
-		total_paid = self.payments.inject(0) { |sum, e| sum + e.transaction.amount }
-		self.course.price - total_paid
-	end
-
 	#This calculates the refund entitled in the case of a cancellation. Any payments made before refund_enrollments_before are refunded
 	def refund_amount
 		total = 0
@@ -56,5 +51,18 @@ class Enrollment < ActiveRecord::Base
 			transactions << min_transaction
 		end
 		return transactions
+	end
+
+	def total_paid
+		total = 0
+		self.payments.each do |p|
+			transaction = Braintree::Transaction.find(p.transaction_id)
+				total += transaction.amount.to_f
+		end
+		return total
+	end
+
+	def total_due
+		self.course.price - total_paid
 	end
 end

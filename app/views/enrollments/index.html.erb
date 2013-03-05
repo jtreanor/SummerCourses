@@ -16,18 +16,16 @@
 		</td>
 		<td>
 			<%=
-				total_paid = enrollment.payments.inject(0) { |sum, e| sum + e.transaction.amount }
-				number_to_currency(total_paid, :unit => "&euro;")
+				number_to_currency(enrollment.total_paid, :unit => "&euro;")
 			%>
 		</td>
 		<td>
 			<%=
-				total_due = enrollment.course.price - total_paid
-				number_to_currency(total_due, :unit => "&euro;")
+				number_to_currency(enrollment.total_due, :unit => "&euro;")
 			%>
 		</td>
 		<td>
-			<% if total_due > total_paid %>
+			<% if enrollment.total_due > enrollment.total_paid %>
 				<%= link_to "Pay Balance", edit_enrollment_path(enrollment.id), class: "btn" %>
 			<% end %>
 			<%= link_to "Cancel", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>

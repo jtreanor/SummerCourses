@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
   add_index "payments", ["transaction_id"], :name => "payments_transaction_id_idx"
   add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
-  #add_foreign_key "payments", "transactions", :name => "payments_transaction_id_fk"
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refundTransactionID",   :limit => 45, :null => false

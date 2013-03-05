@@ -1,7 +1,7 @@
 <h2>Cancel <%= @enrollment.course.title %></h2>
 <p>Are you sure you wish to cancel your enrollment in <%= @enrollment.course.title %>?</p>
 
-<p>You will receive a refund of <strong><%= number_to_currency(@enrollment.refund_amount(), :unit => "&euro;") %></strong>.</p>
+<p>You will receive a refund of <strong><%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %></strong>.</p>
 
 <%= link_to "Un-Enroll", refund_enrollment_path(@enrollment.id), class: "btn btn-danger", method: "post" %>
 <%= link_to "No Thanks", enrollments_path, class: "btn" %>
