@@ -24,8 +24,9 @@ class Enrollment < ActiveRecord::Base
 	def refund_amount
 		total = 0
 		self.payments.each do |p|
-			if p.transaction.timestamp <= self.course.refund_enrollments_before
-				total += p.transaction.amount
+			transaction = Braintree::Transaction.find(p.transaction_id)
+			if transaction.created_at <= self.course.refund_enrollments_before
+				total += transaction.amount.to_f
 			end
 		end
 
@@ -39,13 +40,14 @@ class Enrollment < ActiveRecord::Base
 	#returns refundable transactions
 	def refund_transactions
 		transactions = []
-		min_transaction = self.payments[0].transaction
+		min_transaction = Braintree::Transaction.find(self.payments[0].transaction_id)
 		self.payments.each do |p|
-			if p.transaction.timestamp <= self.course.refund_enrollments_before
-				transactions << p.transaction
+			transaction = Braintree::Transaction.find(p.transaction_id)
+			if transaction.created_at <= self.course.refund_enrollments_before
+				transactions << transaction
 			end
-			if p.transaction.amount < min_transaction.amount
-				min_transaction = p.transaction
+			if transaction.amount.to_f < min_transaction.amount
+				min_transaction = transaction
 			end
 		end
 

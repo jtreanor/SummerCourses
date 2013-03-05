@@ -47,14 +47,12 @@ class EnrollmentsController < ApplicationController
 		error = true
 
 	  if result.success?
-	    transaction = Transaction.create(id: result.transaction.id, amount: result.transaction.amount, timestamp: DateTime.now)
-	    if transaction.save
 	    	enrollment = current_student.enrollments.find_by_course_id(@course.id)
 	    	if enrollment == nil
 	    		enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	end
 	    	if enrollment.save
-	    		payment = Payment.create(transaction_id: transaction.id, enrollment_id: enrollment.id)
+	    		payment = Payment.create(transaction_id: result.transaction.id, enrollment_id: enrollment.id)
 	    		if payment.save
 	    			error = false
 	    			@message = "The payment has been accepted and you have been succesfully enrolled in " + @course.title
@@ -62,7 +60,7 @@ class EnrollmentsController < ApplicationController
 	  				redirect_to enrollments_path
 	    		end
 	    	end
-		end
+		
 	  end
 	  if error
 	  	if result.success?
@@ -96,6 +94,7 @@ class EnrollmentsController < ApplicationController
 		refund_transactions.sort_by(&:amount).each do |transaction|
 			result = nil
 			transactionDetails = Braintree::Transaction.find(transaction.id)
+
 			if transaction.amount > amount_to_be_refunded
 				result = Braintree::Transaction.refund(transaction.id, transaction.amount.to_s)
 			else
