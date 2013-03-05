@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "time_table_items", ["courseID"], :name => "courseID_idx"
   add_index "time_table_items", ["locationID"], :name => "locationID_idx"
 
+=begin
   create_table "transactions", :id => false, :force => true do |t|
     t.string  "id",    :limit => 10,           :null => false
     t.decimal  "amount",    :precision => 10, :scale => 2, :null => false
@@ -209,5 +210,5 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   end
 
   add_index "transactions", ["id"], :name => "transaction_id_UNIQUE", :unique => true
-
+=end
 end
