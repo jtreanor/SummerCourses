@@ -11,5 +11,4 @@ class Payment < ActiveRecord::Base
 	set_primary_key :transaction_id
 
 	belongs_to :enrollment
-	belongs_to :transaction
 end
