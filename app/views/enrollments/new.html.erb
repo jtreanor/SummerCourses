@@ -20,7 +20,7 @@
   </script>
 <% end %>
 <h2>Enrol in <%= @course.title %></h2>
-<% if current_student.enrollments.find_by_course_id(@course.id) != nil %>
+<% if ! current_student.enrollments.where("course_id = #{@course.id}  AND is_cancelled = 'false'").empty? %>
   <p>You are already enrolled in this course.</p>
 <% else %>
   <p>The total cost of this course is <%= number_to_currency(@course.price, :unit => "&euro;") %>. The deposit is <%= number_to_currency(@course.deposit, :unit => "&euro;")%>. To secure a place in <em><%= @course.title %></em>, you may pay the deposit now and pay the balance online before the course starts. You may also pay the full amount now.</p>

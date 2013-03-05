@@ -26,7 +26,8 @@ class EnrollmentsController < ApplicationController
 	def new
 		@course = Course.find_by_id(params[:id])
 
-		if current_student.enrollments.find_by_course_id(@course.id) == nil
+		if current_student.enrollments.where("course_id = #{@course.id}  AND is_cancelled = 'false'").empty? 
+			#Not already enrolled
 			@full_tr_data = tr_data(@course.price.to_s,enrollment_result_url(@course.id))
 			@deposit_tr_data = tr_data(@course.deposit.to_s,enrollment_result_url(@course.id))
 
@@ -42,7 +43,7 @@ class EnrollmentsController < ApplicationController
 		error = true
 
 	  if result.success?
-	    	enrollment = current_student.enrollments.find_by_course_id(@course.id)
+	    	enrollment = current_student.enrollments.where("course_id = #{@course.id}  AND is_cancelled = 'false'")[0]
 	    	if enrollment == nil
 	    		enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	end
