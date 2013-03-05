@@ -2,8 +2,8 @@
 #
 # Table name: payments
 #
-#  id            :integer          not null, primary key
-#  enrollment_id :integer          not null
+#  transaction_id :string(10)       not null, primary key
+#  enrollment_id  :integer          not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

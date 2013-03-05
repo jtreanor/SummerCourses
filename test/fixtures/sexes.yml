@@ -2,7 +2,7 @@
 #
 # Table name: sexes
 #
-#  sex_id   :integer          primary key
+#  sex_id   :integer          not null, primary key
 #  sex_name :string(45)       not null
 #
 

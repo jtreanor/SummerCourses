@@ -2,7 +2,7 @@
 #
 # Table name: transactions
 #
-#  id        :integer          not null, primary key
+#  id        :string(10)       not null, primary key
 #  amount    :decimal(10, 2)   not null
 #  timestamp :datetime         not null
 #
