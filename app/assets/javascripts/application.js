@@ -15,3 +15,8 @@
 //= require bootstrap
 //= require clear_eyes
 //= require_tree .
+jQuery(document).ready(function() {
+  $("#user-dropdown").attr("class","dropdown-menu");
+  $(".dropdown-toggle").show();
+  $(".nav-header").show();
+});

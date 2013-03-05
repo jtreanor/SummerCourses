@@ -25,9 +25,9 @@
         <ul class="nav pull-right">
           <% if student_signed_in? %>
             <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "#{current_student.forename} #{current_student.surname}" %> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="nav-header">Account</li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: none;"><%= "#{current_student.forename} #{current_student.surname}" %> <b class="caret"></b></a>
+            <ul class="nav" id="user-dropdown">
+              <li class="nav-header" style="display: none;">Account</li>
               <li><%= link_to "Edit Account", edit_student_registration_path %></li>
               <li><%= link_to "My Courses", enrollments_path %></li>
               <li><%= link_to "Sign Out", destroy_student_session_path, method: "delete" %></li>
@@ -37,31 +37,6 @@
             <li><%= link_to "Sign In", new_student_session_path %></li>
             <li><%= link_to "Sign Up", new_student_registration_path %></li>
           <% end %>
-          <!--<li class="dropdown">
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Register <strong class="caret"></strong></a>
-          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-            <form>
-              <input type="text" placeholder="Email">
-              <input type="password" placeholder="Password">
-              <input type="password" placeholder="Confirm Password">
-              <input type="text" name="forename" placeholder="Forename">
-              <input type="text" name="surname" placeholder="Surname">
-              <input type="text" name="nationality" placeholder="Nationality">
-
-              <input class="btn btn-danger" style="width: 100%;" type="submit" value="Register" />
-            </form>
-          </div>
-          </li>
-          <li class="dropdown">
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
-          <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-            <form>
-              <input type="text" placeholder="Email">
-              <input type="passwordasd" placeholder="Password">
-              <input class="btn btn-danger" style="width: 100%;" type="submit" value="Sign In" />
-            </form>
-          </div>
-          </li>-->
         </ul>
       </div><!--/.nav-collapse --> 
     </div>
