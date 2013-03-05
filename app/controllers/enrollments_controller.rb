@@ -93,23 +93,20 @@ class EnrollmentsController < ApplicationController
 		results = []
 		refund_transactions.sort_by(&:amount).each do |transaction|
 			result = nil
-			transactionDetails = Braintree::Transaction.find(transaction.id)
 
-			if transaction.amount > amount_to_be_refunded
-				result = Braintree::Transaction.refund(transaction.id, transaction.amount.to_s)
+			if transaction.status != "settled"
+				result = Braintree::Transaction.void(transaction.id)
+			elsif transaction.amount.to_f > amount_to_be_refunded
+				result = Braintree::Transaction.refund(transaction.id, amount_to_be_refunded.to_s)
 			else
 				result = Braintree::Transaction.refund(transaction.id)
 			end
-			@message = result.message
 			if result.success?
-				if amount_to_be_refunded <= 0
-					enrollment.is_cancelled = true
-					enrollment.save
+					@enrollment.is_cancelled = true
+					@enrollment.save
 					@message = "The refund was succesfully applied."
-					break
-				end
 			else
-				@message = "An error occured when issuing the refund. Please contact an administrator to un-enroll." + transactionDetails.status
+				@message = "An error occured when issuing the refund. Please contact an administrator to un-enroll." + transaction.status
 			end
 		end
 	end
