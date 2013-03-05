@@ -1,3 +1,10 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      $(".accordion-body").addClass("collapse");
+    });
+  </script>
+<% end %>
 <div class="hero-unit">
   <h1><%= @category.category_name %></h1>
   <p>This page lists all the courses offered in the <%= @category.category_name %> category though the UCC summer courses office.</p>
@@ -12,7 +19,7 @@
           <%= course.title %>
         </a>
       </div>
-      <div id="collapse<%= course.id %>" class="accordion-body collapse">
+      <div id="collapse<%= course.id %>" class="accordion-body">
         <div class="accordion-inner">
           <p><%= course.brief_description %></p>
           <p>

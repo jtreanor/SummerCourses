@@ -7,14 +7,14 @@
       $("#deposit_button").on("click", function() {
         $("#full_form").hide();
         $("#deposit_form").show();
-        $(this).attr('class', 'btn btn-small active');
-        $("#full_button").attr('class', 'btn btn-small');
+        $(this).addClass('active');
+        $("#full_button").removeClass('active');
       });
       $("#full_button").on("click", function() {
         $("#full_form").show();
         $("#deposit_form").hide();
-        $(this).attr('class', 'btn btn-small active');
-        $("#deposit_button").attr('class', 'btn btn-small');
+        $(this).addClass('active');
+        $("#deposit_button").removeClass('active');
       });
     })
   </script>

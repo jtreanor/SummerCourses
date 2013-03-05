@@ -70,4 +70,8 @@ class Enrollment < ActiveRecord::Base
 	def total_due
 		self.course.price - total_paid
 	end
+
+	def cancel
+		
+	end
 end
