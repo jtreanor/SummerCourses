@@ -135,12 +135,12 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
 
   create_table "refunds", :id => false, :force => true do |t|
-    t.string "refundTransactionID",   :limit => 45, :null => false
-    t.string "originalTransactionID", :limit => 45, :null => false
+    t.string "refund_transaction_id",   :limit => 45, :null => false
+    t.string "original_transaction_id", :limit => 45, :null => false
   end
 
-  add_index "refunds", ["originalTransactionID"], :name => "transactionID_idx1"
-  add_index "refunds", ["refundTransactionID"], :name => "transactionID_idx"
+  add_index "refunds", ["refund_transaction_id"], :name => "refund_transaction_id_idx"
+  add_index "refunds", ["original_transaction_id"], :name => "original_transaction_id_idx"
 
   create_table "sexes", :id => false, :force => true do |t|
     t.integer "sex_id",                 :limit => 1,                  :null => false
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   create_table "teachers", :force => true do |t|
     t.string  "photoUrl"
-    t.boolean "isActive",                  :default => true, :null => false
+    t.boolean "is_active",                  :default => true, :null => false
     t.text    "description",                                 :null => false
     t.string  "forename",    :limit => 45,                   :null => false
     t.string  "surname",     :limit => 45,                   :null => false
@@ -188,17 +188,17 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.string  "password",    :limit => 60,                   :null => false
   end
 
-  add_index "teachers", ["id"], :name => "teacherID_UNIQUE", :unique => true
+  add_index "teachers", ["id"], :name => "teacher_id_UNIQUE", :unique => true
 
   create_table "time_table_items", :force => true do |t|
-    t.integer  "courseID",                 :null => false
-    t.integer  "locationID",               :null => false
-    t.datetime "startTime",                :null => false
-    t.datetime "endTime",                  :null => false
+    t.integer  "course_id",                 :null => false
+    t.integer  "location_id",               :null => false
+    t.datetime "start_time",                :null => false
+    t.datetime "end_time",                  :null => false
     t.string   "room",       :limit => 45, :null => false
   end
 
-  add_index "time_table_items", ["courseID"], :name => "courseID_idx"
-  add_index "time_table_items", ["locationID"], :name => "locationID_idx"
+  add_index "time_table_items", ["course_id"], :name => "timetable_course_id_idx"
+  add_index "time_table_items", ["location_id"], :name => "timetable_location_id_idx"
 
 end
