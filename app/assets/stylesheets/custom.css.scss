@@ -27,3 +27,13 @@ header{
 
 // And finally bootswatch style itself
 @import "bootswatch/readable/bootswatch";
+
+
+
+@import 'gallery/galleria/classic';
+
+#galleria { 
+  width: 700px; 
+  height: 400px; 
+  background: white 
+}

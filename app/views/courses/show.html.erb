@@ -2,12 +2,34 @@
   <h1><%= @course.title %></h1>
   <p><%= @course.brief_description %>.</p>
 </div>
-<p><%= @course.description %></p>
-<ul>
-	<li>Teacher: <%= @course.teacher_id %></li>
-	<li>Number Of Places: <%= @course.number_of_places %></li>
-	<li>Price: €<%= @course.price %></li>
-	<li>Deposit: €<%= @course.deposit %></li>
-	<li>CategoryID: <%= @course.category.category_name %></li>
-</ul>
-<p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>
+<!--end hero unit -->
+
+<!--
+<script>
+  if (Galleria) { $("body").text('Galleria works') }
+</script>
+-->
+<div class="offset1">
+  <div id="galleria">
+    <a href="http://www.youtube.com/watch?v=GCZrz8siv4Q"><img src="/assets/rails.png"></a>
+    <a href="http://vimeo.com/12309423"><span class="video">Watch this on Vimeo!</span></a>
+  </div>
+</div>
+<div class="row">
+
+  <p><%= @course.description %></p>
+  <ul>
+    <li>Teacher: <%= @course.teacher_id %></li>
+    <li>Number Of Places: <%= @course.number_of_places %></li>
+    <li>Price: €<%= @course.price %></li>
+    <li>Deposit: €<%= @course.deposit %></li>
+    <li>CategoryID: <%= @course.category.category_name %></li>
+  </ul>
+  <p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>
+</div>
+
+<script>
+  Galleria.loadTheme('/assets/galleria.classic.min.js');
+  Galleria.run('#galleria');
+</script>
+

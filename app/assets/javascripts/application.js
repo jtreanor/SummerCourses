@@ -15,6 +15,10 @@
 //= require bootstrap
 //= require clear_eyes
 //= require_tree .
+//= require galleria-1.2.9.min.js
+//= require galleria.classic.min
+//
+
 jQuery(document).ready(function() {
   $("#user-dropdown").attr("class","dropdown-menu");
   $(".dropdown-toggle").show();
