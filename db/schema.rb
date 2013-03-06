@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228095757) do
+ActiveRecord::Schema.define(:version => 20130306165555) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -59,30 +59,29 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "countries", ["country_id"], :name => "country_id_idx"
 
-  create_table "course_media", :id => false, :force => true do |t|
+  create_table "course_medium", :id => false, :force => true do |t|
     t.integer "course_id", :null => false
     t.integer "media_id",  :null => false
   end
 
-  add_index "course_media", ["course_id"], :name => "course_id_idx"
-  add_index "course_media", ["media_id"], :name => "mediaID_idx"
+  add_index "course_medium", ["course_id"], :name => "course_id_idx"
+  add_index "course_medium", ["media_id"], :name => "media_id_idx"
 
   create_table "courses", :force => true do |t|
-    t.string  "title",             :limit => 100,                                               :null => false
-    t.text    "description",                                                                    :null => false
-    t.text    "brief_description", :limit => 255,                                               :null => false
-    t.integer "teacher_id",                                                                     :null => false
-    t.integer "number_of_places",                                                               :null => false
-    t.decimal "price",                            :precision => 10, :scale => 2,                :null => false
-    t.decimal "deposit",                          :precision => 10, :scale => 2,                :null => false
-    t.integer "category_id",                                                                    :null => false
-    t.integer "hits",                                                            :default => 0, :null => false
-    t.datetime "refund_enrollments_before",                                                     :null => false
+    t.string   "title",                     :limit => 100,                                               :null => false
+    t.text     "description",                                                                            :null => false
+    t.text     "brief_description",         :limit => 255,                                               :null => false
+    t.integer  "teacher_id",                                                                             :null => false
+    t.integer  "number_of_places",                                                                       :null => false
+    t.decimal  "price",                                    :precision => 10, :scale => 2,                :null => false
+    t.decimal  "deposit",                                  :precision => 10, :scale => 2,                :null => false
+    t.integer  "category_id",                                                                            :null => false
+    t.integer  "hits",                                                                    :default => 0, :null => false
+    t.datetime "refund_enrollments_before",                                                              :null => false
   end
 
   add_index "courses", ["category_id"], :name => "category_id_idx"
   add_index "courses", ["teacher_id"], :name => "teacher_id_idx"
-  add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
 
   create_table "enrollments", :force => true do |t|
     t.integer "student_id",                      :null => false
@@ -92,8 +91,6 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
 
   add_index "enrollments", ["course_id"], :name => "course_id_idx"
   add_index "enrollments", ["student_id"], :name => "student_id_idx"
-  add_foreign_key "enrollments", "courses", :name => "enrollments_course_id_fk"
-  #add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk", :primary_key => "id", :sender_id => "student_id"
 
   create_table "locations", :force => true do |t|
     t.string "title",     :limit => 45, :null => false
@@ -101,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.float  "latitude",                :null => false
   end
 
-  create_table "media", :force => true do |t|
-    t.string "url",         :limit => 45, :null => false
+  create_table "medium", :force => true do |t|
+    t.string "url",                       :null => false
     t.string "extension",   :limit => 45, :null => false
     t.string "description", :limit => 45, :null => false
   end
@@ -123,27 +120,25 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   end
 
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
-  #add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
 
   create_table "payments", :id => false, :force => true do |t|
-    t.string  "transaction_id",    :limit => 10, :null => false
-    t.integer "enrollment_id", :null => false
+    t.string  "transaction_id", :limit => 10, :null => false
+    t.integer "enrollment_id",                :null => false
   end
 
   add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
   add_index "payments", ["transaction_id"], :name => "payments_transaction_id_idx"
-  add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refund_transaction_id",   :limit => 45, :null => false
     t.string "original_transaction_id", :limit => 45, :null => false
   end
 
-  add_index "refunds", ["refund_transaction_id"], :name => "refund_transaction_id_idx"
   add_index "refunds", ["original_transaction_id"], :name => "original_transaction_id_idx"
+  add_index "refunds", ["refund_transaction_id"], :name => "refund_transaction_id_idx"
 
   create_table "sexes", :id => false, :force => true do |t|
-    t.integer "sex_id",                 :limit => 1,                  :null => false
+    t.integer "sex_id",   :limit => 1,  :null => false
     t.string  "sex_name", :limit => 45, :null => false
   end
 
@@ -175,12 +170,10 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
   add_index "students", ["email"], :name => "index_students_on_email", :unique => true
   add_index "students", ["reset_password_token"], :name => "index_students_on_reset_password_token", :unique => true
   add_index "students", ["sex_id"], :name => "sex_id_idx"
-  add_foreign_key "students", "countries", :name => "students_country_id_fk", :primary_key => "country_id"
-  add_foreign_key "students", "sexes", :name => "students_sex_id_fk", :primary_key => "sex_id"
 
   create_table "teachers", :force => true do |t|
     t.string  "photoUrl"
-    t.boolean "is_active",                  :default => true, :null => false
+    t.boolean "is_active",                 :default => true, :null => false
     t.text    "description",                                 :null => false
     t.string  "forename",    :limit => 45,                   :null => false
     t.string  "surname",     :limit => 45,                   :null => false
@@ -195,10 +188,19 @@ ActiveRecord::Schema.define(:version => 20130228095757) do
     t.integer  "location_id",               :null => false
     t.datetime "start_time",                :null => false
     t.datetime "end_time",                  :null => false
-    t.string   "room",       :limit => 45, :null => false
+    t.string   "room",        :limit => 45, :null => false
   end
 
   add_index "time_table_items", ["course_id"], :name => "timetable_course_id_idx"
   add_index "time_table_items", ["location_id"], :name => "timetable_location_id_idx"
+
+  add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
+
+  add_foreign_key "enrollments", "courses", :name => "enrollments_course_id_fk"
+
+  add_foreign_key "payments", "enrollments", :name => "payments_enrollment_id_fk"
+
+  add_foreign_key "students", "countries", :name => "students_country_id_fk", :primary_key => "country_id"
+  add_foreign_key "students", "sexes", :name => "students_sex_id_fk", :primary_key => "sex_id"
 
 end
