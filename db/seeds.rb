@@ -314,3 +314,12 @@ Student.create([
 s = Student.first
 s.confirmed_at = DateTime.now
 s.save
+
+Media.create([
+  { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", extension: "swf", description: "test description"
+    }])
+
+CourseMedia.create([
+  { course_id: Course.first.id, 
+    media_id: Media.first.id
+    }])
