@@ -4,6 +4,8 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+
+    MessageMailer.message().deliver
   end
 
   def create
