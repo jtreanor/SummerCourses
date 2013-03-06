@@ -9,10 +9,16 @@
   if (Galleria) { $("body").text('Galleria works') }
 </script>
 -->
-<div class="offset1">
+<div class="row">
   <div id="galleria">
-    <a href="http://www.youtube.com/watch?v=GCZrz8siv4Q"><img src="/assets/rails.png"></a>
-    <a href="http://vimeo.com/12309423"><span class="video">Watch this on Vimeo!</span></a>
+    <% @course.course_medium.each do |m| %>
+
+      <a href=<%= m.media.url %> >
+        <img src=/assets/rails.png 
+        data-description="<%= m.media.description %>" 
+        >
+      </a>
+    <% end %>
   </div>
 </div>
 <div class="row">
