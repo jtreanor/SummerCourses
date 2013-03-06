@@ -4,9 +4,9 @@ class IncomingMessagesController < ApplicationController
 
   def create
   	Rails.logger.info "FROM:" + params[:from]
+  	Rails.logger.info "TO:" + params[:to]
     Rails.logger.info "SUBJECT:" + params[:subject] 
-    Rails.logger.info "PLAIN:" + params[:plain]
-    Rails.logger.info "REPLY PLAIN:" + params[:reply_plain]
+    Rails.logger.info "stripped-text:" + params["stripped-text"]
 
     # Do some other stuff with the mail message
 
