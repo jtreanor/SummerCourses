@@ -22,6 +22,8 @@ SummerCourses::Application.routes.draw do
 
   match '/contact' => 'message_threads#new'
 
+  match '/incoming_messages' => 'incoming_messages#create'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
