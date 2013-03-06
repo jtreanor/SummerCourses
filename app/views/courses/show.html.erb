@@ -1,6 +1,6 @@
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
-  <p><%= @course.brief_description %>.</p>
+  <p><%= @course.description %>.</p>
 </div>
 <!--end hero unit -->
 
@@ -21,17 +21,23 @@
     <% end %>
   </div>
 </div>
+<br />
+<br />
 <div class="row">
-
-  <p><%= @course.description %></p>
-  <ul>
-    <li>Teacher: <%= @course.teacher_id %></li>
-    <li>Number Of Places: <%= @course.number_of_places %></li>
-    <li>Price: €<%= @course.price %></li>
-    <li>Deposit: €<%= @course.deposit %></li>
-    <li>CategoryID: <%= @course.category.category_name %></li>
-  </ul>
+  <table class="table table-striped">
+    <caption>
+      course details
+    </caption>
+    <tbody>
+      <tr><td>Teacher: </td><td><%= @course.teacher_id %></td></tr>
+      <tr><td>Number Of Places: </td><td><%= @course.number_of_places %></td></tr>
+      <tr><td>Price: €</td><td><%= @course.price %></td></tr>
+      <tr><td>Deposit: €</td><td><%= @course.deposit %></td></tr>
+      <tr><td>Category: </td><td><%= @course.category.category_name %></td></tr>
+    </tbody>
+  </table>
   <p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>
+
 </div>
 
 <script>
