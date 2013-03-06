@@ -13,6 +13,6 @@ class Media < ActiveRecord::Base
   #
 
   attr_accessible :url, :description, :extension
-  belongs_to :course_media
+  has_many :course_medium
 
 end

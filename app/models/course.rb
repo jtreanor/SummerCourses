@@ -19,7 +19,7 @@ class Course < ActiveRecord::Base
 	attr_accessible :title, :description, :brief_description, :teacher_id, :number_of_places, :price, :deposit
 
 	belongs_to :category
-    belongs_to :course_media
+    has_many :course_medium
 	has_many :enrollments
 
 	before_create :set_refund_enrollments_before_to_now

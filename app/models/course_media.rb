@@ -8,7 +8,8 @@
 
 class CourseMedia < ActiveRecord::Base
   # attr_accessible :title, :body
-  
-  has_many :course
-  has_many :media
+ 
+  attr_accessible :course_id, :media_id
+  belongs_to :course
+  belongs_to :media
 end
