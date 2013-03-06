@@ -67,7 +67,6 @@ SummerCourses::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'summercourses.herokuapp.com' }
 
-=begin
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
@@ -77,15 +76,5 @@ SummerCourses::Application.configure do
     :domain         => 'heroku.com'
   }
   ActionMailer::Base.delivery_method ||= :smtp
-=end
-ActionMailer::Base.smtp_settings = {
-  :port           => ENV['MAILGUN_SMTP_PORT'], 
-  :address        => ENV['MAILGUN_SMTP_SERVER'],
-  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-  :domain         => 'summercourses.heroku.com',
-  :authentication => :plain,
-}
-ActionMailer::Base.delivery_method = :smtp
 
 end
