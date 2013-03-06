@@ -5,5 +5,4 @@ class MessageMailer < ActionMailer::Base
 	    @url  = "http://summercourses.herokuapp.com/"
 	    mail(:to => "jtreanor3@gmail.com", :subject => "Welcome to My Awesome Site")
 	  end
-	end
 end

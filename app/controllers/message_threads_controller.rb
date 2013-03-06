@@ -4,6 +4,8 @@ class MessageThreadsController < ApplicationController
 
   def new
     @thread = MessageThread.new
+
+    MessageMailer.message().deliver
   end
 
   def create
