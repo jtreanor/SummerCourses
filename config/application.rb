@@ -63,7 +63,7 @@ module SummerCourses
     config.assets.initialize_on_precompile = false
 
     # Precompile additional assets. Defaults to [application.js, application.css, non-JS/CSS]
-    config.assets.precompile += %w[active_admin.css active_admin.js print.css]
+    config.assets.precompile += %w[active_admin.css active_admin.js galleria.classic.min.js print.css]
     config.assets.precompile += %w[active_admin/print.css]
     #config.assets.compile = true
   end
