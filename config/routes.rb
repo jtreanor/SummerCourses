@@ -18,7 +18,11 @@ SummerCourses::Application.routes.draw do
   match 'enrollments/refund/:id' => 'enrollments#refund', :as => :refund_enrollment, :via => [:post]
 
   match 'heroku' => 'heroku#run'
+  match 'heroku/process' => 'heroku#command'
+
   match '/contact' => 'message_threads#new'
+
+  match '/incoming_messages' => 'incoming_messages#create'
 
 
   # The priority is based upon order of creation:
