@@ -12,7 +12,7 @@
 #  deposit                   :decimal(10, 2)   not null
 #  category_id               :integer          not null
 #  hits                      :integer          default(0), not null
-#  refund_enrollments_before :datetime
+#  refund_enrollments_before :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

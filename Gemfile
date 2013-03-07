@@ -7,6 +7,10 @@ gem 'bcrypt-ruby', '3.0.1'
 
 gem 'seed_dump'
 
+#for galleria.io plugin,non-official gem
+#gem 'rails-gallery' hardly to use
+#gem 'galleria-rails', github: 'albandiguer/galleria-rails'
+
 # Active admin
 gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
