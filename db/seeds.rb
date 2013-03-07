@@ -327,6 +327,6 @@ CourseMedia.create([
     media_id: Media.first.id
   },
   { course_id: Course.first.id,
-    media_id: Media.first.id+1
+    media_id: Media.last.id
   }
 ])
