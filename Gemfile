@@ -11,6 +11,10 @@ gem 'seed_dump'
 #gem 'rails-gallery' hardly to use
 #gem 'galleria-rails', github: 'albandiguer/galleria-rails'
 
+#asset upload
+gem 'aws-sdk'
+gem 'paperclip'
+
 # Active admin
 gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
