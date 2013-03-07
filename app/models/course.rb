@@ -21,6 +21,7 @@ class Course < ActiveRecord::Base
 	belongs_to :category
     has_many :course_assets
 	has_many :enrollments
+	accepts_nested_attributes_for :course_assets
 
 	before_create :set_refund_enrollments_before_to_now
   	def set_refund_enrollments_before_to_now

@@ -12,5 +12,6 @@ class CourseAsset < ActiveRecord::Base
   attr_accessible :course_id, :asset_id
   belongs_to :course
   belongs_to :asset
+  accepts_nested_attributes_for :asset
 
 end

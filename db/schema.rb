@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.integer "asset_id",  :null => false
   end
 
-  add_index "course_assets", ["course_id"], :name => "course_id_idx"
-  add_index "course_assets", ["asset_id"], :name => "asset_id_idx"
+  add_index "course_assets", ["course_id"], :name => "course_id_idx", :unique => true
+  add_index "course_assets", ["asset_id"], :name => "asset_id_idx", :unique => true
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
