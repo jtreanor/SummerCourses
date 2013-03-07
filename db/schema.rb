@@ -104,19 +104,20 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.string "description", :limit => 45, :null => false
   end
 
-  create_table "message_threads", :force => true do |t|
-    t.string   "user_email", :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "message_threads",:id => false, :force => true do |t|
+    t.string   "id",        :limit => 24, :null => false 
+    t.string   "user_email",              :null => false
+    t.datetime "created_at",              :null => false
   end
 
+  execute "ALTER TABLE message_threads ADD PRIMARY KEY (id);"
+
   create_table "messages", :force => true do |t|
-    t.string   "message_thread_id", :limit => 80,                     :null => false
+    t.string   "message_thread_id", :limit => 24,                     :null => false
     t.text     "subject",           :limit => 255,                    :null => false
     t.boolean  "is_response",                      :default => false, :null => false
     t.text     "content",                                             :null => false
     t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
   end
 
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"

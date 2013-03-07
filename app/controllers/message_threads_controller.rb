@@ -12,13 +12,17 @@ class MessageThreadsController < ApplicationController
     @message = Message.new
     @message.subject = (params[:new_message_thread][:subject])
     @message.content = (params[:new_message_thread][:content])
-    #@thread.set_message(message)
-    if @thread.save
-      @message.message_thread_id = @thread.id
-      if  @message.save
-        flash[:success] = "Your message has been successfully sent, we will reply your email shortly!"
-        redirect_to root_path
-      end
+    #validate the id
+    @thread.id = SecureRandom.base64 
+
+    while MessageThread.find_by_id @thread.id
+      @thread.id = SecureRandom.base64
+    end
+    @message.message_thread_id = @thread.id
+
+    if @thread.save && @message.save
+      flash[:success] = "Your message has been successfully sent, we will reply your email shortly!"
+      redirect_to root_path
     else
       render 'new'
     end

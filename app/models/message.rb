@@ -8,7 +8,6 @@
 #  is_response       :boolean          default(FALSE), not null
 #  content           :text             default(""), not null
 #  created_at        :datetime         not null
-#  updated_at        :datetime         not null
 #
 
 class Message < ActiveRecord::Base
