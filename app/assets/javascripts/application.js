@@ -14,9 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require clear_eyes
-//= require_tree .
-//= require galleria-1.2.9.min.js
+//= require galleria-1.2.9.min
 //= require galleria.classic.min
+//= require_tree .
 //
 
 jQuery(document).ready(function() {
