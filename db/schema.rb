@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "countries", ["country_id"], :name => "country_id_idx"
 
-  create_table "course_medium", :id => false, :force => true do |t|
+  create_table "course_assets", :id => false, :force => true do |t|
     t.integer "course_id", :null => false
-    t.integer "media_id",  :null => false
+    t.integer "asset_id",  :null => false
   end
 
-  add_index "course_medium", ["course_id"], :name => "course_id_idx"
-  add_index "course_medium", ["media_id"], :name => "media_id_idx"
+  add_index "course_assets", ["course_id"], :name => "course_id_idx"
+  add_index "course_assets", ["asset_id"], :name => "asset_id_idx"
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.float  "latitude",                :null => false
   end
 
-  create_table "medium", :force => true do |t|
+  create_table "assets", :force => true do |t|
     t.string "url",                       :null => false
     t.string "kind",   :limit => 45, :null => false
     t.string "description", :limit => 45, :null => false

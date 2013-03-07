@@ -315,18 +315,18 @@ s = Student.first
 s.confirmed_at = DateTime.now
 s.save
 
-Media.create([
+Asset.create([
   { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", kind: "video", description: "test video description"
   },
   { url: "/assets/UCC-logo@2x.png", kind: "picture", description: "test picture description"
   }
 ])
 
-CourseMedia.create([
+CourseAsset.create([
   { course_id: Course.first.id, 
-    media_id: Media.first.id
+    asset_id: Asset.first.id
   },
   { course_id: Course.first.id,
-    media_id: Media.last.id
+    asset_id: Asset.last.id
   }
 ])

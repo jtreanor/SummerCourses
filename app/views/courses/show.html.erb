@@ -11,11 +11,11 @@
 -->
 <div class="row">
   <div id="galleria">
-    <% @course.course_medium.each do |m| %>
+    <% @course.course_assets.each do |m| %>
 
-      <a href=<%= m.media.url %> >
+      <a href=<%= m.asset.url %> >
         <img src=/assets/rails.png 
-        data-description="<%= m.media.description %>" 
+        data-description="<%= m.asset.description %>" 
         >
       </a>
     <% end %>

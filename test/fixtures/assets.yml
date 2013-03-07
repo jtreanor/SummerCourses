@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: media
-#
-#  id          :integer          not null, primary key
-#  url         :string(45)       not null
-#  extension   :string(45)       not null
-#  description :string(45)       not null
-#
-
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the
