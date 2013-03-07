@@ -99,8 +99,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   end
 
   create_table "assets", :force => true do |t|
-    t.string "url",                       :null => false
-    t.string "kind",   :limit => 45, :null => false
+    t.attachment :asset
     t.string "description", :limit => 45, :null => false
   end
 

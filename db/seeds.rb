@@ -316,6 +316,7 @@ s = Student.first
 s.confirmed_at = DateTime.now
 s.save
 
+=begin
 Asset.create([
   { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", kind: "video", description: "test video description"
   },
@@ -331,3 +332,4 @@ CourseAsset.create([
     asset_id: Asset.last.id
   }
 ])
+=end

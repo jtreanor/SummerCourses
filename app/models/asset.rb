@@ -10,6 +10,8 @@
 
 class Asset < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :url, :description, :kind
+  attr_accessible :description, :asset
   has_many :course_assets
+
+  has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>" }
 end

@@ -13,8 +13,8 @@
   <div id="galleria">
     <% @course.course_assets.each do |m| %>
 
-      <a href=<%= m.asset.url %> >
-        <img src=/assets/rails.png 
+      <a href=<%= m.asset.asset.url(:medium) %> >
+        <img src=<%= m.asset.asset.url(:thumb) %> 
         data-description="<%= m.asset.description %>" 
         >
       </a>

@@ -36,15 +36,5 @@ SummerCourses::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
-  config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_protocol => 'http',
-    :s3_credentials => {
-      :bucket => "heroku-summercourses",
-      :access_key_id => "AKIAIPAMHVWRBQT5B7TQ",
-      :secret_access_key => "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"
-    }
-  }
   
 end
