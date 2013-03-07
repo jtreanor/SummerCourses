@@ -5,11 +5,11 @@ class IncomingMessagesController < ApplicationController
   def create
   	Rails.logger.info "FROM:" + params[:from]
     Rails.logger.info "SUBJECT:" + params[:subject] 
-    Rails.logger.info "stripped-text:" + params["stripped-text"]
+    Rails.logger.info "stripped-text:" + params[:stripped_text]
 
     # Do some other stuff with the mail message
 
-    render :text => 'success', :status => 200 # a status of 404 would reject the mail
+    render :text => 'success', :status => 200
   end
 
 end
