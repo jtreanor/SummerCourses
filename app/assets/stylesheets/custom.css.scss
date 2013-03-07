@@ -20,8 +20,12 @@ $btnPrimaryBackgroundHighlight: $red;
 
 header{
   padding: 40px
-} 
+}
 
+// bootstrap-sass change the backgroung to white
+.well{
+background-color: #F5F5F5;
+}
 // Responsive styles go here in case you want them
 @import "bootstrap-responsive";
 
