@@ -10,5 +10,9 @@ class Category < ActiveRecord::Base
 	attr_accessible :category_name
 	has_many :courses
 
+	def to_s
+		self.category_name
+	end
+
 	validates :category_name, presence: true, length: { maximum: 45 }
 end
