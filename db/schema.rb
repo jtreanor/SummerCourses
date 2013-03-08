@@ -59,13 +59,12 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "countries", ["country_id"], :name => "country_id_idx"
 
-  create_table "course_assets", :id => false, :force => true do |t|
-    t.integer "course_id", :null => false
-    t.integer "asset_id",  :null => false
+  create_table "course_assets", :force => true do |t|
+    t.references :course
+    t.references :asset
   end
-
-  add_index "course_assets", ["course_id"], :name => "course_id_idx", :unique => true
-  add_index "course_assets", ["asset_id"], :name => "asset_id_idx", :unique => true
+  add_index :course_assets, [:course_id, :asset_id], :unique => true
+  #add_index :course_assets, [:asset_id, :course_id]
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false

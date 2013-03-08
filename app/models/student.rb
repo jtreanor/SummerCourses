@@ -36,6 +36,8 @@ class Student < ActiveRecord::Base
   belongs_to :sex
   belongs_to :country
   has_many :enrollments
+  has_many :courses,
+              :through => :enrollments
 
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }

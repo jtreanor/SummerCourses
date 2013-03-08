@@ -2,8 +2,9 @@
 #
 # Table name: course_assets
 #
-#  course_id :integer          not null
-#  asset_id  :integer          not null
+#  id        :integer          not null, primary key
+#  course_id :integer
+#  asset_id  :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
