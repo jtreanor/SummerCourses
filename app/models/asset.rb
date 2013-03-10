@@ -17,5 +17,9 @@ class Asset < ActiveRecord::Base
   has_many :courses,
               :through => :course_assets
 
+  def to_s
+  	self.description
+  end
+
   has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>" }
 end
