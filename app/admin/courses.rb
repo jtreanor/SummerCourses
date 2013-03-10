@@ -10,19 +10,16 @@ ActiveAdmin.register Course do
 	  f.input :deposit
 	  f.input :category
     end
-=begin
-    f.inputs "Images or Videos", :for => [:course_assets, CourseAsset.new ] do |fm|
-    	fm.inputs "Asset", :for => [:asset, fm.object.asset || Asset.new] do |fmi|
-    		fmi.input :description
-      		fmi.input :file, :for => :asset, :as => :file
-    	end
-  	end
-=end
+
 	f.inputs "Assets" do
 	  	f.has_many :course_assets do |ca|
-	  		ca.inputs "Asset" do
+	  		ca.inputs "Existing Asset" do
 	    		ca.input :asset
 	  		end
+        ca.inputs "New Asset", :for => [:asset, Asset.new ] do |fm|
+            fm.input :description
+            fm.input :asset, :as => :file
+        end
 	  	end
   	end
 

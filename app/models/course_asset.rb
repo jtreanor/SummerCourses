@@ -10,7 +10,7 @@
 class CourseAsset < ActiveRecord::Base
   # attr_accessible :title, :body
   #
-  attr_accessible :course_id, :asset_id
+  attr_accessible :course_id, :asset_id, :asset_attributes
   belongs_to :course
   belongs_to :asset
   accepts_nested_attributes_for :asset
