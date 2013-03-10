@@ -123,6 +123,7 @@ GEM
     mime-types (1.21)
     multi_json (1.6.1)
     mysql2 (0.3.11)
+    newrelic_rpm (3.5.7.59)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
@@ -208,6 +209,7 @@ DEPENDENCIES
   jquery-rails
   meta_search (>= 1.1.0.pre)
   mysql2
+  newrelic_rpm
   paperclip
   rails (= 3.2.12)
   sass-rails (~> 3.2)

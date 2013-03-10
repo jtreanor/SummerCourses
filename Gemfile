@@ -5,6 +5,8 @@ gem "bootstrap-sass", "~> 2.3.0.1"
 gem 'bootswatch-rails'
 gem 'bcrypt-ruby', '3.0.1'
 
+gem 'newrelic_rpm'
+
 gem 'seed_dump'
 
 #for galleria.io plugin,non-official gem
