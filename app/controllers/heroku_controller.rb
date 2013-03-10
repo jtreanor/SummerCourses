@@ -10,6 +10,9 @@ class HerokuController < ApplicationController
 	end
 	
 	def run
+		if params[:command] != nil
+			@output = simple_format_no_tags(`#{params[:command]}`)
+		end
 	end
 
 	def command
