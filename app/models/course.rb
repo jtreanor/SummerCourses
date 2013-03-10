@@ -16,11 +16,12 @@
 #
 
 class Course < ActiveRecord::Base
-	attr_accessible :title, :description, :brief_description, :teacher_id, :number_of_places, :price, :deposit
+	attr_accessible :title, :description, :brief_description,
+  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes
 
 	belongs_to :category
-    has_many :course_assets
-    has_many :assets,
+  has_many :course_assets
+  has_many :assets,
               :through => :course_assets
 	has_many :enrollments
 	has_many :students,
