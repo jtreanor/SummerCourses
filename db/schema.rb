@@ -176,13 +176,10 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "students", ["sex_id"], :name => "sex_id_idx"
 
   create_table "teachers", :force => true do |t|
-    t.string  "photoUrl"
+    t.references :asset
     t.boolean "is_active",                 :default => true, :null => false
     t.text    "description",                                 :null => false
-    t.string  "forename",    :limit => 45,                   :null => false
-    t.string  "surname",     :limit => 45,                   :null => false
-    t.string  "email",       :limit => 45,                   :null => false
-    t.string  "password",    :limit => 60,                   :null => false
+    t.integer "admin_id"
   end
 
   add_index "teachers", ["id"], :name => "teacher_id_UNIQUE", :unique => true
