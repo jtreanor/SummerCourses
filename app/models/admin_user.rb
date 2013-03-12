@@ -28,6 +28,7 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :admin_permission
+  has_one :teacher
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password,:forename, :surname, :password_confirmation, :remember_me, :admin_permission_id

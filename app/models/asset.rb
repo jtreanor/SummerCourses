@@ -16,6 +16,7 @@ class Asset < ActiveRecord::Base
   has_many :course_assets
   has_many :courses,
               :through => :course_assets
+  has_many :teachers
 
   def to_s
   	self.description

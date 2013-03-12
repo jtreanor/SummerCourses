@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.integer  "admin_permission_id",                                        :null => false
+    t.integer  "admin_permission_id"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.references :asset
     t.boolean "is_active",                 :default => true, :null => false
     t.text    "description",                                 :null => false
-    t.integer "admin_id"
+    t.integer "admin_user_id"
   end
 
   add_index "teachers", ["id"], :name => "teacher_id_UNIQUE", :unique => true

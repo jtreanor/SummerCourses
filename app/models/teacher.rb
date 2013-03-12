@@ -10,5 +10,8 @@
 #
 
 class Teacher < ActiveRecord::Base
-  # attr_accessible :title, :body
+	attr_accessible :asset_id, :is_active, :description, :admin_user_id
+
+	belongs_to :admin_user
+	belongs_to :asset
 end

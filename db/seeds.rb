@@ -310,9 +310,26 @@ AdminPermission.create([
   ], :without_protection => true )
 
 AdminUser.create([
-  { :forename => "Test", :surname => "Admin", :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password', :admin_permission_id => AdminPermission.first.id
-  }
+  { :forename => "Test",
+    :surname => "Admin",
+    :email => 'admin@example.com',
+    :password => 'password',
+    :password_confirmation => 'password',
+    :admin_permission_id => AdminPermission.first.id
+  },
+  { :forename => "Teacher",
+    :surname => "Name",
+    :email => 'teacher@example.com',
+    :password => 'password',
+    :password_confirmation => 'password'
+  },
 ], :without_protection => true )
+
+Teacher.create([
+    {
+      :is_active => true, :description => "This teacher is great", :admin_user_id => AdminUser.last.id
+    }
+  ])
 
 Student.create([
   { email: "jtreanor3@gmail.com", forename: "James", surname: "Treanor", password: "password", password_confirmation: "password", year_of_birth: 1991, country_id: "IE", sex_id: 1
