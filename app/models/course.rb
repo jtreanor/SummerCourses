@@ -27,6 +27,7 @@ class Course < ActiveRecord::Base
 	has_many :students,
               :through => :enrollments
   has_many :time_table_items
+  belongs_to :teacher
 	accepts_nested_attributes_for :course_assets
 
 	before_create :set_refund_enrollments_before_to_now

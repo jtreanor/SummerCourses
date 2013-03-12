@@ -262,20 +262,45 @@ Country.create([
   { :country_id => "ZW", :country_name => "ZIMBABWE" }
 ], :without_protection => true )
 
+AdminPermission.create([
+  { :permission_name => "Super Admin" },
+  { :permission_name => "Admin"}
+  ], :without_protection => true )
 
+AdminUser.create([
+  { :forename => "Test",
+    :surname => "Admin",
+    :email => 'admin@example.com',
+    :password => 'password',
+    :password_confirmation => 'password',
+    :admin_permission_id => AdminPermission.first.id
+  },
+  { :forename => "Teacher",
+    :surname => "Name",
+    :email => 'teacher@example.com',
+    :password => 'password',
+    :password_confirmation => 'password'
+  },
+], :without_protection => true )
+
+Teacher.create([
+    {
+      :is_active => true, :description => "This teacher is great", :admin_user_id => AdminUser.last.id
+    }
+  ])
 
 Course.create([
   { :title => "Intro to programming", 
     :description => "full description", 
     :brief_description => "brief description", 
-    :teacher_id => 1, 
+    :teacher_id => Teacher.first.id, 
     :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, :category_id => Category.first.id, :hits => 0 },
   { :title => "Some course", 
     :description => "full description", 
     :brief_description => "brief description", 
-    :teacher_id => 1, 
+    :teacher_id => Teacher.first.id, 
     :number_of_places => 50, 
     :price => 100.0, 
     :deposit => 10.0, 
@@ -303,33 +328,6 @@ Message.create([
     :content => "test message",
 }
 ], :without_protection => true )
-
-AdminPermission.create([
-  { :permission_name => "Super Admin" },
-  { :permission_name => "Admin"}
-  ], :without_protection => true )
-
-AdminUser.create([
-  { :forename => "Test",
-    :surname => "Admin",
-    :email => 'admin@example.com',
-    :password => 'password',
-    :password_confirmation => 'password',
-    :admin_permission_id => AdminPermission.first.id
-  },
-  { :forename => "Teacher",
-    :surname => "Name",
-    :email => 'teacher@example.com',
-    :password => 'password',
-    :password_confirmation => 'password'
-  },
-], :without_protection => true )
-
-Teacher.create([
-    {
-      :is_active => true, :description => "This teacher is great", :admin_user_id => AdminUser.last.id
-    }
-  ])
 
 Student.create([
   { email: "jtreanor3@gmail.com", forename: "James", surname: "Treanor", password: "password", password_confirmation: "password", year_of_birth: 1991, country_id: "IE", sex_id: 1
