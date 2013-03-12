@@ -26,6 +26,10 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
+  def role
+    "admin"
+  end
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password,:forename, :surname, :password_confirmation, :remember_me
   # attr_accessible :title, :body
