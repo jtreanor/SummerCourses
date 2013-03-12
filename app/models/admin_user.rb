@@ -17,6 +17,7 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  admin_permission_id    :integer          not null
 #
 
 class AdminUser < ActiveRecord::Base
@@ -26,12 +27,10 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  def role
-    "admin"
-  end
+  belongs_to :admin_permission
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password,:forename, :surname, :password_confirmation, :remember_me
+  attr_accessible :email, :password,:forename, :surname, :password_confirmation, :remember_me, :admin_permission_id
   # attr_accessible :title, :body
 
   after_create { |admin| admin.send_reset_password_instructions }

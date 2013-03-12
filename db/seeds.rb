@@ -304,8 +304,13 @@ Message.create([
 }
 ], :without_protection => true )
 
+AdminPermission.create([
+  { :permission_name => "Super Admin" },
+  { :permission_name => "Admin"}
+  ], :without_protection => true )
+
 AdminUser.create([
-  { :forename => "Test", :surname => "Admin", :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password'
+  { :forename => "Test", :surname => "Admin", :email => 'admin@example.com', :password => 'password', :password_confirmation => 'password', :admin_permission_id => AdminPermission.first.id
   }
 ], :without_protection => true )
 

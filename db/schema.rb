@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
+    t.integer  "admin_permission_id",                                        :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -127,6 +128,10 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
   add_index "payments", ["transaction_id"], :name => "payments_transaction_id_idx"
+
+  create_table :admin_permissions do |t|
+    t.string :permission_name
+  end
 
   create_table "refunds", :id => false, :force => true do |t|
     t.string "refund_transaction_id",   :limit => 45, :null => false

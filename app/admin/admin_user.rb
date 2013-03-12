@@ -1,7 +1,7 @@
 ActiveAdmin.register AdminUser do
   menu :if => proc{ can?(:manage, AdminUser) }     
   controller.authorize_resource 
- 
+
   index do                            
     column :email
     column :forename
@@ -18,7 +18,10 @@ ActiveAdmin.register AdminUser do
     f.inputs "Admin Details" do       
       f.input :email   
       f.input :forename
-      f.input :surname               
+      f.input :surname             
+    end
+    f.inputs "Permission" do       
+      f.input :admin_permission             
     end                               
     f.actions                         
   end                                 
