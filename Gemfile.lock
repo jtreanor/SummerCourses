@@ -65,6 +65,7 @@ GEM
     braintree (2.22.0)
       builder (>= 2.0.0)
     builder (3.0.4)
+    cancan (1.6.9)
     clear_eyes (0.1.6)
       railties (~> 3.1)
       rmagick (~> 2.13.1)
@@ -200,6 +201,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.3.0.1)
   bootswatch-rails
   braintree
+  cancan
   clear_eyes
   coffee-rails
   coffee-script-source (~> 1.4.0)

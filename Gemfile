@@ -9,6 +9,9 @@ gem 'newrelic_rpm'
 
 gem 'seed_dump'
 
+#authorisation
+gem "cancan"
+
 #for galleria.io plugin,non-official gem
 #gem 'rails-gallery' hardly to use
 #gem 'galleria-rails', github: 'albandiguer/galleria-rails'
