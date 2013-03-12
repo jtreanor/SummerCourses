@@ -205,12 +205,12 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_foreign_key "students", "sexes", :name => "students_sex_id_fk", :primary_key => "sex_id"
 
 
-      add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
-    add_foreign_key "course_assets", "assets", :name => "course_assets_asset_id_fk"
-    add_foreign_key "course_assets", "courses", :name => "course_assets_course_id_fk"
-    add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk"
-    add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
-    add_foreign_key "teachers", "admin_users", :name => "teachers_admin_user_id_fk"
-    add_foreign_key "teachers", "assets", :name => "teachers_asset_id_fk"
+  add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
+  add_foreign_key "course_assets", "assets", :name => "course_assets_asset_id_fk"
+  add_foreign_key "course_assets", "courses", :name => "course_assets_course_id_fk"
+  add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk"
+  add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
+  add_foreign_key "teachers", "admin_users", :name => "teachers_admin_user_id_fk"
+  add_foreign_key "teachers", "assets", :name => "teachers_asset_id_fk"
 
 end
