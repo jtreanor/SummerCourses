@@ -17,7 +17,7 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  admin_permission_id    :integer          not null
+#  admin_permission_id    :integer
 #
 
 class AdminUser < ActiveRecord::Base
