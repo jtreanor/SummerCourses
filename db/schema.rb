@@ -212,5 +212,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_foreign_key "messages", "message_threads", :name => "messages_message_thread_id_fk"
   add_foreign_key "teachers", "admin_users", :name => "teachers_admin_user_id_fk"
   add_foreign_key "teachers", "assets", :name => "teachers_asset_id_fk"
+  add_foreign_key "time_table_items", "courses", :name => "time_table_items_course_id_fk"
+  add_foreign_key "time_table_items", "locations", :name => "time_table_items_location_id_fk"
 
 end
