@@ -144,6 +144,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    railroady (1.1.0)
     rails (3.2.12)
       actionmailer (= 3.2.12)
       actionpack (= 3.2.12)
@@ -220,6 +221,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   paperclip
+  railroady
   rails (= 3.2.12)
   rails-erd
   sass-rails (~> 3.2)

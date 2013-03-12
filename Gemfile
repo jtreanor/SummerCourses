@@ -40,7 +40,8 @@ group :development do
 	gem 'annotate', '2.5.0'
 	gem "better_errors"
 	gem 'binding_of_caller'
-	gem "rails-erd"
+	gem 'rails-erd'
+  gem 'railroady'
 end
 
 #generate foreign keys
