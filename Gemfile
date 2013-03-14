@@ -12,10 +12,6 @@ gem 'seed_dump'
 #authorisation
 gem "cancan"
 
-#for galleria.io plugin,non-official gem
-#gem 'rails-gallery' hardly to use
-#gem 'galleria-rails', github: 'albandiguer/galleria-rails'
-
 #asset upload
 gem 'aws-sdk'
 gem 'paperclip'
@@ -24,8 +20,8 @@ gem 'paperclip'
 gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+#Google Maps
+gem 'gmaps4rails'
 
 gem 'mysql2'
 gem 'devise'

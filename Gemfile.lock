@@ -96,6 +96,7 @@ GEM
       activerecord (>= 3.0.0)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    gmaps4rails (1.5.6)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.4)
@@ -215,6 +216,7 @@ DEPENDENCIES
   coffee-script-source (~> 1.4.0)
   devise
   foreigner
+  gmaps4rails
   immigrant
   jquery-rails
   meta_search (>= 1.1.0.pre)
