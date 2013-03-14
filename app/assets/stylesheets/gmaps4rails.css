@@ -22,3 +22,6 @@
    height: 400px;
    border:#555555 2px solid;
 }
+/* fix bootstrap display of the map controls and info boxes.*/
+.map_container img{max-width: none;}
+.gmaps4rails_map img{max-width: none;}

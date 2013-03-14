@@ -10,5 +10,14 @@
 
 class Location < ActiveRecord::Base
   # attr_accessible :title, :body
+  attr_accessible :longitude, :latitude, :title
+  acts_as_gmappable
+
   has_many :time_table_items
+
+
+#  def gmaps4rails_address
+#    #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+#    "#{self.street}, #{self.city}, #{self.country}"
+#  end
 end

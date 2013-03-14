@@ -3,10 +3,11 @@
   <p><%= @course.description %>.</p>
 </div>
 <!--end hero unit -->
-
+<!--
 <script>
   if (Galleria) { $("body").text('Galleria works') }
 </script>
+-->
 <div class="row">
   <div id="galleria">
     <% @course.course_assets.each do |m| %>
@@ -36,6 +37,9 @@
   <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
 
 </div>
+<div>
+  <%= gmaps4rails(@locations) %>
+</div>
 <!-- add galleria theme js-->
 <script>
   Galleria.loadTheme('/assets/galleria.classic.min.js');
@@ -43,7 +47,5 @@
 </script>
 
 <!-- add map related js-->
-<!--
 <%= yield :scripts %>
--->
 
