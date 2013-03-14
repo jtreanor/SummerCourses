@@ -1,3 +1,9 @@
+<script>
+    var script = document.createElement( 'script' );
+    script.type = 'text/javascript';
+    script.src = "/assets/galleria.classic.min.js";
+    $("#someElement").append( script );
+</script>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
   <p><%= @course.description %>.</p>
@@ -12,10 +18,9 @@
 <div class="row">
   <div id="galleria">
     <% @course.course_assets.each do |m| %>
-
-      <a href=<%= m.asset.asset.url(:medium) %> >
-        <img src=<%= m.asset.asset.url(:thumb) %> 
-        data-description="<%= m.asset.description %>" 
+      <a href="<%= m.asset.asset.url(:medium) %>">
+        <img src="<%= m.asset.asset.url(:thumb) %>"
+                     data-description="<%= m.asset.description %>"
         >
       </a>
     <% end %>
@@ -36,7 +41,7 @@
       <tr><td>Category: </td><td><%= @course.category.category_name %></td></tr>
     </tbody>
   </table>
-  <p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>
+  <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
 
 </div>
 
