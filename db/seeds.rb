@@ -316,7 +316,7 @@ Sex.create([
 ], :without_protection => true )
 
 MessageThread.create([
-  { id: SecureRandom.base64,
+  { id: SecureRandom.urlsafe_base64(6),
     user_email: "test@test.com"
   }
 ], :without_protection => true )
