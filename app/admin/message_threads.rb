@@ -14,7 +14,7 @@ ActiveAdmin.register MessageThread do
 				table :class=> :attributes_table do
 					
 						th("Message Body")
-						td(m.content) 
+						td(simple_format(m.content)) 
 					
 				end
 			end
