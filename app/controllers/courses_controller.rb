@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
     @time_table.each do |t|
       @locations.push t.location
     end
+    #change data of locations to gmap4rails format
     @locations = @locations.to_gmaps4rails
 
 	end
