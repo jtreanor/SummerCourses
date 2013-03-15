@@ -14,6 +14,8 @@ class IncomingMessagesController < ApplicationController
 
     Message.create(message_thread_id: MessageThread.first.id, subject: subject, content: actual_body, is_response: false)
 
+    Rails.logger.info MessageThread.first.messages
+
     render :text => "OK"
   end
 
