@@ -12,7 +12,9 @@ class IncomingMessagesController < ApplicationController
 
     # Do some other stuff with the mail message
 
-    Message.create(message_thread_id: MessageThread.first.id, subject: subject, content: actual_body, is_response: false)
+    if (MessageThread.find_by_id(subject) != nil)
+      Message.create(message_thread_id: subject, subject: subject, content: actual_body, is_response: false)
+    end
 
     Rails.logger.info MessageThread.first.messages
 
