@@ -3,8 +3,8 @@ ActiveAdmin.register Asset do
   	column :description                     
     column "Preview" do |asset|
     	link_to(image_tag(asset.asset.url(:thumb), :height => '100'), admin_asset_path(asset))
-	end   
-	column "URL" do |asset|
+	  end   
+	  column "URL" do |asset|
   		link_to("Full Size", asset.asset.url(:medium))
   	end
     default_actions                   
