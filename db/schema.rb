@@ -107,9 +107,10 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "enrollments", ["student_id"], :name => "student_id_idx"
 
   create_table "locations", :force => true do |t|
-    t.string "title",     :limit => 45, :null => false
-    t.float  "longitude",               :null => false
-    t.float  "latitude",                :null => false
+    t.string "title",     :limit => 45,       :null => false
+    t.float  "longitude",                     :null => false
+    t.float  "latitude",                      :null => false
+    t.boolean "gmaps",    :default => true,   :null => false
   end
 
   create_table "message_threads", :id => false, :force => true do |t|

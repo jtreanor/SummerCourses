@@ -3,7 +3,6 @@
   <p><%= @course.description %>.</p>
 </div>
 <!--end hero unit -->
-
 <!--
 <script>
   if (Galleria) { $("body").text('Galleria works') }
@@ -12,10 +11,9 @@
 <div class="row">
   <div id="galleria">
     <% @course.course_assets.each do |m| %>
-
-      <a href=<%= m.asset.asset.url(:medium) %> >
-        <img src=<%= m.asset.asset.url(:thumb) %> 
-        data-description="<%= m.asset.description %>" 
+      <a href="<%= m.asset.asset.url(:medium) %>">
+        <img src="<%= m.asset.asset.url(:thumb) %>"
+                     data-description="<%= m.asset.description %>"
         >
       </a>
     <% end %>
@@ -36,12 +34,18 @@
       <tr><td>Category: </td><td><%= @course.category.category_name %></td></tr>
     </tbody>
   </table>
-  <p><%= link_to "Enrol", new_enrollment_path(@course.id), class: "btn btn-large btn-danger" %></a></p>
+  <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
 
 </div>
-
+<div>
+  <%= gmaps4rails(@locations) %>
+</div>
+<!-- add galleria theme js-->
 <script>
   Galleria.loadTheme('/assets/galleria.classic.min.js');
   Galleria.run('#galleria');
 </script>
+
+<!-- add map related js-->
+<%= yield :scripts %>
 

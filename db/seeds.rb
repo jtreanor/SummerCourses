@@ -290,21 +290,21 @@ Teacher.create([
   ])
 
 Course.create([
-  { :title => "Intro to programming", 
-    :description => "full description", 
-    :brief_description => "brief description", 
-    :teacher_id => Teacher.first.id, 
-    :number_of_places => 50, 
-    :price => 100.0, 
+  { :title => "Intro to programming",
+    :description => "full description",
+    :brief_description => "brief description",
+    :teacher_id => Teacher.first.id,
+    :number_of_places => 50,
+    :price => 100.0,
     :deposit => 10.0, :category_id => Category.first.id, :hits => 0 },
-  { :title => "Some course", 
-    :description => "full description", 
-    :brief_description => "brief description", 
-    :teacher_id => Teacher.first.id, 
-    :number_of_places => 50, 
-    :price => 100.0, 
-    :deposit => 10.0, 
-    :category_id => Category.first.id, 
+  { :title => "Some course",
+    :description => "full description",
+    :brief_description => "brief description",
+    :teacher_id => Teacher.first.id,
+    :number_of_places => 50,
+    :price => 100.0,
+    :deposit => 10.0,
+    :category_id => Category.first.id,
     :hits => 0 }
 ], :without_protection => true )
 
@@ -336,6 +336,16 @@ s = Student.first
 s.confirmed_at = DateTime.now
 s.save
 
+Location.create([
+    { title: 'ucc', longitude: -8.492932, latitude: 51.892162}
+                ])
+
+Course.first.time_table_items.create(
+    location_id: Location.first.id,
+    start_time: Time.now-10000,
+    end_time: Time.now,
+    room: 'G21'
+)
 =begin
 Asset.create([
   { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", kind: "video", description: "test video description"

@@ -63,8 +63,10 @@ module SummerCourses
     config.assets.initialize_on_precompile = false
 
     # Precompile additional assets. Defaults to [application.js, application.css, non-JS/CSS]
-    config.assets.precompile += %w[active_admin.css active_admin.js galleria.classic.min.js galleria.classic.css print.css]
+    config.assets.precompile += %w[active_admin.css active_admin.js print.css]
     config.assets.precompile += %w[active_admin/print.css]
+    config.assets.precompile += %w[galleria-1.2.9.min.js galleria.classic.min.js galleria.classic.css]
+    config.assets.precompile += %w[gmaps4rails.css gmaps4rails/*]
     #config.assets.compile = true
   end
 end
