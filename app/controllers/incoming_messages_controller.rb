@@ -3,13 +3,18 @@ class IncomingMessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-  	Rails.logger.info "FROM:" + params[:sender]
-    Rails.logger.info "SUBJECT:" + params[:subject] 
-    Rails.logger.info "body-plain:" + params["body-plain"]
+    sender  = params['from']
+    subject = params['subject']
+
+     # get the "stripped" body of the message, i.e. without
+     # the quoted part
+    actual_body = params["stripped-text"]
 
     # Do some other stuff with the mail message
 
-    render :text => 'success', :status => 200
+    Message.create(message_thread_id: MessageThread.first.id, subject: subject, content: actual_body, is_response: false)
+
+    render :text => "OK"
   end
 
 end
