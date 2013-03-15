@@ -3,9 +3,9 @@ class IncomingMessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-  	Rails.logger.info "FROM:" + params[:from]
+  	Rails.logger.info "FROM:" + params[:sender]
     Rails.logger.info "SUBJECT:" + params[:subject] 
-    Rails.logger.info "stripped-text:" + params[:stripped_text]
+    Rails.logger.info "body-plain:" + params["body-plain"]
 
     # Do some other stuff with the mail message
 
