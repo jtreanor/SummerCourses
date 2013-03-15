@@ -1,5 +1,6 @@
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
+
   <p><%= @course.description %>.</p>
 </div>
 <!--end hero unit -->
@@ -11,39 +12,55 @@
 <div class="row">
   <div id="galleria">
     <% @course.course_assets.each do |m| %>
-      <a href="<%= m.asset.asset.url(:medium) %>">
-        <img src="<%= m.asset.asset.url(:thumb) %>"
-                     data-description="<%= m.asset.description %>"
-        >
-      </a>
+        <a href="<%= m.asset.asset.url(:medium) %>">
+          <img src="<%= m.asset.asset.url(:thumb) %>"
+               data-description="<%= m.asset.description %>"
+          >
+        </a>
     <% end %>
   </div>
 </div>
-<br />
-<br />
+<br/>
+<br/>
 <div class="row">
   <table class="table table-striped">
     <caption>
       course details
     </caption>
     <tbody>
-      <tr><td>Teacher: </td><td><%= @course.teacher_id %></td></tr>
-      <tr><td>Number Of Places: </td><td><%= @course.number_of_places %></td></tr>
-      <tr><td>Price: €</td><td><%= @course.price %></td></tr>
-      <tr><td>Deposit: €</td><td><%= @course.deposit %></td></tr>
-      <tr><td>Category: </td><td><%= @course.category.category_name %></td></tr>
+    <tr>
+      <td>Teacher:</td>
+      <td><%= @course.teacher_id %></td>
+    </tr>
+    <tr>
+      <td>Number Of Places:</td>
+      <td><%= @course.number_of_places %></td>
+    </tr>
+    <tr>
+      <td>Price: €</td>
+      <td><%= @course.price %></td>
+    </tr>
+    <tr>
+      <td>Deposit: €</td>
+      <td><%= @course.deposit %></td>
+    </tr>
+    <tr>
+      <td>Category:</td>
+      <td><%= @course.category.category_name %></td>
+    </tr>
     </tbody>
   </table>
   <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
 
 </div>
 <div>
-  <%= gmaps4rails(@locations) %>
+  <%= gmaps('map_options' => { 'center_on_user' => true,
+                              'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
 <!-- add galleria theme js-->
 <script>
-  Galleria.loadTheme('/assets/galleria.classic.min.js');
-  Galleria.run('#galleria');
+    Galleria.loadTheme('/assets/galleria.classic.min.js');
+    Galleria.run('#galleria');
 </script>
 
 <!-- add map related js-->
