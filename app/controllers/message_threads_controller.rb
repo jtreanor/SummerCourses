@@ -13,10 +13,10 @@ class MessageThreadsController < ApplicationController
     @message.subject = (params[:new_message_thread][:subject])
     @message.content = (params[:new_message_thread][:content])
     #validate the id
-    @thread.id = SecureRandom.base64 
+    @thread.id = SecureRandom.urlsafe_base64(6) 
 
     while MessageThread.find_by_id @thread.id
-      @thread.id = SecureRandom.base64
+      @thread.id = SecureRandom.urlsafe_base64(6)
     end
     @message.message_thread_id = @thread.id
 

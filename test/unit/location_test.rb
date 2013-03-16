@@ -6,6 +6,7 @@
 #  title     :string(45)       not null
 #  longitude :float            not null
 #  latitude  :float            not null
+#  gmaps     :boolean          default(TRUE), not null
 #
 
 require 'test_helper'
