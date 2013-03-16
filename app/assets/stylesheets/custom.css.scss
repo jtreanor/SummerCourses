@@ -32,11 +32,10 @@ background-color: #F5F5F5;
 // And finally bootswatch style itself
 @import "bootswatch/readable/bootswatch";
 
-
-
-
-#galleria { 
-  width: 700px; 
-  height: 400px; 
-  background: white 
+//used for gallery show
+#galleria {
+  width: 100%;
+  height: 400px;
+  background: white;
+  responsive: true
 }

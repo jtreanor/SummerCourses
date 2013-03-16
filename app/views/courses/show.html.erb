@@ -1,3 +1,7 @@
+<link type="text/css" rel="stylesheet" href="/assets/galleria.classic.css">
+<script type="text/javascript" src="/assets/galleria-1.2.9.min.js"></script>
+<script type="text/javascript" src="/assets/galleria.classic.min.js"></script>
+
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
 
@@ -10,14 +14,16 @@
 </script>
 -->
 <div class="row">
-  <div id="galleria">
-    <% @course.course_assets.each do |m| %>
-        <a href="<%= m.asset.asset.url(:medium) %>">
-          <img src="<%= m.asset.asset.url(:thumb) %>"
-               data-description="<%= m.asset.description %>"
-          >
-        </a>
-    <% end %>
+  <div class="span10">
+    <div id="galleria">
+      <% @course.course_assets.each do |m| %>
+          <a href="<%= m.asset.asset.url(:medium) %>">
+            <img src="<%= m.asset.asset.url(:thumb) %>"
+                 data-description="<%= m.asset.description %>"
+            >
+          </a>
+      <% end %>
+    </div>
   </div>
 </div>
 <br/>
@@ -53,10 +59,12 @@
   <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
 
 </div>
-<div>
-  <%= gmaps('map_options' => { 'center_on_user' => true,
+<div class="row">
+  <%= gmaps('map_options' => {'center_on_user' => true,
                               'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
+
+
 <!-- add galleria theme js-->
 <script>
     Galleria.loadTheme('/assets/galleria.classic.min.js');
