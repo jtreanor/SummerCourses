@@ -3,7 +3,7 @@ class IncomingMessagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    sender  = params['from']
+    sender  = params['sender']
     subject = params['subject']
 
      # get the "stripped" body of the message, i.e. without
@@ -12,7 +12,7 @@ class IncomingMessagesController < ApplicationController
 
     # Do some other stuff with the mail message
 
-    logger.info "All threads by this person:" + MessageThread.find_all_by_user_email(sender).to_s
+    logger.info "All threads by #{sender}:" + MessageThread.find_all_by_user_email(sender).to_s
 
     MessageThread.find_all_by_user_email(sender).each do |thread|
       if subject.include? thread.id
