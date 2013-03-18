@@ -75,7 +75,9 @@
                     }
                 ]
             });
-
+            $('.fc-button-content').each(function () {
+                $(this).parent().parent().html($(this).html());
+            });
         });
 
     </script>
