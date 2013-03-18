@@ -1,5 +1,5 @@
 ActiveAdmin.register MessageThread do
-  show do |asset|
+  show do |thread|
   	attributes_table do
 	  	row :id
 	  	row :user_email
@@ -17,7 +17,6 @@ ActiveAdmin.register MessageThread do
 		end
 	end
 
-  	active_admin_comments
   end
   
 end
