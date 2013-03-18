@@ -1,6 +1,11 @@
 <% content_for(:head) do %>
     <%= javascript_include_tag 'galleria-1.2.9.min' %>
+
     <%= stylesheet_link_tag 'gmaps4rails' %>
+
+    <%= stylesheet_link_tag 'fullcalendar.print' %>
+    <%= stylesheet_link_tag 'fullcalendar' %>
+    <%= javascript_include_tag 'fullcalendar.min' %>
 <% end %>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>

@@ -67,6 +67,7 @@ module SummerCourses
     config.assets.precompile += %w[active_admin/print.css]
     config.assets.precompile += %w[galleria-1.2.9.min.js galleria.classic.min.js galleria.classic.css]
     config.assets.precompile += %w[gmaps4rails.css gmaps4rails/*]
+    config.assets.precompile += %w[fullcalendar*]
     #config.assets.compile = true
   end
 end
