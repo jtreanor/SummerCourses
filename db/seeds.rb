@@ -317,13 +317,13 @@ Sex.create([
 
 MessageThread.create([
   { id: SecureRandom.urlsafe_base64(6),
-    user_email: "test@test.com"
+    user_email: "test@test.com",
+    :subject => "test subject"
   }
 ], :without_protection => true )
 
 Message.create([
   { :message_thread_id => MessageThread.first.id,
-    :subject =>"test subject",
     :is_response => false,
     :content => "test message",
 }
