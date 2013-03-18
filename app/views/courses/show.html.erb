@@ -60,8 +60,7 @@
 
 </div>
 <div class="row">
-  <%= gmaps('map_options' => {'center_on_user' => true,
-                              'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
+  <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
 
 <% content_for(:foot) do %>
