@@ -1,7 +1,7 @@
-<link type="text/css" rel="stylesheet" href="/assets/galleria.classic.css">
-<script type="text/javascript" src="/assets/galleria-1.2.9.min.js"></script>
-<script type="text/javascript" src="/assets/galleria.classic.min.js"></script>
-
+<% content_for(:head) do %>
+    <%= javascript_include_tag 'galleria-1.2.9.min' %>
+    <%= stylesheet_link_tag 'gmaps4rails' %>
+<% end %>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
 
@@ -64,13 +64,13 @@
                               'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
 
+<% content_for(:foot) do %>
+    <!-- add galleria theme js-->
+    <script>
+        Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
+        Galleria.run('#galleria');
+    </script>
 
-<!-- add galleria theme js-->
-<script>
-    Galleria.loadTheme('/assets/galleria.classic.min.js');
-    Galleria.run('#galleria');
-</script>
-
-<!-- add map related js-->
-<%= yield :scripts %>
-
+    <!-- add map related js-->
+    <%= yield :scripts %>
+<% end %>
