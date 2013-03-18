@@ -8,8 +8,7 @@
 #
 
 class MessageThread < ActiveRecord::Base
-  # attr_accessible :title, :body
-  attr_accessible :user_email
+  attr_accessible :user_email, :subject
   set_primary_key :id
 
   has_many :messages

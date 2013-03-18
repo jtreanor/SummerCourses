@@ -12,8 +12,6 @@ class IncomingMessagesController < ApplicationController
 
     # Do some other stuff with the mail message
 
-    logger.info "All threads by #{sender}:" + MessageThread.find_all_by_user_email(sender).to_s
-
     MessageThread.find_all_by_user_email(sender).each do |thread|
       if subject.include? thread.id
         thread.messages.create(subject: subject, content: actual_body, is_response: false)

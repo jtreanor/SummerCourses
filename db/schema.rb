@@ -116,14 +116,13 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   create_table "message_threads", :id => false, :force => true do |t|
     t.string   "id", :limit => 24,                     :null => false
     t.string   "user_email", :null => false
-    t.datetime "created_at", :null => false
+    t.text     "subject",           :limit => 255,                    :null => false
   end
 
   add_index "message_threads", ["id"], :name => "thread_id_idx"
 
   create_table "messages", :force => true do |t|
     t.string   "message_thread_id", :limit => 24,                     :null => false
-    t.text     "subject",           :limit => 255,                    :null => false
     t.boolean  "is_response",                      :default => false, :null => false
     t.text     "content",                                             :null => false
     t.datetime "created_at",                                          :null => false

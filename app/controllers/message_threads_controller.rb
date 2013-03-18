@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     @thread = MessageThread.new
     @thread.user_email = params[:new_message_thread][:user_email]
     @message = Message.new
-    @message.subject = (params[:new_message_thread][:subject])
+    @thread.subject = (params[:new_message_thread][:subject])
     @message.content = (params[:new_message_thread][:content])
     #validate the id
     @thread.id = SecureRandom.urlsafe_base64(6) 
@@ -21,7 +21,7 @@ class MessageThreadsController < ApplicationController
     @message.message_thread_id = @thread.id
 
     if @thread.save && @message.save
-      flash[:success] = "Your message has been successfully sent, we will reply your email shortly!"
+      flash[:success] = "Your message has been successfully sent, we will reply to your email shortly!"
       redirect_to root_path
     else
       render 'new'
