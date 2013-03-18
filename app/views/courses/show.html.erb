@@ -19,13 +19,11 @@
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    center: 'title'    ,
+                    right: 'month,agendaWeek'
                 },
-                buttonText: {
-                    prev: '<i class="icon-arrow-left"></i>',
-                    next: '<i class="icon-arrow-right"></i>'
-                },
+                allDaySlot: false,
+                defaultView: "agendaWeek",
                 theme: false,
                 editable: true,
                 events: [
@@ -75,9 +73,7 @@
                     }
                 ]
             });
-            $('.fc-button-content').each(function () {
-                $(this).parent().parent().html($(this).html());
-            });
+
         });
 
     </script>
@@ -142,6 +138,8 @@
 <div class="row">
   <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
+<br />
+<br />
 <div class="row">
   <div id='calendar'></div>
 </div>
