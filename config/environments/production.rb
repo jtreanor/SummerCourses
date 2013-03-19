@@ -65,8 +65,6 @@ SummerCourses::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => 'summercourses.mailgun.org' }
-
   ActionMailer::Base.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'], 
     :address        => ENV['MAILGUN_SMTP_SERVER'],
