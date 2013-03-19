@@ -3,6 +3,6 @@ class MessageMailer < ActionMailer::Base
 
   def reply_email(message)
     @message = message
-    mail(:to => message.user_email, :subject => "Welcome to My Awesome Site")
+    mail(:to => message.message_thread.user_email, :subject => "Welcome to My Awesome Site")
   end
 end
