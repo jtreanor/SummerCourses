@@ -19,7 +19,7 @@ class Message < ActiveRecord::Base
   def send_email_if_needed
   	if self.is_response
   		logger.info "Send Email"
-  		MessageMailer.message_reply self
+  		MessageMailer.reply_email self
   	end
   end
 
