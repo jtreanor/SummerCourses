@@ -342,9 +342,15 @@ Location.create([
 
 Course.first.time_table_items.create(
     location_id: Location.first.id,
-    start_time: Time.now-10000,
-    end_time: Time.now,
+    start_time: DateTime.new(2013,10,9,15),
+    end_time: DateTime.new(2013,10,9,16),
     room: 'G21'
+)
+Course.first.time_table_items.create(
+    location_id: Location.first.id,
+    start_time: DateTime.new(2013,10,10,10),
+    end_time: DateTime.new(2013,10,10,12),
+    room: '1.11'
 )
 =begin
 Asset.create([

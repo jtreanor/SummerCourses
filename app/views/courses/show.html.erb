@@ -6,79 +6,6 @@
     <%= javascript_include_tag 'gmaps4rails/gmaps4rails.googlemaps' %>
 
     <%= stylesheet_link_tag 'fullcalendar' %>
-    <%= javascript_include_tag 'fullcalendar.min' %>
-    <script type='text/javascript'>
-
-        $(document).ready(function () {
-
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title'    ,
-                    right: 'month,agendaWeek'
-                },
-                allDaySlot: false,
-                defaultView: "agendaWeek",
-                theme: false,
-                editable: true,
-                minTime: 7,
-                maxTime: 20,
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1)
-                    },
-                    {
-                        title: 'Long Event',
-                        start: new Date(y, m, d - 5),
-                        end: new Date(y, m, d - 2)
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d - 3, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d + 4, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false
-                    },
-                    {
-                        title: 'Lunch',
-                        start: new Date(y, m, d, 12, 0),
-                        end: new Date(y, m, d, 14, 0),
-                        allDay: false
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d + 1, 19, 0),
-                        end: new Date(y, m, d + 1, 22, 30),
-                        allDay: false
-                    },
-                    {
-                        title: 'Click for Google',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        url: 'http://google.com/'
-                    }
-                ]
-            });
-
-        });
-
-    </script>
 <% end %>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
@@ -140,15 +67,57 @@
 <div class="row">
   <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
 </div>
-<br />
-<br />
+<br/>
+<br/>
 <div class="row">
   <div id='calendar'></div>
 </div>
 
 <% content_for(:foot) do %>
+    <!-- add calendar realted js -->
+    <%= javascript_include_tag 'fullcalendar.min' %>
+    <script type='text/javascript'>
+        <% if !@time_table_items.empty? %>
+        $(document).ready(function () {
+
+            //change ruby data to javascript data: var date = new Date(date.to_i*1000)
+            var start_date = new Date(<%= @time_table_items.first.start_time.to_i * 1000 %>);
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek'
+                },
+                date: start_date.getDate(),
+                month: start_date.getMonth(),
+                year: start_date.getFullYear(),
+                allDaySlot: false,
+                defaultView: "agendaWeek",
+                theme: false,
+                editable: true,
+                minTime: 7,
+                maxTime: 20,
+                events: [
+                    <% @time_table_items.each_with_index do |item, index| %>
+                    {
+
+                        title: 'All Day Event',
+                        start: new Date(<%= item.start_time.to_i * 1000 %>),
+                        end: new Date(<%= item.end_time.to_i * 1000%>),
+                        title: "Room:<%= item.room %>",
+                        allDay: false
+                    }<% break if index == @time_table_items.size-1 %>,
+                    <% end %>
+                ]
+            });
+
+        })
+        ;
+        <%end%>
+    </script>
     <!-- add galleria theme js-->
-    <script>
+    <script type="text/javascript">
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
     </script>

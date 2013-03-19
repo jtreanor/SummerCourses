@@ -15,4 +15,6 @@ class TimeTableItem < ActiveRecord::Base
   attr_accessible :location_id, :start_time, :end_time, :room
   belongs_to :course
   belongs_to :location
+
+  default_scope order: 'time_table_items.start_time ASC'
 end
