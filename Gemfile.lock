@@ -127,7 +127,7 @@ GEM
     multi_json (1.7.1)
     mysql2 (0.3.11)
     newrelic_rpm (3.5.8.72)
-    nokogiri (1.5.7)
+    nokogiri (1.5.8)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)

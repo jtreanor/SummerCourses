@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require clear_eyes
-//= require_tree .
 //
 
 jQuery(document).ready(function() {
