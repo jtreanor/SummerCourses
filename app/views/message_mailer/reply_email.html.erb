@@ -6,12 +6,12 @@
   <body>
     <%= simple_format @message.content %>
 
-    <h3>You asked:</h3>
+    <p><strong>You asked:</strong></p>
     <% @message.message_thread.messages.each do |m| %>
     	<% if !m.is_response %>
-    	<div>
+    	<blockquote>
     		<%= simple_format m.content %>
-    	</div>
+    	</blockquote>
     	<% end %>
     <% end %>
   </body>
