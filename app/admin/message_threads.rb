@@ -3,6 +3,7 @@ ActiveAdmin.register MessageThread do
   	attributes_table do
 	  	row :id
 	  	row :user_email
+	  	row :subject
 	end
 
 	message_thread.messages.each do |m|
