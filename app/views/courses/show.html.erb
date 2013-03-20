@@ -30,6 +30,30 @@
 </script>
 -->
 
+<style>
+        /*used for gallery show*/
+    #galleria {
+        width: 100%;
+        height: 400px;
+        background: white;
+        responsive: true
+    }
+
+        /*used for callendar*/
+    #calendar {
+        width: 900px;
+        margin: 0 auto;
+        font-size: 14px;
+        font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+        line-height: 15px;
+    }
+
+    .fc-header-title h2 {
+        line-height: 25px;
+        font-size: 21px;
+    }
+
+</style>
 
 
 <div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -42,47 +66,55 @@
     <div class="tab-pane active" id="tab1">
       <!-- gallery show -->
       <% if @course.course_assets.any? %>
-          <div class="span10">
-            <div id="galleria">
-              <% @course.course_assets.each do |m| %>
-                  <a href="<%= m.asset.asset.url(:medium) %>">
-                    <img src="<%= m.asset.asset.url(:thumb) %>"
-                         data-description="<%= m.asset.description %>"
-                    >
-                  </a>
-              <% end %>
+          <div class="row">
+            <div class="span10 offset1">
+              <div id="galleria">
+                <% @course.course_assets.each do |m| %>
+                    <a href="<%= m.asset.asset.url(:medium) %>">
+                      <img src="<%= m.asset.asset.url(:thumb) %>"
+                           data-description="<%= m.asset.description %>"
+                      >
+                    </a>
+                <% end %>
+              </div>
             </div>
           </div>
       <% end %>
       <!-- course description -->
-      <table class="table table-striped">
-        <caption>
-          course details
-        </caption>
-        <tbody>
-        <tr>
-          <td>Teacher:</td>
-          <td><%= @course.teacher_id %></td>
-        </tr>
-        <tr>
-          <td>Number Of Places:</td>
-          <td><%= @course.number_of_places %></td>
-        </tr>
-        <tr>
-          <td>Price: €</td>
-          <td><%= @course.price %></td>
-        </tr>
-        <tr>
-          <td>Deposit: €</td>
-          <td><%= @course.deposit %></td>
-        </tr>
-        <tr>
-          <td>Category:</td>
-          <td><%= @course.category.category_name %></td>
-        </tr>
-        </tbody>
-      </table>
-      <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
+      <div class="row">
+        <div class="span1 hidden-phone">
+        </div>
+        <div class="span10">
+          <table class="table table-striped">
+            <caption>
+              course details
+            </caption>
+            <tbody>
+            <tr>
+              <td>Teacher:</td>
+              <td><%= @course.teacher_id %></td>
+            </tr>
+            <tr>
+              <td>Number Of Places:</td>
+              <td><%= @course.number_of_places %></td>
+            </tr>
+            <tr>
+              <td>Price: €</td>
+              <td><%= @course.price %></td>
+            </tr>
+            <tr>
+              <td>Deposit: €</td>
+              <td><%= @course.deposit %></td>
+            </tr>
+            <tr>
+              <td>Category:</td>
+              <td><%= @course.category.category_name %></td>
+            </tr>
+            </tbody>
+          </table>
+          <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
+        </div>
+      </div>
     </div>
     <div class="tab-pane" id="tab2">
       <!-- google map insert here-->
@@ -99,7 +131,8 @@
       <!--<div id="map_container">-->
       <!--<div id="gmaps4rails_map"></div>-->
       <!--</div>-->
-      <%= gmaps({:last_map => false}) %>
+      <div class="row">
+          <%= gmaps({:last_map => false}) %>
     </div>
     <div class="tab-pane" id="tab3">
       <div id='calendar'></div>
@@ -108,66 +141,77 @@
 </div>
 <script type="text/javascript">
     $('a[data-toggle="tab"]').on('shown', function (e) {
-        <% if time_table_items.any? %>
-        $(document).ready(function () {
+        if (e.target.hash == "#tab3") {
+            //reset calendar
+            $("#calendar").html("");
+            //add calendar related js
+            <% if time_table_items.any? %>
+            $(document).ready(function () {
 
-            //change ruby data to javascript data: var date = new Date(date.to_i*1000)
-            var start_date = new Date(<%= time_table_items.first.start_time.to_i * 1000 %>);
+                //change ruby data to javascript data: var date = new Date(date.to_i*1000)
+                var start_date = new Date(<%= time_table_items.first.start_time.to_i * 1000 %>);
 
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek'
-                },
-                date: start_date.getDate(),
-                month: start_date.getMonth(),
-                year: start_date.getFullYear(),
-                allDaySlot: false,
-                defaultView: "agendaWeek",
-                theme: false,
-                editable: true,
-                minTime: 7,
-                maxTime: 20,
-                events: [
-                    <% time_table_items.each_with_index do |item, index| %>
-                    {
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek'
+                    },
+                    date: start_date.getDate(),
+                    month: start_date.getMonth(),
+                    year: start_date.getFullYear(),
+                    allDaySlot: false,
+                    defaultView: "agendaWeek",
+                    theme: false,
+                    editable: true,
+                    minTime: 7,
+                    maxTime: 20,
+                    events: [
+                        <% time_table_items.each_with_index do |item, index| %>
+                        {
 
-                        title: 'All Day Event',
-                        start: new Date(<%= item.start_time.to_i * 1000 %>),
-                        end: new Date(<%= item.end_time.to_i * 1000%>),
-                        allDay: false
-                    }<% break if index == time_table_items.size-1 %>,
-                    <% end %>
-                ]
+                            title: 'All Day Event',
+                            start: new Date(<%= item.start_time.to_i * 1000 %>),
+                            end: new Date(<%= item.end_time.to_i * 1000%>),
+                            allDay: false
+                        }<% break if index == time_table_items.size-1 %>,
+                        <% end %>
+                    ]
+                });
+
             });
-
-        })
-        ;
-        <%end%>
-        Gmaps.map = new Gmaps4RailsGoogle();
-        Gmaps.load_map = function() {
-            Gmaps.map.map_options.maxZoom = 15;
-            Gmaps.map.initialize();
-            Gmaps.map.markers = <%=raw locations %>;
-            Gmaps.map.create_markers();
-            Gmaps.map.adjustMapToBounds();
-            Gmaps.map.callback();
-        };
-        Gmaps.loadMaps();
-
+            <%end%>
+        }
+        else if (e.target.hash == "#tab2") {
+            //display maps
+            Gmaps.map = new Gmaps4RailsGoogle();
+            Gmaps.load_map = function () {
+                Gmaps.map.map_options.maxZoom = 18;
+                Gmaps.map.initialize();
+                Gmaps.map.markers = <%=raw locations %>;
+                Gmaps.map.create_markers();
+                Gmaps.map.adjustMapToBounds();
+                Gmaps.map.callback();
+            };
+            Gmaps.loadMaps();
+        }
+        else {
+            //add galleria theme js
+//            $(".hero-unit").html("tab1");
+            <% if @course.course_assets.any? %>
+            Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
+            Galleria.run('#galleria');
+            <% end %>
+        }
     })
 </script>
 <% content_for(:foot) do %>
-    <!-- add calendar related js -->
 
-    <!-- add galleria theme js-->
-    <% if @course.course_assets.any? %>
-        <script type="text/javascript">
-            Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
-            Galleria.run('#galleria');
-        </script>
-    <% end %>
+    <script>
+        Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
+        Galleria.run('#galleria');
+    </script>
+
 
 
 <% end %>
