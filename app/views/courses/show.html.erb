@@ -1,23 +1,16 @@
 <% content_for(:head) do %>
-    <%= javascript_include_tag 'galleria-1.2.9.min' %>
+
 
     <%= stylesheet_link_tag 'gmaps4rails' %>
-    <%= javascript_include_tag 'gmaps4rails/gmaps4rails.base' %>
-    <%= javascript_include_tag 'gmaps4rails/gmaps4rails.googlemaps' %>
+
 
     <%= stylesheet_link_tag 'fullcalendar' %>
     <%= stylesheet_link_tag 'fullcalendar.print', media: 'print' %>
-    <%= javascript_include_tag 'fullcalendar.min' %>
+
 
 
 <% end %>
-<!-- add map related js-->
-<!--<script src="//maps.google.com/maps/api/js?v=3.8&amp;sensor=false&amp;client=&amp;key=&amp;libraries=geometry&amp;language=&amp;hl=&amp;region=" type="text/javascript">-->
-<!--</script>-->
-<script type="text/javascript" src="//maps.google.com/maps/api/js?v=3.5&sensor=false&libraries=geometry"></script>
-<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js"></script>
-<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.5/src/markerclusterer_packed.js"></script>
-<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js"></script>
+
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
 
@@ -85,6 +78,7 @@
           <div class="row">
             <div class="span10 offset1">
               <div id="galleria">
+
                 <% @course.course_assets.each do |m| %>
                     <a href="<%= m.asset.asset.url(:medium) %>">
                       <img src="<%= m.asset.asset.url(:thumb) %>"
@@ -162,13 +156,13 @@
 <script type="text/javascript">
     $('a[data-toggle="tab"]').on('shown', function (e) {
         if (e.target.hash == "#tab3") {
-            //reset calendar
+//            reset calendar
             $("#calendar").html("");
-            //add calendar related js
+//            add calendar related js
             <% if time_table_items.any? %>
             $(document).ready(function () {
 
-                //change ruby data to javascript data: var date = new Date(date.to_i*1000)
+//                change ruby data to javascript data: var date = new Date(date.to_i*1000)
                 var start_date = new Date(<%= time_table_items.first.start_time.to_i * 1000 %>);
 
                 $('#calendar').fullCalendar({
@@ -203,7 +197,7 @@
             <%end%>
         }
         else if (e.target.hash == "#tab2") {
-            //display maps
+//            display maps
             Gmaps.map = new Gmaps4RailsGoogle();
             Gmaps.load_map = function () {
                 Gmaps.map.map_options.maxZoom = 18;
@@ -216,8 +210,7 @@
             Gmaps.loadMaps();
         }
         else {
-            //add galleria theme js
-//            $(".hero-unit").html("tab1");
+//            show galleria
             <% if @course.course_assets.any? %>
             Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
             Galleria.run('#galleria');
@@ -226,12 +219,24 @@
     })
 </script>
 <% content_for(:foot) do %>
-
-    <script>
+    <!-- add galleria related js -->
+    <%= javascript_include_tag 'galleria-1.2.9.min' %>
+    <script type="text/javascript">
+        <% if @course.course_assets.any? %>
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
+        <% end %>
     </script>
 
+    <!-- add map related js-->
+    <%= javascript_include_tag 'gmaps4rails/gmaps4rails.base' %>
+    <%= javascript_include_tag 'gmaps4rails/gmaps4rails.googlemaps' %>
 
+    <script type="text/javascript" src="//maps.google.com/maps/api/js?v=3.5&sensor=false&libraries=geometry"></script>
+    <script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js"></script>
+    <script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.5/src/markerclusterer_packed.js"></script>
+    <script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js"></script>
 
+    <!-- add calendar related js -->
+    <%= javascript_include_tag 'fullcalendar.min' %>
 <% end %>
