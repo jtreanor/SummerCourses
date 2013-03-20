@@ -6,11 +6,10 @@
     <%= javascript_include_tag 'gmaps4rails/gmaps4rails.googlemaps' %>
 
     <%= stylesheet_link_tag 'fullcalendar' %>
-    <%= stylesheet_link_tag 'fullcalendar.print', media:'print' %>
+    <%= stylesheet_link_tag 'fullcalendar.print', media: 'print' %>
 <% end %>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
-
   <p><%= @course.description %>.</p>
 </div>
 <!--end hero unit -->
@@ -19,19 +18,21 @@
   if (Galleria) { $("body").text('Galleria works') }
 </script>
 -->
-<div class="row">
-  <div class="span10">
-    <div id="galleria">
-      <% @course.course_assets.each do |m| %>
-          <a href="<%= m.asset.asset.url(:medium) %>">
-            <img src="<%= m.asset.asset.url(:thumb) %>"
-                 data-description="<%= m.asset.description %>"
-            >
-          </a>
-      <% end %>
+<% if @course.course_assets.any? %>
+    <div class="row">
+      <div class="span10">
+        <div id="galleria">
+          <% @course.course_assets.each do |m| %>
+              <a href="<%= m.asset.asset.url(:medium) %>">
+                <img src="<%= m.asset.asset.url(:thumb) %>"
+                     data-description="<%= m.asset.description %>"
+                >
+              </a>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+<% end %>
 <br/>
 <br/>
 <div class="row">
@@ -63,10 +64,19 @@
     </tbody>
   </table>
   <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
-
+<!-- google map insert here-->
 </div>
 <div class="row">
-  <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => @locations}) %>
+  <%
+     locations = Array.new
+     time_table_items = @course.time_table_items
+     time_table_items.each do |i|
+       locations.push i.location
+     end
+     #change data of locations to gmap4rails format
+     locations =locations.to_gmaps4rails
+  %>
+  <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => locations}) %>
 </div>
 <br/>
 <br/>
@@ -75,14 +85,15 @@
 </div>
 
 <% content_for(:foot) do %>
-    <!-- add calendar realted js -->
+    <!-- add calendar related js -->
     <%= javascript_include_tag 'fullcalendar.min' %>
     <script type='text/javascript'>
-        <% if !@time_table_items.empty? %>
+
+        <% if time_table_items.any? %>
         $(document).ready(function () {
 
             //change ruby data to javascript data: var date = new Date(date.to_i*1000)
-            var start_date = new Date(<%= @time_table_items.first.start_time.to_i * 1000 %>);
+            var start_date = new Date(<%= time_table_items.first.start_time.to_i * 1000 %>);
 
             $('#calendar').fullCalendar({
                 header: {
@@ -100,15 +111,14 @@
                 minTime: 7,
                 maxTime: 20,
                 events: [
-                    <% @time_table_items.each_with_index do |item, index| %>
+                    <% time_table_items.each_with_index do |item, index| %>
                     {
 
                         title: 'All Day Event',
                         start: new Date(<%= item.start_time.to_i * 1000 %>),
                         end: new Date(<%= item.end_time.to_i * 1000%>),
-                        title: "Room:<%= item.room %>",
                         allDay: false
-                    }<% break if index == @time_table_items.size-1 %>,
+                    }<% break if index == time_table_items.size-1 %>,
                     <% end %>
                 ]
             });
@@ -118,11 +128,12 @@
         <%end%>
     </script>
     <!-- add galleria theme js-->
-    <script type="text/javascript">
-        Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
-        Galleria.run('#galleria');
-    </script>
-
+    <% if @course.course_assets.any? %>
+        <script type="text/javascript">
+            Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
+            Galleria.run('#galleria');
+        </script>
+    <% end %>
     <!-- add map related js-->
     <%= yield :scripts %>
 <% end %>
