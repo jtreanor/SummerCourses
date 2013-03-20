@@ -8,7 +8,8 @@ ActiveAdmin.register MessageThread do
 
 	message_thread.messages.each do |m|
 		div :class => :panel do
-			h3 "Message"
+			h3 "User's Question" if !m.is_response
+			h3 "Reply by administrator" if m.is_response
 			div :class => :panel_contents do
 				div :class => "attributes_table message_thread" do
 				table do
