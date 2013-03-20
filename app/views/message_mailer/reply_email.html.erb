@@ -5,5 +5,14 @@
   </head>
   <body>
     <%= simple_format @message.content %>
+
+    <h3>You asked:</h3>
+    <% @message.message_thread.each do |m| %>
+    	<% if !m.is_response %>
+    	<div>
+    		<%= simple_format m.content %>
+    	</div>
+    	<% end %>
+    <% end %>
   </body>
 </html>
