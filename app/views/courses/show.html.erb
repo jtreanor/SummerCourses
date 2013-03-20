@@ -7,10 +7,31 @@
 
     <%= stylesheet_link_tag 'fullcalendar' %>
     <%= stylesheet_link_tag 'fullcalendar.print', media: 'print' %>
+    <%= javascript_include_tag 'fullcalendar.min' %>
+
+
 <% end %>
+<!-- add map related js-->
+<!--<script src="//maps.google.com/maps/api/js?v=3.8&amp;sensor=false&amp;client=&amp;key=&amp;libraries=geometry&amp;language=&amp;hl=&amp;region=" type="text/javascript">-->
+<!--</script>-->
+<script type="text/javascript" src="//maps.google.com/maps/api/js?v=3.5&sensor=false&libraries=geometry"></script>
+<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js"></script>
+<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.5/src/markerclusterer_packed.js"></script>
+<script type="text/javascript" src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js"></script>
+<style>
+    #map-container {
+        width: 800px;
+    }
+
+    #gmaps4rails_map {
+        width: 800px;
+        height: 400px;
+    }
+</style>
 <div class="hero-unit">
   <h1><%= @course.title %></h1>
-  <p><%= @course.description %>.</p>
+
+  <p><%= @course.brief_description %>.</p>
 </div>
 <!--end hero unit -->
 <!--
@@ -18,77 +39,85 @@
   if (Galleria) { $("body").text('Galleria works') }
 </script>
 -->
-<% if @course.course_assets.any? %>
-    <div class="row">
-      <div class="span10">
-        <div id="galleria">
-          <% @course.course_assets.each do |m| %>
-              <a href="<%= m.asset.asset.url(:medium) %>">
-                <img src="<%= m.asset.asset.url(:thumb) %>"
-                     data-description="<%= m.asset.description %>"
-                >
-              </a>
-          <% end %>
-        </div>
-      </div>
+
+
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Course Description</a></li>
+    <li><a href="#tab2" data-toggle="tab">Course Maps</a></li>
+    <li><a href="#tab3" data-toggle="tab">Course Time Table</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <!-- gallery show -->
+      <% if @course.course_assets.any? %>
+          <div class="span10">
+            <div id="galleria">
+              <% @course.course_assets.each do |m| %>
+                  <a href="<%= m.asset.asset.url(:medium) %>">
+                    <img src="<%= m.asset.asset.url(:thumb) %>"
+                         data-description="<%= m.asset.description %>"
+                    >
+                  </a>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+      <!-- course description -->
+      <table class="table table-striped">
+        <caption>
+          course details
+        </caption>
+        <tbody>
+        <tr>
+          <td>Teacher:</td>
+          <td><%= @course.teacher_id %></td>
+        </tr>
+        <tr>
+          <td>Number Of Places:</td>
+          <td><%= @course.number_of_places %></td>
+        </tr>
+        <tr>
+          <td>Price: €</td>
+          <td><%= @course.price %></td>
+        </tr>
+        <tr>
+          <td>Deposit: €</td>
+          <td><%= @course.deposit %></td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td><%= @course.category.category_name %></td>
+        </tr>
+        </tbody>
+      </table>
+      <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
     </div>
-<% end %>
-<br/>
-<br/>
-<div class="row">
-  <table class="table table-striped">
-    <caption>
-      course details
-    </caption>
-    <tbody>
-    <tr>
-      <td>Teacher:</td>
-      <td><%= @course.teacher_id %></td>
-    </tr>
-    <tr>
-      <td>Number Of Places:</td>
-      <td><%= @course.number_of_places %></td>
-    </tr>
-    <tr>
-      <td>Price: €</td>
-      <td><%= @course.price %></td>
-    </tr>
-    <tr>
-      <td>Deposit: €</td>
-      <td><%= @course.deposit %></td>
-    </tr>
-    <tr>
-      <td>Category:</td>
-      <td><%= @course.category.category_name %></td>
-    </tr>
-    </tbody>
-  </table>
-  <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
-<!-- google map insert here-->
-</div>
-<div class="row">
-  <%
-     locations = Array.new
-     time_table_items = @course.time_table_items
-     time_table_items.each do |i|
-       locations.push i.location
-     end
-     #change data of locations to gmap4rails format
-     locations =locations.to_gmaps4rails
-  %>
-  <%= gmaps('map_options' => {'auto_zoom' => false, 'zoom' => 17}, 'markers' => {'data' => locations}) %>
-</div>
-<br/>
-<br/>
-<div class="row">
-  <div id='calendar'></div>
-</div>
+    <div class="tab-pane" id="tab2">
+      <!-- google map insert here-->
 
-<% content_for(:foot) do %>
-    <!-- add calendar related js -->
-    <%= javascript_include_tag 'fullcalendar.min' %>
-    <script type='text/javascript'>
-
+      <%
+         locations = Array.new
+         time_table_items = @course.time_table_items
+         time_table_items.each do |i|
+           locations.push i.location
+         end
+         #change data of locations to gmap4rails format
+         locations =locations.to_gmaps4rails
+      %>
+      <!--<div id="map_container">-->
+      <!--<div id="gmaps4rails_map"></div>-->
+      <!--</div>-->
+      <%= gmaps({:last_map => false}) %>
+    </div>
+    <div class="tab-pane" id="tab3">
+      <div id='calendar'></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('a[data-toggle="tab"]').on('shown', function (e) {
         <% if time_table_items.any? %>
         $(document).ready(function () {
 
@@ -126,7 +155,22 @@
         })
         ;
         <%end%>
-    </script>
+        Gmaps.map = new Gmaps4RailsGoogle();
+        Gmaps.load_map = function() {
+            Gmaps.map.map_options.maxZoom = 15;
+            Gmaps.map.initialize();
+            Gmaps.map.markers = <%=raw locations %>;
+            Gmaps.map.create_markers();
+            Gmaps.map.adjustMapToBounds();
+            Gmaps.map.callback();
+        };
+        Gmaps.loadMaps();
+
+    })
+</script>
+<% content_for(:foot) do %>
+    <!-- add calendar related js -->
+
     <!-- add galleria theme js-->
     <% if @course.course_assets.any? %>
         <script type="text/javascript">
@@ -134,6 +178,6 @@
             Galleria.run('#galleria');
         </script>
     <% end %>
-    <!-- add map related js-->
-    <%= yield :scripts %>
+
+
 <% end %>
