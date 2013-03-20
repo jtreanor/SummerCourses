@@ -5,5 +5,14 @@
   </head>
   <body>
     <%= simple_format @message.content %>
+
+    <p>If you require any further assistance, please reply to this email.</p>
+
+    <p><strong>You asked:</strong></p>
+
+	<blockquote>
+		<%= simple_format @recent_message.content %>
+	</blockquote>
+
   </body>
 </html>

@@ -1,4 +1,5 @@
 ActiveAdmin.register CourseAsset do
+  menu false
   form :html => { :enctype => "multipart/form-data" } do |f|
    f.inputs "Details" do
    	f.input :course

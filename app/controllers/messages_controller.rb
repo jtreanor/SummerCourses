@@ -10,6 +10,6 @@ class MessagesController < ApplicationController
 			flash[:warning] = "Something went wrong."
 		end
 
-		redirect_to admin_message_thread_path(@message.message_thread.id)
+		redirect_to admin_message_path(@message.message_thread.id)
 	end
 end
