@@ -7,12 +7,9 @@
     <%= simple_format @message.content %>
 
     <p><strong>You asked:</strong></p>
-    <% @message.message_thread.messages.each do |m| %>
-    	<% if !m.is_response %>
-    	<blockquote>
-    		<%= simple_format m.content %>
-    	</blockquote>
-    	<% end %>
-    <% end %>
+
+	<blockquote>
+		<%= simple_format @recent_message.content %>
+	</blockquote>
   </body>
 </html>
