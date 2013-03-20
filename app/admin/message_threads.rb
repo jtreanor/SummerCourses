@@ -8,7 +8,7 @@ ActiveAdmin.register MessageThread, :as => "Messages" do
 		default_actions
 	end
 
-  show do |thread|
+  show :title => :subject do |thread|
   	attributes_table do
 	  	row :id
 	  	row :user_email
