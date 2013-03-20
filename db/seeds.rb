@@ -285,14 +285,14 @@ AdminUser.create([
 
 Teacher.create([
     {
-      :is_active => true, :description => "This teacher is great", :admin_user_id => AdminUser.last.id
+      :is_active => true, :description => Faker::Lorem.paragraph(10), :admin_user_id => AdminUser.last.id
     }
   ])
 
 Course.create([
-  { :title => "Intro to programming",
-    :description => "full description",
-    :brief_description => "brief description",
+  { :title => "Intro to programm",
+    :description => Faker::Lorem.paragraph(10),
+    :brief_description => Faker::Lorem.sentence(10),
     :teacher_id => Teacher.first.id,
     :number_of_places => 50,
     :price => 100.0,

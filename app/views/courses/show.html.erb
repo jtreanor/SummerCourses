@@ -1,14 +1,8 @@
 <% content_for(:head) do %>
-
-
     <%= stylesheet_link_tag 'gmaps4rails' %>
-
 
     <%= stylesheet_link_tag 'fullcalendar' %>
     <%= stylesheet_link_tag 'fullcalendar.print', media: 'print' %>
-
-
-
 <% end %>
 
 <div class="hero-unit">
@@ -62,24 +56,42 @@
         width: 100%;
         height: 400px;
     }
+
+    #teacher-img {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 </style>
 
+<%
+   #initialise variable
+   assets = @course.course_assets
+   teacher = @course.teacher
+   locations = Array.new
+   time_table_items = @course.time_table_items
+   time_table_items.each do |i|
+     locations.push i.location
+   end
+   #change data of locations to gmap4rails format
+   locations =locations.to_gmaps4rails
+%>
 
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">Course Description</a></li>
-    <li><a href="#tab2" data-toggle="tab">Course Maps</a></li>
-    <li><a href="#tab3" data-toggle="tab">Course Time Table</a></li>
+    <li><a href="#tab2" data-toggle="tab">Teacher</a></li>
+    <li><a href="#tab3" data-toggle="tab">Course Maps</a></li>
+    <li><a href="#tab4" data-toggle="tab">Course Time Table</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <!-- gallery show -->
-      <% if @course.course_assets.any? %>
+      <% if assets.any? %>
           <div class="row">
             <div class="span10 offset1">
               <div id="galleria">
 
-                <% @course.course_assets.each do |m| %>
+                <% assets.each do |m| %>
                     <a href="<%= m.asset.asset.url(:medium) %>">
                       <img src="<%= m.asset.asset.url(:thumb) %>"
                            data-description="<%= m.asset.description %>"
@@ -95,14 +107,14 @@
         <div class="span1 hidden-phone">
         </div>
         <div class="span10">
+          <div class="well">
+            <%= @course.description %>
+          </div>
           <table class="table table-striped">
-            <caption>
-              course details
-            </caption>
             <tbody>
             <tr>
               <td>Teacher:</td>
-              <td><%= @course.teacher_id %></td>
+              <td><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></td>
             </tr>
             <tr>
               <td>Number Of Places:</td>
@@ -127,17 +139,23 @@
       </div>
     </div>
     <div class="tab-pane" id="tab2">
-      <!-- google map insert here-->
+      <div class="row">
+        <div class="span2 hidden-phone">
+        </div>
+        <div class="span10">
+          <% unless teacher.asset.nil? || teacher.asset.empty? %>
+          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.asset.asset.url(:medium) %>">
+          <% end %>
+          <h5 class="muted">ABOUT THE PROFESSOR</h5>
 
-      <%
-         locations = Array.new
-         time_table_items = @course.time_table_items
-         time_table_items.each do |i|
-           locations.push i.location
-         end
-         #change data of locations to gmap4rails format
-         locations =locations.to_gmaps4rails
-      %>
+          <h2><strong><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></strong></h2>
+
+          <p><%= teacher.description %></p>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab3">
+      <!-- google map insert here-->
       <!--<div id="map_container">-->
       <!--<div id="gmaps4rails_map"></div>-->
       <!--</div>-->
@@ -148,14 +166,14 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="tab3">
+    <div class="tab-pane" id="tab4">
       <div id='calendar'></div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
     $('a[data-toggle="tab"]').on('shown', function (e) {
-        if (e.target.hash == "#tab3") {
+        if (e.target.hash == "#tab4") {
 //            reset calendar
             $("#calendar").html("");
 //            add calendar related js
@@ -183,7 +201,6 @@
                     events: [
                         <% time_table_items.each_with_index do |item, index| %>
                         {
-
                             title: 'All Day Event',
                             start: new Date(<%= item.start_time.to_i * 1000 %>),
                             end: new Date(<%= item.end_time.to_i * 1000%>),
@@ -196,7 +213,7 @@
             });
             <%end%>
         }
-        else if (e.target.hash == "#tab2") {
+        else if (e.target.hash == "#tab3") {
 //            display maps
             Gmaps.map = new Gmaps4RailsGoogle();
             Gmaps.load_map = function () {
@@ -211,7 +228,7 @@
         }
         else {
 //            show galleria
-            <% if @course.course_assets.any? %>
+            <% if assets.any? %>
             Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
             Galleria.run('#galleria');
             <% end %>
@@ -222,7 +239,7 @@
     <!-- add galleria related js -->
     <%= javascript_include_tag 'galleria-1.2.9.min' %>
     <script type="text/javascript">
-        <% if @course.course_assets.any? %>
+        <% if assets.any? %>
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
         <% end %>

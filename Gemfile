@@ -32,6 +32,9 @@ gem 'clear_eyes'
 #payment with braintree
 gem 'braintree'
 
+#used for generate fake data
+gem 'faker'
+
 group :development do
 	gem 'annotate', '2.5.0'
 	gem "better_errors"
