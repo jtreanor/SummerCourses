@@ -86,7 +86,7 @@
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <!-- gallery show -->
-      <% if assets.any? %>
+      <% unless assets.nil? || assets.empty? %>
           <div class="row">
             <div class="span10 offset1">
               <div id="galleria">
@@ -117,8 +117,8 @@
               <td><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></td>
             </tr>
             <tr>
-              <td>Number Of Places:</td>
-              <td><%= @course.number_of_places %></td>
+              <td>Number Of Places Remain:</td>
+              <td><%= @course.number_of_places - @course.enrollments.count%></td>
             </tr>
             <tr>
               <td>Price: €</td>
@@ -228,7 +228,7 @@
         }
         else {
 //            show galleria
-            <% if assets.any? %>
+            <% unless assets.nil? || assets.empty? %>
             Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
             Galleria.run('#galleria');
             <% end %>
@@ -239,7 +239,7 @@
     <!-- add galleria related js -->
     <%= javascript_include_tag 'galleria-1.2.9.min' %>
     <script type="text/javascript">
-        <% if assets.any? %>
+        <% unless assets.nil? || assets.empty? %>
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
         <% end %>

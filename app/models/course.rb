@@ -16,22 +16,23 @@
 #
 
 class Course < ActiveRecord::Base
-	attr_accessible :title, :description, :brief_description,
-  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes
+  attr_accessible :title, :description, :brief_description,
+                  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes
 
-	belongs_to :category
+  belongs_to :category
   has_many :course_assets
   has_many :assets,
-              :through => :course_assets
-	has_many :enrollments
-	has_many :students,
-              :through => :enrollments
+           :through => :course_assets
+  has_many :enrollments
+  has_many :students,
+           :through => :enrollments
   has_many :time_table_items
   belongs_to :teacher
-	accepts_nested_attributes_for :course_assets
+  accepts_nested_attributes_for :course_assets
 
-	before_create :set_refund_enrollments_before_to_now
-  	def set_refund_enrollments_before_to_now
-    	self.refund_enrollments_before = Time.now
-  	end
+  before_create :set_refund_enrollments_before_to_now
+
+  def set_refund_enrollments_before_to_now
+    self.refund_enrollments_before = Time.now
+  end
 end
