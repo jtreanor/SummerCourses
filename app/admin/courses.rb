@@ -22,8 +22,6 @@ ActiveAdmin.register Course do
       #end
     end
 
- #   number_to_currency(f.object.price, :unit => "&euro;")
-
     if f.object.new_record?
       f.inputs "Assets" do
         f.has_many :course_assets do |ca|
@@ -37,12 +35,23 @@ ActiveAdmin.register Course do
         end
       end
     else
-
+      #Existing course assets
     end
 
-  	
-
     f.buttons
+  end
+
+  index do
+    column "Course ID" do |c|
+          link_to c.id, admin_course_path(c)
+    end
+    column "Title" do |c|
+          link_to c.title, admin_course_path(c)
+    end
+    column "Brief Description" do |c|
+      truncate(c.brief_description, :length => 50)
+    end
+    default_actions
   end
 
 end
