@@ -13,4 +13,21 @@ class MessageThread < ActiveRecord::Base
 
   has_many :messages
   accepts_nested_attributes_for :messages
+
+  def sorted_user_messages
+  	self.messages.find_all{|m| !m.is_response }.sort_by{|m| m[:created_at]}
+  end
+
+  def most_recent_question
+  	self.sorted_user_messages.last.created_at
+  end
+
+  def unanswered
+  	!self.messages.last.is_response
+  end
+
+  def subject_line
+  	"Re: #{self.subject} [#{self.id}]"
+  end
+
 end

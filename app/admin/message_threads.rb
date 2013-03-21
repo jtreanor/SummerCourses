@@ -1,10 +1,16 @@
 ActiveAdmin.register MessageThread, :as => "Messages" do
-	actions :all, :except => [:destroy,:edit]
+	actions :all, :except => [:destroy,:edit,:new,:create]
+	config.per_page = 10
 
 	index do |thread|
-		column "Thread ID", :id
+		column "Thread ID" do |t|
+      		link_to t.id, admin_message_path(t)
+    	end
 		column :user_email
 		column :subject
+		column "Last Question" do |t|
+      		t.sorted_user_messages.last.created_at
+    	end
 		default_actions
 	end
 
