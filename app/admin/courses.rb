@@ -1,4 +1,6 @@
 ActiveAdmin.register Course do
+  actions :all, :except => [:destroy]
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Course Details" do
    	  f.input :title
