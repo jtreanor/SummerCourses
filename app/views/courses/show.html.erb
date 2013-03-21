@@ -6,14 +6,7 @@
 <% end %>
 
 
-  <h2><%= @course.title %> <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger' %></h2>
-
-
-  <p><%= @course.brief_description %>.</p>
-
-  
-
-<!--end hero unit -->
+  <h2><%= @course.title %> <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger', style: "font-weight: normal" %></h2> 
 <!--
 <script>
   if (Galleria) { $("body").text('Galleria works') }
