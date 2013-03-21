@@ -1,5 +1,5 @@
 ActiveAdmin.register Teacher do
-
+  actions :all, except: [:destroy]
 
   index do
     id_column
