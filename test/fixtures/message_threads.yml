@@ -4,7 +4,7 @@
 #
 #  id         :string(24)       not null, primary key
 #  user_email :string(255)      not null
-#  created_at :datetime         not null
+#  subject    :text(255)        default(""), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
