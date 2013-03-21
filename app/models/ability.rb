@@ -7,7 +7,9 @@ class Ability
       when 1 #SuperAdmin
         can :manage, :all
       when 2 #Admin
-        cannot :manage, AdminUser 
+        cannot :manage, AdminUser
+      when 3 #Teacher
+        can :read, [Course,CourseAsset,Asset]
       end
   end
 end

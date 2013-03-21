@@ -116,8 +116,8 @@
           <table class="table table-striped">
             <tbody>
             <tr>
-              <th>Teacher:</th>
-              <td><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></td>
+              <td>Teacher:</td>
+              <td><%= teacher.to_s %></td>
             </tr>
             <tr>
               <th>Number Of Places Remaining:</th>
@@ -150,7 +150,7 @@
           <% end %>
           <h5 class="muted">ABOUT THE PROFESSOR</h5>
 
-          <h2><strong><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></strong></h2>
+          <h2><strong><%= teacher.to_s %></strong></h2>
 
           <p><%= teacher.description %></p>
         </div>

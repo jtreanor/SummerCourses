@@ -264,7 +264,8 @@ Country.create([
 
 AdminPermission.create([
   { :permission_name => "Super Admin" },
-  { :permission_name => "Admin"}
+  { :permission_name => "Admin"},
+  { :permission_name => "Teacher"}
   ], :without_protection => true )
 
 AdminUser.create([
@@ -279,7 +280,8 @@ AdminUser.create([
     :surname => "Name",
     :email => 'teacher@example.com',
     :password => 'password',
-    :password_confirmation => 'password'
+    :password_confirmation => 'password',
+    :admin_permission_id => AdminPermission.last.id
   },
 ], :without_protection => true )
 
