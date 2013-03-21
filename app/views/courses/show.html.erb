@@ -197,7 +197,7 @@
                     events: [
                         <% time_table_items.each_with_index do |item, index| %>
                         {
-                            title: 'All Day Event',
+                            title: "Room: <%= item.room%>",
                             start: new Date(<%= item.start_time.to_i * 1000 %>),
                             end: new Date(<%= item.end_time.to_i * 1000%>),
                             allDay: false
