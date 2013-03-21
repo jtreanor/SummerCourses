@@ -1,5 +1,5 @@
 class MessageMailer < ActionMailer::Base
-  default from: "ask@summercourses.mailgun.org"
+  default from: "UCC Summer Course Office <ask@summercourses.mailgun.org>"
 
   def reply_email(message)
     @message = message
