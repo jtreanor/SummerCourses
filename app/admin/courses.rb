@@ -6,7 +6,7 @@ ActiveAdmin.register Course do
    	  f.input :title
    	  f.input :brief_description
    	  f.input :description
-      f.input :teacher_id
+      f.input :teacher
 	    f.input :number_of_places
 	    f.input :price
 	    f.input :deposit
@@ -17,17 +17,23 @@ ActiveAdmin.register Course do
       #end
     end
 
-  	f.inputs "Assets" do
-  	  	f.has_many :course_assets do |ca|
-  	  		ca.inputs "Existing Asset" do
-  	    		ca.input :asset
-  	  		end
+    if f.object.new_record?
+      f.inputs "Assets" do
+        f.has_many :course_assets do |ca|
+          ca.inputs "Existing Asset" do
+            ca.input :asset
+          end
           ca.inputs "New Asset", :for => [:asset, Asset.new ] do |fm|
               fm.input :description
               fm.input :asset, :as => :file
           end
-  	  	end
-    	end
+        end
+      end
+    else
+
+    end
+
+  	
 
     f.buttons
   end

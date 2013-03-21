@@ -12,6 +12,10 @@
 class Teacher < ActiveRecord::Base
 	attr_accessible :asset_id, :is_active, :description, :admin_user_id
 
+	def to_s
+		"#{self.admin_user.forename} #{self.admin_user.surname}"
+	end
+
 	belongs_to :admin_user
 	belongs_to :asset
 	has_many :courses
