@@ -114,23 +114,23 @@
           <table class="table table-striped">
             <tbody>
             <tr>
-              <td>Teacher:</td>
+              <th>Teacher:</th>
               <td><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></td>
             </tr>
             <tr>
-              <td>Number Of Places Remaining:</td>
+              <th>Number Of Places Remaining:</th>
               <td><%= @course.number_of_places - @course.enrollments.count%></td>
             </tr>
             <tr>
-              <td>Price:</td>
+              <th>Price:</th>
               <td><%= number_to_currency(@course.price, :unit => "&euro;") %></td>
             </tr>
             <tr>
-              <td>Deposit:</td>
+              <th>Deposit:</th>
               <td><%= number_to_currency(@course.deposit, :unit => "&euro;") %></td>
             </tr>
             <tr>
-              <td>Category:</td>
+              <th>Category:</th>
               <td><%= @course.category.category_name %></td>
             </tr>
             </tbody>
