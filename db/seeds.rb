@@ -292,7 +292,7 @@ Teacher.create([
   ])
 
 Course.create([
-  { :title => "Intro to programm",
+  { :title => "Intro to programming",
     :description => Faker::Lorem.paragraph(10),
     :brief_description => Faker::Lorem.sentence(10),
     :teacher_id => Teacher.first.id,
