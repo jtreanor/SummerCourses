@@ -27,7 +27,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def subject_line
-  	"Re: #{self.message_thread.subject} [#{self.message_thread.id}]"
+  	"Re: #{self.subject} [#{self.id}]"
   end
 
 end
