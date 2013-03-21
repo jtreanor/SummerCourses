@@ -109,7 +109,7 @@
         <div class="span10">
           <div class="well">
             <h5 class="muted">ABOUT THE COURSE</h5>
-            <%= @course.description %>
+            <%= simple_format @course.description %>
           </div>
           <table class="table table-striped">
             <tbody>
@@ -118,16 +118,16 @@
               <td><%= "#{teacher.admin_user.forename} #{teacher.admin_user.surname}" %></td>
             </tr>
             <tr>
-              <td>Number Of Places Remain:</td>
+              <td>Number Of Places Remaining:</td>
               <td><%= @course.number_of_places - @course.enrollments.count%></td>
             </tr>
             <tr>
-              <td>Price: €</td>
-              <td><%= @course.price %></td>
+              <td>Price:</td>
+              <td><%= number_to_currency(@course.price, :unit => "&euro;") %></td>
             </tr>
             <tr>
-              <td>Deposit: €</td>
-              <td><%= @course.deposit %></td>
+              <td>Deposit:</td>
+              <td><%= number_to_currency(@course.deposit, :unit => "&euro;") %></td>
             </tr>
             <tr>
               <td>Category:</td>
