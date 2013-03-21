@@ -5,13 +5,14 @@
     <%= stylesheet_link_tag 'fullcalendar.print', media: 'print' %>
 <% end %>
 
-<div class="hero-unit">
-  <h1><%= @course.title %></h1>
+
+  <h2><%= @course.title %> <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></h2>
+
 
   <p><%= @course.brief_description %>.</p>
 
-  <p><%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-large btn-danger' %></a></p>
-</div>
+  
+
 <!--end hero unit -->
 <!--
 <script>
