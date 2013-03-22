@@ -22,5 +22,5 @@ class Asset < ActiveRecord::Base
   	self.description
   end
 
-  has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>", :profile => '400x350' }
+  has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>", :profile => '400x350>' }
 end
