@@ -32,27 +32,6 @@ class Enrollment < ActiveRecord::Base
 		return total
 	end
 
-	#returns refundable transactions
-	def refund_transactions
-		transactions = []
-		min_transaction = Braintree::Transaction.find(self.payments[0].transaction_id)
-		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.transaction_id)
-			if transaction.created_at <= self.course.refund_enrollments_before
-				transactions << transaction
-			end
-			if transaction.amount.to_f < min_transaction.amount
-				min_transaction = transaction
-			end
-		end
-
-		#Just refund the deposit
-		if transactions.empty?
-			transactions << min_transaction
-		end
-		return transactions
-	end
-
 	def total_paid
 		total = 0
 		self.payments.each do |p|
@@ -66,6 +45,19 @@ class Enrollment < ActiveRecord::Base
 		self.course.price - total_paid
 	end
 
+	def total_refunded
+		total = 0
+		self.payments.each do |p|
+			Refund.find_all_by_original_transaction_id(p.transaction_id).each do |refund|
+				transaction = Braintree::Transaction.find(refund.refund_transaction_id)
+				total += transaction.amount.to_f
+			end
+		end
+
+		return total
+	end
+
+	#Cancel course and refund appropriate amount
 	def cancel
 		refundable_transactions = []
 		amount_to_be_refunded = 0;
