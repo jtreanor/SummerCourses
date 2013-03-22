@@ -34,8 +34,13 @@ ActiveAdmin.register Course do
       #Existing course assets
     end
 
-    if !f.object.new_record?
-      f.button "Cancel Course"
+    f.inputs "Schedule" do
+    f.has_many :time_table_items do |tt|
+        tt.input :location
+        tt.input :room
+        tt.input :start_time, :as => :just_datetime_picker
+        tt.input :end_time, :as => :just_datetime_picker
+    end
     end
 
     f.buttons

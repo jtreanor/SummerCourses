@@ -17,7 +17,7 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :title, :description, :brief_description,
-                  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes
+                  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes, :time_table_items_attributes
 
   belongs_to :category
   has_many :course_assets
@@ -29,6 +29,7 @@ class Course < ActiveRecord::Base
   has_many :time_table_items
   belongs_to :teacher
   accepts_nested_attributes_for :course_assets
+  accepts_nested_attributes_for :time_table_items
 
   before_create :set_refund_enrollments_before_to_now
 

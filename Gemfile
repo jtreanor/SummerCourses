@@ -7,6 +7,8 @@ gem 'bcrypt-ruby', '3.0.1'
 
 gem 'newrelic_rpm'
 
+gem "just-datetime-picker"
+
 gem 'seed_dump'
 
 #authorisation
