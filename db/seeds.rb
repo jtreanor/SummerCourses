@@ -354,10 +354,10 @@ Course.first.time_table_items.create(
     end_time: DateTime.new(2013,10,10,12),
     room: '1.11'
 )
+=begin
 Course.first.enrollments.create(
     student_id: Student.first.id
 )
-=begin
 Asset.create([
   { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", kind: "video", description: "test video description"
   },

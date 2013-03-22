@@ -20,7 +20,7 @@ class EnrollmentsController < ApplicationController
 	def edit
 		@enrollment = Enrollment.find_by_id(params[:id])
 
-		@full_tr_data = tr_data(@enrollment.total_due,enrollment_result_url(@enrollment.course.id))
+		@full_tr_data = tr_data(@enrollment.total_due,enrollment_create_url(@enrollment.course.id))
 	end
 
 	def new
@@ -36,7 +36,7 @@ class EnrollmentsController < ApplicationController
 		end
 	end
 
-	def result
+	def create
 		result = Braintree::TransparentRedirect.confirm(request.query_string)
 		@course = Course.find_by_id(params[:id])
 		@message =""

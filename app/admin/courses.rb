@@ -16,10 +16,6 @@ ActiveAdmin.register Course do
         f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => { :value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true" }
       end
 	    f.input :category
-      #f.inputs "Category", :for => [:category, f.object.category || Category.new] do |meta_form|
-      #  f.input :category, label: "Existing category" 
-      #  meta_form.input :category_name, label: "New Category"
-      #end
     end
 
     if f.object.new_record?
@@ -36,6 +32,10 @@ ActiveAdmin.register Course do
       end
     else
       #Existing course assets
+    end
+
+    if !f.object.new_record?
+      f.button "Cancel Course"
     end
 
     f.buttons

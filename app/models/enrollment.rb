@@ -15,11 +15,6 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :student
 	has_many :payments
 
-	Braintree::Configuration.environment = :sandbox
-	Braintree::Configuration.merchant_id = "6b6c6smqn4ddbrvy"
-	Braintree::Configuration.public_key = "bkmz9ztnjt6f3jvj"
-	Braintree::Configuration.private_key = "e37569f722592948d8e9e262fec86478"
-
 	#This calculates the refund entitled in the case of a cancellation. Any payments made before refund_enrollments_before are refunded
 	def refund_amount
 		total = 0
