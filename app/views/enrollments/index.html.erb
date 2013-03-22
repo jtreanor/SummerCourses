@@ -37,7 +37,7 @@
 				<%= link_to "Pay Balance", edit_enrollment_path(enrollment.id), class: "btn" %>
 			<% end %>
 			<% if Time.now < enrollment.course.start_time %>
-				<%= link_to "Cancel", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>
+				<%= link_to "Un-Enrol", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>
 			<% end %>
 		</td>
     </tr>

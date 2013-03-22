@@ -6,7 +6,21 @@
 <% end %>
 
 
-  <h2><%= @course.title %> <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger', style: "font-weight: normal" %></h2> 
+  <h2>
+    <%= @course.title %>
+
+    <% 
+      enrollments = current_student.enrollments.find_all{|e| !e.is_cancelled && e.course.id == @course.id && Time.now <= e.course.end_time }
+      if enrollments.count > 0 
+    %>
+        <%= link_to "Pay Balance", edit_enrollment_path(enrollments[0].id), class: "btn", style: "font-weight: normal" %>
+        <% if Time.now < enrollments[0].course.start_time %>
+          <%= link_to "Un-Enrol", cancel_enrollment_path(enrollments[0].id), class: "btn btn-danger", style: "font-weight: normal" %>
+        <% end %>
+    <% else %>
+      <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger', style: "font-weight: normal" %>
+    <% end %>
+  </h2> 
 <!--
 <script>
   if (Galleria) { $("body").text('Galleria works') }
