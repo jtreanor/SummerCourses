@@ -48,12 +48,6 @@ ActiveAdmin.register Course do
       end
     end
 
-    if !f.object.new_record?
-      f.inputs "Refund Enrollees" do
-        f.input :allow_refund
-      end
-    end
-
     f.buttons
   end
 
