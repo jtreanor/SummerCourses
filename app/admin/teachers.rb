@@ -3,30 +3,60 @@ ActiveAdmin.register Teacher do
 
   index do
     id_column
-    column 'Surname' do |t|
+    column :surname do |t|
       t.admin_user.surname
     end
-    column 'Forename' do |t|
+    column :forename  do |t|
       t.admin_user.forename
     end
-    column 'Email' do |t|
+    column :email  do |t|
       t.admin_user.email
     end
-    column 'Current Sign In At' do |t|
+    column :current_sign_in_at  do |t|
       t.admin_user.current_sign_in_at
     end
-    column 'Last Sign In At' do |t|
+    column :last_sign_in_at  do |t|
       t.admin_user.last_sign_in_at
     end
-    column 'Sign In Count' do |t|
+    column :sign_in_count  do |t|
       t.admin_user.sign_in_count
     end
     default_actions
   end
 
+  show do |t|
+    attributes_table do
+      row :surname  do
+        t.admin_user.surname
+      end
+      row :forename  do
+        t.admin_user.forename
+      end
+      row :email do
+        t.admin_user.email
+      end
+      row :description
+      row :current_sign_in_at do
+        t.admin_user.current_sign_in_at
+      end
+      row :last_sign_in_at do
+        t.admin_user.last_sign_in_at
+      end
+      row :sign_in_count  do
+        t.admin_user.sign_in_count
+      end
+      row :teacher_picture do
+        unless t.asset.nil?
+          link_to(image_tag(t.asset.asset.url(:thumb)), t.asset.asset.url(:medium))
+        end
+      end
+    end
+    active_admin_comments
+  end
 
-  form :html => { :multipart => true } do |f|
-    #f.inputs 'Existing Asset' do
+
+  form :html => {:multipart => true} do |f|
+    #f.inputs 'Existing Asset  do
     #  f.input :asset
     #end
     f.inputs 'Teacher Information', :for => [:admin_user, f.object.admin_user || AdminUser.new] do |fm|
@@ -35,9 +65,9 @@ ActiveAdmin.register Teacher do
       fm.input :email
     end
     f.inputs 'Teacher Description' do
-      f.input  :description
+      f.input :description
     end
-    f.inputs 'Teacher Picture', :for => [:asset, Asset.new ] do |fm|
+    f.inputs :'Teacher Picture', :for => [:asset, Asset.new] do |fm|
       fm.input :asset, :as => :file
     end
 
