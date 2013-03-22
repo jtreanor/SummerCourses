@@ -8,5 +8,5 @@
 #
 
 class Refund < ActiveRecord::Base
-  # attr_accessible :title, :body
+	attr_accessible :refund_transaction_id, :original_transaction_id
 end
