@@ -21,9 +21,6 @@ ActiveAdmin.register Course do
     if f.object.new_record?
       f.inputs "Assets" do
         f.has_many :course_assets do |ca|
-          ca.inputs "Existing Asset" do
-            ca.input :asset
-          end
           ca.inputs "New Asset", :for => [:asset, Asset.new ] do |fm|
               fm.input :description
               fm.input :asset, :as => :file
@@ -32,7 +29,17 @@ ActiveAdmin.register Course do
       end
     else
       #Existing course assets
+      f.inputs "Assets" do
+        f.has_many :course_assets do |ca|
+          ca.inputs "Existing Asset" do
+            ca.input :asset
+          end
+        end
+      end
+      
     end
+
+  
 
     f.inputs "Schedule" do
     f.has_many :time_table_items do |tt|
