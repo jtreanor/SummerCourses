@@ -80,12 +80,12 @@
 	<p>You have no past courses</p>
 <% end %>
 
+<h3>Cancelled Courses</h3>
+
 <% 
 	cancelled = @enrollments.find_all{|e| e.is_cancelled }
 	if cancelled.count > 0
 %>
-
-<h3>Cancelled Courses</h3>
 
 <table class="table">
 	<tr>
