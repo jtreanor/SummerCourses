@@ -39,15 +39,19 @@ ActiveAdmin.register Course do
       
     end
 
-  
-
     f.inputs "Schedule" do
-    f.has_many :time_table_items do |tt|
-        tt.input :location
-        tt.input :room
-        tt.input :start_time, :as => :just_datetime_picker
-        tt.input :end_time, :as => :just_datetime_picker
+      f.has_many :time_table_items do |tt|
+          tt.input :location
+          tt.input :room
+          tt.input :start_time, :as => :just_datetime_picker
+          tt.input :end_time, :as => :just_datetime_picker
+      end
     end
+
+    if !f.object.new_record?
+      f.inputs "Refund Enrollees" do
+        f.input :allow_refund
+      end
     end
 
     f.buttons

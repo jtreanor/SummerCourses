@@ -16,7 +16,7 @@
 #
 
 class Course < ActiveRecord::Base
-  attr_accessible :title, :description, :brief_description,
+  attr_accessible :title, :description, :brief_description, :allow_refund,
                   :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes, :time_table_items_attributes
 
   belongs_to :category
