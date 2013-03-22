@@ -6,7 +6,7 @@
 <h3>Upcoming Courses</h3>
 
 <% 
-	upcoming = @enrollments.find_all{|e| !e.is_cancelled }
+	upcoming = @enrollments.find_all{|e| !e.is_cancelled && Time.now <= e.course.end_time }
 	if upcoming.count > 0
 %>
 
@@ -36,7 +36,9 @@
 			<% if enrollment.total_due > enrollment.total_paid %>
 				<%= link_to "Pay Balance", edit_enrollment_path(enrollment.id), class: "btn" %>
 			<% end %>
-			<%= link_to "Cancel", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>
+			<% if Time.now < enrollment.course.start_time %>
+				<%= link_to "Cancel", cancel_enrollment_path(enrollment.id), class: "btn btn-danger" %>
+			<% end %>
 		</td>
     </tr>
     <% end %>
@@ -51,7 +53,7 @@
 <h3>Past Courses</h3>
 
 <% 
-	past = @enrollments.find_all{|e| !e.is_cancelled }
+	past = @enrollments.find_all{|e| !e.is_cancelled && Time.now > e.course.end_time }
 	if past.count > 0
 %>
 

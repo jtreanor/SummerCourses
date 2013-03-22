@@ -35,4 +35,12 @@ class Course < ActiveRecord::Base
   def set_refund_enrollments_before_to_now
     self.refund_enrollments_before = Time.now
   end
+
+  def start_time
+    self.time_table_items.sort_by(&:start_time).last.start_time
+  end
+
+  def end_time
+    self.time_table_items.sort_by(&:end_time).last.end_time
+  end
 end
