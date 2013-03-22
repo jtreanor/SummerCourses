@@ -28,8 +28,8 @@ class EnrollmentsController < ApplicationController
 
 		if current_student.enrollments.where("course_id = #{@course.id}  AND is_cancelled = 'false'").empty? 
 			#Not already enrolled
-			@full_tr_data = tr_data(@course.price.to_s,enrollment_result_url(@course.id))
-			@deposit_tr_data = tr_data(@course.deposit.to_s,enrollment_result_url(@course.id))
+			@full_tr_data = tr_data(@course.price.to_s,enrollment_create_url(@course.id))
+			@deposit_tr_data = tr_data(@course.deposit.to_s,enrollment_create_url(@course.id))
 
 		else
 			#already enrolled

@@ -1,3 +1,5 @@
 class PaymentMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "UCC Summer Courses Office <admin@summercourses.mailgun.org>"
+
+  
 end
