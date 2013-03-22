@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.string   "asset_content_type"
     t.integer  "asset_file_size"
     t.datetime "asset_updated_at"
-    t.string   "description",        :limit => 45, :null => false
+    t.string   "description",        :limit => 45
   end
 
   create_table "categories", :force => true do |t|

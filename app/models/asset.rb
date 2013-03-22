@@ -12,7 +12,7 @@
 
 class Asset < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :description, :asset, :asset_file_name
+  attr_accessible :description, :asset, :asset_file_name, :asset_attributes
   has_many :course_assets
   has_many :courses,
               :through => :course_assets
@@ -22,5 +22,5 @@ class Asset < ActiveRecord::Base
   	self.description
   end
 
-  has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>" }
+  has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>", :profile => '400x350' }
 end

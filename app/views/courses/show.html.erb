@@ -139,8 +139,8 @@
         <div class="span2 hidden-phone">
         </div>
         <div class="span10">
-          <% unless teacher.asset.nil? || teacher.asset.empty? %>
-          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.asset.asset.url(:medium) %>">
+          <% unless teacher.asset.nil?%>
+          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.asset.asset.url(:profile) %>">
           <% end %>
           <h5 class="muted">ABOUT THE PROFESSOR</h5>
 

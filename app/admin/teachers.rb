@@ -23,4 +23,25 @@ ActiveAdmin.register Teacher do
     end
     default_actions
   end
+
+
+  form :html => { :multipart => true } do |f|
+    #f.inputs 'Existing Asset' do
+    #  f.input :asset
+    #end
+    f.inputs 'Teacher Information', :for => [:admin_user, f.object.admin_user || AdminUser.new] do |fm|
+      fm.input :surname
+      fm.input :forename
+      fm.input :email
+    end
+    f.inputs 'Teacher Description' do
+      f.input  :description
+    end
+    f.inputs 'Teacher Picture', :for => [:asset, Asset.new ] do |fm|
+      fm.input :asset, :as => :file
+    end
+
+    f.buttons
+  end
+
 end
