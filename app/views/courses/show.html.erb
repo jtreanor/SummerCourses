@@ -110,7 +110,7 @@
                     </a>
                 <% end %>
                 <% videos.each do |v| %>
-                    <a href="<%= v.url %>"><span class="video">"<%= v.description %>"</span></a>
+                    <a href="<%= v.url %>"><span class="video" data-description="<%= v.description %>"></span></a>
                 <% end %>
 
               </div>
