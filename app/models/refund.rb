@@ -9,7 +9,7 @@
 class Refund < ActiveRecord::Base
 	attr_accessible :id, :payment_id
 	set_primary_key :id
-	#after_create :send_receipt
+	after_create :send_receipt
 
 	def send_receipt
 		PaymentMailer.refund_receipt(self).deliver

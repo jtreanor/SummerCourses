@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
 
   add_index "course_videos", ["course_id", "video_id"], :name => "index_course_videos_on_course_id_and_video_id", :unique => true
   add_index "course_videos", ["video_id"], :name => "course_videos_video_id_fk"
+  add_index "course_videos", ["course_id"], :name => "course_videos_course_id_idx"
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
@@ -222,7 +223,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
   add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
 
   add_foreign_key "course_images", "courses", :name => "course_images_course_id_fk"
-  add_foreign_key "course_images", "courses", :name => "course_videos_course_id_fk"
+  add_foreign_key "course_videos", "courses", :name => "course_videos_course_id_fk"
   add_foreign_key "course_images", "images", :name => "course_images_image_id_fk"
 
   add_foreign_key "course_videos", "videos", :name => "course_videos_video_id_fk"
@@ -245,5 +246,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
 
   add_foreign_key "time_table_items", "courses", :name => "time_table_items_course_id_fk"
   add_foreign_key "time_table_items", "locations", :name => "time_table_items_location_id_fk"
+
+  add_foreign_key "refunds", "payments", :name => "refunds_payment_id_fk"
 
 end

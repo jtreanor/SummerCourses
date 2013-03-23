@@ -1,0 +1,19 @@
+Hello <%= @enrollment.student.forename %>,
+
+Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.
+
+Your original payment of <%= number_to_currency(@original_transaction.amount.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(@refund_transaction.amount.to_s, :unit => "&euro;") %>.
+
+<% if @enrollment.course.is_cancelled #Automatic refund %>
+  Unfortunately this course has been cancelled. You have been issued a full refund. UCC sincerely apologises for any inconvenience.
+
+  Please note if you paid for this course in more than one instalment, you will receipt an email corresponding to each payment.
+<% else #Self un-enrolled %>
+<% end %>
+
+If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.
+
+If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %>
+
+Kind regards,
+UCC Summer Courses Office
