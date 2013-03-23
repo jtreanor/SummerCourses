@@ -222,7 +222,10 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
   add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
 
   add_foreign_key "course_images", "courses", :name => "course_images_course_id_fk"
+  add_foreign_key "course_images", "courses", :name => "course_videos_course_id_fk"
   add_foreign_key "course_images", "images", :name => "course_images_image_id_fk"
+
+  add_foreign_key "course_videos", "videos", :name => "course_videos_video_id_fk"
 
   add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
   add_foreign_key "courses", "teachers", :name => "courses_teacher_id_fk"

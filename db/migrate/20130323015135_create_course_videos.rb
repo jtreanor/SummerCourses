@@ -7,5 +7,7 @@ class CreateCourseVideos < ActiveRecord::Migration
     end
     add_index "course_videos", ["course_id", "video_id"], :name => "index_course_videos_on_course_id_and_video_id", :unique => true
     add_index "course_videos", ["video_id"], :name => "course_videos_video_id_fk"
+    add_foreign_key "course_images", "courses", :name => "course_videos_course_id_fk"
+    add_foreign_key "course_videos", "videos", :name => "course_videos_video_id_fk"
   end
 end
