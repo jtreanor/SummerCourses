@@ -1,11 +1,6 @@
 #This task should be run daily
-task :send_course_reminders => :environment do
-  Enrollment.send_course_reminders
-end
-
-#This task should be run daily
-task :send_payment_reminders => :environment do
-  Enrollment.send_payment_reminders
+task :send_reminders => :environment do
+  Enrollment.send_reminders
 end
 
 #This task should be run daily
