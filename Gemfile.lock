@@ -101,6 +101,7 @@ GEM
     gmaps4rails (1.5.6)
     has_scope (0.5.1)
     hike (1.2.1)
+    hirb (0.7.1)
     i18n (0.6.4)
     immigrant (0.1.4)
       activerecord (>= 3.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   faker
   foreigner
   gmaps4rails
+  hirb
   immigrant
   jquery-rails
   just-datetime-picker

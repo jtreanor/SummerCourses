@@ -43,6 +43,7 @@ group :development do
 	gem 'binding_of_caller'
 	gem 'rails-erd'
   gem 'railroady'
+  gem 'hirb'
 end
 
 #generate foreign keys
