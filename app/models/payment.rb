@@ -12,8 +12,16 @@ class Payment < ActiveRecord::Base
 	after_create :send_receipt
 
 	def send_receipt #Send receipt for most recent payment
-		transaction = Braintree::Transaction.find(self.id)
-		PaymentMailer.payment_receipt(self,transaction).deliver
+		PaymentMailer.payment_receipt(self).deliver
+	end
+
+	@transaction_object = nil
+
+	def transaction
+		if @transaction_object.nil?
+		  @transaction_object = Braintree::Transaction.find(self.id)
+		end
+		@transaction_object
 	end
 
 	belongs_to :enrollment

@@ -19,7 +19,7 @@ class Enrollment < ActiveRecord::Base
 	def refund_amount
 		total = 0
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p._id)
+			transaction = p.transaction
 			if transaction.created_at <= self.course.refund_enrollments_before
 				total += transaction.amount.to_f
 			end
@@ -35,8 +35,8 @@ class Enrollment < ActiveRecord::Base
 	def total_paid
 		total = 0
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.id)
-				total += transaction.amount.to_f
+			transaction = p.transaction
+			total += transaction.amount.to_f
 		end
 		return total
 	end
@@ -49,7 +49,7 @@ class Enrollment < ActiveRecord::Base
 		total = 0
 		self.payments.each do |p|
 			Refund.find_all_by_id(p.id).each do |refund|
-				transaction = Braintree::Transaction.find(refund.id)
+				transaction = refund.transaction
 				total += transaction.amount.to_f
 			end
 		end
@@ -62,9 +62,9 @@ class Enrollment < ActiveRecord::Base
 		refundable_transactions = []
 		amount_to_be_refunded = 0;
 
-		min_transaction = Braintree::Transaction.find(self.payments[0].id)
+		min_transaction = self.payments.first.transaction
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.id)
+			transaction = p.transaction
 			if transaction.created_at <= self.course.refund_enrollments_before
 				refundable_transactions << transaction
 				amount_to_be_refunded += transaction.amount.to_f
@@ -83,7 +83,7 @@ class Enrollment < ActiveRecord::Base
 		success = false
 		message = "An error occured when issuing the refund. Please contact an administrator to un-enroll."
 
-		refund_transactions.sort_by(&:amount).each do |transaction|
+		refundable_transactions.sort_by(&:amount).each do |transaction|
 			result = nil
 
 			if transaction.amount.to_f > amount_to_be_refunded
