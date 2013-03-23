@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: course_assets
+# Table name: course_images
 #
 #  id        :integer          not null, primary key
 #  course_id :integer
-#  asset_id  :integer
+#  image_id  :integer
 #
 
 require 'test_helper'

@@ -54,14 +54,6 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "images", :force => true do |t|
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
-    t.string   "description",        :limit => 45
-  end
-
   create_table "categories", :force => true do |t|
     t.string "category_name", :limit => 45, :null => false
   end
@@ -78,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
     t.integer "image_id"
   end
 
-  add_index "course_images", ["image_id"], :name => "course_images_image_id_fk"
   add_index "course_images", ["course_id", "image_id"], :name => "index_course_images_on_course_id_and_image_id", :unique => true
+  add_index "course_images", ["image_id"], :name => "course_images_image_id_fk"
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
@@ -106,26 +98,34 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "enrollments", ["course_id"], :name => "course_id_idx"
   add_index "enrollments", ["student_id"], :name => "student_id_idx"
 
+  create_table "images", :force => true do |t|
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+    t.string   "description",        :limit => 45
+  end
+
   create_table "locations", :force => true do |t|
-    t.string "title",     :limit => 45,       :null => false
-    t.float  "longitude",                     :null => false
-    t.float  "latitude",                      :null => false
-    t.boolean "gmaps",    :default => true,   :null => false
+    t.string  "title",     :limit => 45,                   :null => false
+    t.float   "longitude",                                 :null => false
+    t.float   "latitude",                                  :null => false
+    t.boolean "gmaps",                   :default => true, :null => false
   end
 
   create_table "message_threads", :id => false, :force => true do |t|
-    t.string   "id", :limit => 24,                     :null => false
-    t.string   "user_email", :null => false
-    t.text     "subject",           :limit => 255,                    :null => false
+    t.string "id",         :limit => 24,  :null => false
+    t.string "user_email",                :null => false
+    t.text   "subject",    :limit => 255, :null => false
   end
 
   add_index "message_threads", ["id"], :name => "thread_id_idx"
 
   create_table "messages", :force => true do |t|
-    t.string   "message_thread_id", :limit => 24,                     :null => false
-    t.boolean  "is_response",                      :default => false, :null => false
-    t.text     "content",                                             :null => false
-    t.datetime "created_at",                                          :null => false
+    t.string   "message_thread_id", :limit => 24,                    :null => false
+    t.boolean  "is_response",                     :default => false, :null => false
+    t.text     "content",                                            :null => false
+    t.datetime "created_at",                                         :null => false
   end
 
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
@@ -188,8 +188,8 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   end
 
   add_index "teachers", ["admin_user_id"], :name => "teachers_admin_user_id_fk"
-  add_index "teachers", ["image_id"], :name => "teachers_image_id_fk"
   add_index "teachers", ["id"], :name => "teacher_id_UNIQUE", :unique => true
+  add_index "teachers", ["image_id"], :name => "teachers_image_id_fk"
 
   create_table "time_table_items", :force => true do |t|
     t.integer  "course_id",                 :null => false
@@ -204,10 +204,11 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
 
-  add_foreign_key "course_images", "images", :name => "course_images_image_id_fk"
   add_foreign_key "course_images", "courses", :name => "course_images_course_id_fk"
+  add_foreign_key "course_images", "images", :name => "course_images_image_id_fk"
 
   add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
+  add_foreign_key "courses", "teachers", :name => "courses_teacher_id_fk"
 
   add_foreign_key "enrollments", "courses", :name => "enrollments_course_id_fk"
   add_foreign_key "enrollments", "students", :name => "enrollments_student_id_fk"
@@ -224,6 +225,5 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_foreign_key "time_table_items", "courses", :name => "time_table_items_course_id_fk"
   add_foreign_key "time_table_items", "locations", :name => "time_table_items_location_id_fk"
-  add_foreign_key "courses", "teachers", :name => "courses_teacher_id_fk"
 
 end

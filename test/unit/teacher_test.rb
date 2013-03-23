@@ -3,7 +3,7 @@
 # Table name: teachers
 #
 #  id            :integer          not null, primary key
-#  asset_id      :integer
+#  image_id      :integer
 #  is_active     :boolean          default(TRUE), not null
 #  description   :text             default(""), not null
 #  admin_user_id :integer
