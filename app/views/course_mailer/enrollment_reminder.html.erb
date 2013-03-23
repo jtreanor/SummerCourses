@@ -8,7 +8,7 @@
 
     <p><%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> will begin in <%= @enrollment.course.days_to_start %> days.</p>
 
-    <p>To view details of the schedule please visit the %= link_to "course page", course_url(@enrollment.course.id) %>.</p>
+    <p>To view details of the schedule please visit the <%= link_to "course page", course_url(@enrollment.course.id) %>.</p>
 
     <p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
 
