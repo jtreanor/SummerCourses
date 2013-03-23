@@ -104,7 +104,7 @@
                 <% images.each do |m| %>
                     <a href="<%= m.image.asset.url(:medium) %>">
                       <img src="<%= m.image.asset.url(:thumb) %>"
-                           data-description="<%= m.asset.description %>"
+                           data-description="<%= m.image.description %>"
                       >
                     </a>
                 <% end %>

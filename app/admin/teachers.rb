@@ -14,19 +14,19 @@ ActiveAdmin.register Teacher do
     column :surname do |t|
       t.admin_user.surname
     end
-    column :forename  do |t|
+    column :forename do |t|
       t.admin_user.forename
     end
-    column :email  do |t|
+    column :email do |t|
       t.admin_user.email
     end
-    column :current_sign_in_at  do |t|
+    column :current_sign_in_at do |t|
       t.admin_user.current_sign_in_at
     end
-    column :last_sign_in_at  do |t|
+    column :last_sign_in_at do |t|
       t.admin_user.last_sign_in_at
     end
-    column :sign_in_count  do |t|
+    column :sign_in_count do |t|
       t.admin_user.sign_in_count
     end
     default_actions
@@ -42,10 +42,10 @@ ActiveAdmin.register Teacher do
           status_tag 'inactive'
         end
       end
-      row :surname  do
+      row :surname do
         t.admin_user.surname
       end
-      row :forename  do
+      row :forename do
         t.admin_user.forename
       end
       row :email do
@@ -58,7 +58,7 @@ ActiveAdmin.register Teacher do
       row :last_sign_in_at do
         t.admin_user.last_sign_in_at
       end
-      row :sign_in_count  do
+      row :sign_in_count do
         t.admin_user.sign_in_count
       end
       row :teacher_picture do
@@ -87,7 +87,11 @@ ActiveAdmin.register Teacher do
       f.input :is_active
     end
     f.inputs :'Teacher Image', :for => [:image, Image.new] do |fm|
-      fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
+      if f.object.image.nil?
+        fm.input :asset, :as => :file
+      else
+        fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
+      end
     end
 
     f.buttons
