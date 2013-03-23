@@ -21,9 +21,6 @@ ActiveAdmin.register Course do
     if f.object.new_record?
       f.inputs "Images" do
         f.has_many :course_pictures do |ca|
-          ca.inputs "Existing Images" do
-            ca.input :asset
-          end
           ca.inputs "New Images", :for => [:image, Image.new ] do |fm|
               fm.input :description
               fm.input :asset, :as => :file
@@ -32,10 +29,23 @@ ActiveAdmin.register Course do
       end
     else
       #Existing course images/videos
+      f.inputs "Assets" do
+        f.has_many :course_assets do |ca|
+          ca.inputs "Existing Asset" do
+            ca.input :asset
+          end
+        end
+      end
+      
     end
 
-    if !f.object.new_record?
-      f.button "Cancel Course"
+    f.inputs "Schedule" do
+      f.has_many :time_table_items do |tt|
+          tt.input :location
+          tt.input :room
+          tt.input :start_time, :as => :just_datetime_picker
+          tt.input :end_time, :as => :just_datetime_picker
+      end
     end
 
     f.buttons

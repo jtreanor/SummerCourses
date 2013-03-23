@@ -11,8 +11,9 @@
 #
 
 class TimeTableItem < ActiveRecord::Base
-  # attr_accessible :title, :body
   attr_accessible :location_id, :start_time, :end_time, :room
+  just_define_datetime_picker :start_time, :add_to_attr_accessible => true
+  just_define_datetime_picker :end_time, :add_to_attr_accessible => true
   belongs_to :course
   belongs_to :location
 
