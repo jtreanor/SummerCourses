@@ -52,7 +52,8 @@ class Course < ActiveRecord::Base
     now = DateTime.now.beginning_of_day
     start = start_time.beginning_of_day
 
-    7
+    #Days until the course starts
+    (start-now).to_i
   end
 
   def end_time
