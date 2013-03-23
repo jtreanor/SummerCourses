@@ -15,6 +15,16 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :student
 	has_many :payments
 
+	def self.send_course_reminders
+    	@enrollments.find_all{|e| !e.is_cancelled && Time.now <= e.course.end_time }.each do |e|
+    		
+    	end
+	end
+
+	def self.send_payment_reminders
+
+	end
+
 	#This calculates the refund entitled in the case of a cancellation. Any payments made before refund_enrollments_before are refunded
 	def refund_amount
 		total = 0

@@ -2,7 +2,7 @@
 #
 # Table name: refunds
 #
-#  id         :integer          not null, primary key
+#  id         :string(45)       not null, primary key
 #  payment_id :string(45)       not null
 #
 

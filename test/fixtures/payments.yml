@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id            :string(10)       not null
+#  id            :string(10)       not null, primary key
 #  enrollment_id :integer          not null
 #
 

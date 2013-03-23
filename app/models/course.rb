@@ -13,6 +13,7 @@
 #  category_id               :integer          not null
 #  hits                      :integer          default(0), not null
 #  refund_enrollments_before :datetime         not null
+#  is_cancelled              :boolean          default(FALSE), not null
 #
 
 class Course < ActiveRecord::Base
