@@ -104,7 +104,11 @@
 			%>
 		</td>
 		<td>
-			<%= number_to_currency(enrollment.total_refunded, :unit => "&euro;") %>
+			<% if enrollment.refund_amount > enrollment.total_refunded %>
+				<strong>Refund processing (<%= number_to_currency(enrollment.refund_amount, :unit => "&euro;") %>).</strong>
+			<% else %>
+				<%= number_to_currency(enrollment.total_refunded, :unit => "&euro;") %>
+			<% end %>
 		</td>
     </tr>
     <% end %>
