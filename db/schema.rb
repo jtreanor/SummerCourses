@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306165555) do
+ActiveRecord::Schema.define(:version => 20130323015135) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "course_images", ["course_id", "image_id"], :name => "index_course_images_on_course_id_and_image_id", :unique => true
   add_index "course_images", ["image_id"], :name => "course_images_image_id_fk"
+
+  create_table "course_videos", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "video_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "course_videos", ["course_id", "video_id"], :name => "index_course_videos_on_course_id_and_video_id", :unique => true
+  add_index "course_videos", ["video_id"], :name => "course_videos_video_id_fk"
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
@@ -201,6 +211,13 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "time_table_items", ["course_id"], :name => "timetable_course_id_idx"
   add_index "time_table_items", ["location_id"], :name => "timetable_location_id_idx"
+
+  create_table "videos", :force => true do |t|
+    t.text     "url",         :null => false
+    t.string   "description", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
 
