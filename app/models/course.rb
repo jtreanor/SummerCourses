@@ -20,7 +20,6 @@ class Course < ActiveRecord::Base
   attr_accessible :title, :description, :brief_description,
                   :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_images, :course_images_attributes, :time_table_items_attributes, :videos, :videos_attributes
 
-
   belongs_to :category
   has_many :course_images
   has_many :images,
@@ -47,6 +46,13 @@ class Course < ActiveRecord::Base
 
   def start_time
     self.time_table_items.sort_by(&:start_time).last.start_time
+  end
+
+  def days_to_start
+    now = DateTime.now.beginning_of_day
+    start = start_time.beginning_of_day
+
+    7
   end
 
   def end_time

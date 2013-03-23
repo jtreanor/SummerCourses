@@ -16,8 +16,8 @@ class Enrollment < ActiveRecord::Base
 	has_many :payments
 
 	def self.send_course_reminders
-    	@enrollments.find_all{|e| !e.is_cancelled && Time.now <= e.course.end_time }.each do |e|
-    		
+    	Enrollment.all.find_all{|e| !e.is_cancelled && Time.now <= e.course.start_time && e.course.days_to_start <= 7 }.each do |e|
+    		puts "Sending reminder email to #{e.student.forename} #{e.student.surname} (#{e.student.email}) regarding #{e.course.title}"
     	end
 	end
 
