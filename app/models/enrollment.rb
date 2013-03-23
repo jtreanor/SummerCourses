@@ -15,6 +15,7 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :student
 	has_many :payments
 
+	#A reminder of an upcoming course is sent one week and two weeks from the course start.
 	def self.send_course_reminders
 		puts "Sending reminder emails."
     	Enrollment.all.find_all{|e| !e.is_cancelled && Time.now <= e.course.start_time && (e.course.days_to_start == 7 || e.course.days_to_start == 14) }.each do |e|
