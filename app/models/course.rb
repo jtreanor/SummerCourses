@@ -45,7 +45,7 @@ class Course < ActiveRecord::Base
   end
 
   def start_time
-    self.time_table_items.sort_by(&:start_time).last.start_time
+    self.time_table_items.sort_by(&:start_time).first.start_time
   end
 
   def days_to_start
