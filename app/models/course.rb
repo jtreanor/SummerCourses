@@ -53,7 +53,7 @@ class Course < ActiveRecord::Base
     start = start_time.beginning_of_day
 
     #Days until the course starts
-    (start-now).to_i
+    (start-now).to_i/(24*60*60) #Seconds to days
   end
 
   def end_time
