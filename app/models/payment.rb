@@ -16,12 +16,41 @@ class Payment < ActiveRecord::Base
 	end
 
 	@transaction_object = nil
-
 	def transaction
 		if @transaction_object.nil?
 		  @transaction_object = Braintree::Transaction.find(self.id)
 		end
 		@transaction_object
+	end
+
+	def total_refunded
+		total = 0
+		self.refund.each do |refund|
+			total += refund.transaction.amount.to_f
+		end
+		total
+	end
+
+	#Total of payment which has not been refunded
+	def total_left
+		self.transaction.amount.to_f - self.total_refunded
+	end
+
+	#Refund `amount` of this payment
+	def refund(amount)
+		result = nil
+		if amount < total_left
+			result = Braintree::Transaction.refund(transaction.id, amount_to_be_refunded.to_s)
+		else #Full refund
+			result = Braintree::Transaction.refund(transaction.id)
+		end
+
+		if result.success?
+			self.refunds.create(id: result.transaction.id)
+			return true
+		else
+			return false
+		end
 	end
 
 	belongs_to :enrollment
