@@ -45,8 +45,7 @@ class Enrollment < ActiveRecord::Base
 	def total_paid
 		total = 0
 		self.payments.each do |p|
-			transaction = p.transaction
-			total += transaction.amount.to_f
+			total += p.transaction.amount.to_f
 		end
 		return total
 	end
