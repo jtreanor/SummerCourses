@@ -38,7 +38,13 @@ ActiveAdmin.register Course do
       end
       
     end
-
+    #video support
+    f.inputs 'Video' do
+      f.has_many :videos do |cv|
+          cv.input :description
+          cv.input :url
+      end
+    end
     f.inputs "Schedule" do
       f.has_many :time_table_items do |tt|
           tt.input :location
