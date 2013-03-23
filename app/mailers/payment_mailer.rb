@@ -4,8 +4,8 @@ class PaymentMailer < ActionMailer::Base
   def payment_receipt(payment)
   	@transaction = payment.transaction
   	@enrollment = payment.enrollment
-    mail(:to => payment.enrollment.student.email, :subject => "Your receipt for #{@enrollment.course}")
-    logger.info "Sent email with subject #{"Your receipt for #{@enrollment.course}"} to #{payment.enrollment.student.email}"
+    mail(:to => payment.enrollment.student.email, :subject => "Your receipt for #{@enrollment.course.titlr}")
+    logger.info "Sent email with subject #{"Your receipt for #{@enrollment.course.title}"} to #{payment.enrollment.student.email}"
   end
 
   def refund_receipt(refund)
