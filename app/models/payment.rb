@@ -37,7 +37,7 @@ class Payment < ActiveRecord::Base
 	end
 
 	#Refund `amount` of this payment
-	def refund(amount)
+	def refund(amount=total_left)
 		result = nil
 		if amount < total_left
 			result = Braintree::Transaction.refund(transaction.id, amount_to_be_refunded.to_s)
@@ -47,9 +47,9 @@ class Payment < ActiveRecord::Base
 
 		if result.success?
 			self.refunds.create(id: result.transaction.id)
-			return true
+			return result.transaction.amount.to_f
 		else
-			return false
+			return 0
 		end
 	end
 

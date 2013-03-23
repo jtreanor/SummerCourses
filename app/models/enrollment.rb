@@ -43,7 +43,7 @@ class Enrollment < ActiveRecord::Base
 			total = total_paid - self.course.deposit
 		end
 
-		return total
+		return total - total_refunded
 	end
 
 	#The total amount which has been refunded for this course.
@@ -69,59 +69,52 @@ class Enrollment < ActiveRecord::Base
 		self.course.price - total_paid
 	end
 
-	#Cancel course and refund appropriate amount
+	#Returns all enrollments awaiting refund
+	def self.refund_queue
+		Enrollment.where(:is_cancelled => true).find_all{|e| e.refund_amount > 0 }
+	end
+
+	#class method to processed all queued refunds
+	def self.issue_queued_refunds
+		enrollments = Enrollment.refund_queue
+
+		enrollments.each do |enrollment|
+			enrollment.refund
+		end
+	end
+
+	#Called by rake task
+	def refund
+		to_be_refunded = refund_amount
+		if to_be_refunded <= 0
+			return true
+		end
+
+		#Check that all payments are settled
+		self.payments.each do |payment|
+			if payment.transaction.status != "settled"
+				return false
+			end
+		end
+
+		#All payments are settled, proceed to refund
+		self.payments.each do |payment|
+			if to_be_refunded < payment.total_left
+				to_be_refunded -= payment.refund(to_be_refunded)
+			else
+				to_be_refunded -= payment.refund
+			end
+
+			if to_be_refunded <= 0
+				return true
+			end
+		end
+
+		return false
+	end
+
+	#Cancel course and set refund process in motion
 	def cancel
-=begin		refundable_transactions = []
-		amount_to_be_refunded = 0;
-
-		min_transaction = self.payments.first.transaction
-		self.payments.each do |p|
-			transaction = p.transaction
-			if transaction.created_at <= self.course.refund_enrollments_before
-				refundable_transactions << transaction
-				amount_to_be_refunded += transaction.amount.to_f
-			end
-			if transaction.amount.to_f < min_transaction.amount
-				min_transaction = transaction
-			end
-		end
-
-		#Just refund the deposit
-		if refundable_transactions.empty?
-			refundable_transactions << min_transaction
-			amount_to_be_refunded = self.course.deposit
-		end
-
-		success = false
-		message = "An error occured when issuing the refund. Please contact an administrator to un-enroll."
-
-		refundable_transactions.sort_by(&:amount).each do |transaction|
-			result = nil
-
-			if transaction.amount.to_f > amount_to_be_refunded
-				result = Braintree::Transaction.refund(transaction.id, amount_to_be_refunded.to_s)
-				amount_to_be_refunded = 0
-			else
-				result = Braintree::Transaction.refund(transaction.id)
-				amount_to_be_refunded -= transaction.amount.to_f
-			end
-			if result.success?
-				message = "The refund was succesfully applied."
-				Refund.create(id: result.transaction.id, payment_id: transaction.id)
-				success = true
-			else
-				message = "An error occured when issuing the refund. Please contact an administrator to un-enroll. " + result.message
-				success = false
-				break
-			end
-		end
-
-		if success
-			self.is_cancelled = true
-			self.save
-		end
-=end
-
 		self.is_cancelled = true
 		self.save
 
