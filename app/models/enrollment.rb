@@ -93,6 +93,7 @@ class Enrollment < ActiveRecord::Base
 		#Check that all payments are settled
 		self.payments.each do |payment|
 			if payment.transaction.status != "settled"
+				puts "Payments for #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title} are not settled."
 				return false
 			end
 		end
@@ -110,6 +111,7 @@ class Enrollment < ActiveRecord::Base
 			end
 		end
 
+		puts "An error occured when refunding #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title}."
 		return false
 	end
 
@@ -127,6 +129,5 @@ class Enrollment < ActiveRecord::Base
 		PaymentMailer.refund_processing(self).deliver
 
 		return message
-
 	end
 end

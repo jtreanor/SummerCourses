@@ -5,5 +5,5 @@ end
 
 #This task should be run daily
 task :issue_queued_refunds => :environment do
-  Enrollment.refund_queued
+  Enrollment.issue_queued_refunds
 end
