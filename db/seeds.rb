@@ -358,19 +358,19 @@ Course.first.time_table_items.create(
 Course.first.enrollments.create(
     student_id: Student.first.id
 )
-Asset.create([
+Image.create([
   { url: "http://www.youtube.com/watch?v=k6U-i4gXkLM&list=PL06458A6C3AAD892D&index=1", kind: "video", description: "test video description"
   },
   { url: "/assets/UCC-logo@2x.png", kind: "picture", description: "test picture description"
   }
 ])
 
-CourseAsset.create([
+CourseImage.create([
   { course_id: Course.first.id, 
-    asset_id: Asset.first.id
+    asset_id: Image.first.id
   },
   { course_id: Course.first.id,
-    asset_id: Asset.last.id
+    asset_id: Image.last.id
   }
 ])
 =end

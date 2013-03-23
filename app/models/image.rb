@@ -10,12 +10,12 @@
 #  description        :string(45)       not null
 #
 
-class Asset < ActiveRecord::Base
+class Image < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :description, :asset, :asset_file_name, :asset_attributes
-  has_many :course_assets
+  attr_accessible :description, :asset, :asset_file_name
+  has_many :course_images
   has_many :courses,
-              :through => :course_assets
+              :through => :course_images
   has_many :teachers
 
   def to_s

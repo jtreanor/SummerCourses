@@ -9,7 +9,7 @@ class Ability
       when 2 #Admin
         cannot :manage, AdminUser
       when 3 #Teacher
-        can :read, [Course,CourseAsset,Asset]
+        can :read, [Course,CourseImage,Image]
       end
   end
 end

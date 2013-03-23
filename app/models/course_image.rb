@@ -7,11 +7,11 @@
 #  asset_id  :integer
 #
 
-class CourseAsset < ActiveRecord::Base
+class CourseImage < ActiveRecord::Base
   # attr_accessible :title, :body
   #
-  attr_accessible :course_id, :asset_id, :asset_attributes
+  attr_accessible :course_id, :image_id, :image_attributes
   belongs_to :course
-  belongs_to :asset
-  accepts_nested_attributes_for :asset
+  belongs_to :image
+  accepts_nested_attributes_for :image
 end

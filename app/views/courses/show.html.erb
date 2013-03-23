@@ -75,7 +75,7 @@
 
 <%
    #initialise variable
-   assets = @course.course_assets
+   images = @course.course_images
    teacher = @course.teacher
    locations = Array.new
    time_table_items = @course.time_table_items
@@ -96,14 +96,14 @@
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <!-- gallery show -->
-      <% unless assets.nil? || assets.empty? %>
+      <% unless images.nil? || images.empty? %>
           <div class="row">
             <div class="span10 offset1">
               <div id="galleria">
 
-                <% assets.each do |m| %>
-                    <a href="<%= m.asset.asset.url(:medium) %>">
-                      <img src="<%= m.asset.asset.url(:thumb) %>"
+                <% images.each do |m| %>
+                    <a href="<%= m.image.asset.url(:medium) %>">
+                      <img src="<%= m.image.asset.url(:thumb) %>"
                            data-description="<%= m.asset.description %>"
                       >
                     </a>
@@ -153,8 +153,8 @@
         <div class="span2 hidden-phone">
         </div>
         <div class="span10">
-          <% unless teacher.asset.nil?%>
-          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.asset.asset.url(:profile) %>">
+          <% unless teacher.image.nil?%>
+          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.image.asset.url(:profile) %>">
           <% end %>
           <h5 class="muted">ABOUT THE PROFESSOR</h5>
 
@@ -238,7 +238,7 @@
         }
         else {
 //            show galleria
-            <% unless assets.nil? || assets.empty? %>
+            <% unless images.nil? || images.empty? %>
             Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
             Galleria.run('#galleria');
             <% end %>
@@ -249,7 +249,7 @@
     <!-- add galleria related js -->
     <%= javascript_include_tag 'galleria-1.2.9.min' %>
     <script type="text/javascript">
-        <% unless assets.nil? || assets.empty? %>
+        <% unless images.nil? || images.empty? %>
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
         <% end %>

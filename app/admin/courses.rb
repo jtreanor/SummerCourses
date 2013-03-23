@@ -19,19 +19,19 @@ ActiveAdmin.register Course do
     end
 
     if f.object.new_record?
-      f.inputs "Assets" do
-        f.has_many :course_assets do |ca|
-          ca.inputs "Existing Asset" do
+      f.inputs "Images" do
+        f.has_many :course_pictures do |ca|
+          ca.inputs "Existing Images" do
             ca.input :asset
           end
-          ca.inputs "New Asset", :for => [:asset, Asset.new ] do |fm|
+          ca.inputs "New Images", :for => [:image, Image.new ] do |fm|
               fm.input :description
               fm.input :asset, :as => :file
           end
         end
       end
     else
-      #Existing course assets
+      #Existing course images/videos
     end
 
     if !f.object.new_record?

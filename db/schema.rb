@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "assets", :force => true do |t|
+  create_table "images", :force => true do |t|
     t.string   "asset_file_name"
     t.string   "asset_content_type"
     t.integer  "asset_file_size"
@@ -73,13 +73,13 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_index "countries", ["country_id"], :name => "country_id_idx"
 
-  create_table "course_assets", :force => true do |t|
+  create_table "course_images", :force => true do |t|
     t.integer "course_id"
-    t.integer "asset_id"
+    t.integer "image_id"
   end
 
-  add_index "course_assets", ["asset_id"], :name => "course_assets_asset_id_fk"
-  add_index "course_assets", ["course_id", "asset_id"], :name => "index_course_assets_on_course_id_and_asset_id", :unique => true
+  add_index "course_images", ["image_id"], :name => "course_images_image_id_fk"
+  add_index "course_images", ["course_id", "image_id"], :name => "index_course_images_on_course_id_and_image_id", :unique => true
 
   create_table "courses", :force => true do |t|
     t.string   "title",                     :limit => 100,                                               :null => false
@@ -181,14 +181,14 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_index "students", ["sex_id"], :name => "sex_id_idx"
 
   create_table "teachers", :force => true do |t|
-    t.integer "asset_id"
+    t.integer "image_id"
     t.boolean "is_active",     :default => true, :null => false
     t.text    "description",                     :null => false
     t.integer "admin_user_id"
   end
 
   add_index "teachers", ["admin_user_id"], :name => "teachers_admin_user_id_fk"
-  add_index "teachers", ["asset_id"], :name => "teachers_asset_id_fk"
+  add_index "teachers", ["image_id"], :name => "teachers_image_id_fk"
   add_index "teachers", ["id"], :name => "teacher_id_UNIQUE", :unique => true
 
   create_table "time_table_items", :force => true do |t|
@@ -204,8 +204,8 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
 
   add_foreign_key "admin_users", "admin_permissions", :name => "admin_users_admin_permission_id_fk"
 
-  add_foreign_key "course_assets", "assets", :name => "course_assets_asset_id_fk"
-  add_foreign_key "course_assets", "courses", :name => "course_assets_course_id_fk"
+  add_foreign_key "course_images", "images", :name => "course_images_image_id_fk"
+  add_foreign_key "course_images", "courses", :name => "course_images_course_id_fk"
 
   add_foreign_key "courses", "categories", :name => "courses_category_id_fk"
 
@@ -220,7 +220,7 @@ ActiveRecord::Schema.define(:version => 20130306165555) do
   add_foreign_key "students", "sexes", :name => "students_sex_id_fk", :primary_key => "sex_id"
 
   add_foreign_key "teachers", "admin_users", :name => "teachers_admin_user_id_fk"
-  add_foreign_key "teachers", "assets", :name => "teachers_asset_id_fk"
+  add_foreign_key "teachers", "images", :name => "teachers_image_id_fk"
 
   add_foreign_key "time_table_items", "courses", :name => "time_table_items_course_id_fk"
   add_foreign_key "time_table_items", "locations", :name => "time_table_items_location_id_fk"

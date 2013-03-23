@@ -9,7 +9,7 @@
 
 require 'test_helper'
 
-class CourseAssetTest < ActiveSupport::TestCase
+class CourseImageTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

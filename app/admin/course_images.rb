@@ -1,4 +1,4 @@
-ActiveAdmin.register CourseAsset do
+ActiveAdmin.register CourseImage do
   menu false
   form :html => { :enctype => "multipart/form-data" } do |f|
    f.inputs "Details" do
@@ -8,7 +8,7 @@ ActiveAdmin.register CourseAsset do
 
 
 
-  f.inputs "Asset", :for => [:asset, Asset.new ] do |fm|
+  f.inputs "Image", :for => [:image, Image.new ] do |fm|
   	  fm.input :description
       fm.input :asset, :as => :file
   end

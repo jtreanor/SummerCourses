@@ -62,8 +62,8 @@ ActiveAdmin.register Teacher do
         t.admin_user.sign_in_count
       end
       row :teacher_picture do
-        unless t.asset.nil?
-          link_to(image_tag(t.asset.asset.url(:thumb)), t.asset.asset.url(:medium))
+        unless t.image.nil?
+          link_to(image_tag(t.image.asset.url(:thumb)), t.image.asset.url(:medium))
         end
       end
     end
@@ -72,8 +72,8 @@ ActiveAdmin.register Teacher do
 
 
   form :html => {:multipart => true} do |f|
-    #f.inputs 'Existing Asset  do
-    #  f.input :asset
+    #f.inputs 'Existing Image  do
+    #  f.input :image
     #end
     f.inputs 'Teacher Information', :for => [:admin_user, f.object.admin_user || AdminUser.new] do |fm|
       fm.input :surname
@@ -86,8 +86,8 @@ ActiveAdmin.register Teacher do
     f.inputs 'Active Or Deactive' do
       f.input :is_active
     end
-    f.inputs :'Teacher Picture', :for => [:asset, Asset.new] do |fm|
-      fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.asset.asset.url(:thumb))
+    f.inputs :'Teacher Image', :for => [:image, Image.new] do |fm|
+      fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
     end
 
     f.buttons

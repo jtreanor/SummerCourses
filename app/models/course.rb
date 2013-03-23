@@ -17,18 +17,18 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :title, :description, :brief_description,
-                  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_assets, :course_assets_attributes
+                  :teacher_id, :number_of_places, :price, :deposit, :category_id, :course_images, :course_images_attributes
 
   belongs_to :category
-  has_many :course_assets
-  has_many :assets,
-           :through => :course_assets
+  has_many :course_images
+  has_many :images,
+           :through => :course_images
   has_many :enrollments
   has_many :students,
            :through => :enrollments
   has_many :time_table_items
   belongs_to :teacher
-  accepts_nested_attributes_for :course_assets
+  accepts_nested_attributes_for :course_images
 
   before_create :set_refund_enrollments_before_to_now
 
