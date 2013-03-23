@@ -11,4 +11,9 @@
 
 class CourseVideo < ActiveRecord::Base
   # attr_accessible :title, :body
+  #
+  attr_accessible :course_id, :video_id, :video_attributes
+  belongs_to :course
+  belongs_to :video
+  accepts_nested_attributes_for :video
 end

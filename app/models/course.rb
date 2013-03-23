@@ -24,6 +24,9 @@ class Course < ActiveRecord::Base
   has_many :course_images
   has_many :images,
            :through => :course_images
+  has_many :course_videos
+  has_many :videos,
+           :through => :course_videos
   has_many :enrollments
   has_many :students,
            :through => :enrollments
