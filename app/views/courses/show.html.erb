@@ -6,21 +6,21 @@
 <% end %>
 
 
-  <h2>
-    <%= @course.title %>
+<h2>
+  <%= @course.title %>
 
-    <% 
-      enrollments = current_student.enrollments.find_all{|e| !e.is_cancelled && e.course.id == @course.id && Time.now <= e.course.end_time } if current_student != nil
-      if current_student != nil && enrollments.count > 0 
-    %>
-        <%= link_to "Pay Balance", edit_enrollment_path(enrollments[0].id), class: "btn", style: "font-weight: normal" %>
-        <% if Time.now < enrollments[0].course.start_time %>
+  <%
+     enrollments = current_student.enrollments.find_all { |e| !e.is_cancelled && e.course.id == @course.id && Time.now <= e.course.end_time } if current_student != nil
+     if current_student != nil && enrollments.count > 0
+  %>
+      <%= link_to "Pay Balance", edit_enrollment_path(enrollments[0].id), class: "btn", style: "font-weight: normal" %>
+      <% if Time.now < enrollments[0].course.start_time %>
           <%= link_to "Un-Enrol", cancel_enrollment_path(enrollments[0].id), class: "btn btn-danger", style: "font-weight: normal" %>
-        <% end %>
-    <% else %>
+      <% end %>
+  <% else %>
       <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger', style: "font-weight: normal" %>
-    <% end %>
-  </h2> 
+  <% end %>
+</h2>
 <!--
 <script>
   if (Galleria) { $("body").text('Galleria works') }
@@ -75,7 +75,8 @@
 
 <%
    #initialise variable
-   images = @course.course_images
+   images = @course.images
+   videos = @course.videos
    teacher = @course.teacher
    locations = Array.new
    time_table_items = @course.time_table_items
@@ -96,18 +97,22 @@
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
       <!-- gallery show -->
-      <% unless images.nil? || images.empty? %>
+      <% unless ((images.nil? || images.empty?) && (videos.nil? || videos.empty?)) %>
           <div class="row">
             <div class="span10 offset1">
               <div id="galleria">
 
-                <% images.each do |m| %>
-                    <a href="<%= m.image.asset.url(:medium) %>">
-                      <img src="<%= m.image.asset.url(:thumb) %>"
-                           data-description="<%= m.image.description %>"
+                <% images.each do |i| %>
+                    <a href="<%= i.asset.url(:medium) %>">
+                      <img src="<%= i.asset.url(:thumb) %>"
+                           data-description="<%= i.description %>"
                       >
                     </a>
                 <% end %>
+                <% videos.each do |v| %>
+                    <a href="<%= v.url %>"><span class="video">"<%= v.description %>"</span></a>
+                <% end %>
+
               </div>
             </div>
           </div>
@@ -129,7 +134,7 @@
             </tr>
             <tr>
               <th>Number Of Places Remaining:</th>
-              <td><%= @course.number_of_places - @course.enrollments.find_all{|e| !e.is_cancelled }.count%></td>
+              <td><%= @course.number_of_places - @course.enrollments.find_all { |e| !e.is_cancelled }.count %></td>
             </tr>
             <tr>
               <th>Price:</th>
@@ -153,8 +158,8 @@
         <div class="span2 hidden-phone">
         </div>
         <div class="span10">
-          <% unless teacher.image.nil?%>
-          <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.image.asset.url(:profile) %>">
+          <% unless teacher.image.nil? %>
+              <img id="teacher-img" class="img-polaroid pull-left" src="<%= teacher.image.asset.url(:profile) %>">
           <% end %>
           <h5 class="muted">ABOUT THE PROFESSOR</h5>
 
@@ -238,7 +243,7 @@
         }
         else {
 //            show galleria
-            <% unless images.nil? || images.empty? %>
+            <% unless ((images.nil? || images.empty?) && (videos.nil? || videos.empty?)) %>
             Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
             Galleria.run('#galleria');
             <% end %>
@@ -249,7 +254,7 @@
     <!-- add galleria related js -->
     <%= javascript_include_tag 'galleria-1.2.9.min' %>
     <script type="text/javascript">
-        <% unless images.nil? || images.empty? %>
+        <% unless ((images.nil? || images.empty?) && (videos.nil? || videos.empty?)) %>
         Galleria.loadTheme('<%= javascript_path 'galleria.classic.min' %>');
         Galleria.run('#galleria');
         <% end %>
