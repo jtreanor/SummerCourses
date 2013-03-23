@@ -14,6 +14,7 @@ class Enrollment < ActiveRecord::Base
 	belongs_to :course
 	belongs_to :student
 	has_many :payments
+	has_many :refunds, :through => :payments
 
 	#A reminder of an upcoming course is sent one week and two weeks from the course start.
 	def self.send_reminders
