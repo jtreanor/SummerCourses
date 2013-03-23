@@ -3,6 +3,14 @@ ActiveAdmin.register Teacher do
 
   index do
     id_column
+    column :state do |t|
+      if t.is_active == true
+        status_tag 'active', :ok
+      else
+        status_tag 'inactive'
+      end
+
+    end
     column :surname do |t|
       t.admin_user.surname
     end
@@ -26,6 +34,14 @@ ActiveAdmin.register Teacher do
 
   show do |t|
     attributes_table do
+      row :id
+      row :statue do
+        if t.is_active == true
+          status_tag 'active', :ok
+        else
+          status_tag 'inactive'
+        end
+      end
       row :surname  do
         t.admin_user.surname
       end
@@ -67,8 +83,11 @@ ActiveAdmin.register Teacher do
     f.inputs 'Teacher Description' do
       f.input :description
     end
+    f.inputs 'Active Or Deactive' do
+      f.input :is_active
+    end
     f.inputs :'Teacher Picture', :for => [:asset, Asset.new] do |fm|
-      fm.input :asset, :as => :file
+      fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.asset.asset.url(:thumb))
     end
 
     f.buttons
