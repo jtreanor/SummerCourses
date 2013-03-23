@@ -57,15 +57,12 @@ class Enrollment < ActiveRecord::Base
 		return total
 	end
 
-	@total_paid = nil
 	def total_paid
-		if @total_paid.nil?
-			@total_paid = 0
-			self.payments.each do |p|
-				@total_paid += p.transaction.amount.to_f
-			end
+		total_paid = 0
+		self.payments.each do |p|
+			total_paid += p.transaction.amount.to_f
 		end
-		return @total_paid
+		total_paid
 	end
 
 	def total_due
