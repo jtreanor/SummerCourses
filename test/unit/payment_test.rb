@@ -2,8 +2,8 @@
 #
 # Table name: payments
 #
-#  transaction_id :string(10)       not null, primary key
-#  enrollment_id  :integer          not null
+#  id            :string(10)       not null
+#  enrollment_id :integer          not null
 #
 
 require 'test_helper'

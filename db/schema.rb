@@ -141,20 +141,20 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
   add_index "messages", ["message_thread_id"], :name => "message_thread_id_idx"
 
   create_table "payments", :id => false, :force => true do |t|
-    t.string  "transaction_id", :limit => 10, :null => false
+    t.string  "id", :limit => 10, :null => false
     t.integer "enrollment_id",                :null => false
   end
 
   add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
-  add_index "payments", ["transaction_id"], :name => "payments_transaction_id_idx"
+  add_index "payments", ["id"], :name => "payment_id_idx"
 
-  create_table "refunds", :force => true do |t|
-    t.string "refund_transaction_id",   :limit => 45, :null => false
-    t.string "original_transaction_id", :limit => 45, :null => false
+  create_table "refunds", :id => false, :force => true do |t|
+    t.string "id",   :limit => 45, :null => false
+    t.string "payment_id", :limit => 45, :null => false
   end
 
-  add_index "refunds", ["original_transaction_id"], :name => "original_transaction_id_idx"
-  add_index "refunds", ["refund_transaction_id"], :name => "refund_transaction_id_idx"
+  add_index "refunds", ["payment_id"], :name => "refund_payment_id_idx"
+  add_index "refunds", ["id"], :name => "refund_id_idx"
 
   create_table "sexes", :id => false, :force => true do |t|
     t.integer "sex_id",   :limit => 1,  :null => false

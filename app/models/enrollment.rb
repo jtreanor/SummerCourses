@@ -19,7 +19,7 @@ class Enrollment < ActiveRecord::Base
 	def refund_amount
 		total = 0
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.transaction_id)
+			transaction = Braintree::Transaction.find(p._id)
 			if transaction.created_at <= self.course.refund_enrollments_before
 				total += transaction.amount.to_f
 			end
@@ -35,7 +35,7 @@ class Enrollment < ActiveRecord::Base
 	def total_paid
 		total = 0
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.transaction_id)
+			transaction = Braintree::Transaction.find(p.id)
 				total += transaction.amount.to_f
 		end
 		return total
@@ -48,8 +48,8 @@ class Enrollment < ActiveRecord::Base
 	def total_refunded
 		total = 0
 		self.payments.each do |p|
-			Refund.find_all_by_original_transaction_id(p.transaction_id).each do |refund|
-				transaction = Braintree::Transaction.find(refund.refund_transaction_id)
+			Refund.find_all_by_id(p.id).each do |refund|
+				transaction = Braintree::Transaction.find(refund.id)
 				total += transaction.amount.to_f
 			end
 		end
@@ -62,9 +62,9 @@ class Enrollment < ActiveRecord::Base
 		refundable_transactions = []
 		amount_to_be_refunded = 0;
 
-		min_transaction = Braintree::Transaction.find(self.payments[0].transaction_id)
+		min_transaction = Braintree::Transaction.find(self.payments[0].id)
 		self.payments.each do |p|
-			transaction = Braintree::Transaction.find(p.transaction_id)
+			transaction = Braintree::Transaction.find(p.id)
 			if transaction.created_at <= self.course.refund_enrollments_before
 				refundable_transactions << transaction
 				amount_to_be_refunded += transaction.amount.to_f
@@ -95,7 +95,7 @@ class Enrollment < ActiveRecord::Base
 			end
 			if result.success?
 				message = "The refund was succesfully applied."
-				Refund.create(refund_transaction_id: result.transaction.id, original_transaction_id: transaction.id)
+				Refund.create(id: result.transaction.id, payment_id: transaction.id)
 				success = true
 			else
 				message = "An error occured when issuing the refund. Please contact an administrator to un-enroll. The transaction status is: " + transaction.status

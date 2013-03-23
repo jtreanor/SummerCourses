@@ -2,9 +2,8 @@
 #
 # Table name: refunds
 #
-#  id                      :integer          not null, primary key
-#  refund_transaction_id   :string(45)       not null
-#  original_transaction_id :string(45)       not null
+#  id         :integer          not null, primary key
+#  payment_id :string(45)       not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
