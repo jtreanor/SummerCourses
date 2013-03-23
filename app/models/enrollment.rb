@@ -98,7 +98,7 @@ class Enrollment < ActiveRecord::Base
 				Refund.create(id: result.transaction.id, payment_id: transaction.id)
 				success = true
 			else
-				message = "An error occured when issuing the refund. Please contact an administrator to un-enroll. The transaction status is: " + transaction.status
+				message = "An error occured when issuing the refund. Please contact an administrator to un-enroll. " + result.message
 				success = false
 				break
 			end

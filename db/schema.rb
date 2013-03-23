@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
     t.integer  "category_id",                                                                            :null => false
     t.integer  "hits",                                                                    :default => 0, :null => false
     t.datetime "refund_enrollments_before",                                                              :null => false
+    t.boolean  "is_cancelled",                                                        :default => false, :null => false
   end
 
   add_index "courses", ["category_id"], :name => "category_id_idx"

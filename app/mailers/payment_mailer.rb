@@ -12,7 +12,7 @@ class PaymentMailer < ActionMailer::Base
   	@original_transaction = refund.payment.transaction
     @refund_transaction = refund.transaction
   	@enrollment = refund.enrollment
-  	mail(:to => enrollment.student.email, :subject => "Your refund for #{@enrollment.course.title}")
+  	mail(:to => @enrollment.student.email, :subject => "Your refund for #{@enrollment.course.title}")
     logger.info "Sent email with subject #{"Your refund for #{@enrollment.course.title}"} to #{@enrollment.student.email}"
   end
 end
