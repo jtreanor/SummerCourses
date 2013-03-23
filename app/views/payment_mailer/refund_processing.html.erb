@@ -6,8 +6,9 @@
   <p>Unfortunately <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been cancelled. You will be issued a full refund within 48 hours. UCC sincerely apologises for any inconvenience.</p>
 <% else #Self un-enrolled %>
   <p>Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.</p>
-
-  <p>You will be refunded to the amount of <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %> within 48 hours.</p>
+  <% if @enrollment.refund_amount > 0 %>
+  	<p>You will be refunded to the amount of <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %> within 48 hours.</p>
+  <% end %>
 <% end %>
 
 <p>If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.</p>

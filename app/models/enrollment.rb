@@ -131,7 +131,7 @@ class Enrollment < ActiveRecord::Base
 			message = "Your cancellation has been processed. You will receive your refund within 48 hours."
 		end
 
-		PaymentMailer.refund_processing(self)
+		PaymentMailer.refund_processing(self).deliver
 
 		return message
 
