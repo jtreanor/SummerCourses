@@ -1,3 +1,20 @@
 <%= render "layouts/email_header" %>
 
+<p>Hello <%= @enrollment.student.forename %>,</p>
+
+<% if @enrollment.course.is_cancelled #Automatic refund %>
+  <p>Unfortunately <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been cancelled. You will be issued a full refund within 48 hours. UCC sincerely apologises for any inconvenience.</p>
+<% else #Self un-enrolled %>
+  <p>Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.</p>
+
+  <p>You will be refunded to the amount of <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %> within 48 hours.</p>
+<% end %>
+
+<p>If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.</p>
+
+<p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
+
+<p>Kind regards,</p>
+<p>UCC Summer Courses Office</p>
+
 <%= render "layouts/email_footer" %>

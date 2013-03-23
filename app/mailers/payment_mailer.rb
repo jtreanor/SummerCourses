@@ -20,6 +20,7 @@ class PaymentMailer < ActionMailer::Base
     @enrollment = enrollment
 
     mail(:to => @enrollment.student.email, :subject => "Your cancellation of #{@enrollment.course.title}")
+    logger.info "Sent email with subject #{"Your cancellation of #{@enrollment.course.title}"} to #{@enrollment.student.email}"
   end
 
 end

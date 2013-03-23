@@ -29,6 +29,8 @@ class Enrollment < ActiveRecord::Base
 	#This calculates the refund entitled in the case of a cancellation. Any payments made before refund_enrollments_before are refunded
 	def refund_amount
 		total = 0
+
+		#Check for special refund entitlement
 		self.payments.each do |p|
 			transaction = p.transaction
 			if transaction.created_at <= self.course.refund_enrollments_before
@@ -36,25 +38,15 @@ class Enrollment < ActiveRecord::Base
 			end
 		end
 
-		#At a minimum, refund the deposit
+		#At a minimum, refund the total paid in excess of the deposit
 		if total == 0
-			total = self.course.deposit
+			total = total_paid - self.course.deposit
 		end
+
 		return total
 	end
 
-	def total_paid
-		total = 0
-		self.payments.each do |p|
-			total += p.transaction.amount.to_f
-		end
-		return total
-	end
-
-	def total_due
-		self.course.price - total_paid
-	end
-
+	#The total amount which has been refunded for this course.
 	def total_refunded
 		total = 0
 		self.refunds.each do |refund|
@@ -63,6 +55,21 @@ class Enrollment < ActiveRecord::Base
 		end
 
 		return total
+	end
+
+	@total_paid = nil
+	def total_paid
+		if @total_paid.nil?
+			@total_paid = 0
+			self.payments.each do |p|
+				@total_paid += p.transaction.amount.to_f
+			end
+		end
+		return @total_paid
+	end
+
+	def total_due
+		self.course.price - total_paid
 	end
 
 	#Cancel course and refund appropriate amount
@@ -126,6 +133,8 @@ class Enrollment < ActiveRecord::Base
 		if refund_amount > 0
 			message = "Your cancellation has been processed. You will receive your refund within 48 hours."
 		end
+
+		PaymentMailer.refund_processing(self)
 
 		return message
 
