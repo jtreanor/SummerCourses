@@ -15,4 +15,11 @@ class PaymentMailer < ActionMailer::Base
   	mail(:to => @enrollment.student.email, :subject => "Your refund for #{@enrollment.course.title}")
     logger.info "Sent email with subject #{"Your refund for #{@enrollment.course.title}"} to #{@enrollment.student.email}"
   end
+
+  def refund_processing(enrollment)
+    @enrollment = enrollment
+
+    mail(:to => @enrollment.student.email, :subject => "Your cancellation of #{@enrollment.course.title}")
+  end
+
 end

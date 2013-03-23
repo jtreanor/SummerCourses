@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <p>Hello <%= @enrollment.student.forename %>,</p>
+<%= render "layouts/email_header" %>
+<p>Hello <%= @enrollment.student.forename %>,</p>
 
-    <p>Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.</p>
+<p>Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.</p>
 
-    <p>Your original payment of <%= number_to_currency(@original_transaction.amount.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(@refund_transaction.amount.to_s, :unit => "&euro;") %>.</p>
+<p>Your original payment of <%= number_to_currency(@original_transaction.amount.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(@refund_transaction.amount.to_s, :unit => "&euro;") %>.</p>
 
-    <% if @enrollment.course.is_cancelled #Automatic refund %>
-      <p>Unfortunately this course has been cancelled. You have been issued a full refund. UCC sincerely apologises for any inconvenience.</p>
+<% if @enrollment.course.is_cancelled #Automatic refund %>
+  <p>Unfortunately this course has been cancelled. You have been issued a full refund. UCC sincerely apologises for any inconvenience.</p>
 
-      <p>Please note if you paid for this course in more than one instalment, you will receipt an email corresponding to each payment.</p>
-    <% else #Self un-enrolled %>
-    <% end %>
+  <p>Please note if you paid for this course in more than one instalment, you will receipt an email corresponding to each payment.</p>
+<% else #Self un-enrolled %>
+<% end %>
 
-    <p>If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.</p>
+<p>If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.</p>
 
-    <p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
+<p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
 
-    <p>Kind regards,</p>
-    <p>UCC Summer Courses Office</p>
-  </body>
-</html>
+<p>Kind regards,</p>
+<p>UCC Summer Courses Office</p>
+<%= render "layouts/email_footer" %>

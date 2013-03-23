@@ -57,11 +57,9 @@ class Enrollment < ActiveRecord::Base
 
 	def total_refunded
 		total = 0
-		self.payments.each do |p|
-			Refund.find_all_by_id(p.id).each do |refund|
-				transaction = refund.transaction
-				total += transaction.amount.to_f
-			end
+		self.refunds.each do |refund|
+			transaction = refund.transaction
+			total += transaction.amount.to_f
 		end
 
 		return total
@@ -69,7 +67,7 @@ class Enrollment < ActiveRecord::Base
 
 	#Cancel course and refund appropriate amount
 	def cancel
-		refundable_transactions = []
+=begin		refundable_transactions = []
 		amount_to_be_refunded = 0;
 
 		min_transaction = self.payments.first.transaction
@@ -117,6 +115,16 @@ class Enrollment < ActiveRecord::Base
 		if success
 			self.is_cancelled = true
 			self.save
+		end
+=end
+
+		self.is_cancelled = true
+		self.save
+
+		message = "Your cancellation has been processed. You have not received a refund."
+
+		if refund_amount > 0
+			message = "Your cancellation has been processed. You will receive your refund within 48 hours."
 		end
 
 		return message
