@@ -3,7 +3,7 @@
 
 <p>There have been some changes to <%= @enrollment.course %>:</p>
 
-<% @diff.each do |key,value| %>
+<% @diff_hash.each do |key,value| %>
 	<p><strong><%= key.to_s %></strong>: <%= value.to_s %></p>
 <% end %>
 
