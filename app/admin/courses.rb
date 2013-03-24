@@ -13,7 +13,7 @@ ActiveAdmin.register Course do
         new_course_hash = new_course.attributes.to_options
 
         #Returns hash of changes
-        diff_hash = old_course_hash.diff( new_course_hash )
+        diff_hash = new_course_hash.diff( old_course_hash )
 
         logger.info "Diff: " + diff_hash.to_s
 

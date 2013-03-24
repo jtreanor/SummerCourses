@@ -1,10 +1,10 @@
 <%= render "layouts/email_header" %>
 <p>Hello <%= @enrollment.student.forename %>,</p>
 
-<p>There have been some changes to <%= @enrollment.course %>:</p>
+<p>There have been some changes to <%= @enrollment.course.title %>:</p>
 
 <% @diff_hash.each do |key,value| %>
-	<p><strong><%= key.to_s %></strong>: <%= value.to_s %></p>
+	<p><strong><%= key.to_s.capitalize %></strong>: <%= value.to_s %></p>
 <% end %>
 
 <p>To view full details of the course please visit the <%= link_to "course page", course_url(@enrollment.course.id) %>.</p>
