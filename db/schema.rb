@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
     t.integer "student_id",                      :null => false
     t.integer "course_id",                       :null => false
     t.boolean "is_cancelled", :default => false, :null => false
+    t.integer "refund_attempts", :default => 2,  :null => false
   end
 
   add_index "enrollments", ["course_id"], :name => "course_id_idx"

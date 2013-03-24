@@ -2,10 +2,11 @@
 #
 # Table name: enrollments
 #
-#  id           :integer          not null, primary key
-#  student_id   :integer          not null
-#  course_id    :integer          not null
-#  is_cancelled :boolean          default(FALSE), not null
+#  id              :integer          not null, primary key
+#  student_id      :integer          not null
+#  course_id       :integer          not null
+#  is_cancelled    :boolean          default(FALSE), not null
+#  refund_attempts :integer          default(2), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

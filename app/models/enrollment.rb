@@ -2,10 +2,11 @@
 #
 # Table name: enrollments
 #
-#  id           :integer          not null, primary key
-#  student_id   :integer          not null
-#  course_id    :integer          not null
-#  is_cancelled :boolean          default(FALSE), not null
+#  id              :integer          not null, primary key
+#  student_id      :integer          not null
+#  course_id       :integer          not null
+#  is_cancelled    :boolean          default(FALSE), not null
+#  refund_attempts :integer          default(2), not null
 #
 
 class Enrollment < ActiveRecord::Base
@@ -82,6 +83,15 @@ class Enrollment < ActiveRecord::Base
 		end
 	end
 
+	def refund_failed
+		self.refund_attempts--
+		self.save
+		puts "#{self.refund_attempts} more refund attempts"
+		if self.refund_attempts <= 0
+			PaymentMailer.refund_failure(self)
+		end
+	end
+
 	#Called by rake task
 	def refund
 		to_be_refunded = refund_amount
@@ -98,6 +108,7 @@ class Enrollment < ActiveRecord::Base
 		self.payments.each do |payment|
 			if payment.transaction.status != "settled"
 				puts "Payments not settled."
+				refund_failed
 				return false
 			end
 		end
@@ -126,6 +137,7 @@ class Enrollment < ActiveRecord::Base
 		end
 
 		puts "An error occured when refunding #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title}."
+		refund_failed
 		return false
 	end
 
