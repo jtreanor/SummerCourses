@@ -89,7 +89,7 @@ class Enrollment < ActiveRecord::Base
 		self.save
 		puts "#{self.refund_attempts} more refund attempts"
 		if self.refund_attempts <= 0
-			PaymentMailer.refund_failure(self)
+			PaymentMailer.refund_failure(self).deliver
 		end
 	end
 
