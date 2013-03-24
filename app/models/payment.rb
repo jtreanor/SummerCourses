@@ -50,7 +50,7 @@ class Payment < ActiveRecord::Base
 		end
 
 		if result.success?
-			puts "Sucessgully Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
+			puts "Sucessfully Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
 			self.refunds.create(id: result.transaction.id, amount: result.transaction.amount, created_at: result.transaction.created_at)
 			return result.transaction.amount.to_f
 		else

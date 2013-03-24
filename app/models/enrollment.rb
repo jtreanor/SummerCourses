@@ -104,8 +104,8 @@ class Enrollment < ActiveRecord::Base
 
 		puts "All payments are settled"
 
-		#All payments are settled, proceed to refund
-		self.payments.each do |payment|
+		#All payments are settled, proceed to refund. Starting with highest amount.
+		self.payments.sort_by(&:amount).reverse.each do |payment|
 			puts "Payment #{payment.id} of which #{payment.total_left} is not refunded."
 
 			if to_be_refunded < payment.total_left

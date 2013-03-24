@@ -4,7 +4,7 @@
 <p>Your refund for <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has now been fully processed.</p>
 
 <% 
-	@enrollment.payments each do |p| 
+	@enrollment.payments.each do |p| 
 	original_amount = p.amount
 	refund_amount = p.total_refunded
 %>
