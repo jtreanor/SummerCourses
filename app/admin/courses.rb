@@ -24,7 +24,14 @@ ActiveAdmin.register Course do
         #Returns hash of changes
         course_diff_hash = new_course_hash.diff( old_course_hash )
 
+        #Has the timetable been changed
         time_table_change = old_time_table_items != new_time_table_items
+
+        #If start or end time has changed
+        if (old_time_table_items.first != new_time_table_items.first) 
+          || (new_time_table_items.last != new_time_table_items.last)
+          new_course.set_refund_enrollments_before_to_now
+        end
 
         logger.info "Course Diff: " + course_diff_hash.to_s
 
