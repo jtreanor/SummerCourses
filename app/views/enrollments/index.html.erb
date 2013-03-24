@@ -105,7 +105,11 @@
 		</td>
 		<td>
 			<% if enrollment.refund_amount > enrollment.total_refunded %>
-				<strong>Refund processing (<%= number_to_currency(enrollment.refund_amount, :unit => "&euro;") %>).</strong>
+				<% if enrollment.refund_attempts > 0 %>
+					<strong>Refund processing (<%= number_to_currency(enrollment.refund_amount, :unit => "&euro;") %>).</strong>
+				<% else %>
+					Refund failed. Please <%= link_to "Contact Us", contact_url %>.
+				<% end %>
 			<% else %>
 				<%= number_to_currency(enrollment.total_refunded, :unit => "&euro;") %>
 			<% end %>
