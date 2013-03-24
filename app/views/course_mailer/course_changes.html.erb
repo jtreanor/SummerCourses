@@ -16,8 +16,8 @@
 			<tr>
 				<td><%= tt.location.title %></td>
 				<td><%= tt.room %></td>
-				<td><%= tt.start_time %></td>
-				<td><%= tt.end_time %></td>
+				<td><%= tt.start_time.strftime("%b %e, %l:%M %p") %></td>
+				<td><%= tt.end_time.strftime("%b %e, %l:%M %p") %></td>
 			</tr>
 		</table>
 	<% end %>
