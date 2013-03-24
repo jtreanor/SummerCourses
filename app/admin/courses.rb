@@ -28,7 +28,7 @@ ActiveAdmin.register Course do
         time_table_change = old_time_table_items != new_time_table_items
 
         #If start or end time has changed
-        if old_time_table_items.first.start_time != new_time_table_items.first.start_time || old_time_table_items.last.end_time != new_time_table_items.last.end_time
+        if old_time_table_items.first[:start_time] != new_time_table_items.first[:start_time] || old_time_table_items.last[:end_time] != new_time_table_items.last[:end_time]
           new_course.set_refund_enrollments_before_to_now
         end
 
