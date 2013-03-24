@@ -14,6 +14,12 @@ class PaymentMailer < ActionMailer::Base
     logger.info "Sent email with subject #{"Your refund for #{@enrollment.course.title}"} to #{@enrollment.student.email}"
   end
 
+  def refund_failure(enrollment)
+    @enrollment = enrollment
+    mail(:to => @enrollment.student.email, :subject => "Your refund for #{@enrollment.course.title} has been unsuccessful")
+    logger.info "Sent email with subject #{"Your refund for #{@enrollment.course.title} has been unsuccessful"} to #{@enrollment.student.email}"
+  end
+
   def refund_processing(enrollment)
     @enrollment = enrollment
 

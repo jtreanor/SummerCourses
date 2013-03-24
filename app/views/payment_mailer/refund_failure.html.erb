@@ -1,0 +1,16 @@
+<%= render "layouts/email_header" %>
+<p>Hello <%= @enrollment.student.forename %>,</p>
+
+<p>Your refund for <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been unsuccessful.</p>
+
+<% if @enrollment.total_refunded > 0 %>
+	<p>You have been refunded <%= number_to_currency(@enrollment.total_refunded, :unit => "&euro;") %> but you entitle to a further <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %>.</p>
+<% else %>
+	<p>You are entitled to a refund of <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %></p>
+<% end %>
+
+<p>Please <%= link_to "Contact Us", contact_url %> to resolve this issue.</p>
+
+<p>Kind regards,</p>
+<p>UCC Summer Courses Office</p>
+<%= render "layouts/email_footer" %>
