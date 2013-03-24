@@ -2,8 +2,8 @@ ActiveAdmin.register Course do
   actions :all, :except => [:destroy]
 
   controller do
-      # This code is evaluated within the controller class
-
+  
+      #Custom code for editing courses
       def update
         #Course before edit
         old_course = Course.find_by_id(params[:id])
@@ -30,10 +30,12 @@ ActiveAdmin.register Course do
         #If start or end time has changed
         if old_time_table_items.first[:start_time] != new_time_table_items.first[:start_time] || old_time_table_items.last[:end_time] != new_time_table_items.last[:end_time]
           new_course.set_refund_enrollments_before_to_now
+          new_course.save
         end
 
         logger.info "Course Diff: " + course_diff_hash.to_s
 
+        #If there have been changes, notify all users.
         if new_course_hash != old_course_hash || time_table_change
           #Notify enrollees of changes
           logger.info "Sending diff emails"
