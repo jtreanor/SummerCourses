@@ -5,10 +5,11 @@
 #  id         :string(45)       not null, primary key
 #  payment_id :string(45)       not null
 #  amount     :decimal(10, 2)   not null
+#  created_at :datetime         not null
 #
 
 class Refund < ActiveRecord::Base
-	attr_accessible :id, :payment_id, :amount
+	attr_accessible :id, :payment_id, :amount, :created_at
 	set_primary_key :id
 
 	@transaction_object = nil

@@ -5,10 +5,11 @@
 #  id            :string(10)       not null, primary key
 #  enrollment_id :integer          not null
 #  amount        :decimal(10, 2)   not null
+#  created_at    :datetime         not null
 #
 
 class Payment < ActiveRecord::Base
-	attr_accessible :id, :enrollment_id, :amount
+	attr_accessible :id, :enrollment_id, :amount, :created_at
 	set_primary_key :id
 	after_create :send_receipt
 
@@ -50,7 +51,7 @@ class Payment < ActiveRecord::Base
 
 		if result.success?
 			puts "Sucessgully Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
-			self.refunds.create(id: result.transaction.id, amount: result.transaction.amount)
+			self.refunds.create(id: result.transaction.id, amount: result.transaction.amount, created_at: result.transaction.created_at)
 			return result.transaction.amount.to_f
 		else
 			puts "Did not refund payment #{self.id}"

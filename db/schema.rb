@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
     t.string  "id", :limit => 10, :null => false
     t.integer "enrollment_id",                :null => false
     t.decimal  "amount",  :precision => 10, :scale => 2, :null => false
+    t.datetime "created_at",  :null => false
   end
 
   add_index "payments", ["enrollment_id"], :name => "payments_enrollment_id_idx"
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20130323015135) do
     t.string "id",   :limit => 45, :null => false
     t.string "payment_id", :limit => 45, :null => false
     t.decimal  "amount",  :precision => 10, :scale => 2, :null => false
+    t.datetime "created_at",  :null => false
   end
 
   add_index "refunds", ["payment_id"], :name => "refund_payment_id_idx"

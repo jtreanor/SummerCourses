@@ -5,6 +5,7 @@
 #  id            :string(10)       not null, primary key
 #  enrollment_id :integer          not null
 #  amount        :decimal(10, 2)   not null
+#  created_at    :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

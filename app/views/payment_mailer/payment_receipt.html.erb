@@ -2,7 +2,7 @@
 
 <p>Hello <%= @enrollment.student.forename %>,</p>
 
-<p>Your payment of <%= number_to_currency(@transaction.amount.to_s, :unit => "&euro;") %> for <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully received.</p>
+<p>Your payment of <%= number_to_currency(@payment.amount.to_s, :unit => "&euro;") %> for <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully received.</p>
 
 <% if @enrollment.payments.count == 1 #first payment %>
   <p>Your place in this course is now secured. The balance of <%= number_to_currency(@enrollment.total_due, :unit => "&euro;") %> must be paid before the course begins. This can be done through the <%= link_to "My Courses", enrollments_url %> section of our website.</p>

@@ -5,6 +5,7 @@
 #  id            :string(10)       not null, primary key
 #  enrollment_id :integer          not null
 #  amount        :decimal(10, 2)   not null
+#  created_at    :datetime         not null
 #
 
 require 'test_helper'
