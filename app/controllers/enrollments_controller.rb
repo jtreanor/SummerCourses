@@ -20,7 +20,9 @@ class EnrollmentsController < ApplicationController
 	def edit
 		@enrollment = Enrollment.find_by_id(params[:id])
 
-		@full_tr_data = tr_data(@enrollment.total_due,enrollment_create_url(@enrollment.course.id))
+		if @enrollment.total_due > 0
+			@full_tr_data = tr_data(@enrollment.total_due,enrollment_create_url(@enrollment.course.id))
+		end
 	end
 
 	def new
@@ -51,8 +53,8 @@ class EnrollmentsController < ApplicationController
 	    		payment = enrollment.payments.create(id: result.transaction.id)
 	    		if payment.save
 	    			error = false
-	    			@message = "The payment has been accepted and you have been succesfully enrolled in " + @course.title
-	  				flash[:notice] = @message
+	    			@message = "The payment has been accepted and you have been succesfully enrolled in " + @course.title + "."
+	  				flash[:success] = @message
 	  				redirect_to enrollments_path
 	    		end
 	    	end
@@ -63,7 +65,7 @@ class EnrollmentsController < ApplicationController
 	  		#TODO - refund transaction if something went wrong 
 	  	else
 	  		@message = "Message: #{result.message}"
-	  		flash[:notice] = @message
+	  		flash[:error] = @message
 	  		redirect_to new_enrollment_path(@course.id)
 	  	end
 
@@ -77,7 +79,7 @@ class EnrollmentsController < ApplicationController
 	def refund
 		@enrollment = Enrollment.find_by_id(params[:id])
 		@message = @enrollment.cancel
-		flash[:notice] = @message
+		flash[:success] = @message
 		redirect_to enrollments_path
 	end
 end

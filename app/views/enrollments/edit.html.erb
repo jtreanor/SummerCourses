@@ -1,3 +1,7 @@
 <h2>Pay balance for <%= @enrollment.course.title %></h2>
-<p>You will be charged <%= number_to_currency(@enrollment.total_due, :unit => "&euro;") %></p>
-<%= render :partial =>"layouts/payment_form" %>
+<% if @enrollment.total_due > 0 %>
+	<p>You will be charged <%= number_to_currency(@enrollment.total_due, :unit => "&euro;") %></p>
+	<%= render :partial =>"layouts/payment_form" %>
+<% else %>
+	<p>You have completed all payments for this course.</p>
+<% end %>

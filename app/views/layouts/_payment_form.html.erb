@@ -1,3 +1,13 @@
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+      $("#submit").on("click", function() {
+        $('#myModal').modal('show');
+      });
+    })
+  </script>
+<% end %>
+
 <%= form_tag(Braintree::TransparentRedirect.url, :html => { :class => "form-horizontal", :id => "payment-form"}, :method => "post") do %>
   <%= hidden_field_tag :tr_data, @deposit_tr_data != nil ? @deposit_tr_data : @full_tr_data %>
   <div>
@@ -15,5 +25,20 @@
       </div>
     </div>
   </div>
-  <%= submit_tag "Enrol", class: "btn btn-danger" %>
+  <%= submit_tag "Enrol", class: "btn btn-danger", id: "submit" %>
 <% end %>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3>Processing payment...</h3>
+  </div>
+  <div class="modal-body">
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 100%;"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <p>If you navigate away from this page your payment may be interrupted.</p>
+  </div>
+</div>
