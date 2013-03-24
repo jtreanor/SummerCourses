@@ -24,6 +24,7 @@
   <p>You are already enrolled in this course.</p>
 <% else %>
   <p>The total cost of this course is <%= number_to_currency(@course.price, :unit => "&euro;") %>. The deposit is <%= number_to_currency(@course.deposit, :unit => "&euro;")%>. To secure a place in <em><%= @course.title %></em>, you may pay the deposit now and pay the balance online before the course starts. You may also pay the full amount now.</p>
+  <p>Please note you may cancel your enrolment at any time but you will only be refunded the amount paid in excess of the deposit.</p>
   <div class="btn-group" id="buttons" data-toggle="buttons-radio" style="display: none;">
      <button data-toggle="button" id="deposit_button" class="btn btn-small active">Pay Deposit</button>
      <button data-toggle="button" id="full_button" class="btn btn-small">Pay Full Price</button>
