@@ -92,6 +92,7 @@ class Enrollment < ActiveRecord::Base
 
 		if to_be_refunded <= 0
 			puts "Nothing to refund. Done"
+			refund_receipt
 			return true
 		end
 
@@ -119,6 +120,7 @@ class Enrollment < ActiveRecord::Base
 
 			if to_be_refunded <= 0
 				puts "Nothing left to refund. Done"
+				refund_receipt
 				return true
 			end
 
@@ -127,6 +129,10 @@ class Enrollment < ActiveRecord::Base
 
 		puts "An error occured when refunding #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title}."
 		return false
+	end
+
+	def refund_receipt
+		PaymentMailer.refund_receipt(self).deliver
 	end
 
 	#Cancel course and set refund process in motion

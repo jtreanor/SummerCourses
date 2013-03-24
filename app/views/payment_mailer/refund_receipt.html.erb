@@ -1,15 +1,20 @@
 <%= render "layouts/email_header" %>
 <p>Hello <%= @enrollment.student.forename %>,</p>
 
-<p>Your enrolment in <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has been successfully cancelled.</p>
+<p>Your refund for <%= link_to @enrollment.course.title, course_url(@enrollment.course.id) %> has now been fully processed.</p>
 
-<p>Your original payment of <%= number_to_currency(@original_transaction.amount.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(@refund_transaction.amount.to_s, :unit => "&euro;") %>.</p>
+<% 
+	@enrollment.payments each do |p| 
+	original_amount = p.transaction.amount
+	refund_amount = p.total_refunded
+%>
+
+<p>Your payment of <%= number_to_currency(orignial.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(refund_amount.to_s, :unit => "&euro;") %>.</p>
+
+<% end %>
 
 <% if @enrollment.course.is_cancelled #Automatic refund %>
   <p>Unfortunately this course has been cancelled. You have been issued a full refund. UCC sincerely apologises for any inconvenience.</p>
-
-  <p>Please note if you paid for this course in more than one instalment, you will receipt an email corresponding to each payment.</p>
-<% else #Self un-enrolled %>
 <% end %>
 
 <p>If you wish to browse our wide range of courses, please visit this <%= link_to "link", categories_url %>.</p>
