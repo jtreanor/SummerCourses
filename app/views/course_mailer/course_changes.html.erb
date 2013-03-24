@@ -10,14 +10,18 @@
 <% if @show_time_table %>
 	<p>The revised schedule is as follows:</p>
 
-		<table>
-			<tr><th>Location</th><th>Room</th><th>Start Time</th><th>End Time</th></tr>
+		<table style="border: 1px solid black; border-collapse: collapse;">
+			<tr>
+				<th style="border: 1px solid black ;">Location</th>
+				<th style="border: 1px solid black ;">Room</th>
+				<th style="border: 1px solid black ;">Start Time</th><th>End Time</th>
+			</tr>
 	<% @enrollment.course.time_table_items.each do |tt| %>
 			<tr>
-				<td><%= tt.location.title %></td>
-				<td><%= tt.room %></td>
-				<td><%= tt.start_time.strftime("%b %e, %l:%M %p") %></td>
-				<td><%= tt.end_time.strftime("%b %e, %l:%M %p") %></td>
+				<td style="border: 1px solid black ;"><%= tt.location.title %></td>
+				<td style="border: 1px solid black ;"><%= tt.room %></td>
+				<td style="border: 1px solid black ;"><%= tt.start_time.strftime("%b %e, %l:%M %p") %></td>
+				<td style="border: 1px solid black ;"><%= tt.end_time.strftime("%b %e, %l:%M %p") %></td>
 			</tr>
 		</table>
 	<% end %>
