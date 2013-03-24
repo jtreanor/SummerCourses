@@ -5,7 +5,7 @@
 
 <% 
 	@enrollment.payments each do |p| 
-	original_amount = p.transaction.amount
+	original_amount = p.amount
 	refund_amount = p.total_refunded
 %>
 

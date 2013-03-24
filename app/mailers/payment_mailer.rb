@@ -2,7 +2,7 @@ class PaymentMailer < ActionMailer::Base
   default from: "UCC Summer Courses Office <admin@summercourses.mailgun.org>"
 
   def payment_receipt(payment)
-  	@transaction = payment.transaction
+  	@payment = payment
   	@enrollment = payment.enrollment
     mail(:to => payment.enrollment.student.email, :subject => "Your receipt for #{@enrollment.course.title}")
     logger.info "Sent email with subject #{"Your receipt for #{@enrollment.course.title}"} to #{payment.enrollment.student.email}"

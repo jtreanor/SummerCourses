@@ -50,7 +50,7 @@ class EnrollmentsController < ApplicationController
 	    		enrollment = Enrollment.create(student_id: current_student.id, course_id: @course.id)
 	    	end
 	    	if enrollment.save
-	    		payment = enrollment.payments.create(id: result.transaction.id)
+	    		payment = enrollment.payments.create(id: result.transaction.id, amount: result.transaction.amount)
 	    		if payment.save
 	    			error = false
 	    			@message = "The payment has been accepted and you have been succesfully enrolled in " + @course.title + "."

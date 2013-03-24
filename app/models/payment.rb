@@ -4,10 +4,11 @@
 #
 #  id            :string(10)       not null, primary key
 #  enrollment_id :integer          not null
+#  amount        :decimal(10, 2)   not null
 #
 
 class Payment < ActiveRecord::Base
-	attr_accessible :id, :enrollment_id
+	attr_accessible :id, :enrollment_id, :amount
 	set_primary_key :id
 	after_create :send_receipt
 
@@ -26,14 +27,14 @@ class Payment < ActiveRecord::Base
 	def total_refunded
 		total = 0
 		self.refunds.each do |refund|
-			total += refund.transaction.amount.to_f
+			total += refund.amount.to_f
 		end
 		total
 	end
 
 	#Total of payment which has not been refunded
 	def total_left
-		self.transaction.amount.to_f - self.total_refunded
+		self.amount.to_f - self.total_refunded
 	end
 
 	#Refund `amount` of this payment
@@ -49,7 +50,7 @@ class Payment < ActiveRecord::Base
 
 		if result.success?
 			puts "Sucessgully Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
-			self.refunds.create(id: result.transaction.id)
+			self.refunds.create(id: result.transaction.id, amount: result.transaction.amount)
 			return result.transaction.amount.to_f
 		else
 			puts "Did not refund payment #{self.id}"

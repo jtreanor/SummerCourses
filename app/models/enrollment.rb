@@ -50,8 +50,7 @@ class Enrollment < ActiveRecord::Base
 	def total_refunded
 		total = 0
 		self.refunds.each do |refund|
-			transaction = refund.transaction
-			total += transaction.amount.to_f
+			total += refund.amount.to_f
 		end
 
 		return total
@@ -60,7 +59,7 @@ class Enrollment < ActiveRecord::Base
 	def total_paid
 		total_paid = 0
 		self.payments.each do |p|
-			total_paid += p.transaction.amount.to_f
+			total_paid += p.amount.to_f
 		end
 		total_paid
 	end
@@ -108,7 +107,7 @@ class Enrollment < ActiveRecord::Base
 
 		#All payments are settled, proceed to refund
 		self.payments.each do |payment|
-			puts "Payment #{payment.transaction.id} of which #{payment.total_left} is not refunded."
+			puts "Payment #{payment.id} of which #{payment.total_left} is not refunded."
 
 			if to_be_refunded < payment.total_left
 				puts "Attempt partial refund"
