@@ -6,19 +6,25 @@ ActiveAdmin.register Course do
 
       def update
         #Course before edit
-        old_course_hash = Course.find_by_id(params[:id]).attributes.to_options
+        old_course = Course.find_by_id(params[:id])
+        old_course_hash = old_course.attributes.to_options
+        old_time_table_hash = old_course.time_table_items.attributes.to_options
         super
         #Course after edit
         new_course = Course.find_by_id(params[:id])
         new_course_hash = new_course.attributes.to_options
+        new_time_table_hash = new_course.time_table_items.attributes.to_options
 
         #Returns hash of changes
-        diff_hash = new_course_hash.diff( old_course_hash )
+        course_diff_hash = new_course_hash.diff( old_course_hash )
 
-        logger.info "Diff: " + diff_hash.to_s
 
-        #Notify enrollees of changes
-        new_course.notify_enrollees_of_edit(diff_hash)
+        logger.info "Course Diff: " + course_diff_hash.to_s
+
+        if new_course_hash != old_course_hash || old_time_table_hash != new_time_table_hash
+          #Notify enrollees of changes
+          new_course.notify_enrollees_of_edit(course_diff_hash, old_time_table_hash != new_time_table_hash)
+        end
       end
   end
 

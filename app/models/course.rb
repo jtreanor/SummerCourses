@@ -44,9 +44,9 @@ class Course < ActiveRecord::Base
     self.refund_enrollments_before = Time.now
   end
 
-  def notify_enrollees_of_edit(diff_hash)
+  def notify_enrollees_of_edit(diff_hash, show_time_table)
     self.enrollments.where(:is_cancelled => false).each do |e|
-      CourseMailer.course_changes(diff_hash,e).deliver
+      CourseMailer.course_changes(diff_hash,e,show_time_table).deliver
     end
   end
 

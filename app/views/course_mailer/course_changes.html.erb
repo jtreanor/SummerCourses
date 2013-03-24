@@ -7,6 +7,32 @@
 	<p><strong><%= key.to_s.capitalize %></strong>: <%= value.to_s %></p>
 <% end %>
 
+<% if @show_time_table %>
+	<p>The revised schedule is as follows:</p>
+
+		<table>
+			<tr><th>Location</th><th>Room</th><th>Start Time</th><th>End Time</th></tr>
+	<% @enrollment.course.time_table_items.each do |tt| %>
+			<tr>
+				<td><%= tt.location.title %></td>
+				<td><%= tt.room %></td>
+				<td><%= tt.start_time %></td>
+				<td><%= tt.end_time %></td>
+			</tr>
+		</table>
+	<% end %>
+<% end %>
+
+<% if @enrollment.refund_amount > @enrollment.course.price - @enrollment.course.deposit %>
+	<p>Due to changes that have been made to this course, you are now entitled to a 
+		<% if @enrollment.refund_amount == @enrollment.course.price %>
+			full refund
+		<% else %>
+			refund of <%= number_to_currency(@enrollment.refund_amount, :unit => "&euro;") %>
+		<% end %> if you wish to cancel your enrolment. You can do this from your <%= link_to "My Courses", enrollments_url %> page.
+	</p>
+<% end %>
+
 <p>To view full details of the course please visit the <%= link_to "course page", course_url(@enrollment.course.id) %>.</p>
 
 <p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
