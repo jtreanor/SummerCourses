@@ -10,9 +10,11 @@
   <p>This page lists all the courses offered in the <%= @category.category_name %> category though the UCC summer courses office.</p>
 </div>
 
-<% if !@category.courses.empty? %>
+<% courses = @category.courses.find_all{|c| !c.is_cancelled} %>
+
+<% if !courses.empty? %>
   <div class="accordion" id="accordion2">
-  <% @category.courses.each do |course| %>
+  <% courses.each do |course| %>
     <div class="accordion-group">
       <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= course.id %>">

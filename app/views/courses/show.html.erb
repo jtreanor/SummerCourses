@@ -19,7 +19,7 @@
       <% if Time.now < enrollments[0].course.start_time %>
           <%= link_to "Un-Enrol", cancel_enrollment_path(enrollments[0].id), class: "btn btn-danger", style: "font-weight: normal" %>
       <% end %>
-  <% else %>
+  <% elsif !@course.is_cancelled %>
       <%= link_to 'Enrol', new_enrollment_path(@course.id), class: 'btn btn-danger', style: "font-weight: normal" %>
   <% end %>
 </h2>

@@ -148,6 +148,8 @@ class Enrollment < ActiveRecord::Base
 
 	#Cancel course and set refund process in motion
 	def cancel
+		puts "Cancelling #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title}"
+
 		self.is_cancelled = true
 		self.save
 

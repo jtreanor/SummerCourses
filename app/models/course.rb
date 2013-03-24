@@ -59,4 +59,15 @@ class Course < ActiveRecord::Base
   def end_time
     self.time_table_items.sort_by(&:end_time).last.end_time
   end
+
+  def cancel
+    puts "Cancelling #{self.title}..."
+    set_refund_enrollments_before_to_now
+    self.is_cancelled = true
+    self.save
+    self.enrollments.each do |enrollment|
+      enrollment.cancel
+    end
+  end
+
 end

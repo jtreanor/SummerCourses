@@ -1,5 +1,21 @@
 class EnrollmentsController < ApplicationController
 	before_filter :authenticate_student!
+ 
+ 
+	 
+    def require_uncancelled_course!(course)
+      if course.is_cancelled
+        flash[:error] = "#{course.title} has been cancelled."
+        redirect_to enrollments_path
+      end
+    end
+
+    def require_uncancelled_enrollment!(enrollment)
+      if enrollment.is_cancelled
+        flash[:error] = "This enrollment has been cancelled."
+        redirect_to enrollments_path
+      end
+    end
 
 	def tr_data(amount, redirect_url)
 		Braintree::TransparentRedirect.transaction_data(
@@ -13,12 +29,15 @@ class EnrollmentsController < ApplicationController
 			  })
 	end
 
+  	
+
 	def index
 		@enrollments = current_student.enrollments
 	end
 
 	def edit
 		@enrollment = Enrollment.find_by_id(params[:id])
+		require_uncancelled_enrollment! @enrollment
 
 		if @enrollment.total_due > 0
 			@full_tr_data = tr_data(@enrollment.total_due,enrollment_create_url(@enrollment.course.id))
@@ -27,6 +46,7 @@ class EnrollmentsController < ApplicationController
 
 	def new
 		@course = Course.find_by_id(params[:id])
+		require_uncancelled_course! @course
 
 		if current_student.enrollments.where("course_id = #{@course.id}  AND is_cancelled = 'false'").empty? 
 			#Not already enrolled
@@ -74,10 +94,13 @@ class EnrollmentsController < ApplicationController
 
 	def cancel
 		@enrollment = Enrollment.find_by_id(params[:id])
+		require_uncancelled_enrollment! @enrollment
 	end
 
 	def refund
 		@enrollment = Enrollment.find_by_id(params[:id])
+		require_uncancelled_enrollment! @enrollment
+
 		@message = @enrollment.cancel
 		flash[:success] = @message
 		redirect_to enrollments_path
