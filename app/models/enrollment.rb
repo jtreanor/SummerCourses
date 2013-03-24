@@ -70,12 +70,13 @@ class Enrollment < ActiveRecord::Base
 
 	#Returns all enrollments awaiting refund
 	def self.refund_queue
-		Enrollment.where(:is_cancelled => true).find_all{|e| e.refund_amount > 0 }
+		Enrollment.where(:is_cancelled => true).find_all{|e| e.refund_amount > 0 && e.refund_attempts > 0 }
 	end
 
 	#class method to processed all queued refunds
 	def self.issue_queued_refunds
 		enrollments = Enrollment.refund_queue
+		puts "#{enrollments.count} refunds queued."
 
 		enrollments.each do |enrollment|
 			puts "Starting refund for #{enrollment.student.forename} #{enrollment.student.surname}'s enrollment in #{enrollment.course.title}."
@@ -84,7 +85,7 @@ class Enrollment < ActiveRecord::Base
 	end
 
 	def refund_failed
-		self.refund_attempts--
+		self.refund_attempts -= 1
 		self.save
 		puts "#{self.refund_attempts} more refund attempts"
 		if self.refund_attempts <= 0
