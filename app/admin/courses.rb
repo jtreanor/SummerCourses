@@ -5,13 +5,17 @@ ActiveAdmin.register Course do
       # This code is evaluated within the controller class
 
       def update
+        #Course before edit
         old_course_hash = Course.find_by_id(params[:id]).attributes.to_options
         super
+        #Course after edit
         new_course = Course.find_by_id(params[:id])
         new_course_hash = new_course.attributes.to_options
 
+        #Returns hash of changes
         diff_hash = old_course_hash.diff new_course_hash
 
+        #Notify enrollees of changes
         new_course.notify_enrollees_of_edit(diff_hash)
       end
   end
