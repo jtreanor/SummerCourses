@@ -25,7 +25,7 @@ class Payment < ActiveRecord::Base
 
 	def total_refunded
 		total = 0
-		self.refund.each do |refund|
+		self.refunds.each do |refund|
 			total += refund.transaction.amount.to_f
 		end
 		total
@@ -40,14 +40,16 @@ class Payment < ActiveRecord::Base
 	def refund(amount=total_left)
 		result = nil
 		if amount < total_left
-			result = Braintree::Transaction.refund(transaction.id, amount_to_be_refunded.to_s)
+			puts "Payment.refund: Partial refund"
+			result = Braintree::Transaction.refund(transaction.id, amount.to_s)
 		else #Full refund
+			puts "Payment.refund: Full refund"
 			result = Braintree::Transaction.refund(transaction.id)
 		end
 
 		if result.success?
+			puts "Sucessgully Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
 			self.refunds.create(id: result.transaction.id)
-			puts "Refunded payment #{self.id} to the amount of #{result.transaction.amount}"
 			return result.transaction.amount.to_f
 		else
 			puts "Did not refund payment #{self.id}"

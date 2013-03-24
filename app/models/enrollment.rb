@@ -79,6 +79,7 @@ class Enrollment < ActiveRecord::Base
 		enrollments = Enrollment.refund_queue
 
 		enrollments.each do |enrollment|
+			puts "Starting refund for #{enrollment.student.forename} #{enrollment.student.surname}'s enrollment in #{enrollment.course.title}."
 			enrollment.refund
 		end
 	end
@@ -86,29 +87,42 @@ class Enrollment < ActiveRecord::Base
 	#Called by rake task
 	def refund
 		to_be_refunded = refund_amount
+
+		puts "To be refunded: #{to_be_refunded}"
+
 		if to_be_refunded <= 0
+			puts "Nothing to refund. Done"
 			return true
 		end
 
 		#Check that all payments are settled
 		self.payments.each do |payment|
 			if payment.transaction.status != "settled"
-				puts "Payments for #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title} are not settled."
+				puts "Payments not settled."
 				return false
 			end
 		end
 
+		puts "All payments are settled"
+
 		#All payments are settled, proceed to refund
 		self.payments.each do |payment|
+			puts "Payment #{payment.transaction.id} of which #{payment.total_left} is not refunded."
+
 			if to_be_refunded < payment.total_left
+				puts "Attempt partial refund"
 				to_be_refunded -= payment.refund(to_be_refunded)
 			else
+				puts "Attempt full refund"
 				to_be_refunded -= payment.refund
 			end
 
 			if to_be_refunded <= 0
+				puts "Nothing left to refund. Done"
 				return true
 			end
+
+			puts "Left to be refunded: #{to_be_refunded}"
 		end
 
 		puts "An error occured when refunding #{self.student.forename} #{self.student.surname}'s enrollment in #{self.course.title}."
