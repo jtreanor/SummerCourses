@@ -44,6 +44,12 @@ class Course < ActiveRecord::Base
     self.refund_enrollments_before = Time.now
   end
 
+  def notify_enrollees_of_edit(diff_hash)
+    self.enrollments.where(:is_cancelled => false).each do |e|
+      CourseMailer.course_changes(diff_hash,e).deliver
+    end
+  end
+
   def start_time
     self.time_table_items.sort_by(&:start_time).first.start_time
   end

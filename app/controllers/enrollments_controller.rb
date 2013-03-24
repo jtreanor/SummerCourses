@@ -2,8 +2,7 @@ class EnrollmentsController < ApplicationController
 	before_filter :authenticate_student!
  	before_filter :require_uncancelled_course!, only: [:new]
  	before_filter :require_uncancelled_enrollment!, only: [:edit,:cancel,:refund]
- 
-	 
+  
     def require_uncancelled_course!
       course = Course.find_by_id(params[:id])
       if course.nil?

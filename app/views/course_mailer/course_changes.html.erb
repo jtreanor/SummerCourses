@@ -1,0 +1,16 @@
+<%= render "layouts/email_header" %>
+<p>Hello <%= @enrollment.student.forename %>,</p>
+
+<p>There have been some changes to <%= @enrollment.course %>:</p>
+
+<% @diff.each do |key,value| %>
+	<p><strong><%= key.to_s %></strong>: <%= value.to_s %></p>
+<% end %>
+
+<p>To view full details of the course please visit the <%= link_to "course page", course_url(@enrollment.course.id) %>.</p>
+
+<p>If you have any questions, please do not hesitate to <%= link_to "Contact Us", contact_url %></p>
+
+<p>Kind regards,</p>
+<p>UCC Summer Courses Office</p>
+<%= render "layouts/email_footer" %>

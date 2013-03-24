@@ -1,6 +1,21 @@
 ActiveAdmin.register Course do
   actions :all, :except => [:destroy]
 
+  controller do
+      # This code is evaluated within the controller class
+
+      def update
+        old_course_hash = Course.find_by_id(params[:id]).attributes.to_options
+        super
+        new_course = Course.find_by_id(params[:id])
+        new_course_hash = new_course.attributes.to_options
+
+        diff_hash = old_course_hash.diff new_course_hash
+
+        new_course.notify_enrollees_of_edit(diff_hash)
+      end
+  end
+
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Course Details" do
    	  f.input :title
