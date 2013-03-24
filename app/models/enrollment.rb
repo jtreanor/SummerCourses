@@ -138,10 +138,10 @@ class Enrollment < ActiveRecord::Base
 		self.is_cancelled = true
 		self.save
 
-		message = "Your cancellation has been processed. You have not received a refund."
+		message = "Your cancellation was successful. You have not received a refund."
 
 		if refund_amount > 0
-			message = "Your cancellation has been processed. You will receive your refund within 48 hours."
+			message = "Your cancellation was successful. You will receive your refund within 48 hours."
 		end
 
 		PaymentMailer.refund_processing(self).deliver

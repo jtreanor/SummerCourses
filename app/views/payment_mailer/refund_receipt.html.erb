@@ -9,7 +9,7 @@
 	refund_amount = p.total_refunded
 %>
 
-<p>Your payment of <%= number_to_currency(orignial.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(refund_amount.to_s, :unit => "&euro;") %>.</p>
+<p>Your payment of <%= number_to_currency(original_amount.to_s, :unit => "&euro;") %> has been refunded to the amount of <%= number_to_currency(refund_amount.to_s, :unit => "&euro;") %>.</p>
 
 <% end %>
 
