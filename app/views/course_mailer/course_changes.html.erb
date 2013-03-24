@@ -23,8 +23,8 @@
 				<td style="border: 1px solid black ;"><%= tt.start_time.strftime("%b %e, %l:%M %p") %></td>
 				<td style="border: 1px solid black ;"><%= tt.end_time.strftime("%b %e, %l:%M %p") %></td>
 			</tr>
-		</table>
 	<% end %>
+	</table>
 <% end %>
 
 <% if @enrollment.refund_amount > @enrollment.course.price - @enrollment.course.deposit %>
