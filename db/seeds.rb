@@ -344,14 +344,14 @@ Location.create([
 
 Course.first.time_table_items.create(
     location_id: Location.first.id,
-    start_time: DateTime.new(2013,10,9,15),
-    end_time: DateTime.new(2013,10,9,16),
+    start_time: DateTime.new(2013,9,9,15),
+    end_time: DateTime.new(2013,9,9,16),
     room: 'G21'
 )
 Course.first.time_table_items.create(
     location_id: Location.first.id,
-    start_time: DateTime.new(2013,10,10,10),
-    end_time: DateTime.new(2013,10,10,12),
+    start_time: DateTime.new(2013,9,10,10),
+    end_time: DateTime.new(2013,9,10,12),
     room: '1.11'
 )
 

@@ -10,7 +10,7 @@
   <p>This page lists all the courses offered in the <%= @category.category_name %> category though the UCC summer courses office.</p>
 </div>
 
-<% courses = @category.courses.find_all{|c| !c.is_cancelled} %>
+<% courses = @category.courses.find_all{|c| !c.is_cancelled}.sort_by(&:start_time) %>
 
 <% if !courses.empty? %>
   <div class="accordion" id="accordion2">
@@ -19,6 +19,7 @@
       <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= course.id %>">
           <%= course.title %>
+          <span class="pull-right"><%= course.start_time.strftime("%B #{course.start_time.day.ordinalize} %Y") %></span>
         </a>
       </div>
       <div id="collapse<%= course.id %>" class="accordion-body">
