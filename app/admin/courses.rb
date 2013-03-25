@@ -69,7 +69,7 @@ ActiveAdmin.register Course do
           fm.input :asset, :as => :file, :hint => (f.template.image_tag(fm.object.asset.url(:thumb)) unless fm.object.new_record?)
       end
       
-    #video support
+      #video support
       f.has_many :videos do |cv|
           cv.input :description
           cv.input :url, :label => "Video URL", :input_html => { :rows => 1  }, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."

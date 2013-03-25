@@ -18,7 +18,8 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :title, :description, :brief_description,
-                  :teacher_id, :number_of_places, :price, :deposit, :category_id,:images, :course_images, :course_images_attributes, :time_table_items_attributes, :videos, :videos_attributes
+                  :teacher_id, :number_of_places, :price, :deposit, :category_id,:images, :course_images,
+                   :course_images_attributes, :time_table_items_attributes, :videos, :videos_attributes,:images_attributes, :course_videos_attributes
 
   belongs_to :category
   has_many :course_images
