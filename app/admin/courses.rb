@@ -163,4 +163,40 @@ ActiveAdmin.register Course do
 
   end
 
+  show do |c|
+    attributes_table do
+      row :title
+      row :brief_description
+      row :description
+
+
+      row :deposit
+      row :price
+      row :teacher_surname do
+        c.teacher.admin_user.surname
+      end
+      row :teacher_forname do
+        c.teacher.admin_user.forename
+      end
+      row :category do
+        c.category.category_name
+      end
+      row :is_cancelled
+      if can?(:manage, Course)
+        row :refund_enrollments_before
+      end
+      row :hits
+      row :number_of_places
+      row :enrollments do
+        c.enrollments.count
+      end
+      c.enrollments.each do |e|
+        row :enrolled_student do
+          link_to(e.student.to_s, admin_student_path(e.student))
+        end
+      end
+    end
+    active_admin_comments
+  end
+
 end

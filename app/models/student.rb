@@ -43,4 +43,8 @@ class Student < ActiveRecord::Base
   validates :surname, presence: true, length: { maximum: 35 }
   validates :year_of_birth, presence: true
   validates :sex_id, presence: true
+
+  def to_s
+    "#{self.forename} #{self.surname}"
+  end
 end
