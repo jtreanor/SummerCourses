@@ -1,0 +1,24 @@
+<% if ! @course.is_cancelled %>
+
+<h2>Are you sure you wish to cancel <%= @course.title %>?</h2>
+
+<p>This cannot be undone. A full refund will be given to all enrollees.</p>
+
+
+
+<%= form_tag(do_cancel_admin_course_path(@course.id)) do %>
+	<%= hidden_field_tag 'token', 'VUBJKB23UIVI1UU1VOBVI@' %>
+	
+	<fieldset class="actions">
+	<ol>
+		<li class="action input_action " id="course_submit_action">
+			<%= submit_tag "Cancel Course" %>
+		</li>
+		<li class="cancel">
+			<%= link_to "No Thanks", admin_courses_path %>
+		</li>
+	</ol>
+	</fieldset>
+<% end %>
+
+<% end %>

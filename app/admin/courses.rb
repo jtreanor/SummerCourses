@@ -1,6 +1,31 @@
 ActiveAdmin.register Course do
   actions :all, :except => [:destroy]
 
+  member_action :cancel, :method => :get do
+    @course = Course.find_by_id(params[:id])
+
+    if @course.nil?
+      flash[:notice] = "Unknown course."
+      redirect_to admin_courses_path
+    elsif @course.is_cancelled
+      flash[:notice] = "#{@course.title} is already cancelled."
+      redirect_to admin_courses_path
+    end
+  end
+
+  member_action :do_cancel, :method => :post do
+    @course = Course.find_by_id(params[:id])
+    if @course.nil?
+      flash[:notice] = "Unknown course."
+    elsif !@course.is_cancelled
+      @course.cancel
+      flash[:notice] = "#{@course.title} has been successfully cancelled."
+    elsif @course.is_cancelled
+      flash[:notice] = "#{@course.title} is already cancelled."
+    end
+    redirect_to admin_courses_path
+  end
+
   controller do
   
       #Custom code for editing courses
@@ -114,7 +139,9 @@ ActiveAdmin.register Course do
     column "Brief Description" do |c|
       truncate(c.brief_description, :length => 50)
     end
-    default_actions
+    column "Actions" do |c|
+      "#{link_to("View", admin_course_path(c))} #{link_to("Edit", edit_admin_course_path(c))} #{link_to("Cancel", cancel_admin_course_path(c))}".html_safe
+    end
   end
 
 end

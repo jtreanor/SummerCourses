@@ -339,7 +339,7 @@ s.confirmed_at = DateTime.now
 s.save
 
 Location.create([
-    { title: 'ucc', longitude: -8.492932, latitude: 51.892162}
+    { title: 'Western Gateway', longitude: -8.492932, latitude: 51.892162}
                 ])
 
 Course.first.time_table_items.create(
