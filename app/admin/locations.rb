@@ -1,4 +1,5 @@
 ActiveAdmin.register Location do
+  menu :if => proc{ can?(:manage, Location) }
 
   form do |f|
     f.inputs "Location" do

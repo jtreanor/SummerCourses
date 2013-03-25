@@ -1,4 +1,5 @@
 ActiveAdmin.register MessageThread, :as => "Messages" do
+  menu :if => proc{ can?(:manage, MessageThread) }
 	actions :all, :except => [:destroy,:edit,:new,:create]
 	config.per_page = 10
 

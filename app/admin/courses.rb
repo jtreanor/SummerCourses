@@ -2,102 +2,102 @@ ActiveAdmin.register Course do
   actions :all, :except => [:destroy]
 
   controller do
-  
-      #Custom code for editing courses
-      def update
-        puts Hirb::Helpers::AutoTable.render(params[:course])
 
-        #Check if refund was checked
-        if params[:course]["refund_enrollments_before"].to_i == 1
-          params[:course]["refund_enrollments_before"] = Time.now
-          puts "Set refund enrolments to now."
-        else
-          puts "Not allowing refund"
-          params[:course] = params[:course].except!("refund_enrollments_before")
-        end
-        #Course before edit
-        old_course = Course.find_by_id(params[:id])
-        old_course_hash = old_course.attributes.to_options
-        old_time_table_items = []
-        old_course.time_table_items.each do |tt|
-          old_time_table_items << tt.attributes.to_options
-        end
-        super
-        #Course after edit
-        new_course = Course.find_by_id(params[:id])
-        new_course_hash = new_course.attributes.to_options
-        new_time_table_items = []
-        new_course.time_table_items.each do |tt|
-          new_time_table_items << tt.attributes.to_options
-        end
+    #Custom code for editing courses
+    def update
+      puts Hirb::Helpers::AutoTable.render(params[:course])
 
-        #Returns hash of changes
-        course_diff_hash = new_course_hash.diff( old_course_hash )
-
-        #Has the timetable been changed
-        time_table_change = old_time_table_items != new_time_table_items
-
-        #If start or end time has changed
-        if old_time_table_items.first[:start_time] != new_time_table_items.first[:start_time] || old_time_table_items.last[:end_time] != new_time_table_items.last[:end_time]
-          new_course.set_refund_enrollments_before_to_now
-          new_course.save
-        end
-
-        logger.info "Course Diff: " + course_diff_hash.to_s
-
-        #If there have been changes, notify all users.
-        if new_course_hash != old_course_hash || time_table_change
-          #Notify enrollees of changes
-          logger.info "Sending diff emails"
-          new_course.notify_enrollees_of_edit(course_diff_hash, time_table_change)
-        end
+      #Check if refund was checked
+      if params[:course]["refund_enrollments_before"].to_i == 1
+        params[:course]["refund_enrollments_before"] = Time.now
+        puts "Set refund enrolments to now."
+      else
+        puts "Not allowing refund"
+        params[:course] = params[:course].except!("refund_enrollments_before")
       end
+      #Course before edit
+      old_course = Course.find_by_id(params[:id])
+      old_course_hash = old_course.attributes.to_options
+      old_time_table_items = []
+      old_course.time_table_items.each do |tt|
+        old_time_table_items << tt.attributes.to_options
+      end
+      super
+      #Course after edit
+      new_course = Course.find_by_id(params[:id])
+      new_course_hash = new_course.attributes.to_options
+      new_time_table_items = []
+      new_course.time_table_items.each do |tt|
+        new_time_table_items << tt.attributes.to_options
+      end
+
+      #Returns hash of changes
+      course_diff_hash = new_course_hash.diff(old_course_hash)
+
+      #Has the timetable been changed
+      time_table_change = old_time_table_items != new_time_table_items
+
+      #If start or end time has changed
+      if old_time_table_items.first[:start_time] != new_time_table_items.first[:start_time] || old_time_table_items.last[:end_time] != new_time_table_items.last[:end_time]
+        new_course.set_refund_enrollments_before_to_now
+        new_course.save
+      end
+
+      logger.info "Course Diff: " + course_diff_hash.to_s
+
+      #If there have been changes, notify all users.
+      if new_course_hash != old_course_hash || time_table_change
+        #Notify enrollees of changes
+        logger.info "Sending diff emails"
+        new_course.notify_enrollees_of_edit(course_diff_hash, time_table_change)
+      end
+    end
   end
 
-  form :html => { :enctype => "multipart/form-data" } do |f|
+  form :html => {:enctype => "multipart/form-data"} do |f|
     f.inputs "Course Details" do
-   	  f.input :title
-   	  f.input :brief_description, :input_html => { :rows => 5  }
-   	  f.input :description
+      f.input :title
+      f.input :brief_description, :input_html => {:rows => 5}
+      f.input :description
       f.input :teacher, :hint => "Click #{link_to("here", admin_teachers_path)} to manage teachers."
-	    f.input :number_of_places
+      f.input :number_of_places
       if f.object.new_record?
         f.input :price
         f.input :deposit
       else
-        f.input :price, :hint => "Price may not be changed once a course is created. If necessary, you may cancel a course and start a new one." ,:input_html => { :value => number_to_currency(f.object.price, :unit => "&euro;"), :type => "text", :disabled => "true" }
-        f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => { :value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true" }
+        f.input :price, :hint => "Price may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => {:value => number_to_currency(f.object.price, :unit => "&euro;"), :type => "text", :disabled => "true"}
+        f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => {:value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true"}
       end
-	    f.input :category, :hint => "Click #{link_to("here", admin_categories_path)} to manage categories."
+      f.input :category, :hint => "Click #{link_to("here", admin_categories_path)} to manage categories."
     end
 
 
     #Existing course images/videos
     f.inputs "Assets" do
       f.has_many :images do |fm|
-          fm.input :description
-          fm.input :asset, :as => :file, :hint => (f.template.image_tag(fm.object.asset.url(:thumb)) unless fm.object.new_record?)
+        fm.input :description
+        fm.input :asset, :as => :file, :hint => (f.template.image_tag(fm.object.asset.url(:thumb)) unless fm.object.new_record?)
       end
-      
+
       #video support
       f.has_many :videos do |cv|
-          cv.input :description
-          cv.input :url, :label => "Video URL", :input_html => { :rows => 1  }, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
+        cv.input :description
+        cv.input :url, :label => "Video URL", :input_html => {:rows => 1}, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
       end
     end
 
     f.inputs "Schedule" do
       f.has_many :time_table_items do |tt|
-          tt.input :location, :hint => "Click #{link_to("here", admin_locations_path)} to manage locations."
-          tt.input :room
-          tt.input :start_time, :as => :just_datetime_picker
-          tt.input :end_time, :as => :just_datetime_picker
+        tt.input :location, :hint => "Click #{link_to("here", admin_locations_path)} to manage locations."
+        tt.input :room
+        tt.input :start_time, :as => :just_datetime_picker
+        tt.input :end_time, :as => :just_datetime_picker
       end
     end
 
     if !f.object.new_record?
       f.inputs "Allow Refund" do
-        f.input :refund_enrollments_before,:as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
+        f.input :refund_enrollments_before, :as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
       end
     end
 
@@ -106,10 +106,10 @@ ActiveAdmin.register Course do
 
   index do
     column "Course ID" do |c|
-          link_to c.id, admin_course_path(c)
+      link_to c.id, admin_course_path(c)
     end
     column "Title" do |c|
-          link_to c.title, admin_course_path(c)
+      link_to c.title, admin_course_path(c)
     end
     column "Brief Description" do |c|
       truncate(c.brief_description, :length => 50)
