@@ -4,11 +4,7 @@
 
 <p>This cannot be undone. A full refund will be given to all enrollees.</p>
 
-
-
-<%= form_tag(do_cancel_admin_course_path(@course.id)) do %>
-	<%= hidden_field_tag 'token', 'VUBJKB23UIVI1UU1VOBVI@' %>
-	
+<%= form_tag(do_cancel_admin_course_path(@course.id)) do %>	
 	<fieldset class="actions">
 	<ol>
 		<li class="action input_action " id="course_submit_action">

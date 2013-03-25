@@ -30,8 +30,6 @@ ActiveAdmin.register Course do
   
       #Custom code for editing courses
       def update
-        puts Hirb::Helpers::AutoTable.render(params[:course])
-
         #Check if refund was checked
         if params[:course]["refund_enrollments_before"].to_i == 1
           params[:course]["refund_enrollments_before"] = Time.now
@@ -122,7 +120,7 @@ ActiveAdmin.register Course do
 
     if !f.object.new_record?
       f.inputs "Allow Refund" do
-        f.input :refund_enrollments_before,:as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
+        f.input :refund_enrollments_before,:as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect.", :autocomplete => 'off'
       end
     end
 
