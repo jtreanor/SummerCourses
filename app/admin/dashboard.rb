@@ -22,8 +22,31 @@ ActiveAdmin.register_page "Dashboard" do
        end
 
        column do
-         
+
+            h3 "Courses Summary"
             table class: "index_table index" do
+                
+                tr do 
+                  th "Course Title"
+                  th "Start Date"
+                  th "Number of enrolments"
+                end
+                odd = true
+              Course.limit(10).each do |c|
+                tr class: odd ? "odd" : "even" do 
+                  td link_to c.title, admin_course_path(c.id)
+                  td c.start_time.strftime("%B #{c.start_time.day.ordinalize} %Y")
+                  td c.enrollments.count
+                end
+                odd = !odd
+              end
+            end
+
+            br
+         
+            h3 "Recent Messages"
+            table class: "index_table index" do
+                
                 tr do 
                   th "User Email"
                   th "Subject"
