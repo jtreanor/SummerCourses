@@ -7,22 +7,17 @@ class MessageThreadsController < ApplicationController
   end
 
   def create
-    @thread = MessageThread.new
-    @thread.user_email = params[:new_message_thread][:user_email]
-    @message = Message.new
-    @thread.subject = (params[:new_message_thread][:subject])
-    @message.content = (params[:new_message_thread][:content])
-    #validate the id
-    @thread.id = SecureRandom.urlsafe_base64(6) 
+    @thread = MessageThread.create(user_email: params[:new_message_thread][:user_email],
+                                      subject: params[:new_message_thread][:subject])
 
-    while MessageThread.find_by_id @thread.id
-      @thread.id = SecureRandom.urlsafe_base64(6)
-    end
-    @message.message_thread_id = @thread.id
-
-    if @thread.save && @message.save
-      flash[:success] = "Your message has been successfully sent, we will reply to your email shortly!"
-      redirect_to root_path
+    if @thread.save
+      @message = @thread.messages.create(content: params[:new_message_thread][:content])
+      if @message.save
+        flash[:success] = "Your message has been successfully sent, we will reply to your email shortly!"
+        redirect_to root_path
+      else
+        render 'new'
+      end
     else
       render 'new'
     end

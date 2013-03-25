@@ -10,9 +10,18 @@
 class MessageThread < ActiveRecord::Base
   attr_accessible :user_email, :subject, :messages_attributes
   self.primary_key = :id
+  before_create :generate_id
 
   has_many :messages
   accepts_nested_attributes_for :messages
+
+  def generate_id
+    self.id = SecureRandom.urlsafe_base64(6) 
+
+    while MessageThread.find_by_id self.id
+      self.id = SecureRandom.urlsafe_base64(6)
+    end
+  end
 
   def sorted_user_messages
   	self.messages.find_all{|m| !m.is_response }.sort_by{|m| m[:created_at]}
