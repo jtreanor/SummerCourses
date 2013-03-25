@@ -12,7 +12,7 @@ ActiveAdmin.register_page "Dashboard" do
          panel "Recent Enrolments" do
            ul do
              Enrollment.limit(5).map do |e|
-               li link_to(e.student,admin_student_path(e.student.id)) + " enroled in " + link_to(e.course.title,admin_student_path(e.course.id)) + " (#{e.payments.first.created_at.strftime("%b %e, %l:%M %p")})."
+               li link_to(e.student,admin_student_path(e.student.id)) + " enroled in " + link_to(e.course.title,admin_course_path(e.course.id)) + " (#{e.payments.first.created_at.strftime("%b %e, %l:%M %p")})."
              end
            end
          end
@@ -23,7 +23,7 @@ ActiveAdmin.register_page "Dashboard" do
 
        column do
 
-            h3 "Courses Summary"
+            h3 "Upcoming Courses Summary"
             table class: "index_table index" do
                 
                 tr do 
@@ -32,7 +32,7 @@ ActiveAdmin.register_page "Dashboard" do
                   th "Number of enrolments"
                 end
                 odd = true
-              Course.limit(10).each do |c|
+              Course.limit(10).find_all{|c| DateTime.now < c.start_time }.each do |c|
                 tr class: odd ? "odd" : "even" do 
                   td link_to c.title, admin_course_path(c.id)
                   td c.start_time.strftime("%B #{c.start_time.day.ordinalize} %Y")

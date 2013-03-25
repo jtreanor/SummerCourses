@@ -1,4 +1,5 @@
 ActiveAdmin.register MessageThread, :as => "Messages" do
+	config.sort_order = "messages.created_at_desc"
   menu :if => proc{ can?(:manage, MessageThread) }
 	actions :all, :except => [:destroy,:edit,:new,:create]
 	config.per_page = 10
@@ -9,10 +10,16 @@ ActiveAdmin.register MessageThread, :as => "Messages" do
     	end
 		column :user_email
 		column :subject
-		column "Last Question" do |t|
+		column "Last Question", :sortable => :"messages.created_at" do |t|
       		t.sorted_user_messages.last.created_at.strftime("%b %e, %l:%M %p")
     	end
 		default_actions
+	end
+
+	controller do
+	  def scoped_collection
+	    MessageThread.includes(:messages)
+	  end
 	end
 
   show :title => :subject do |thread|

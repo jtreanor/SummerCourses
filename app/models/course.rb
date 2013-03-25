@@ -43,6 +43,8 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :images
   accepts_nested_attributes_for :time_table_items
 
+  default_scope :include => :time_table_items, :order => "time_table_items.start_time ASC"
+
 
   before_create :set_refund_enrollments_before_to_now
 

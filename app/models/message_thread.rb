@@ -15,6 +15,8 @@ class MessageThread < ActiveRecord::Base
   has_many :messages
   accepts_nested_attributes_for :messages
 
+  default_scope :include => :messages, :order => "messages.created_at DESC"
+
   def generate_id
     self.id = SecureRandom.urlsafe_base64(6) 
 
