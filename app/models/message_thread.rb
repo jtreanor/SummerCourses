@@ -17,6 +17,9 @@ class MessageThread < ActiveRecord::Base
 
   default_scope :include => :messages, :order => "messages.created_at DESC"
 
+  validates :user_email, presence: true
+  validates :subject, presence: true
+
   def generate_id
     self.id = SecureRandom.urlsafe_base64(6) 
 
