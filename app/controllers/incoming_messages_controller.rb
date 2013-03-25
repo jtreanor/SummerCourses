@@ -12,12 +12,24 @@ class IncomingMessagesController < ApplicationController
 
     # Do some other stuff with the mail message
 
+    saved = false
+
     MessageThread.find_all_by_user_email(sender).each do |thread|
       if subject.include? thread.id
-        thread.messages.create(subject: subject, content: actual_body, is_response: false)
+        thread.messages.create(content: actual_body, is_response: false)
+        saved = true
         logger.info "Put message from " + sender + " into " + thread.id
+        break;
       else
         logger.info "DID NOT Put message from " + sender + " into " + thread.id
+      end
+    end
+
+    if !saved
+      #new thread
+      thread = MessageThread.create(user_email: sender, subject: subject)
+      if thread.save
+        thread.messages.create(content: actual_body)
       end
     end
 
