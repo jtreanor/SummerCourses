@@ -13,7 +13,7 @@ class MessageThreadsController < ApplicationController
     if @thread.save
       @message = @thread.messages.create(content: params[:new_message_thread][:content])
       if @message.save
-        flash[:success] = "Your message has been successfully sent, we will reply to your email shortly!"
+        flash[:success] = "Your message has been successfully sent, we will reply by email shortly!"
         redirect_to root_path
       else
         render 'new'

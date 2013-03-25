@@ -8,16 +8,16 @@
     <form action="message_threads" method="post">
 
       <div class="control-group">
-        <label class= "control-label" for="subject" ><i class="icon-question-sign"></i> Subject</label>
+        <label class="control-label" for="user_email"><i class="icon-envelope"></i> Email</label>
         <div class="controls">
-          <input id="subject"  class="span6"  name="new_message_thread[subject]" type="text" />
+          <input id="user_email" class="span6"  name="new_message_thread[user_email]" type="text" <%= "value=#{current_student.email}" unless !student_signed_in? %> />
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="user_email"><i class="icon-envelope"></i> Email</label>
+        <label class= "control-label" for="subject" ><i class="icon-question-sign"></i> Subject</label>
         <div class="controls">
-          <input id="user_email" class="span6"  name="new_message_thread[user_email]" type="text" />
+          <input id="subject"  class="span6"  name="new_message_thread[subject]" type="text" />
         </div>
       </div>
 
