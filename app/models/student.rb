@@ -39,6 +39,10 @@ class Student < ActiveRecord::Base
   has_many :courses,
               :through => :enrollments
 
+  def to_s
+    "#{self.forename} #{self.surname}"
+  end
+
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }
   validates :year_of_birth, presence: true

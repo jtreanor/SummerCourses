@@ -10,7 +10,7 @@ ActiveAdmin.register MessageThread, :as => "Messages" do
 		column :user_email
 		column :subject
 		column "Last Question" do |t|
-      		t.sorted_user_messages.last.created_at
+      		t.sorted_user_messages.last.created_at.strftime("%b %e, %l:%M %p")
     	end
 		default_actions
 	end

@@ -17,6 +17,8 @@ class Enrollment < ActiveRecord::Base
 	has_many :payments
 	has_many :refunds, :through => :payments
 
+	default_scope :joins => :payments, :order => "payments.created_at DESC"
+
 	#A reminder of an upcoming course is sent one week and two weeks from the course start.
 	def self.send_reminders
 		puts "Sending reminder emails."
