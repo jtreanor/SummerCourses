@@ -24,18 +24,29 @@ class AdminUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :admin_permission
   has_one :teacher
+  has_many :courses, through: :teacher
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password,:forename, :surname, :password_confirmation, :remember_me, :admin_permission_id
+  attr_accessible :email, :password, :forename, :surname, :password_confirmation, :remember_me, :admin_permission_id
   # attr_accessible :title, :body
 
   after_create { |admin| admin.send_reset_password_instructions }
+
   def password_required?
     new_record? ? false : super
   end
+=begin
+  def courses
+    if self.admin_permission != 'Teacher'
+      Course.all
+    else
+      self.teacher.courses
+    end
+  end
+=end
 end

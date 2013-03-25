@@ -1,4 +1,8 @@
 ActiveAdmin.register Course do
+  #if current_admin_user.admin_permission.id == 3
+    scope_to :current_admin_user
+  #end
+
   actions :all, :except => [:destroy]
 
   member_action :cancel, :method => :get do
@@ -27,6 +31,16 @@ ActiveAdmin.register Course do
   end
 
   controller do
+=begin
+    def index
+      if can? :manage, Course
+        @courses = Course.page params[:page] #you must call .page for the index to work.
+      else
+        @courses = current_admin_user.teacher.courses.page params[:page]
+      end
+      index! #this is needed unless you are using custom views
+    end
+=end
 
     #Custom code for editing courses
     def update
