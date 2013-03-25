@@ -34,7 +34,9 @@ class Enrollment < ActiveRecord::Base
 		#Check for special refund entitlement
 		self.payments.each do |p|
 			if p.created_at <= self.course.refund_enrollments_before
-				total += p.amount.to_f
+				#Give full refund
+				total = total_paid
+				break
 			end
 		end
 
