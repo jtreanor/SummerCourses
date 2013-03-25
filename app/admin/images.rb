@@ -1,5 +1,4 @@
 ActiveAdmin.register Image do
-  menu false
   index do
   	column :description                     
     column "Preview" do |image|

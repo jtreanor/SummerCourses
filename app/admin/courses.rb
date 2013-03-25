@@ -47,9 +47,9 @@ ActiveAdmin.register Course do
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Course Details" do
    	  f.input :title
-   	  f.input :brief_description
+   	  f.input :brief_description, :input_html => { :rows => 5  }
    	  f.input :description
-      f.input :teacher
+      f.input :teacher, :hint => "Click #{link_to("here", admin_teachers_path)} to manage teachers."
 	    f.input :number_of_places
       if f.object.new_record?
         f.input :price
@@ -58,36 +58,24 @@ ActiveAdmin.register Course do
         f.input :price, :hint => "Price may not be changed once a course is created. If necessary, you may cancel a course and start a new one." ,:input_html => { :value => number_to_currency(f.object.price, :unit => "&euro;"), :type => "text", :disabled => "true" }
         f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => { :value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true" }
       end
-	    f.input :category
+	    f.input :category, :hint => "Click #{link_to("here", admin_categories_path)} to manage categories."
     end
 
-    if f.object.new_record?
-      f.inputs "Images" do
-        f.has_many :course_images do |ca|
-          ca.inputs "New Images", :for => [:image, Image.new ] do |fm|
-              fm.input :description
-              fm.input :asset, :as => :file
-          end
-        end
-      end
-    else
-      #Existing course images/videos
-      f.inputs "Assets" do
-        f.has_many :course_images do |ca|
-          ca.inputs "Existing Asset" do
-            ca.input :image
-          end
-        end
+
+    #Existing course images/videos
+    f.inputs "Assets" do
+      f.has_many :images do |fm|
+          fm.input :description
+          fm.input :asset, :as => :file, :hint => (f.template.image_tag(fm.object.asset.url(:thumb)) unless fm.object.new_record?)
       end
       
-    end
     #video support
-    f.inputs 'Video' do
       f.has_many :videos do |cv|
           cv.input :description
-          cv.input :url
+          cv.input :url, :label => "Video URL", :input_html => { :rows => 1  }, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
       end
     end
+
     f.inputs "Schedule" do
       f.has_many :time_table_items do |tt|
           tt.input :location, :hint => "Click #{link_to("here", admin_locations_path)} to manage locations."
