@@ -10,4 +10,11 @@ class MessageMailer < ActionMailer::Base
     mail(:to => message.message_thread.user_email, :subject => @message.message_thread.subject_line)
     logger.info "Sent email with subject #{@message.message_thread.subject_line} to #{message.message_thread.user_email}"
   end
+
+  def auto_reply(message)
+  	@message = message
+
+  	mail(:to => message.message_thread.user_email, :subject => @message.message_thread.subject_line)
+    logger.info "Sent email with subject #{@message.message_thread.subject_line} to #{message.message_thread.user_email}"
+  end
 end

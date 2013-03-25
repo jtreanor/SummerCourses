@@ -14,6 +14,15 @@ class Message < ActiveRecord::Base
   after_create :send_email_if_needed
   belongs_to :message_thread
 
+  after_create :send_automated_reply_if_needed
+
+  def send_automated_reply_if_needed
+    if message_thread.messages.count == 1
+      #First message
+      MessageMailer.auto_reply(self).deliver
+    end
+  end
+
   #If it is a response, send an email
   def send_email_if_needed
   	if self.is_response
