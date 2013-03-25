@@ -1,6 +1,6 @@
 ActiveAdmin.register Course do
   #if current_admin_user.admin_permission.id == 3
-    scope_to :current_admin_user
+  scope_to :current_admin_user, :association_method => :courses
   #end
 
   actions :all, :except => [:destroy]
@@ -31,6 +31,7 @@ ActiveAdmin.register Course do
   end
 
   controller do
+
 =begin
     def index
       if can? :manage, Course

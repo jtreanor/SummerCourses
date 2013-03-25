@@ -29,7 +29,7 @@ class AdminUser < ActiveRecord::Base
 
   belongs_to :admin_permission
   has_one :teacher
-  has_many :courses, through: :teacher
+  #has_many :courses, through: :teacher
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :forename, :surname, :password_confirmation, :remember_me, :admin_permission_id
@@ -40,13 +40,13 @@ class AdminUser < ActiveRecord::Base
   def password_required?
     new_record? ? false : super
   end
-=begin
+
   def courses
-    if self.admin_permission != 'Teacher'
-      Course.all
+    if self.admin_permission.id < 3 #Not a teacher
+      Course.scoped
     else
-      self.teacher.courses
+      Course.where(:teacher_id => self.teacher.id)
     end
   end
-=end
+
 end
