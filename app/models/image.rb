@@ -23,4 +23,7 @@ class Image < ActiveRecord::Base
   end
 
   has_attached_file :asset, :styles => { :medium => "600x600>", :thumb => "100x100>", :profile => '400x350>' }
+
+  validates :asset, presence: true
+  validates :description, presence: true
 end
