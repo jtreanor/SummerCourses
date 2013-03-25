@@ -41,4 +41,8 @@ body.active_admin {
 		color: white;
 		text-shadow: none;
 	}
+	.has_many {
+      h3 {
+        display: none;
+     }}
 }
