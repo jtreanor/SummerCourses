@@ -17,7 +17,8 @@ class MessageThread < ActiveRecord::Base
 
   default_scope :include => :messages, :order => "messages.created_at DESC"
 
-  validates :user_email, presence: true
+  VALID_EMAIL_REGEX = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  validates :user_email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :subject, presence: true
 
   def generate_id

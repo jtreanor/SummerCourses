@@ -7,6 +7,24 @@
   <div class="span6">
     <form action="message_threads" method="post">
 
+      <% if @thread.errors.any? || @message.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-error">
+            The form contains <%= pluralize(@thread.errors.count + (@message.nil? ? 0 : @message.errors.count ), "error") %>.
+          </div>
+          <ul>
+            <% @thread.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            <% if !@message.nil? %>
+            <% @message.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <div class="control-group">
         <label class="control-label" for="user_email"><i class="icon-envelope"></i> Email</label>
         <div class="controls">
