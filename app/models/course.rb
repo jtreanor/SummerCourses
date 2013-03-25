@@ -23,8 +23,6 @@ class Course < ActiveRecord::Base
                   :videos, :videos_attributes, :course_videos_attributes,
                   :time_table_items_attributes,:refund_enrollments_before
 
-  #just_define_datetime_picker :refund_enrollments_before, :add_to_attr_accessible => true
-
   belongs_to :category
   has_many :course_images
   has_many :images,
@@ -44,6 +42,20 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :time_table_items
 
   default_scope :include => :time_table_items, :order => "time_table_items.start_time ASC"
+
+  validates :title, presence: true, length: { maximum: 100 }
+  validates :description, presence: true
+  validates :brief_description, presence: true
+  validates :teacher, presence: true
+  validates :number_of_places, presence: true, :numericality => { :only_integer => true }      
+  validates :price, presence: true, :numericality => true 
+  validates :deposit, presence: true, :numericality => true 
+  validates :category, presence: true
+  validate  :have_start_and_end
+
+  def have_start_and_end
+    self.time_table_items.count >= 2
+  end
 
 
   before_create :set_refund_enrollments_before_to_now
