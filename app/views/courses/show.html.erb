@@ -136,7 +136,7 @@
             </tr>
             <tr>
               <th>Number Of Places Remaining:</th>
-              <td><%= @course.number_of_places - @course.enrollments.find_all { |e| !e.is_cancelled }.count %></td>
+              <td><%= @course.places_remaining %></td>
             </tr>
             <tr>
               <th>Price:</th>

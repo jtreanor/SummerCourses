@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Dashboard" do
        column do
          panel "Recent Enrolments" do
            ul do
-             Enrollment.limit(5).map do |e|
+             Enrollment.recent.limit(5).map do |e|
                li link_to(e.student,admin_student_path(e.student.id)) + " enroled in " + link_to(e.course.title,admin_course_path(e.course.id)) + " (#{e.payments.first.created_at.strftime("%b %e, %l:%M %p")})."
              end
            end
@@ -30,6 +30,7 @@ ActiveAdmin.register_page "Dashboard" do
                   th "Course Title"
                   th "Start Date"
                   th "Number of enrolments"
+                  th "Places Remaining"
                 end
                 odd = true
               Course.limit(10).find_all{|c| DateTime.now < c.start_time }.each do |c|
@@ -37,6 +38,7 @@ ActiveAdmin.register_page "Dashboard" do
                   td link_to c.title, admin_course_path(c.id)
                   td c.start_time.strftime("%B #{c.start_time.day.ordinalize} %Y")
                   td c.enrollments.count
+                  td c.places_remaining
                 end
                 odd = !odd
               end
