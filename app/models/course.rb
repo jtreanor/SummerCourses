@@ -18,8 +18,12 @@
 
 class Course < ActiveRecord::Base
   attr_accessible :title, :description, :brief_description,
-                  :teacher_id, :number_of_places, :price, :deposit, :category_id,:images, :course_images,
-                   :course_images_attributes, :time_table_items_attributes, :videos, :videos_attributes,:images_attributes, :course_videos_attributes
+                  :teacher_id, :number_of_places, :price, :deposit, :category_id,
+                  :images, :course_images, :images_attributes, :course_images_attributes, 
+                  :videos, :videos_attributes, :course_videos_attributes,
+                  :time_table_items_attributes,:refund_enrollments_before
+
+  #just_define_datetime_picker :refund_enrollments_before, :add_to_attr_accessible => true
 
   belongs_to :category
   has_many :course_images
@@ -41,6 +45,7 @@ class Course < ActiveRecord::Base
 
 
   before_create :set_refund_enrollments_before_to_now
+
 
   def set_refund_enrollments_before_to_now
     self.refund_enrollments_before = Time.now

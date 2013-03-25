@@ -9,7 +9,7 @@
 
 class MessageThread < ActiveRecord::Base
   attr_accessible :user_email, :subject, :messages_attributes
-  set_primary_key :id
+  self.primary_key = :id
 
   has_many :messages
   accepts_nested_attributes_for :messages

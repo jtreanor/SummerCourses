@@ -8,7 +8,7 @@
 
 class Country < ActiveRecord::Base
 	attr_accessible :country_name
-	set_primary_key :country_id
+	self.primary_key = :country_id
 
 	has_many :students
 end

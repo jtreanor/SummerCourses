@@ -5,6 +5,16 @@ ActiveAdmin.register Course do
   
       #Custom code for editing courses
       def update
+        puts Hirb::Helpers::AutoTable.render(params[:course])
+
+        #Check if refund was checked
+        if params[:course]["refund_enrollments_before"].to_i == 1
+          params[:course]["refund_enrollments_before"] = Time.now
+          puts "Set refund enrolments to now."
+        else
+          puts "Not allowing refund"
+          params[:course] = params[:course].except!("refund_enrollments_before")
+        end
         #Course before edit
         old_course = Course.find_by_id(params[:id])
         old_course_hash = old_course.attributes.to_options
@@ -85,7 +95,11 @@ ActiveAdmin.register Course do
       end
     end
 
-    f.buttons
+    f.inputs "Allow Refund" do
+      f.input :refund_enrollments_before,:as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
+    end
+
+    f.actions
   end
 
   index do

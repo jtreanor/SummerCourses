@@ -8,7 +8,7 @@
 
 class Sex < ActiveRecord::Base
 	attr_accessible :sex_name
-	set_primary_key :sex_id
+	self.primary_key = :sex_id
 
 	has_many :students
 end

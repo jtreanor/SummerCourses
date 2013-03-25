@@ -10,7 +10,7 @@
 
 class Refund < ActiveRecord::Base
 	attr_accessible :id, :payment_id, :amount, :created_at
-	set_primary_key :id
+	self.primary_key = :id
 
 	@transaction_object = nil
 
