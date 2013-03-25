@@ -1,12 +1,35 @@
 ActiveAdmin.register Course do
   actions :all, :except => [:destroy]
 
+  member_action :cancel, :method => :get do
+    @course = Course.find_by_id(params[:id])
+
+    if @course.nil?
+      flash[:notice] = "Unknown course."
+      redirect_to admin_courses_path
+    elsif @course.is_cancelled
+      flash[:notice] = "#{@course.title} is already cancelled."
+      redirect_to admin_courses_path
+    end
+  end
+
+  member_action :do_cancel, :method => :post do
+    @course = Course.find_by_id(params[:id])
+    if @course.nil?
+      flash[:notice] = "Unknown course."
+    elsif !@course.is_cancelled
+      @course.cancel
+      flash[:notice] = "#{@course.title} has been successfully cancelled."
+    elsif @course.is_cancelled
+      flash[:notice] = "#{@course.title} is already cancelled."
+    end
+    redirect_to admin_courses_path
+  end
+
   controller do
 
     #Custom code for editing courses
     def update
-      puts Hirb::Helpers::AutoTable.render(params[:course])
-
       #Check if refund was checked
       if params[:course]["refund_enrollments_before"].to_i == 1
         params[:course]["refund_enrollments_before"] = Time.now
@@ -32,7 +55,7 @@ ActiveAdmin.register Course do
       end
 
       #Returns hash of changes
-      course_diff_hash = new_course_hash.diff(old_course_hash)
+      course_diff_hash = new_course_hash.diff( old_course_hash )
 
       #Has the timetable been changed
       time_table_change = old_time_table_items != new_time_table_items
@@ -54,10 +77,10 @@ ActiveAdmin.register Course do
     end
   end
 
-  form :html => {:enctype => "multipart/form-data"} do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs "Course Details" do
       f.input :title
-      f.input :brief_description, :input_html => {:rows => 5}
+      f.input :brief_description, :input_html => { :rows => 5  }
       f.input :description
       f.input :teacher, :hint => "Click #{link_to("here", admin_teachers_path)} to manage teachers."
       f.input :number_of_places
@@ -65,8 +88,8 @@ ActiveAdmin.register Course do
         f.input :price
         f.input :deposit
       else
-        f.input :price, :hint => "Price may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => {:value => number_to_currency(f.object.price, :unit => "&euro;"), :type => "text", :disabled => "true"}
-        f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => {:value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true"}
+        f.input :price, :hint => "Price may not be changed once a course is created. If necessary, you may cancel a course and start a new one." ,:input_html => { :value => number_to_currency(f.object.price, :unit => "&euro;"), :type => "text", :disabled => "true" }
+        f.input :deposit, :hint => "Deposit may not be changed once a course is created. If necessary, you may cancel a course and start a new one.", :input_html => { :value => number_to_currency(f.object.deposit, :unit => "&euro;"), :type => "text", :disabled => "true" }
       end
       f.input :category, :hint => "Click #{link_to("here", admin_categories_path)} to manage categories."
     end
@@ -82,7 +105,7 @@ ActiveAdmin.register Course do
       #video support
       f.has_many :videos do |cv|
         cv.input :description
-        cv.input :url, :label => "Video URL", :input_html => {:rows => 1}, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
+        cv.input :url, :label => "Video URL", :input_html => { :rows => 1  }, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
       end
     end
 
@@ -114,7 +137,9 @@ ActiveAdmin.register Course do
     column "Brief Description" do |c|
       truncate(c.brief_description, :length => 50)
     end
-    default_actions
+    column "Actions" do |c|
+      "#{link_to("View", admin_course_path(c))} #{link_to("Edit", edit_admin_course_path(c))} #{link_to("Cancel", cancel_admin_course_path(c))}".html_safe
+    end
   end
 
 end

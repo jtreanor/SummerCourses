@@ -1,0 +1,16 @@
+<%= render "layouts/email_header" %>
+
+<p>Hello <%= @message.message_thread.user_email %>,</p>
+
+<p>Thank you for your question. This is an automated response. A member of our team will answer your question as soon as possible.</p>
+
+<p>Kind regards,</p>
+<p>UCC Summer Courses Office</p>
+
+<p><strong>You asked:</strong></p>
+
+<blockquote>
+<%= simple_format @message.content %>
+</blockquote>
+
+<%= render "layouts/email_footer" %>
