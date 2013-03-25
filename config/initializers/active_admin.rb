@@ -149,4 +149,7 @@ ActiveAdmin.setup do |config|
   #
   # Set the CSV builder options (default is {})
   # config.csv_options = {}
+
+  Formtastic::FormBuilder.escape_html_entities_in_hints_and_labels = false
+  
 end

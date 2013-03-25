@@ -90,7 +90,7 @@ ActiveAdmin.register Course do
     end
     f.inputs "Schedule" do
       f.has_many :time_table_items do |tt|
-          tt.input :location
+          tt.input :location, :hint => "Click #{link_to("here", admin_locations_path)} to manage locations."
           tt.input :room
           tt.input :start_time, :as => :just_datetime_picker
           tt.input :end_time, :as => :just_datetime_picker
