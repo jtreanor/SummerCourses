@@ -1,0 +1,39 @@
+<canvas id="gender" height="450" width="600"></canvas>
+	
+	<% 
+		enrollments = @course.enrollments
+		students = []
+		enrollments.each do |e|
+			students << e.student
+		end
+
+		gender_hash = {}
+		students.each do |s|
+			if gender_hash.has_key s.sex.sex_name
+				gender_hash[s.sex.sex_name] += 1
+			else
+				gender_hash[s.sex.sex_name] = 0
+			end
+		end
+	%>
+
+	<script>
+		var pieData = [
+				{
+					value: 30,
+					color:"#F38630"
+				},
+				{
+					value : 50,
+					color : "#E0E4CC"
+				},
+				{
+					value : 100,
+					color : "#69D2E7"
+				}
+			
+			];
+
+	var myPie = new Chart(document.getElementById("gender").getContext("2d")).Pie(pieData);
+
+	</script>
