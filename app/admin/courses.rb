@@ -164,7 +164,7 @@ ActiveAdmin.register Course do
   end
 
   show do |c|
-
+    @course = Course.find_by_id(params[:id])
     columns do
       column do
 
@@ -200,6 +200,17 @@ ActiveAdmin.register Course do
           row :number_of_places
           row :enrollments do
             c.enrollments.count
+          end
+          if @course.enrollments.any?
+            row :average_age do
+              age_total = 0
+              number_total = 0
+              @course.enrollments.each do |e|
+                age_total = (Date.today.year - e.student.year_of_birth) + age_total
+                number_total = number_total + 1
+              end
+              age_total/number_total
+            end
           end
           row :places_remaining
 
@@ -243,38 +254,37 @@ ActiveAdmin.register Course do
 
       column do
 
+        if @course.enrollments.any?
+          div :class => :panel do
+            h3 'Enrollments Per Day'
+            #@course = Course.find_by_id(params[:id])
 
-        div :class => :panel do
-          h3 'Enrollments Per Day'
-          @course = Course.find_by_id(params[:id])
+            div :class => :panel_contents do
+              render 'enrollments_statistic'
+              #render 'enrollments_chart'
+            end
+          end
+          div :class => :panel do
+            h3 'Gender Distribution'
+            #@course = Course.find_by_id(params[:id])
 
 
-          div :class => :panel_contents do
-            render 'enrollments_statistic'
+            div :class => :panel_contents do
+              render 'gender_statistic'
+            end
+          end
+
+
+          div :class => :panel do
+            h3 'Country Distribution'
+            #@course = Course.find_by_id(params[:id])
+
+
+            div :class => :panel_contents do
+              render 'country_statistic'
+            end
           end
         end
-
-        div :class => :panel do
-          h3 'Gender Distribution'
-          @course = Course.find_by_id(params[:id])
-
-
-          div :class => :panel_contents do
-            render 'gender_statistic'
-          end
-        end
-
-
-        div :class => :panel do
-          h3 'Country Distribution'
-          @course = Course.find_by_id(params[:id])
-
-
-          div :class => :panel_contents do
-            render 'country_statistic'
-          end
-        end
-
         #column
       end
       #columns
