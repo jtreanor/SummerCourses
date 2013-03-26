@@ -46,7 +46,7 @@ def make_courses
     course = Course.create!(:title => Faker::Lorem.sentence,
                             :description => Faker::Lorem.paragraph(10),
                             :brief_description => Faker::Lorem.sentence(10),
-                            :teacher_id => n,
+                            :teacher_id => 1,
                             :number_of_places => 50+n,
                             :price => 100.0+n,
                             :deposit => 10.0+n,
