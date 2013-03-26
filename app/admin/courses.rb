@@ -112,15 +112,15 @@ ActiveAdmin.register Course do
 
     #Existing course images/videos
     f.inputs "Assets" do
-      f.has_many :images do |fm|
-        fm.input :description
-        fm.input :asset, :as => :file, :hint => (f.template.image_tag(fm.object.asset.url(:thumb)) unless fm.object.new_record?)
+
+      f.has_many :course_images do |fm|
+        fm.input :image, :hint => "Click #{link_to("here", admin_images_path)} to manage images."
       end
 
       #video support
-      f.has_many :videos do |cv|
-        cv.input :description
-        cv.input :url, :label => "Video URL", :input_html => {:rows => 1}, :hint => "Video from YouTube, Vimeo or Dailymotion is supported."
+
+      f.has_many :course_videos do |fm|
+        fm.input :video, :hint => "Click #{link_to("here", admin_videos_path)} to manage videos."
       end
     end
 
