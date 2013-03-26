@@ -8,13 +8,22 @@
    end
 
    country_hash = {}
+
    country_count = 0
    students.each do |s|
      if country_hash.has_key?(s.country.country_name)
        country_hash[s.country.country_name] += 1
      else
-       country_hash[s.country.country_name] = 1
-       country_count += 1
+       if country_count < 4
+         country_hash[s.country.country_name] = 1
+         country_count += 1
+         if country_count == 4
+           country_hash[:OTHER] = 0
+         end
+       else
+         country_hash[:OTHER] += 1
+         country_count += 1
+       end
      end
    end
 %>
@@ -41,33 +50,40 @@
         <% if country_count > 0 %>
         {
             value: <%= country_hash[country_hash.keys[0]] %>,
-            color: "#F38630"
+            color: "#F7464A"
         }
         <% end %>
         <% if country_count > 1 %>
         ,
         {
             value: <%= country_hash[country_hash.keys[1]] %>,
-            color: "#E0E4CC"
+            color: "#E2EAE9"
         }
         <% end %>
         <% if country_count > 2 %>
         ,
         {
             value: <%= country_hash[country_hash.keys[2]] %>,
-            color: "#69D2E7"
+            color: "#D4CCC5"
         }
         <% end %>
         <% if country_count > 3 %>
         ,
         {
             value: <%= country_hash[country_hash.keys[3]] %>,
-            color: "#F38630"
+            color: "#949FB1"
+        },
+        <% end %>
+        <% if country_count > 4 %>
+        {
+            value: <%= country_hash[country_hash.keys[4]] %>,
+            color: "#4D5360"
         }
+
         <% end %>
 
     ];
 
-    var mydoughnut = new Chart(document.getElementById("country").getContext("2d")).Pie(doughnutData);
+    var mydoughnut = new Chart(document.getElementById("country").getContext("2d")).Doughnut(doughnutData);
 
 </script>
