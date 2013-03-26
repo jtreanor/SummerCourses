@@ -89,9 +89,9 @@ ActiveAdmin.register Teacher do
     end
     f.inputs :'Teacher Image', :for => [:image, Image.new] do |fm|
       if f.object.image.nil?
-        fm.input :asset, :as => :file
+        fm.input :image, :as => :file
       else
-        fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
+        fm.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
       end
     end
 
