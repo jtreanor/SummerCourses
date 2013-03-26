@@ -2,7 +2,7 @@ namespace :db do
   desc 'Fill database with sample student/teacher data'
   task populate: :environment do
     make_users
-    make_teachers
+    #make_teachers
     make_courses
   end
 end
@@ -32,41 +32,44 @@ def make_teachers
         :email => "teacher-#{n+1}@example.com",
         :password => 'password',
         :password_confirmation => 'password',
-        :admin_permission_id => AdminPermission.last.id
     )
-    Teacher.create(
+    teacher = Teacher.create(
         :is_active => true, :description => Faker::Lorem.paragraph(10), :admin_user_id => admin.id
     )
+    teacher.admin_user.admin_permission_id = 3
+    teacher.save
   end
 end
 
 def make_courses
   for n in 1..40 do
     course = Course.create!(:title => Faker::Lorem.sentence,
-                        :description => Faker::Lorem.paragraph(10),
-                        :brief_description => Faker::Lorem.sentence(10),
-                        :teacher_id => n,
-                        :number_of_places => 50+n,
-                        :price => 100.0+n,
-                        :deposit => 10.0+n,
-                        :category_id => (n%3)+1,
-                        :hits => n)
-
+                            :description => Faker::Lorem.paragraph(10),
+                            :brief_description => Faker::Lorem.sentence(10),
+                            :teacher_id => n,
+                            :number_of_places => 50+n,
+                            :price => 100.0+n,
+                            :deposit => 10.0+n,
+                            :category_id => (n%3)+1,
+                            :hits => n)
+    start_date = n.month.since
     for i in 1..3 do
       course.time_table_items.create(
           location_id: Location.first.id,
-          start_time: i.day.since,
-          end_time: i.day.since+2.hours,
+          start_time: i.day.since + start_date,
+          end_time: i.day.since+2.hours + start_date,
           room: 'G' + n.to_s
       )
     end
     for i in 4..7 do
       course.time_table_items.create(
           location_id: Location.last.id,
-          start_time: i.day.since,
-          end_time: i.day.since+2.hours,
+          start_time: i.day.since + start_date,
+          end_time: i.day.since+2.hours + start_date,
           room: 'G' + n.to_s
       )
     end
   end
 end
+
+
