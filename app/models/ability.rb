@@ -7,6 +7,7 @@ class Ability
       when "Super Admin" #SuperAdmin
         can :manage, :all
       when "Admin" #Admin
+        can :manage, :all
         cannot :manage, AdminUser
       when "Teacher" #Teacher
         can :read, [Course,CourseImage,Image,Student]
