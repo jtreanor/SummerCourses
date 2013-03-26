@@ -42,7 +42,7 @@ def make_teachers
 end
 
 def make_courses
-  for n in 1..40 do
+  for n in 1..20 do
     course = Course.create!(:title => Faker::Lorem.sentence,
                             :description => Faker::Lorem.paragraph(10),
                             :brief_description => Faker::Lorem.sentence(10),
@@ -50,7 +50,7 @@ def make_courses
                             :number_of_places => 50+n,
                             :price => 100.0+n,
                             :deposit => 10.0+n,
-                            :category_id => (n%3)+1,
+                            :category_id => Category.first.id,
                             :hits => n)
     start_date = n.month.since
     for i in 1..3 do
@@ -70,6 +70,35 @@ def make_courses
       )
     end
   end
+  for n in 1..20 do
+    course = Course.create!(:title => Faker::Lorem.sentence,
+                            :description => Faker::Lorem.paragraph(10),
+                            :brief_description => Faker::Lorem.sentence(10),
+                            :teacher_id => n,
+                            :number_of_places => 50+n,
+                            :price => 100.0+n,
+                            :deposit => 10.0+n,
+                            :category_id => Category.last.id,
+                            :hits => n)
+    start_date = n.month.since
+    for i in 1..3 do
+      course.time_table_items.create(
+          location_id: Location.first.id,
+          start_time: i.day.since + start_date,
+          end_time: i.day.since+2.hours + start_date,
+          room: 'G' + n.to_s
+      )
+    end
+    for i in 4..7 do
+      course.time_table_items.create(
+          location_id: Location.last.id,
+          start_time: i.day.since + start_date,
+          end_time: i.day.since+2.hours + start_date,
+          room: 'G' + n.to_s
+      )
+    end
+  end
+
 end
 
 
