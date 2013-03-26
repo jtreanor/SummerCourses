@@ -164,6 +164,10 @@ ActiveAdmin.register Course do
   end
 
   show do |c|
+
+columns do
+       column do
+
     attributes_table do
       row :title
       row :brief_description
@@ -228,6 +232,10 @@ ActiveAdmin.register Course do
       end
     end
 
+      end
+
+        column do
+
 
     div :class => :panel do
       h3 'Enrollments Statistic'
@@ -238,6 +246,12 @@ ActiveAdmin.register Course do
         render 'enrollments_statistic'
       end
     end
+
+    #column
+    end
+    #columns
+    end
+
   end
 
 end
