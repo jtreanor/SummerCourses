@@ -9,7 +9,7 @@ The code was written by [ChengXi Bao](https://github.com/happlebao) and I.
 It was my first attempt at a rails app and my time using Ruby. I had lots of fun making it but I'm sure there are plenty of novice mistakes!
 
 ##The Brief
-There is a copy of the [[Project-Brief]].
+There is a copy of the [projectbrief](https://github.com/jtreanor/SummerCourses/wiki/Project-Brief).
 
 ##Deployment
 This rails app is automatically deployed to Heroku on each push to master. The address is: [summercourses.herokuapp.com](https://summercourses.herokuapp.com/).
