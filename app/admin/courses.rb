@@ -46,13 +46,14 @@ ActiveAdmin.register Course do
     #Custom code for editing courses
     def update
       #Check if refund was checked
-      if params[:course]["refund_enrollments_before"].to_i == 1
+      if params[:course]["refund"].to_i == 1
         params[:course]["refund_enrollments_before"] = Time.now
         puts "Set refund enrolments to now."
       else
-        puts "Not allowing refund"
-        params[:course] = params[:course].except!("refund_enrollments_before")
+        puts "No refund"
       end
+      params[:course] = params[:course].except!("refund")
+
       #Course before edit
       old_course = Course.find_by_id(params[:id])
       old_course_hash = old_course.attributes.to_options
@@ -135,7 +136,7 @@ ActiveAdmin.register Course do
 
     if !f.object.new_record?
       f.inputs "Allow Refund" do
-        f.input :refund_enrollments_before, :as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
+        f.input :refund, :as => :boolean, :hint => "If your edit is substantial, select this. This will allow all payments made before now to be refunded in full. Note: changes to start and end time of course always have this effect."
       end
     end
 
