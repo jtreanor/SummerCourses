@@ -8,29 +8,46 @@
 		end
 
 		gender_hash = {}
+		gender_count = 0
 		students.each do |s|
-			if gender_hash.has_key s.sex.sex_name
+			if gender_hash.has_key?(s.sex.sex_name)
 				gender_hash[s.sex.sex_name] += 1
 			else
 				gender_hash[s.sex.sex_name] = 0
+				gender_count += 1
 			end
 		end
 	%>
 
 	<script>
 		var pieData = [
+				<% if gender_count > 0 %>
 				{
-					value: 30,
+					value: <%= gender_hash[gender_hash.keys[0]] %>,
 					color:"#F38630"
-				},
-				{
-					value : 50,
-					color : "#E0E4CC"
-				},
-				{
-					value : 100,
-					color : "#69D2E7"
 				}
+				<% end %>
+				<% if gender_count > 1 %>
+				,
+				{
+					value: <%= gender_hash[gender_hash.keys[1]] %>,
+					color:"#E0E4CC"
+				}
+				<% end %>
+				<% if gender_count > 2 %>
+				,
+				{
+					value: <%= gender_hash[gender_hash.keys[2]] %>,
+					color:"#69D2E7"
+				}
+				<% end %>
+				<% if gender_count > 3 %>
+				,
+				{
+					value: <%= gender_hash[gender_hash.keys[3]] %>,
+					color:"#F38630"
+				}
+				<% end %>
 			
 			];
 
