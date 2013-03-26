@@ -1,4 +1,4 @@
-<canvas id="myChart" height="450" width="600"></canvas>
+<canvas id="enrollment" height="450" width="600"></canvas>
 <%
    payments = Array.new
    @course.enrollments.each do |e|
@@ -31,9 +31,9 @@
 
 %>
 <script>
-    var ctx = document.getElementById("myChart").getContext("2d");
+    var ctx = document.getElementById("enrollment").getContext("2d");
     //need some change to display time if duration is too short
-    var data = {
+    var lineData = {
         labels: [
             <%for i in 0..6%>
             "<%=date[i].day%>/<%=date[i].month%>" + " - " +
@@ -55,5 +55,5 @@
             }
         ]
     }
-    new Line(ctx).Line(data);
+    new Chart(ctx).Line(lineData);
 </script>
