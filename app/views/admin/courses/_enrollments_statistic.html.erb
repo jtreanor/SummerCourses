@@ -1,0 +1,35 @@
+<canvas id="myChart" width="800" height="400"></canvas>
+<%
+   payments = Array.new
+   @course.enrollments.each do |e|
+     unless e.is_cancelled
+     #get valid payments
+     payments.push(e.payments.first)
+     end
+   end
+   date = Array.new
+   number = Array.new
+   duration = Time.now - payments
+   7.times do
+
+   end
+
+%>
+<script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+//    var myNewChart = new Chart(ctx).PolarArea(data);
+    var data = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+    }
+    new Chart(ctx).Line(data);
+</script>

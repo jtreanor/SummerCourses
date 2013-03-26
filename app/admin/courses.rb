@@ -195,7 +195,19 @@ ActiveAdmin.register Course do
           link_to(e.student.to_s, admin_student_path(e.student))
         end
       end
+
+
     end
+    div :class => :panel do
+      h3 'Enrollments Statistic'
+      @course = Course.find_by_id(params[:id])
+
+
+      div :class => :panel_contents do
+        render 'enrollments_statistic'
+      end
+    end
+
     active_admin_comments
   end
 
