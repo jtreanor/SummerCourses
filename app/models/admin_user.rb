@@ -42,7 +42,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def courses
-    if self.admin_permission.id < 3 #Not a teacher
+    if self.admin_permission.permission_name != "Teacher" #Not a teacher
       Course.scoped
     else
       Course.where(:teacher_id => self.teacher.id)

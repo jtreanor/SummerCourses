@@ -3,12 +3,12 @@ class Ability
 
   def initialize(user)
     user ||= AdminUser.new       
-    case user.admin_permission.id      
-      when 1 #SuperAdmin
+    case user.admin_permission.permission_name     
+      when "Super Admin" #SuperAdmin
         can :manage, :all
-      when 2 #Admin
+      when "Admin" #Admin
         cannot :manage, AdminUser
-      when 3 #Teacher
+      when "Teacher" #Teacher
         can :read, [Course,CourseImage,Image,Student]
       end
   end
