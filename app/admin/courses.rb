@@ -167,17 +167,18 @@ ActiveAdmin.register Course do
     attributes_table do
       row :title
       row :brief_description
-      row :description
+      row :description  do
+        simple_format (c.description)
+      end
 
 
-      row :deposit
-      row :price
-      row :teacher_surname do
-        c.teacher.admin_user.surname
+      row :deposit do
+        number_to_currency(c.deposit, :unit => "&euro;")
       end
-      row :teacher_forname do
-        c.teacher.admin_user.forename
+      row :price do
+        number_to_currency(c.price, :unit => "&euro;")
       end
+      row :teacher
       row :category do
         c.category.category_name
       end
@@ -190,14 +191,44 @@ ActiveAdmin.register Course do
       row :enrollments do
         c.enrollments.count
       end
-      c.enrollments.each do |e|
-        row :enrolled_student do
-          link_to(e.student.to_s, admin_student_path(e.student))
-        end
-      end
+      row :places_remaining
 
 
     end
+
+    h3 "Enrolments"
+    table class: "index_table index" do
+        tr do 
+          th "Name"
+          th "Enrolment Date"
+          th "Total Paid"
+          th "Cancelled"
+          th "Total Refunded"
+        end
+        odd = true
+      Enrollment.where(:course_id => params[:id]).recent.each do |e|
+        tr class: odd ? "odd" : "even" do 
+          td link_to e.student, admin_student_path(e.id)
+          td e.created_at.strftime("%b %e, %l:%M %p")
+          td number_to_currency(e.total_paid, :unit => "&euro;")
+          td e.is_cancelled ? "Yes." : "No"
+          td do
+            if e.is_cancelled && e.refund_amount > e.total_refunded
+              if e.refund_attempts > 0
+                "Refund processing."
+              else
+                "Refund failed."
+              end
+            else
+                number_to_currency(e.total_refunded, :unit => "&euro;")
+            end
+          end
+        end
+        odd = !odd
+      end
+    end
+
+
     div :class => :panel do
       h3 'Enrollments Statistic'
       @course = Course.find_by_id(params[:id])

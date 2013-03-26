@@ -60,8 +60,12 @@ class Course < ActiveRecord::Base
 
   before_create :set_refund_enrollments_before_to_now
 
+  def valid_enrollments
+    self.enrollments.find_all { |e| !e.is_cancelled }.count
+  end
+
   def places_remaining
-    self.number_of_places - self.enrollments.find_all { |e| !e.is_cancelled }.count
+    self.number_of_places - self.valid_enrollments
   end
 
   def set_refund_enrollments_before_to_now

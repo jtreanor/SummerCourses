@@ -29,6 +29,10 @@ class Enrollment < ActiveRecord::Base
     	puts "Done"
 	end
 
+	def created_at
+		self.payments.first.created_at
+	end
+
 	#This calculates the refund entitled in the case of a cancellation. Any payments made before refund_enrollments_before are refunded
 	def refund_amount
 		total = 0
