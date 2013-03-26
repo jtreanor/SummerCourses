@@ -14,4 +14,4 @@ There is a copy of the [project brief](https://github.com/jtreanor/SummerCourses
 ##Deployment
 This rails app is automatically deployed to Heroku on each push to master. The address is: [summercourses.herokuapp.com](https://summercourses.herokuapp.com/).
 
-Primitive deployment logs are [here](http://cs1.ucc.ie/~jct1/git_call)
+Primitive deployment logs are [here](http://cs1.ucc.ie/~jct1/git_call).
