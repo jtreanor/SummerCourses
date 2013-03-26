@@ -45,7 +45,7 @@ class Student < ActiveRecord::Base
 
   validates :forename, presence: true, length: { maximum: 35 }
   validates :surname, presence: true, length: { maximum: 35 }
-  validates :year_of_birth, presence: true
+  validates :year_of_birth, presence: true, :inclusion => {:in => [1900,DateTime.now.year.to_i]}
   validates :sex_id, presence: true
 
   def to_s
