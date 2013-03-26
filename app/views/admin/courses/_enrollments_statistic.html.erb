@@ -1,44 +1,59 @@
-<canvas id="canvas" height="450" width="600"></canvas>
-<% enrolments = Enrollment.where(:course_id => @course.id) %>
+<canvas id="myChart" height="450" width="600"></canvas>
+<%
+   payments = Array.new
+   @course.enrollments.each do |e|
+     unless e.is_cancelled
+       #get valid payments
+       payments.push(e.payments.first)
+     end
+   end
+   date = Array.new
+   number = Array.new(7, 0)
+   start_date = payments.last.created_at
 
-  <script>
-    <% 
-          now = Time.now
-          days = [  (now - 6.day),
-                (now - 5.day),
-                (now - 4.day),
-                (now - 3.day),
-                (now - 2.day),
-                (now - 1.day),
-                now ] 
-        %>
-    var lineChartData = {
-      labels : [
-      <% days.each do |d| %>
-        "<%= d.strftime("%A") %>"
-        <% if d != days.last %>
-        ,
-        <% end %>
-      <% end %>],
-      datasets : [
-        
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : [
-          <% days.each do |d| %>
-            <%= enrolments.find_all{|e| e.payments.first.created_at.wday == d.wday}.count %>
-            <% if d != days.last %>
-            ,
-            <% end %>
-          <% end %>]
-        }
-      ]
+   #duration by seconds
+   duration = Time.now - start_date
+   #divide date to 7 period
+   8.times do |i|
+     #date by seconds
+     date[i] = start_date + duration*(i)/7
+   end
 
+   payments.each do |p|
+
+     for i in 1..7 do
+       if p.created_at.to_i < date[i].to_i
+         number[i-1] = number[i-1] + 1
+         break
+       end
+     end
+   end
+
+%>
+<script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    //need some change to display time if duration is too short
+    var data = {
+        labels: [
+            <%for i in 0..6%>
+            "<%=date[i].day%>/<%=date[i].month%>" + " - " +
+                    "<%=date[i+1].day%>/<%=date[i].month%>",
+            <%end%>
+        ],
+        datasets: [
+
+            {
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                data: [
+                    <% number.each do |n| %>
+                    <%=n%>,
+                    <%end%>
+                ]
+            }
+        ]
     }
-
-  var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-
-  </script>
+    new Chart(ctx).Line(data);
+</script>
