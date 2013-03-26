@@ -37,7 +37,7 @@
 		<%= f.label :sex_id, class: "control-label" %>
 		<div class="controls">
 	  		<%= f.select :sex_id,
-			options_from_collection_for_select(Sex.all, :sex_id, :sex_name) %>
+			options_from_collection_for_select(Sex.all, :sex_id, :format_name) %>
 	  	</div>
 	</div>
 
@@ -45,7 +45,7 @@
 		<%= f.label :country_id, class: "control-label" %>
 		<div class="controls">
 			<%= f.select :country_id,
-			options_from_collection_for_select(Country.all, :country_id, :country_name) %>
+			options_from_collection_for_select(Country.all, :country_id, :country_title) %>
 	  	</div>
 	</div>
 

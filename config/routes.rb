@@ -12,6 +12,8 @@ SummerCourses::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
+  match 'faq' => 'static_pages#faq'
+
   match 'enrollments/new/course/:id' => 'enrollments#new', :as => :new_enrollment
   match 'enrollments/result/course/:id' => 'enrollments#create', :as => :enrollment_create
   match 'enrollments/cancel/:id' => 'enrollments#cancel', :as => :cancel_enrollment
