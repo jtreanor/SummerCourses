@@ -1,5 +1,5 @@
 ActiveAdmin.register Teacher do
-  menu :if => proc{ can?(:manage, Teacher) }
+  menu :if => proc{ can?(:manage, Teacher) }, :priority => 8
   actions :all, except: [:destroy]
 
   index do

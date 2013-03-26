@@ -1,6 +1,6 @@
 ActiveAdmin.register MessageThread, :as => "Messages" do
 	config.sort_order = "messages.created_at_desc"
-  menu :if => proc{ can?(:manage, MessageThread) }
+  menu :if => proc{ can?(:manage, MessageThread) }, :priority => 4
 	actions :all, :except => [:destroy,:edit,:new,:create]
 	config.per_page = 10
 
