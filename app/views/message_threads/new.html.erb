@@ -1,10 +1,14 @@
-<div class="hero-unit">
+<div class="hero-unit" xmlns="http://www.w3.org/1999/html">
   <h1>Ask us anything</h1>
   <p>Please feel free to ask us about any of our courses. A member of our staff will reply to you as soon as possible.</p>
 </div>
 <!--end hero unit -->
-<div class="row">
+<div class="row-fluid">
+
   <div class="span6">
+    <address>
+    <p>Feel free to email us at <a href="mailto:ask@summercourse.mailgun.org">ask@summercourse.mailgun.org</a></p>
+      </address>
     <form action="message_threads" method="post">
 
       <% if @thread.errors.any? || @message.errors.any? %>
@@ -28,14 +32,14 @@
       <div class="control-group">
         <label class="control-label" for="user_email"><i class="icon-envelope"></i> Email</label>
         <div class="controls">
-          <input id="user_email" class="span6"  name="new_message_thread[user_email]" type="text" <%= "value=#{current_student.email}" unless !student_signed_in? %> />
+          <input id="user_email" class="span10"  name="new_message_thread[user_email]" type="text" <%= "value=#{current_student.email}" unless !student_signed_in? %> />
         </div>
       </div>
 
       <div class="control-group">
         <label class= "control-label" for="subject" ><i class="icon-question-sign"></i> Subject</label>
         <div class="controls">
-          <input id="subject"  class="span6"  name="new_message_thread[subject]" type="text" />
+          <input id="subject"  class="span10"  name="new_message_thread[subject]" type="text" />
         </div>
       </div>
 
@@ -43,7 +47,7 @@
       <div class="control-group">
         <label class= "control-label"  for="text"> <i class="icon-pencil"></i> Message</label>
         <div class="controls">
-          <textarea rows="8" class="span6" name="new_message_thread[content]"  placeholder="Write your question here."></textarea>
+          <textarea rows="8" class="span10" name="new_message_thread[content]"  placeholder="Write your question here."></textarea>
         </div>
       </div>
 
