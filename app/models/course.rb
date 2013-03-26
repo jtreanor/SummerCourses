@@ -17,11 +17,11 @@
 #
 
 class Course < ActiveRecord::Base
-  attr_accessible :title, :description, :brief_description,
+  attr_accessible :title, :description, :brief_description, :hits,
                   :teacher_id, :number_of_places, :price, :deposit, :category_id,
-                  :images, :course_images, :images_attributes, :course_images_attributes, 
+                  :images, :course_images, :images_attributes, :course_images_attributes,
                   :videos, :videos_attributes, :course_videos_attributes,
-                  :time_table_items_attributes,:refund_enrollments_before,
+                  :time_table_items_attributes, :refund_enrollments_before,
                   :refund
 
 
@@ -45,15 +45,15 @@ class Course < ActiveRecord::Base
 
   default_scope :include => :time_table_items, :order => "time_table_items.start_time ASC"
 
-  validates :title, presence: true, length: { maximum: 100 }
+  validates :title, presence: true, length: {maximum: 100}
   validates :description, presence: true
   validates :brief_description, presence: true
   validates :teacher, presence: true
-  validates :number_of_places, presence: true, :numericality => { :only_integer => true }      
-  validates :price, presence: true, :numericality => true 
-  validates :deposit, presence: true, :numericality => true 
+  validates :number_of_places, presence: true, :numericality => {:only_integer => true}
+  validates :price, presence: true, :numericality => true
+  validates :deposit, presence: true, :numericality => true
   validates :category, presence: true
-  validate  :have_start_and_end
+  validate :have_start_and_end
 
   def refund
     false
@@ -67,9 +67,9 @@ class Course < ActiveRecord::Base
     self.time_table_items.each do |tt|
       course.time_table_items.each do |ctt|
         if (ctt.start_time < tt.start_time && ctt.end_time > tt.start_time) ||
-           (ctt.start_time > tt.start_time && ctt.end_time < tt.end_time) ||
-           (ctt.start_time < tt.end_time && ctt.end_time > tt.end_time)
-           return true
+            (ctt.start_time > tt.start_time && ctt.end_time < tt.end_time) ||
+            (ctt.start_time < tt.end_time && ctt.end_time > tt.end_time)
+          return true
         end
       end
     end
@@ -92,7 +92,7 @@ class Course < ActiveRecord::Base
 
   def notify_enrollees_of_edit(diff_hash, show_time_table)
     self.enrollments.where(:is_cancelled => false).each do |e|
-      CourseMailer.course_changes(diff_hash,e,show_time_table).deliver
+      CourseMailer.course_changes(diff_hash, e, show_time_table).deliver
     end
   end
 
