@@ -39,7 +39,8 @@ ActiveAdmin.register_page "Dashboard" do
                 tr do 
                   th "Course Title"
                   th "Start Date"
-                  th "Number of enrolments"
+                  th "Enrolments"
+                  th "Cancellations"
                   th "Places Remaining"
                 end
                 odd = true
@@ -48,6 +49,7 @@ ActiveAdmin.register_page "Dashboard" do
                   td link_to c.title, admin_course_path(c.id)
                   td c.start_time.strftime("%B #{c.start_time.day.ordinalize} %Y")
                   td c.enrollments.count
+                  td c.cancellation_count
                   td c.places_remaining
                 end
                 odd = !odd
