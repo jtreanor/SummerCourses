@@ -19,3 +19,20 @@ def make_users
     student.save
   end
 end
+
+def make_teachers
+  for n in 1..50 do
+
+    admin = AdminUser.create(
+        :forename => Faker::Name.first_name,
+        :surname => Faker::Name.last_name,
+        :email => 'teacher@example.com',
+        :password => 'password',
+        :password_confirmation => 'password',
+        :admin_permission_id => AdminPermission.last.id
+    )
+    Teacher.create(
+        :is_active => true, :description => Faker::Lorem.paragraph(10), :admin_user_id => admin.id
+    )
+  end
+end
