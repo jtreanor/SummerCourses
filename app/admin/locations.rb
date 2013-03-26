@@ -1,5 +1,6 @@
 ActiveAdmin.register Location do
   menu :if => proc{ can?(:manage, Location) }, :priority => 6
+  actions :all, :except => [:destroy]
 
   form do |f|
     f.inputs "Location" do
