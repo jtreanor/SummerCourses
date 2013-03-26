@@ -9,7 +9,7 @@ class EnrollmentsController < ApplicationController
 
  		current_student.enrollments.each do |e|
  			if course.overlaps(e.course)
- 				flash[:error] = "#This course conflicts with {e.course.title}."
+ 				flash[:error] = "This course conflicts with #{e.course.title}."
  				redirect_to course_path(course.id)
  				return false
  			end

@@ -54,7 +54,7 @@ class Course < ActiveRecord::Base
   validate  :have_start_and_end
 
   def have_start_and_end
-    self.time_table_items.count >= 2
+    self.time_table_items.count >= 1
   end
 
   def overlaps(course)
