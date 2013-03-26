@@ -165,107 +165,119 @@ ActiveAdmin.register Course do
 
   show do |c|
 
-columns do
-       column do
+    columns do
+      column do
 
-    attributes_table do
-      row :title
-      row :brief_description
-      row :description  do
-        simple_format (c.description)
-      end
-
-
-      row :deposit do
-        number_to_currency(c.deposit, :unit => "&euro;")
-      end
-      row :price do
-        number_to_currency(c.price, :unit => "&euro;")
-      end
-      row :teacher do
-        link_to c.teacher, admin_teacher_path(c.teacher.id)
-      end
-      row :category do
-        link_to c.category.category_name, admin_category_path(c.category.id)
-      end
-      row "Cancelled" do
-        c.is_cancelled ? "Yes" : "No"
-      end
-      if can?(:manage, Course)
-        row :refund_enrollments_before
-      end
-      row "Page hits" do
-        c.hits
-      end
-      row :number_of_places
-      row :enrollments do
-        c.enrollments.count
-      end
-      row :places_remaining
+        attributes_table do
+          row :title
+          row :brief_description
+          row :description do
+            simple_format (c.description)
+          end
 
 
-    end
+          row :deposit do
+            number_to_currency(c.deposit, :unit => "&euro;")
+          end
+          row :price do
+            number_to_currency(c.price, :unit => "&euro;")
+          end
+          row :teacher do
+            link_to c.teacher, admin_teacher_path(c.teacher.id)
+          end
+          row :category do
+            link_to c.category.category_name, admin_category_path(c.category.id)
+          end
+          row "Cancelled" do
+            c.is_cancelled ? "Yes" : "No"
+          end
+          if can?(:manage, Course)
+            row :refund_enrollments_before
+          end
+          row "Page hits" do
+            c.hits
+          end
+          row :number_of_places
+          row :enrollments do
+            c.enrollments.count
+          end
+          row :places_remaining
 
-    h3 "Enrolments"
-    table class: "index_table index" do
-        tr do 
-          th "Name"
-          th "Enrolment Date"
-          th "Total Paid"
-          th "Cancelled"
-          th "Total Refunded"
+
         end
-        odd = true
-      Enrollment.where(:course_id => params[:id]).recent.each do |e|
-        tr class: odd ? "odd" : "even" do 
-          td link_to e.student, admin_student_path(e.id)
-          td e.created_at.strftime("%b %e, %l:%M %p")
-          td number_to_currency(e.total_paid, :unit => "&euro;")
-          td e.is_cancelled ? "Yes." : "No"
-          td do
-            if e.is_cancelled && e.refund_amount > e.total_refunded
-              if e.refund_attempts > 0
-                "Refund processing."
-              else
-                "Refund failed."
+
+        h3 "Enrolments"
+        table class: "index_table index" do
+          tr do
+            th "Name"
+            th "Enrolment Date"
+            th "Total Paid"
+            th "Cancelled"
+            th "Total Refunded"
+          end
+          odd = true
+          Enrollment.where(:course_id => params[:id]).recent.each do |e|
+            tr class: odd ? "odd" : "even" do
+              td link_to e.student, admin_student_path(e.id)
+              td e.created_at.strftime("%b %e, %l:%M %p")
+              td number_to_currency(e.total_paid, :unit => "&euro;")
+              td e.is_cancelled ? "Yes." : "No"
+              td do
+                if e.is_cancelled && e.refund_amount > e.total_refunded
+                  if e.refund_attempts > 0
+                    "Refund processing."
+                  else
+                    "Refund failed."
+                  end
+                else
+                  number_to_currency(e.total_refunded, :unit => "&euro;")
+                end
               end
-            else
-                number_to_currency(e.total_refunded, :unit => "&euro;")
             end
+            odd = !odd
           end
         end
-        odd = !odd
-      end
-    end
+
 
       end
 
-        column do
+      column do
 
 
-    div :class => :panel do
-      h3 'Enrollments Per Day'
-      @course = Course.find_by_id(params[:id])
+        div :class => :panel do
+          h3 'Enrollments Per Day'
+          @course = Course.find_by_id(params[:id])
 
 
-      div :class => :panel_contents do
-        render 'enrollments_statistic'
+          div :class => :panel_contents do
+            render 'enrollments_statistic'
+          end
+        end
+
+        div :class => :panel do
+          h3 'Gender Distribution'
+          @course = Course.find_by_id(params[:id])
+
+
+          div :class => :panel_contents do
+            render 'gender_statistic'
+          end
+        end
+
+
+        div :class => :panel do
+          h3 'Country Distribution'
+          @course = Course.find_by_id(params[:id])
+
+
+          div :class => :panel_contents do
+            render 'country_statistic'
+          end
+        end
+
+        #column
       end
-    end
-
-    div :class => :panel do
-      h3 'Gender Distribution'
-      @course = Course.find_by_id(params[:id])
-
-
-      div :class => :panel_contents do
-        render 'gender_statistic'
-      end
-    end
-
-    #column
-    end
-    #columns
+      #columns
     end
 
   end

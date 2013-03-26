@@ -3,8 +3,8 @@ th:first-letter {
     text-transform: uppercase;
 }
 </style>
-	
-	<% 
+
+	<%
 		enrollments = @course.enrollments
 		students = []
 		enrollments.each do |e|
@@ -25,21 +25,24 @@ th:first-letter {
 
 	<canvas id="gender" height="450" width="600"></canvas>
 
-<table>
-<div class="panel_contents">
-<div class="attributes_table message_thread">
-  <table stlye="border-collapse: collapse; border: 1px #ccc solid;">
-    <tbody>
-    	<% gender_hash.each do |sex_name,count| %>
-			<tr>
-			  <th style="text-transform: lowercase; border: 1px #ccc solid;"><%= sex_name %></th>
-			  <td style="text-transform: lowercase; border: 1px #ccc solid;"><%=  count %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
-</div>
-</div>
+<%=
+    html = Arbre::Context.new do
+      table class: 'index_table index' do
+        tr do
+          th 'gender name'
+          th 'gender count'
+        end
+        odd = true
+        gender_hash.each do |c|
+          tr class: odd ? "odd" : "even" do
+            th c[0]
+            th c[1]
+          end
+          odd = !odd
+        end
+      end
+    end
+%>
 
 </table>
 
@@ -72,7 +75,7 @@ th:first-letter {
 					color:"#4D5360"
 				}
 				<% end %>
-			
+
 			];
 
 	var myPie = new Chart(document.getElementById("gender").getContext("2d")).Pie(pieData);
