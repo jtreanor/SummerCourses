@@ -52,9 +52,17 @@ def make_courses
                         :category_id => (n%3)+1,
                         :hits => n)
 
-    for i in 1..7 do
+    for i in 1..3 do
       course.time_table_items.create(
           location_id: Location.first.id,
+          start_time: i.day.since,
+          end_time: i.day.since+2.hours,
+          room: 'G' + n.to_s
+      )
+    end
+    for i in 4..7 do
+      course.time_table_items.create(
+          location_id: Location.last.id,
           start_time: i.day.since,
           end_time: i.day.since+2.hours,
           room: 'G' + n.to_s
