@@ -1,5 +1,5 @@
 ActiveAdmin.register Course do
-  #if current_admin_user.admin_permission.id == 3
+  menu :priority => 3
   scope_to :current_admin_user, :association_method => :courses
   #end
 
