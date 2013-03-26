@@ -238,7 +238,7 @@ columns do
 
 
     div :class => :panel do
-      h3 'Enrollments Statistic'
+      h3 'Enrollments Per Day'
       @course = Course.find_by_id(params[:id])
 
 
