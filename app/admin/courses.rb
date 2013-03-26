@@ -207,8 +207,6 @@ ActiveAdmin.register Course do
         render 'enrollments_statistic'
       end
     end
-
-    active_admin_comments
   end
 
 end
