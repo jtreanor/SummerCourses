@@ -57,6 +57,18 @@ class Course < ActiveRecord::Base
     self.time_table_items.count >= 2
   end
 
+  def overlaps(course)
+    self.time_table_items.each do |tt|
+      course.time_table_items.each do |ctt|
+        if (ctt.start_time < tt.start_time && ctt.end_time > tt.start_time) ||
+           (ctt.start_time > tt.start_time && ctt.end_time < tt.end_time) ||
+           (ctt.start_time < tt.end_time && ctt.end_time > tt.end_time)
+           return true
+        end
+      end
+    end
+    false
+  end
 
   before_create :set_refund_enrollments_before_to_now
 
