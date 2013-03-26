@@ -1,0 +1,73 @@
+<canvas id="country" height="450" width="600"></canvas>
+
+<%
+   enrollments = @course.enrollments
+   students = []
+   enrollments.each do |e|
+     students << e.student
+   end
+
+   country_hash = {}
+   country_count = 0
+   students.each do |s|
+     if country_hash.has_key?(s.country.country_name)
+       country_hash[s.country.country_name] += 1
+     else
+       country_hash[s.country.country_name] = 1
+       country_count += 1
+     end
+   end
+%>
+<%=
+    html = Arbre::Context.new do
+      table class: 'index_table index' do
+        tr do
+          th 'COUNTRY NAME'
+          th 'COUNTRY COUNT'
+        end
+        odd = true
+        country_hash.each do |c|
+          tr class: odd ? "odd" : "even" do
+            th c[0]
+            th c[1]
+          end
+          odd = !odd
+        end
+      end
+    end
+%>
+<script>
+    var doughnutData = [
+        <% if country_count > 0 %>
+        {
+            value: <%= country_hash[country_hash.keys[0]] %>,
+            color: "#F38630"
+        }
+        <% end %>
+        <% if country_count > 1 %>
+        ,
+        {
+            value: <%= country_hash[country_hash.keys[1]] %>,
+            color: "#E0E4CC"
+        }
+        <% end %>
+        <% if country_count > 2 %>
+        ,
+        {
+            value: <%= country_hash[country_hash.keys[2]] %>,
+            color: "#69D2E7"
+        }
+        <% end %>
+        <% if country_count > 3 %>
+        ,
+        {
+            value: <%= country_hash[country_hash.keys[3]] %>,
+            color: "#F38630"
+        }
+        <% end %>
+
+    ];
+
+    var mydoughnut = new Chart(document.getElementById("country").getContext("2d")).Pie(doughnutData);
+
+</script>
