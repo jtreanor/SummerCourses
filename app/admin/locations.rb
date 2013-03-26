@@ -5,7 +5,7 @@ ActiveAdmin.register Location do
     f.inputs "Location" do
    	  f.input :title
    	  f.input :longitude
-   	  f.input :latitude
+   	  f.input :latitude, :hint => "#{link_to "This site", "http://gps.ie/gps-lat-long-finder.htm"} may be useful for finding coordinates."
     end
 
     f.buttons
