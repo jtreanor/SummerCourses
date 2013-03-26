@@ -19,4 +19,7 @@ class Video < ActiveRecord::Base
   def to_s
     self.description
   end
+
+  validates :url, presence: true
+  validates :description, presence: true
 end

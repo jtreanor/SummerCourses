@@ -20,6 +20,8 @@ class Teacher < ActiveRecord::Base
   belongs_to :image
   has_many :courses
 
+  validates :description, presence: true
+
   accepts_nested_attributes_for :image, :admin_user
   before_create :set_teacher_permission
 

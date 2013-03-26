@@ -18,4 +18,9 @@ class TimeTableItem < ActiveRecord::Base
   belongs_to :location
 
   default_scope order: 'time_table_items.start_time ASC'
+
+  validates :course_id, presence: true
+  validates :location_id, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
 end

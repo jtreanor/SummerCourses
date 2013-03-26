@@ -13,6 +13,8 @@ class Payment < ActiveRecord::Base
 	self.primary_key = :id
 	after_create :send_receipt
 
+	default_scope :order => "created_at DESC"
+
 	def send_receipt #Send receipt for most recent payment
 		PaymentMailer.payment_receipt(self).deliver
 	end

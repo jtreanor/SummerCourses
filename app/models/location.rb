@@ -16,6 +16,9 @@ class Location < ActiveRecord::Base
 
   has_many :time_table_items
 
+  validates :title, presence: true, length: { maximum: 45 }
+  validates :longitude, presence: true, :numericality => true
+  validates :latitude, presence: true, :numericality => true
 
 #  def gmaps4rails_address
 #    #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki

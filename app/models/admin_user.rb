@@ -49,4 +49,7 @@ class AdminUser < ActiveRecord::Base
     end
   end
 
+  validates :forename, presence: true
+  validates :surname, presence: true
+
 end

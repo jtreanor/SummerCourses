@@ -15,6 +15,12 @@ class MessageThread < ActiveRecord::Base
   has_many :messages
   accepts_nested_attributes_for :messages
 
+  default_scope :include => :messages, :order => "messages.created_at DESC"
+
+  VALID_EMAIL_REGEX = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  validates :user_email, presence: true, format: { with: VALID_EMAIL_REGEX }
+  validates :subject, presence: true
+
   def generate_id
     self.id = SecureRandom.urlsafe_base64(6) 
 
