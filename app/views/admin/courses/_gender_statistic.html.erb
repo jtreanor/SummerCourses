@@ -1,4 +1,8 @@
-<canvas id="gender" height="450" width="600"></canvas>
+<style type="text/css">
+th:first-letter {
+    text-transform: uppercase;
+}
+</style>
 	
 	<% 
 		enrollments = @course.enrollments
@@ -18,6 +22,26 @@
 			end
 		end
 	%>
+
+	<canvas id="gender" height="450" width="600"></canvas>
+
+<table>
+<div class="panel_contents">
+<div class="attributes_table message_thread">
+  <table stlye="border-collapse: collapse; border: 1px #ccc solid;">
+    <tbody>
+    	<% gender_hash.each do |sex_name,count| %>
+			<tr>
+			  <th style="text-transform: lowercase; border: 1px #ccc solid;"><%= sex_name %></th>
+			  <td style="text-transform: lowercase; border: 1px #ccc solid;"><%=  count %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>
+</div>
+
+</table>
 
 	<script>
 		var pieData = [
