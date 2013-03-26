@@ -10,5 +10,11 @@ class Sex < ActiveRecord::Base
 	attr_accessible :sex_name
 	self.primary_key = :sex_id
 
+	def format_name
+		title = self.sex_name.downcase  
+		title[0] = title.first.capitalize[0]
+		title # "Test test"
+	end
+
 	has_many :students
 end
