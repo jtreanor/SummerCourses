@@ -1,7 +1,17 @@
 ActiveAdmin.register_page "Dashboard" do
   menu :if => proc{ can?(:manage, Teacher) }
 
-  menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
+  #menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
+
+  controller do
+    def index
+      if current_admin_user.admin_permission.permission_name == "Teacher"
+        redirect_to admin_courses_path
+      else
+        super
+      end
+    end
+  end
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
 

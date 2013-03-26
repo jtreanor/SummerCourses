@@ -1,4 +1,5 @@
 ActiveAdmin.register Image do
+  menu :if => proc{ can?(:manage, Teacher) }
   index do
   	column :description                     
     column "Preview" do |image|

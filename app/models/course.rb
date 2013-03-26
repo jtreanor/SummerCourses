@@ -21,7 +21,9 @@ class Course < ActiveRecord::Base
                   :teacher_id, :number_of_places, :price, :deposit, :category_id,
                   :images, :course_images, :images_attributes, :course_images_attributes, 
                   :videos, :videos_attributes, :course_videos_attributes,
-                  :time_table_items_attributes,:refund_enrollments_before
+                  :time_table_items_attributes,:refund_enrollments_before,
+                  :refund
+
 
   belongs_to :category
   has_many :course_images
@@ -53,10 +55,26 @@ class Course < ActiveRecord::Base
   validates :category, presence: true
   validate  :have_start_and_end
 
-  def have_start_and_end
-    self.time_table_items.count >= 2
+  def refund
+    false
   end
 
+  def have_start_and_end
+    self.time_table_items.count >= 1
+  end
+
+  def overlaps(course)
+    self.time_table_items.each do |tt|
+      course.time_table_items.each do |ctt|
+        if (ctt.start_time < tt.start_time && ctt.end_time > tt.start_time) ||
+           (ctt.start_time > tt.start_time && ctt.end_time < tt.end_time) ||
+           (ctt.start_time < tt.end_time && ctt.end_time > tt.end_time)
+           return true
+        end
+      end
+    end
+    false
+  end
 
   before_create :set_refund_enrollments_before_to_now
 

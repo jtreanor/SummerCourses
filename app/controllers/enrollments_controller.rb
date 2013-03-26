@@ -1,7 +1,20 @@
 class EnrollmentsController < ApplicationController
 	before_filter :authenticate_student!
  	before_filter :require_uncancelled_course!, only: [:new]
+ 	before_filter :require_no_overlap, only: [:new]
  	before_filter :require_uncancelled_enrollment!, only: [:edit,:cancel,:refund]
+
+ 	def require_no_overlap
+ 		course = Course.find_by_id(params[:id])
+
+ 		current_student.enrollments.each do |e|
+ 			if course.overlaps(e.course)
+ 				flash[:error] = "This course conflicts with #{e.course.title}."
+ 				redirect_to course_path(course.id)
+ 				return false
+ 			end
+ 		end
+ 	end
   
     def require_uncancelled_course!
       course = Course.find_by_id(params[:id])

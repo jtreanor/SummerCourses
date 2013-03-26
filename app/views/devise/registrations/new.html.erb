@@ -63,9 +63,16 @@
 	  	</div>
 	</div>
 
-	<div class="controls">
-	  	<%= f.submit "Sign up", class: "btn btn-large" %>
+	<div class="control-group">
+		<label class="checkbox">
+			<input type="checkbox" name="policy_agree" value="Bike"> I agree to UCC's <%= link_to "Cookie and Privacy", "http://www.ucc.ie/en/privacy/" %> policy.
+		</label>
+		
+		<div class="controls">
+	  		<%= f.submit "Sign Up", class: "btn" %>
+	  	</div>
 	</div>
+
 	<div class="control-group">
 		<p><%= render "devise/shared/links" %></p>
 	</div>
