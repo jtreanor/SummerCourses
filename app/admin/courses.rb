@@ -182,15 +182,21 @@ columns do
       row :price do
         number_to_currency(c.price, :unit => "&euro;")
       end
-      row :teacher
-      row :category do
-        c.category.category_name
+      row :teacher do
+        link_to c.teacher, admin_teacher_path(c.teacher.id)
       end
-      row :is_cancelled
+      row :category do
+        link_to c.category.category_name, admin_category_path(c.category.id)
+      end
+      row "Cancelled" do
+        c.is_cancelled ? "Yes" : "No"
+      end
       if can?(:manage, Course)
         row :refund_enrollments_before
       end
-      row :hits
+      row "Page hits" do
+        c.hits
+      end
       row :number_of_places
       row :enrollments do
         c.enrollments.count
@@ -244,6 +250,16 @@ columns do
 
       div :class => :panel_contents do
         render 'enrollments_statistic'
+      end
+    end
+
+    div :class => :panel do
+      h3 'Gender Distribution'
+      @course = Course.find_by_id(params[:id])
+
+
+      div :class => :panel_contents do
+        render 'gender_statistic'
       end
     end
 
