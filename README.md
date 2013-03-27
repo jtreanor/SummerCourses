@@ -6,7 +6,7 @@ This is my third year team software project (UCC [CS3505/CS3305](http://thing.uc
 
 The code was written by [ChengXi Bao](https://github.com/happlebao) and I. 
 
-It was my first attempt at a rails app and my time using Ruby. I had lots of fun making it but I'm sure there are plenty of novice mistakes!
+It was my first attempt at a rails app and my first time using Ruby. I had lots of fun making it but I'm sure there are plenty of novice mistakes!
 
 ##The Brief
 Here is a copy of the [project brief](https://github.com/jtreanor/SummerCourses/wiki/Project-Brief).
