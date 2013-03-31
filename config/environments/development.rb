@@ -36,5 +36,15 @@ SummerCourses::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  ActionMailer::Base.smtp_settings = {
+    :port           => 587, 
+    :address        => 'smtp.mailgun.org',
+    :user_name      => 'postmaster@app12221254.mailgun.org',
+    :password       => '55qqt9ulznp3',
+    :domain         => 'summercourses.mailgun.org',
+    :authentication => :plain,
+  }
+  ActionMailer::Base.delivery_method = :smtp
   
 end
