@@ -87,12 +87,14 @@ ActiveAdmin.register Teacher do
     f.inputs 'Active Or Deactive' do
       f.input :is_active
     end
-    f.inputs 'Teacher Image', :for => [:image, f.object.image || Image.new] do |fm|
-      if f.object.image.nil?
-        fm.input :asset, :as => :file
-      else
-        fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
-      end
+    f.inputs 'Teacher Image' do
+      f.input :image
+    #f.inputs 'Teacher Image', :for => [:image, f.object.image || Image.new] do |fm|
+      #if f.object.image.nil?
+      #  fm.input :asset, :as => :file
+      #else
+      #  fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
+      #end
     end
 
     f.buttons

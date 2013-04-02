@@ -44,6 +44,7 @@ group :development do
 	gem 'rails-erd'
   gem 'railroady'
   gem 'hirb'
+  gem 'rspec-rails', '2.11.0'
 end
 
 #generate foreign keys
