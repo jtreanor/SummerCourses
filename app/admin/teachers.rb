@@ -72,7 +72,7 @@ ActiveAdmin.register Teacher do
   end
 
 
-  form :html => {:multipart => true} do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     #f.inputs 'Existing Image  do
     #  f.input :image
     #end
@@ -87,11 +87,11 @@ ActiveAdmin.register Teacher do
     f.inputs 'Active Or Deactive' do
       f.input :is_active
     end
-    f.inputs :'Teacher Image', :for => [:image, Image.new] do |fm|
+    f.inputs 'Teacher Image', :for => [:image, f.object.image || Image.new] do |fm|
       if f.object.image.nil?
-        fm.input :image, :as => :file
+        fm.input :asset, :as => :file
       else
-        fm.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
+        fm.input :asset, :as => :file, :hint => f.template.image_tag(f.object.image.asset.url(:thumb))
       end
     end
 
